@@ -19,6 +19,9 @@ A project a Szoftver laboratórium 4. tantárgy feladatának megoldására szül
 \comment{A kialakítandó szoftver milyen területen használható, milyen célra.}
 
 \subsection{Definíciók, rövidítések}
+\begin{itemize}
+\item 
+\end{itemize}
 \comment{A dokumentumban használt definíciók, rövidítések magyarázata.}
 
 \subsection {Hivatkozások}
@@ -51,14 +54,14 @@ A dokumentum további részeiben található:
 \item pályák
 \item robotok
 \end{itemize}
-A szoftver fontos eleme a Játékmotor. Ez teremti meg a kezdeti feltételeket és irányítja a játék folyását. Ez fogja ellenőrizni, hogy a robotok leesnek-e a pályáról, ha olajfoltba lépnek letiltja az irányítást a játékos oldalon, illetve ha ragacsba lép egy játékos, akkor lelassuljon. A Játékmotor indulása előtt lekéri a Pályák alrendszertől a kiválasztott pályát.
-A director alrendszer feladata az idő léptetése, másodpercenként ugranak a robotok ezt ütemezi.
-A HUD alrendszer hivatott jelezni merre fogunk elmozdulni a robotunkkal és jelzi, ha van kivethető ragacs vagy olajfolt a robotnál.
-A játék menü alrendszer feladata a játék során a megfelelő parancsra megállítani a játékot és a beállítások (pl.: grafikai, hang) állíthatósága.
-A grafikus felület feladata, hogy kapcsolatot létesítsen a játékossal vizuális információkkal és a játékos ezen keresztül irányíthatja a játékmotort.
-A Pályák alrendszer betölti a Pályafájlokból a pályákat, tárolja, majd azokat a Játékmotor rendelkezésére bocsájtja.
-A Robotok alrendszer betölti a robotokat a Robotfájlokból, tárolja azokat, majd a Játékmotor rendelkezésére bocsájtja.
-Hálózatot a szoftver nem igényel. Háttértáron pedig a program .jar archívumainak, a kirajzoláshoz szükséges pálya és robot képeknek, a pályákat tartalmazó fájloknak szükséges helyet biztosítani. Ezeken kívül nincs szükség futás idejű tárhelyigényre. 
+\\A szoftver fontos eleme a Játékmotor. Ez teremti meg a kezdeti feltételeket és irányítja a játék folyását. Ez fogja ellenőrizni, hogy a robotok leesnek-e a pályáról, ha olajfoltba lépnek letiltja az irányítást a játékos oldalon, illetve ha ragacsba lép egy játékos, akkor lelassuljon. A Játékmotor indulása előtt lekéri a Pályák alrendszertől a kiválasztott pályát.
+\\A director alrendszer feladata az idő léptetése, másodpercenként ugranak a robotok ezt ütemezi.
+\\A HUD alrendszer hivatott jelezni, hogy a játékos számára elérhető-e a olaj vagy ragacskészlet \comment{,továbbá a megtett körök számát}
+\\A játék menü alrendszer feladata a játék során a megfelelő parancsra megállítani a játékot és a beállítások (pl.: grafikai, hang) állíthatósága.
+\\A grafikus felület feladata, hogy kapcsolatot létesítsen a játékossal vizuális információkkal és a játékos ezen keresztül irányíthatja a játékmotort.
+\\A Pályák alrendszer betölti a Pályafájlokból a pályákat, tárolja, majd azokat a Játékmotor rendelkezésére bocsájtja.
+\\A Robotok alrendszer betölti a robotokat a Robotfájlokból, tárolja azokat, majd a Játékmotor rendelkezésére bocsájtja.
+\\Hálózatot a szoftver nem igényel. Háttértáron pedig a program .jar archívumainak, a kirajzoláshoz szükséges pálya és robot képeknek, a pályákat tartalmazó fájloknak szükséges helyet biztosítani. Ezeken kívül nincs szükség futás idejű tárhelyigényre. 
 
 \comment{A kialakítandó szoftver legmagasabb szintű architekturális képe. A fontosabb alrendszerek felsorolása, a közöttük kialakítandó interfészek lényege, a felhasználói kapcsolatok alapja. Esetleges hálózati és adattárolási elvárások.}
 
@@ -66,7 +69,7 @@ Hálózatot a szoftver nem igényel. Háttértáron pedig a program .jar archív
 \comment{A feladat kb. 4000 karakteres (kb 1,5 oldal) részletezettségű magyar nyelvű leírása. Nem szerepelhetnek informatikai kifejezések.}
 
 \subsection{Felhasználók}
-A játék 2-4 játékos módban indíthat. A játékosnak semmiféle előképzettségre nincs szüksége, a játék menete gyorsan elsajátítható. A játékban nem lesz pályaszerkesztő. A játékot nem lehet elmenteni, mindig újból kell kezdeni.
+A játék 2 játékos módban indíthat. A játékosnak semmiféle előképzettségre nincs szüksége, a játék menete gyorsan elsajátítható. A játékban nem lesz pályaszerkesztő. A játékot nem lehet elmenteni, mindig újból kell kezdeni.
 \comment{A felhasználók jellemzői, tulajdonságai}
 
 \subsection{Korlátozások}
@@ -97,15 +100,16 @@ Források:
 \begin{longtable}{| l | l | l | l | l | l | l |}
 \hline
 \textbf{Azonosító}   & \textbf{Leírás} & \textbf{Ellenőrzés} & \textbf{Prioritás} & \textbf{Forrás} & \textbf{Use-case} & \textbf{Komment} \tabularnewline
-\hline 1.01 & Játék menü & & & & &
-\hline 1.02 & Beállítások kezelése & & & & &
-\hline 1.03 & Játék elindítása & & & & &
-\hline 1.04 & Pályáról leesők kiesnek & & & & &
-\hline 1.05 & Előre elkészített versenypálya & & & & &
-\hline 1.06 & \vtop{\hbox{\strut Robotok a kezdőpozíciójukból}\hbox{\strut indulnak}}  & & & & &
-\hline 1.07 &\vtop{\hbox{\strut Pályán vannak olajfoltok és}\hbox{\strut ragacsfoltok}}   & & & & &
-\hline 1.08 &\vtop{\hbox{\strut Robotok fel vannak szerelve olaj}\hbox{\strut  és ragacskészlettel}}  & & & & &
-\tabularnewline
+\hline 1.01 & Játék menü & & alapvető & & &\tabularnewline
+\hline 1.02 & Beállítások kezelése & & alapvető & & &\tabularnewline
+\hline 1.03 & Játék elindítása & & alapvető & & &\tabularnewline
+\hline 1.04 & Pályáról leesők kiesnek & & alapvető & & &\tabularnewline
+\hline 1.05 & Előre elkészített versenypálya & & alapvető & & &\tabularnewline
+\hline 1.06 & \vtop{\hbox{\strut Robotok a kezdőpozíciójukból}\hbox{\strut indulnak}}  & & alapvető & & &\tabularnewline
+\hline 1.07 &\vtop{\hbox{\strut Pályán vannak olajfoltok és}\hbox{\strut ragacsfoltok}}   & & alapvető & & &\tabularnewline
+\hline 1.08 &\vtop{\hbox{\strut Robotok fel vannak szerelve }\hbox{\strut olaj és ragacskészlettel}}  & & alapvető & & &\tabularnewline
+\hline 1.09 &\vtop{\hbox{\strut 2 személy tudjon játszani}\hbox{\strut egyszerre}} & & alapvető & & &\tabularnewline
+\hline 1.10 & \vtop{\hbox{\strut USB-s joystickkal}\hbox{\strut vezérelhető robotok}} & & opcionális & & &\tabularnewline
 \hline
 \end{longtable}
 
@@ -117,14 +121,22 @@ Források:
 \begin{longtable}{| l | l | l | l | l | l |}
 \hline
 \textbf{Azonosító}   & \textbf{Leírás} & \textbf{Ellenőrzés} & \textbf{Prioritás} & \textbf{Forrás} & \textbf{Komment} \tabularnewline
-\hline
-\hline 2.01 & JRE  &  &  &  & Java IDE  \tabularnewline
-\hline 2.02 & Eclipse &  &  &  & Jav IDE \tabularnewline
-\hline 2.03 & Monitor &  &  &  &  \tabularnewline
-\hline 2.04 & Egér &  &  &  &  \tabularnewline
-\hline 2.05 & ShareLatex &  &  &  & online LaTeX editor  \tabularnewline
-\hline 2.06 & Git &  &  &  & Elosztott verziókezelő \tabularnewline
-\hline 2.07 & GitHub account &  &  &  & Git tárhely \tabularnewline
+\hlie
+\hline 2.01 & JRE  & bemutatás  & alapvető  & megrendelő & Java IDE  \tabularnewline
+\hline 2.02 & Eclipse & nincs & opcionális & csapat & Java IDE \tabularnewline
+\hline 2.03 & NetBeans IDE & nincs  & opcionális  & csapat  & Java IDE  \tabularnewline
+\hline 2.04 & IntelliJ IDEA & nincs  & opcionális  & csapat  & Java IDE  \tabularnewline
+\hline 2.05 & ShareLatex & nincs  & opcionális  & csapat  & online LaTeX editor  \tabularnewline
+\hline 2.06 & Git & nincs  & alapvető  & csapat  & Elosztott verziókezelő \tabularnewline
+\hline 2.07 & GitHub account & nincs  & alapvető & csapat & Git tárhely \tabularnewline
+\hline 2.08 & PC & bemutatás  & alapvető  & megrendelő  &  \tabularnewline
+\hline 2.09 & Monitor & nincs  & alapvető  & csapat  &  \tabularnewline
+\hline 2.10 & Billentyűzet & nincs  & alapvető  & csapat  &  \tabularnewline
+\hline 2.11 & Egér & nincs  & alapvető  & csapat  &  \tabularnewline
+\hline 2.12 & Google Calendar & nincs  & opcionális  & csapat  & Naptár alkalmazás \tabularnewline
+\hline 2.13 & Google Mail & nincs  & opcionális  & csapat  & Levelező rendszer \tabularnewline
+\hline 2.14 & Sympa levelezőlista & nincs  & opcionális  & csapat & \url{lists.sch.bme.hu}  \tabularnewline
+\hline 2.15 & Doxygen  & nincs  & opcionális  & csapat & Programozói dokumentáció 
 \hline
 \end{longtable}
 
@@ -136,22 +148,26 @@ Források:
 \begin{longtable}{| l | l | l | l | l | l |}
 \hline
 \textbf{Azonosító}   & \textbf{Leírás} & \textbf{Ellenőrzés} & \textbf{Prioritás} & \textbf{Forrás} & \textbf{Komment} \tabularnewline
-\hline\hline
-... & ... & ... & ... & ... & ... \tabularnewline
+\hline
+\hline 3.01 & Szkeleton átadás & bemutatás  & alapvető  & megrendelő  & márc. 23  \tabularnewline
+\hline 3.02 & Prototípus átadás & bemutatás & alapvető & megrendelő  & ápr. 20  \tabularnewline
+\hline 3.03 & Teljes program átadása  & bemutatás  & alapvető & megrendelő & máj. 15  \tabularnewline
+\hline 3.04 & \vtop{\hbox{\strut Útmutató alapján}\hbox{\strut telepíthető, indítható}}  & bemutatás  & fontos  & megrendelő  &   \tabularnewline
+\hline 3.06 &\vtop{\hbox{\strut A programnak működnie}\hbox{\strut kell a BME HSZK számítógépein}} & bemutatás & alapvető & megrendelő &  \tabularnewline
 \hline
 \end{longtable}
 
 \subsection{Egyéb nem funkcionális követelmények}
+Nincs egyéb nem funkcionális követelmény.
 \comment{A biztonsággal, hordozhatósággal, megbízhatósággal, tesztelhetőséggel, a felhasználóval kapcsolatos követelmények}
 
 % Azonosító, Leírás, Ellenőrzés, Prioritás, Forrás, Komment
-\begin{longtable}{| l | l | l | l | l | l |}
-\hline
-\textbf{Azonosító}   & \textbf{Leírás} & \textbf{Ellenőrzés} & \textbf{Prioritás} & \textbf{Forrás} & \textbf{Komment} \tabularnewline
-\hline\hline
-... & ... & ... & ... & ... & ... \tabularnewline
-\hline
-\end{longtable}
+%\begin{longtable}{| l | l | l | l | l | l |}
+%\hline
+%\textbf{Azonosító}   & \textbf{Leírás} & \textbf{Ellenőrzés} & \textbf{Prioritás} & \textbf{Forrás} & \textbf{Komment} \tabularnewline
+%\hline\hline ... & ... & ... & ... & ... & ... \tabularnewline
+%\hline
+%\end{longtable}
 
 
 \section{Lényeges use-case-ek}
@@ -165,11 +181,21 @@ Források:
 \usecase{...}{...}{...}{...}
 
 \section{Szótár}
+\begin{itemize}
+\item 
+\end{itemize}
 \comment{A szótár a követelmények alapján készítendő fejezet. Egy szótári bejegyzés definiálásához csak más szótári bejegyzések és köznapi – a feladattól független – fogalmak használhatók fel. A szótár mérete kb. 1-2 oldal legyen.}
 
 \section{Projekt terv}
 \subsection{Csapat}
 A csapat 5 főből áll. A következő táblázat a személyes preferenciákat tartalmazza, a feladatokat úgy osztjuk ki, hogy közel azonos nehézségűek legyenek, miközben ezeket a preferenciákat szem előtt tartjuk.
+
+\subsection {Kommunikáció}
+
+\subsection{Használt programok}
+
+\subsection{Mérföldkövek, határidők}
+\
 \comment{Tartalmaznia kell a projekt végrehajtásának lépéseit, a lépések, eredmények határidejét, az egyes feladatok elvégzéséért felelős személyek nevét és beosztását, a szükséges erőforrásokat, stb. Meg kell adni a csoportmunkát támogató eszközöket, a választott technikákat! Definiálni kell, hogy hogyan történik a dokumentumok és a forráskód megosztása!}
 
 
