@@ -11,23 +11,40 @@
 
 A project követelményeinek, alapvető felépítésének és funkcionalitásának ismertetése, ezek segítségével a fejlesztési folyamatok majd a végleges program felépítésének megtervezése. Fejlesztés közben ezeket figyelembe kell majd venni és tőlük eltérni nem szabad.
 
-\comment{A dokumentum célja.}
-
 \subsection{Szakterület}
 A project a Szoftver laboratórium 4. tantárgy feladatának megoldására született. Az elkészítendő szoftver egy számítógépes játék, nem kimondottan egy szakterület részére készül, inkább szórakoztatás céljából.
 
-\comment{A kialakítandó szoftver milyen területen használható, milyen célra.}
-
 \subsection{Definíciók, rövidítések}
 \begin{itemize}
-\item 
+\item \textbf{BME}	Budapesti Műszaki Egyetem rövidítése.
+\item \textbf{Doxygen}	Forráskódból és kommentekből dokumentációt generáló program.
+\item \textbf{Eclipse}	Fejlesztőkörnyezet Java programozási nyelvhez.
+\item \textbf{Git}	Verziókezelői rendszer.
+\item \textbf{Google Calendar}	Google egy szolgáltatása, melyben eseményeket lehet beállítani naptárszerűen. Ezek megoszthatók más felhasználókkal is.
+\item \textbf{Google Mail}	Google egy szolgáltatása, mely az internetes levelezést biztosítja a felhasználóinak.
+\item \textbf{HSZK}		Hallgatói Számítógép Központ rövidítése.
+\item \textbf{HUD}	Head-Up Display rövidítése. Egy szem elé vetített kijelző, melyen a fontosabb, illetve alapvető adatokat jelenítik meg.
+\item \textbf{IDE}	Integrated Development Environment (Integrált Fejlesztői Környezet) rövidítése. A számítógép programozást megkönnyítő programok ezek.
+\item \textbf{IntelliJ}	Java IDE, megkönnyíti a fejlesztést.
+\item \textbf{JDK}	Java Development Kit (Java Fejlesztői Készlet) rövidítése. A Java nyelv fejlesztőeszköze.
+\item \textbf{JRE}	Java Runtime Environment rövidítése. Program, ami szükséges a Javában megírt fájlok elkészítéséhez, futtatásához.
+\item \textbf{LaTex}		Dokumentum formázó rendszer, mellyel magas színvonalú dokumentációk készíthetők.
+\item \textbf{Netbeans}	Fejlesztőkörnyezet, ami Java nyelven alapul. A programban egyszerűen, gyorsan lehet grafikus felületet létrehozni, például menüket.
+\item \textbf{PC}	Personal Computer rövidítése. Jelentése: személyi számítógép, manapság a legtöbb számítógép ilyen.
+\item \textbf{prototípus}	A program azon állapota, melyben meg van valósítva minden funkció működőképesen, de a grafikus felület még nincs beleépítve.
+\item \textbf{ShareLaTeX}	Internetes LaTeX szerkesztő, mely lehetővé teszi dokumentumok szerkesztését, előkészítését valós idejű online környezetben.
+\item \textbf{Sympa}	Egy szoftver, mely lehetővé teszi a levelező listák használatát, menedzselését.
+\item \textbf{szkeleton}	A program azon állapota, melyben a belső felépítés készen van (a függvények osztályok), de még nem csinál semmit.
+\item \textbf{szoftver}	A számítógépen elhelyezhető, futtatható program.
+\item \textbf{use-case}	Lehetséges interakciók leírása a rendszer és az aktor (felhasználó) között.
+\item \textbf{verziókezelés}		Olyan tevékenység, amellyel eltárolhatóak a fájlok régebbi verzió, ezáltal egy-egy módosítás után vissza lehet térni egy adott verzióhoz és nyomon lehet követni a fejlesztést.
+
 \end{itemize}
-\comment{A dokumentumban használt definíciók, rövidítések magyarázata.}
 
 \subsection {Hivatkozások}
 Szoftver Labor 4 - \url{https://www.iit.bme.hu/~szoftlab4/}
 
-\comment{A dokumentumban használt anyagok, web-oldalak felsorolása}
+GitHub - \url{https://github.com/tht-krisztian/Szoftlab4.git}
 
 \subsection{Összefoglalás}
 A dokumentum további részeiben található:
@@ -40,8 +57,6 @@ A dokumentum további részeiben található:
 \item 2.7 Napló: Az elvégzett feladatok és ráfordított idő felsorolása
 \end{itemize}
 
-\comment{A dokumentum további részeinek rövid ismertetése}
-
 \pagebreak
 \section{Áttekintés}
 \subsection{Általános áttekintés}
@@ -50,34 +65,50 @@ A dokumentum további részeiben található:
 \item director
 \item HUD
 \item játék menü
-\item garfikus felület
+\item grafikus felület
 \item pályák
 \item robotok
 \end{itemize}
 \\A szoftver fontos eleme a Játékmotor. Ez teremti meg a kezdeti feltételeket és irányítja a játék folyását. Ez fogja ellenőrizni, hogy a robotok leesnek-e a pályáról, ha olajfoltba lépnek letiltja az irányítást a játékos oldalon, illetve ha ragacsba lép egy játékos, akkor lelassuljon. A Játékmotor indulása előtt lekéri a Pályák alrendszertől a kiválasztott pályát.
 \\A director alrendszer feladata az idő léptetése, másodpercenként ugranak a robotok ezt ütemezi.
-\\A HUD alrendszer hivatott jelezni, hogy a játékos számára elérhető-e a olaj vagy ragacskészlet \comment{,továbbá a megtett körök számát}
+\\A HUD alrendszer hivatott jelezni, hogy a játékos számára elérhető-e a olaj vagy ragacskészlet,továbbá a megtett körök számát
 \\A játék menü alrendszer feladata a játék során a megfelelő parancsra megállítani a játékot és a beállítások (pl.: grafikai, hang) állíthatósága.
 \\A grafikus felület feladata, hogy kapcsolatot létesítsen a játékossal vizuális információkkal és a játékos ezen keresztül irányíthatja a játékmotort.
 \\A Pályák alrendszer betölti a Pályafájlokból a pályákat, tárolja, majd azokat a Játékmotor rendelkezésére bocsájtja.
 \\A Robotok alrendszer betölti a robotokat a Robotfájlokból, tárolja azokat, majd a Játékmotor rendelkezésére bocsájtja.
 \\Hálózatot a szoftver nem igényel. Háttértáron pedig a program .jar archívumainak, a kirajzoláshoz szükséges pálya és robot képeknek, a pályákat tartalmazó fájloknak szükséges helyet biztosítani. Ezeken kívül nincs szükség futás idejű tárhelyigényre. 
 
-\comment{A kialakítandó szoftver legmagasabb szintű architekturális képe. A fontosabb alrendszerek felsorolása, a közöttük kialakítandó interfészek lényege, a felhasználói kapcsolatok alapja. Esetleges hálózati és adattárolási elvárások.}
-
+\pagebreak
 \subsection{Funkciók}
-\comment{A feladat kb. 4000 karakteres (kb 1,5 oldal) részletezettségű magyar nyelvű leírása. Nem szerepelhetnek informatikai kifejezések.}
+Mivel unalmas a mérnökök munkája a Marson (nem adnak nekik elég érdekes feladatot, mint például a napelem-építés, vagy az ásványi anyag gyűjtése), ezért robotokat versenyeztetnek egymás ellen; ezt valósítja meg az alábbi játékprogram.
+
+Egy versenyző játéknak a lényege, hogy a résztvevők egymás ellen próbálnak minél tovább eljutni a pályán, illetve minél jobb időt elérni. Ez itt sincs másként, a verseny célja, hogy a megadott idő alatt több kört tegyünk meg robotunkkal mint az ellenfél. Ebben segítségünkre lehet a pálya kialakítása, és a különböző felszerelések, melyek megnehezíthetik a verseny lefutását. Fontos, hogy a robotok a kijelölt pályán maradjanak, mert csak ezen a területen biztosított a kommunikáció a vezérlőközponttal. Ha egy robot elhagyja a pályát diszkvalifikálják a futamból.
+
+Az idő lejártával (esetleg más játékmódoknál egy adott körszám megtétele után) a játék véget ér. Ebben az esetben az a játékos robotja nyer, amelyik több kört tett meg (vagy elsőként ért be a célba adott kör után), kivéve ha idő előtt letér a pályáról, ezáltal nem vesz részt az eredményhirdetésen a célvonalnál.
+
+A játékteret a csodálatos Mars környezete adja, ami nagyon veszélyes terep. Tartani kell a különféle sugárzásoktól, nehogy kárt tegyenek a mérnökökben és a nézőkben, ezért ők egy védett szobából szemlélik és irányítják az eseményeket. A pályán különféle nehezítések is helyet kapnak, hogy ne legyen a robotoknak (és mérnökeiknek) könnyű az élete. Olyan akadályokkal kell megbirkózniuk a robotoknak, mint például a lyukak elkerülése, melyek a felépítésüket teszik tönkre, ezáltal nem tudnak tovább versenyezni, vagy az olajfoltok időben való észrevétele, ami meggátolja, hogy a mérnökök irányítsák őket, végül de nem utolsó sorban a ragacsokat is ki kell kerülniük, mert azok a sebességüket csökkentik, ezáltal nagy előnyt adva az ellenfél robotjának. A többi robothoz sem éri meg közel tartózkodni, hiszen mint minden verseny alatt, az ütközésnek itt is ára van, ez most az irányítás bezavarodásában merül ki. Végül a legnagyobb akadály maga a pálya. A versenyeket egy lapos fennsíkon szokták tartani a Marson, jól elszeparálva a marslakóktól, hogy azok ne tudjanak belekontárkodni a futamba, de elakadhatnak vagy leeshetnek a szélén, a mérnököknek erre is nagyon kell figyelniük az irányítás alatt.
+
+A robotok a startvonalról indulnak úgy, hogy figyelembe véve a pálya felépítését, igazságos legyen minden résztvevőnek (a mérnökök a pályán kívülről irányítják őket). A „Start”-ot egy visszaszámolás indítja, melynek következtében a robotok elindulnak. A pályán állomások találhatók, melyek minden robot áthaladásánál ellenőrzik, hogy nem történt-e csalás. Minden körben a pályán adott állomásokon kell áthaladni adott sorrendben. A kör csak akkor érvényes, ha a robot ezeknek a megszorításoknak eleget tud tenni. Továbbá a távolság mérése (ezáltal győzelmi feltételek) is ez alapján történik, szóval egyik mérnöknek sem éri meg ide-oda navigálni a robotját a pontok között, a legnagyobb megtett út reményében.
+A robotok sebessége állandó, a mérnökök csak az ugrások irányát tudják befolyásolni a játék lezajlása alatt, ezért nagyon kell figyelni, hogy a kanyarokat jó ívben vegyék be, az akadályokat pedig megfelelő szakértelemmel kerüljék ki. Továbbá az indulás után máris lehetőséget nyújt a játék, hogy a mérnökök használják a robotokba beépített felszereléseket. Ezek nem mások mint a már feljebb leírt ragacsok és olajfoltok. Ezeket maguk mögött képesek hagyni, és a játék végéig megmaradnak a pálya felületén (illetve amíg valaki bele nem megy, akár a mérnök saját robotja), fejfájást okozva ezzel a versenyzőknek. A felszerelések körönként (fentebb említett „Checkpoint-rendszer” szerint) újratöltődnek, ezért a mérnököknek nem kell taktikázniuk, hogy mikor törjenek borsot az ellenfelük orra alá; körönként megtehetik azt.
+
+A verseny ezen lehetőségek megvalósítása által igen érdekes, veszélyes és néha akár frusztráló is, gondoljunk csak a robotok felszereléseire. Egyszóval ideális időtöltés a Marson unatkozó mérnököknek.
 
 \subsection{Felhasználók}
 A játék 2 játékos módban indíthat. A játékosnak semmiféle előképzettségre nincs szüksége, a játék menete gyorsan elsajátítható. A játékban nem lesz pályaszerkesztő. A játékot nem lehet elmenteni, mindig újból kell kezdeni.
-\comment{A felhasználók jellemzői, tulajdonságai}
 
 \subsection{Korlátozások}
 A BME IIT Szoftver Laboratórium tantárgy oktatói (a megrendelők) által kiírt specifikáció megköveteli, hogy a program a HSZK gépein a beadások alkalmával futtathatók legyenek. Ezekre a gépekre már előre feltelepített JRE 1.7-es környezet elérhető, ezért csak a JDK 1.7-es verziójaban már létező függvények, osztályok használhatóak a kód megírása során.
-\comment{Az elkészítendő szoftverre vonatkozó – általában nem funkcionális - előírások, korlátozások.}
+
 
 \subsection{Feltételezések, kapcsolatok}
-\comment{A dokumentumban használt anyagok, web-oldalak felsorolása}
+\textbf{Szoftver Labor 4}
+\begin{itemize}
+\item feladat határidői \url{https://www.iit.bme.hu/~szoftlab4/}
+\item feladatkiírás \url{https://www.iit.bme.hu/~szoftlab4/feladat.shtml}
+\item dokumentáció sablonok \url{https://www.iit.bme.hu/~szoftlab4/templ/}
+\end{itemize}
+
+ 
 
 \section{Követelmények}
 \subsection{Funkcionális követelmények}
@@ -94,39 +125,47 @@ Források:
 \item konzulens
 \end{itemize}
 
-\comment{Az alábbi táblázat kitöltésével készítendő. Dolgozzon ki követelmény azonosító rendszert! Az ellenőrzés módja szokásosan bemutatás és/vagy kiértékelés. Prioritás lehet alapvető, fontos, opcionális. Az alapvető követelmények nem teljesítése végzetes. Forrás alatt a követelményt előíró anyagot, szervezetet kell érteni. Esetünkben forrás lehet maga a csapat is, mikor ő talál ki követelményt. Use-case-ek alatt az adott követelményt megvalósító használati esete(ke)t kell megadni.}
-
 % Azonosító, Leírás, Ellenőrzés, Prioritás, Forrás, Use-case, Komment
 \begin{longtable}{| l | l | l | l | l | l | l |}
 \hline
 \textbf{Azonosító}   & \textbf{Leírás} & \textbf{Ellenőrzés} & \textbf{Prioritás} & \textbf{Forrás} & \textbf{Use-case} & \textbf{Komment} \tabularnewline
-\hline 1.01 & Játék menü & & alapvető & & &\tabularnewline
-\hline 1.02 & Beállítások kezelése & & alapvető & & &\tabularnewline
-\hline 1.03 & Játék elindítása & & alapvető & & &\tabularnewline
-\hline 1.04 & Pályáról leesők kiesnek & & alapvető & & &\tabularnewline
-\hline 1.05 & Előre elkészített versenypálya & & alapvető & & &\tabularnewline
-\hline 1.06 & \vtop{\hbox{\strut Robotok a kezdőpozíciójukból}\hbox{\strut indulnak}}  & & alapvető & & &\tabularnewline
-\hline 1.07 &\vtop{\hbox{\strut Pályán vannak olajfoltok és}\hbox{\strut ragacsfoltok}}   & & alapvető & & &\tabularnewline
-\hline 1.08 &\vtop{\hbox{\strut Robotok fel vannak szerelve }\hbox{\strut olaj és ragacskészlettel}}  & & alapvető & & &\tabularnewline
-\hline 1.09 &\vtop{\hbox{\strut 2 személy tudjon játszani}\hbox{\strut egyszerre}} & & alapvető & & &\tabularnewline
-\hline 1.10 & \vtop{\hbox{\strut USB-s joystickkal}\hbox{\strut vezérelhető robotok}} & & opcionális & & &\tabularnewline
+\hline 1.01 & Játék menü & bemutatás & alapvető & csapat & &\tabularnewline
+\hline 1.02 & Beállítások kezelése & bemutatás & opcionális & csapat & &\tabularnewline
+\hline 1.03 & Játék elindítása & bemutatás & alapvető & & &\tabularnewline
+\hline 1.04 & Pályáról leesők kiesnek & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.05 & Előre elkészített versenypálya & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.06 & \vtop{\hbox{\strut Robotok a kezdőpozíciójukból}\hbox{\strut indulnak}}& bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.07 &\vtop{\hbox{\strut Pályán vannak olajfoltok és}\hbox{\strut ragacsfoltok}}& bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.08 &\vtop{\hbox{\strut Robotok fel vannak szerelve }\hbox{\strut olaj és ragacskészlettel}} & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.09 &\vtop{\hbox{\strut 2 személy tudjon játszani}\hbox{\strut egyszerre}} & bemutatás & alapvető & csapat & &\tabularnewline
+\hline 1.10 &  Körlimites játékmód & bemutatás & opcionális & csapat & &\tabularnewline
+\hline 1.11 &  Időlimites játékmód & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.12 & A robotok tudjanak ugrani & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.13 &\vtop{\hbox{\strut A ragacs és olaj a pályáról}\hbox{\strut idő után eltűnik}} & bemutatás & opcionális & & &\tabularnewline
+\hline 1.14 & \vtop{\hbox{\strut A ragacs és olaj a pályáról,}\hbox{\strut ha belelépnek eltűnik}} & bemutatás & opcionális & & &\tabularnewline
+\hline 1.15 & \vtop{\hbox{\strut A robotok tudnak egymással}\hbox{\strut ütközni}} & bemutatás & opcionális & & &\tabularnewline
+\hline 1.16 &\vtop{\hbox{\strut Az indulás előtt}\hbox{\strut visszaszámlálás indul}} & bemutatás & opcionális & & &\tabularnewline
+\hline 1.17 &\vtop{\hbox{\strut A robotok sebessége }\hbox{\strut egységnyi méretű tetszőleges }\hbox{\strut irányú vektorral módosítható }} & bemutatás & alapvető & megrendelő  & &\tabularnewline
+\hline 1.18 &\vtop{\hbox{\strut Egy ugrással a sebességgel}\hbox{\strut egyenesen arányos}\hbox{\strut{távolságra tudnak eljutni}}} & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.19 &\vtop{\hbox{\strut A robot ragacsra érkezve}\hbox{\strut sebessége a felére csökken}} & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.20 &\vtop{\hbox{\strut A robot olajfoltra érkezve}\hbox{\strut sebességének módosítása}\hbox{nem lehetséges}} & bemutatás & alapvető & megrendelő & & \tabularnewline
+
 \hline
 \end{longtable}
 
 \subsection{Erőforrásokkal kapcsolatos követelmények}
 
-\comment{A szoftver fejlesztésével és használatával kapcsolatos számítógépes, hardveres, alapszoftveres és egyéb architekturális és logisztikai követelmények}
-
 % Azonosító, Leírás, Ellenőrzés, Prioritás, Forrás, Komment
 \begin{longtable}{| l | l | l | l | l | l |}
 \hline
 \textbf{Azonosító}   & \textbf{Leírás} & \textbf{Ellenőrzés} & \textbf{Prioritás} & \textbf{Forrás} & \textbf{Komment} \tabularnewline
-\hlie
+\hline
 \hline 2.01 & JRE  & bemutatás  & alapvető  & megrendelő & Java IDE  \tabularnewline
 \hline 2.02 & Eclipse & nincs & opcionális & csapat & Java IDE \tabularnewline
 \hline 2.03 & NetBeans IDE & nincs  & opcionális  & csapat  & Java IDE  \tabularnewline
 \hline 2.04 & IntelliJ IDEA & nincs  & opcionális  & csapat  & Java IDE  \tabularnewline
 \hline 2.05 & ShareLatex & nincs  & opcionális  & csapat  & online LaTeX editor  \tabularnewline
+\hline 2.06 & ShareLatex & nincs  & opcionális  & csapat  & online LaTeX editor  \tabularnewline
 \hline 2.06 & Git & nincs  & alapvető  & csapat  & Elosztott verziókezelő \tabularnewline
 \hline 2.07 & GitHub account & nincs  & alapvető & csapat & Git tárhely \tabularnewline
 \hline 2.08 & PC & bemutatás  & alapvető  & megrendelő  &  \tabularnewline
@@ -142,7 +181,6 @@ Források:
 
 
 \subsection{Átadással kapcsolatos követelmények}
-\comment{A szoftver átadásával, telepítésével, üzembe helyezésével kapcsolatos követelmények}
 
 % Azonosító, Leírás, Ellenőrzés, Prioritás, Forrás, Komment
 \begin{longtable}{| l | l | l | l | l | l |}
@@ -159,7 +197,6 @@ Források:
 
 \subsection{Egyéb nem funkcionális követelmények}
 Nincs egyéb nem funkcionális követelmény.
-\comment{A biztonsággal, hordozhatósággal, megbízhatósággal, tesztelhetőséggel, a felhasználóval kapcsolatos követelmények}
 
 % Azonosító, Leírás, Ellenőrzés, Prioritás, Forrás, Komment
 %\begin{longtable}{| l | l | l | l | l | l |}
@@ -171,31 +208,122 @@ Nincs egyéb nem funkcionális követelmény.
 
 
 \section{Lényeges use-case-ek}
-\comment{A 2.3.1-ben felsorolt követelmények közül az alapvető és fontos követelményekhez tartozó használati esetek megadása az alábbi táblázatos formában.}
+
 \subsection{Use-case leírások}
 
-\comment{Minden use-case-hez külön}
+\usecase{Új Játék indítás}{Új Játék indul}{Játékos}{A Játékos kiválasztja a „New Game”-t. Ezután két módból választhat:
+\begin{itemize}
+\item Kör: adott kört kell megtenni
+\item Idő: adott idő alatt kell elérni minél nagyobb távolságot
+\end{itemize} 
+}
 
-\usecase{...}{...}{...}{...}
+\usecase{Mozgás}{Robot mozgása}{Játékos}{A játékos képes megváltoztatni a robot ugrásának irányát a jobbra és balra gombokkal.}
 
-\usecase{...}{...}{...}{...}
+\usecase{Akadályozás}{Ellenfél lassítása, iránymentesítése}{Játékos}{A Játékos képes az ellenfél robotját akadályozni. Ezt kétféleképpen tudja:
+- ragacsot tesz le: az ellenfél lassabbá válik
+- olajfoltot tesz le: az ellenfél nem tudja megváltoztatni egy ideig a robotja irányát
+}
+
+\usecase{Kilépés}{Az alkalmazás bezárása}{Játékos}{A Játékos kilép a programból, ha a jobb felső sarokban lévő bezárásra kattint.}
 
 \section{Szótár}
 \begin{itemize}
-\item 
+\item \textbf{Játékos} - A program felhasználója, a robot irányítója, aki játszik.
+\item \textbf{Robot} - A játékos által irányított virtuális gépezet. Képes ugrani, ragacsot és olajat helyezni a pályára, illetve le tud esni a pályáról.
+\item \textbf{Verseny} – A játék folyamata. Célja minél több kör megtétele adott idő alatt vagy adott körszám megtétele minél rövidebb idő alatt.
+\item \textbf{Pálya} - A verseny helyszíne: az a sík, amin a játék zajlik. A játék közben nem változik, a robotok ide helyezhetik az olajfoltokat és a ragacsokat.
+\item \textbf{Start} – Az az időpillanat, amikor a játék elindul és a játékosok megkezdik a versenyzést. Ezt egy visszaszámlálás előzi meg.
+\item \textbf{Checkpoint} – Olyan vonal a pályán, ami ellenőrzi, hogy a játékos megfelelő irányban halad és nem próbál szabálytalanságot elkövetni.
+\item \textbf{Célvonal} – Ha játékosok adott körszám megtételéig versenyeznek, akkor az a Checkpoint, amit bizonyos körszám után elérve a játéknak vége van.
+\item \textbf{Startvonal} – Az a Checkpoint, amiről a robotok elindulnak.
+\item \textbf{Idő lejárta} – Az a pillanat, amikor a játékosok rendelkezésére álló idő elfogy, eléri a nullát. Ilyenkor az adott játéknak vége van.
+\item \textbf{Kör} - Egy vonal a pályán, ami minden Checkpointot pontosan egyszer érint és a kezdő- és végpontja a startvonal.
+\item \textbf{Távolság} – Az a mértékegység, ami megmondja, hogy egy robot milyen hosszú utat tett meg a pályán a verseny ideje alatt.
+\item \textbf{Zászlók} – Az az indikátor, ami jelzi, hogy a játékos éppen hány Checkpointon jutott át az adott körben. Minden kör végén törlődik, de a megtett körök száma megnő eggyel.
+\item \textbf{Akadály} - Olyan objektum a pályán, ami megnehezíti a játékosok célba jutását. Lehet állandó, ami megmarad a játék egész ideje alatt, illetve ideiglenes, ami eltűnik, amint egy robot ráugrik.
+\item \textbf{Lyuk} – Állandó akadály, amit a pálya előre tartalmaz, tehát nem a játékosok helyezik el. Ha egy robot ráugrik, akkor tönkre teszi annak felépítését, ezáltal megakadályozza a verseny folytatásában.
+\item \textbf{Felszerelés} – Ragacs vagy olaj, amit a robot magánál hord és bármelyik lépésnél a pályára helyezhet. Lehelyezése után ideiglenes akadályként funkcionál.
+\item \textbf{Ragacs} – Olyan ideiglenes akadály, ami felezi a ráugró robot sebességének a nagyságát.
+\item \textbf{Olaj} – Olyan ideiglenes akadály, ami megakadályozza a ráugró robot irányának megváltoztatását.
+\item \textbf{Irányítás} – Az a folyamat, amikor a játékos a hozzá tartozó robot irányát megváltoztatja.
+\item \textbf{Irány} – A robot sebességének az a komponense, ami meghatározza, hogy a robot hova fog érkezni egy ugrás után.
+\item \textbf{Sebesség} – Egy kétdimenziós vektor a pálya síkjában, ami eredendően egységnyi méretű minden robotra. Méretét csak ragacsok tudják változtatni. Irányát a játékosok irányítása, illetve az ütközések módosítják.
+\item \textbf{Ugrás} – A robotok helyváltoztatási folyamata a pályán. Az ugrás nagyságát a robothoz tartozó sebességvektor nagysága határozza meg.
+\item \textbf{Leesés} – Az az esemény, amikor egy robot a pálya felületén kívülre ugrik, ezáltal elhagyva a pályát.  
+\item \textbf{Ütközés} – Az az esemény, amikor a két robot egymásra ugrik, azaz minimum érintik egymást egy ugrás után. A következő ugrás irányát ilyenkor a játékos nem változtathatja, hanem az az ütközésnek megfelelően módosul.
+\item \textbf{Diszkvalifikáció} - A pálya elhagyásának, a pályáról való leesésnek a következménye. Ilyenkor a pályát elhagyó robotot irányító játékos veszít.
+\item \textbf{Szabálytalanság} – Az az eset, amikor a játékos nem az előírt sorrendben próbál végighaladni a Checkpointokon.
+
 \end{itemize}
-\comment{A szótár a követelmények alapján készítendő fejezet. Egy szótári bejegyzés definiálásához csak más szótári bejegyzések és köznapi – a feladattól független – fogalmak használhatók fel. A szótár mérete kb. 1-2 oldal legyen.}
+
 
 \section{Projekt terv}
 \subsection{Csapat}
 A csapat 5 főből áll. A következő táblázat a személyes preferenciákat tartalmazza, a feladatokat úgy osztjuk ki, hogy közel azonos nehézségűek legyenek, miközben ezeket a preferenciákat szem előtt tartjuk.
 
+
+\begin{longtable}{| l | l |}
+\hline
+\textbf{Név}   & \textbf{Felelősségek}  \tabularnewline
+\hline
+\hline Kovács Levente Ákos & UML, kód  \tabularnewline
+\hline Lovász Attila Bence & UML, kód  \tabularnewline
+\hline Graics Vince & Dokumentáció, kód  \tabularnewline
+\hline Magyar Milán Bertalan & Grafika, Dokumentáció, kód  \tabularnewline
+\hline Tóth Krisztián Dávid (csapatvezető) & Menedzsment, Dokumentáció, kód  \tabularnewline
+\hline
+\end{longtable}
+
 \subsection {Kommunikáció}
+
+\textbf{GitWiki}
+
+\textbf{Elérhetőség}
+
+\textbf{Levelezőlista}
+
+\textbf{Megbeszélések}
+
 
 \subsection{Használt programok}
 
+\textbf{Verziókezelés}
+
+\textbf{Dokumentáció}
+
+\textbf{Fejlesztőkörnyezet}
+
+
 \subsection{Mérföldkövek, határidők}
-\
-\comment{Tartalmaznia kell a projekt végrehajtásának lépéseit, a lépések, eredmények határidejét, az egyes feladatok elvégzéséért felelős személyek nevét és beosztását, a szükséges erőforrásokat, stb. Meg kell adni a csoportmunkát támogató eszközöket, a választott technikákat! Definiálni kell, hogy hogyan történik a dokumentumok és a forráskód megosztása!}
+
+
+\begin{longtable}{| l | l | l | l | l | l |}
+\hline
+\textbf{Dátum}   & \textbf{Leírás} & \textbf{Ellenőrzés} \tabularnewline
+\hline
+\hline 2015.02.23 & Követelmény, projekt, funkcionalitás & beadás  \tabularnewline
+\hline 2015.03.02 & Analízis modell kidolgozása 1. & beadás  \tabularnewline
+\hline 2015.03.09 & Analízis modell kidolgozása 2. & beadás  \tabularnewline
+\hline 2015.03.16 & Szkeleton tervezése & beadás  \tabularnewline
+\hline 2015.03.23 & Szkeleton & beadás  \tabularnewline
+\hline 2015.03.25 & \textbf{Szkeleton} & bemutatás  \tabularnewline
+\hline 2015.03.30 & Prototípus koncepciója & beadás  \tabularnewline
+\hline 2015.04.07 & Részletes tervek & beadás  \tabularnewline
+\hline 2015.04.20 & Prototípus & beadás  \tabularnewline
+\hline 2015.04.22 & \textbf{Prototípus} & bemutatás  \tabularnewline
+\hline 2015.04.27 & Grafikus felület specifikációja & beadás  \tabularnewline
+\hline 2015.05.11 & Grafikus változat & beadás  \tabularnewline
+\hline 2015.05.13 & \textbf{Grafikus változat} & bemutatás  \tabularnewline
+\hline 2015.05.15 & Összefoglalás & beadás  \tabularnewline
+\hline
+\end{longtable}
+
+
+\textbf{szkeleton}
+
+\textbf{prototípus}
+
+\textbf{grafikus}
 
 
