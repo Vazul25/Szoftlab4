@@ -56,29 +56,35 @@ A dokumentum további részeiben található:
 \item 2.6 Project terv: A project résztvevőinek feladatkörei és határidők részletes kifejtése
 \item 2.7 Napló: Az elvégzett feladatok és ráfordított idő felsorolása
 \end{itemize}
-
 \pagebreak
+
 \section{Áttekintés}
 \subsection{Általános áttekintés}
-\begin{itemize}
-\item játékmotor
-\item director
-\item HUD
-\item játék menü
-\item grafikus felület
-\item pályák
-\item robotok
-\end{itemize}
-\\A szoftver fontos eleme a Játékmotor. Ez teremti meg a kezdeti feltételeket és irányítja a játék folyását. Ez fogja ellenőrizni, hogy a robotok leesnek-e a pályáról, ha olajfoltba lépnek letiltja az irányítást a játékos oldalon, illetve ha ragacsba lép egy játékos, akkor lelassuljon. A Játékmotor indulása előtt lekéri a Pályák alrendszertől a kiválasztott pályát.
-\\A director alrendszer feladata az idő léptetése, másodpercenként ugranak a robotok ezt ütemezi.
-\\A HUD alrendszer hivatott jelezni, hogy a játékos számára elérhető-e a olaj vagy ragacskészlet,továbbá a megtett körök számát
-\\A játék menü alrendszer feladata a játék során a megfelelő parancsra megállítani a játékot és a beállítások (pl.: grafikai, hang) állíthatósága.
-\\A grafikus felület feladata, hogy kapcsolatot létesítsen a játékossal vizuális információkkal és a játékos ezen keresztül irányíthatja a játékmotort.
-\\A Pályák alrendszer betölti a Pályafájlokból a pályákat, tárolja, majd azokat a Játékmotor rendelkezésére bocsájtja.
-\\A Robotok alrendszer betölti a robotokat a Robotfájlokból, tárolja azokat, majd a Játékmotor rendelkezésére bocsájtja.
-\\Hálózatot a szoftver nem igényel. Háttértáron pedig a program .jar archívumainak, a kirajzoláshoz szükséges pálya és robot képeknek, a pályákat tartalmazó fájloknak szükséges helyet biztosítani. Ezeken kívül nincs szükség futás idejű tárhelyigényre. 
 
-\pagebreak
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.17]{arch_kep.jpg}
+\caption{Architekturális kép}
+\label{fig:my_label}
+\end{figure}
+
+A szoftver fontos eleme a Játékmotor. Ez teremti meg a kezdeti feltételeket és irányítja a játék folyását. Ez fogja ellenőrizni, hogy a robotok leesnek-e a pályáról, ha olajfoltba lépnek letiltja az irányítást a játékos oldalon, illetve ha ragacsba lép egy játékos, akkor lelassuljon. A Játékmotor indulása előtt lekéri a Pályák alrendszertől a kiválasztott pályát.
+
+A director alrendszer feladata az idő léptetése,  a robotok másodpercenkénti ugrását ütemezi.
+
+A HUD alrendszer hivatott jelezni, hogy a játékos számára elérhető-e az olaj vagy ragacskészlet, továbbá a megtett körök számát.
+
+A játék menü alrendszer feladata a játék során a megfelelő parancsra megállítani a játékot és a beállítások (pl.: grafikai, hang) állíthatósága.
+
+A grafikus felület feladata, hogy kapcsolatot létesítsen a játékossal vizuális információkkal és a játékos ezen keresztül irányíthatja a játékmotort. Továbbá hozzáfér a játék menühöz és a HUD-hoz, hiszen ki kell jeleznie azokat.
+
+A Pályák alrendszer betölti a Pályafájlokból a pályákat, tárolja, majd azokat a Játékmotor rendelkezésére bocsájtja.
+
+A Robotok alrendszer betölti a robotokat a Robotfájlokból, tárolja azokat, majd a Játékmotor rendelkezésére bocsájtja.
+
+Hálózatot a szoftver nem igényel. Háttértáron pedig a program .jar archívumainak, a kirajzoláshoz szükséges pálya és robot képeknek, a pályákat tartalmazó fájloknak szükséges helyet biztosítani. Ezeken kívül nincs szükség futás idejű tárhelyigényre. 
+
 \subsection{Funkciók}
 Mivel unalmas a mérnökök munkája a Marson (nem adnak nekik elég érdekes feladatot, mint például a napelem-építés, vagy az ásványi anyag gyűjtése), ezért robotokat versenyeztetnek egymás ellen; ezt valósítja meg az alábbi játékprogram.
 
@@ -97,7 +103,7 @@ A verseny ezen lehetőségek megvalósítása által igen érdekes, veszélyes �
 A játék 2 játékos módban indíthat. A játékosnak semmiféle előképzettségre nincs szüksége, a játék menete gyorsan elsajátítható. A játékban nem lesz pályaszerkesztő. A játékot nem lehet elmenteni, mindig újból kell kezdeni.
 
 \subsection{Korlátozások}
-A BME IIT Szoftver Laboratórium tantárgy oktatói (a megrendelők) által kiírt specifikáció megköveteli, hogy a program a HSZK gépein a beadások alkalmával futtathatók legyenek. Ezekre a gépekre már előre feltelepített JRE 1.7-es környezet elérhető, ezért csak a JDK 1.7-es verziójaban már létező függvények, osztályok használhatóak a kód megírása során.
+A BME IIT Szoftver Laboratórium tantárgy oktatói (a megrendelők) által kiírt specifikáció megköveteli, hogy a program a HSZK gépein a beadások alkalmával futtathatók legyenek. Ezekre a gépekre már előre feltelepített JRE 1.7-es környezet elérhető, ezért csak a JDK 1.6-es verziójaban már létező függvények, osztályok használhatóak a kód megírása során.
 
 
 \subsection{Feltételezések, kapcsolatok}
@@ -112,18 +118,6 @@ A BME IIT Szoftver Laboratórium tantárgy oktatói (a megrendelők) által kií
 
 \section{Követelmények}
 \subsection{Funkcionális követelmények}
-Prioritások:
-\begin{itemize}
-\item alapvető
-\item fontos
-\item opcionális
-\end{itemize}
-Források:
-\begin{itemize}
-\item specifikáció
-\item csapat
-\item konzulens
-\end{itemize}
 
 % Azonosító, Leírás, Ellenőrzés, Prioritás, Forrás, Use-case, Komment
 \begin{longtable}{| l | l | l | l | l | l | l |}
@@ -131,7 +125,7 @@ Források:
 \textbf{Azonosító}   & \textbf{Leírás} & \textbf{Ellenőrzés} & \textbf{Prioritás} & \textbf{Forrás} & \textbf{Use-case} & \textbf{Komment} \tabularnewline
 \hline 1.01 & Játék menü & bemutatás & alapvető & csapat & &\tabularnewline
 \hline 1.02 & Beállítások kezelése & bemutatás & opcionális & csapat & &\tabularnewline
-\hline 1.03 & Játék elindítása & bemutatás & alapvető & & &\tabularnewline
+\hline 1.03 & Játék elindítása & bemutatás & alapvető & megrednelő &\vtop{\hbox{\strut Új Játék}\hbox{\strut indítás}}&\tabularnewline
 \hline 1.04 & Pályáról leesők kiesnek & bemutatás & alapvető & megrendelő & &\tabularnewline
 \hline 1.05 & Előre elkészített versenypálya & bemutatás & alapvető & megrendelő & &\tabularnewline
 \hline 1.06 & \vtop{\hbox{\strut Robotok a kezdőpozíciójukból}\hbox{\strut indulnak}}& bemutatás & alapvető & megrendelő & &\tabularnewline
@@ -141,14 +135,16 @@ Források:
 \hline 1.10 &  Körlimites játékmód & bemutatás & opcionális & csapat & &\tabularnewline
 \hline 1.11 &  Időlimites játékmód & bemutatás & alapvető & megrendelő & &\tabularnewline
 \hline 1.12 & A robotok tudjanak ugrani & bemutatás & alapvető & megrendelő & &\tabularnewline
-\hline 1.13 &\vtop{\hbox{\strut A ragacs és olaj a pályáról}\hbox{\strut idő után eltűnik}} & bemutatás & opcionális & & &\tabularnewline
-\hline 1.14 & \vtop{\hbox{\strut A ragacs és olaj a pályáról,}\hbox{\strut ha belelépnek eltűnik}} & bemutatás & opcionális & & &\tabularnewline
-\hline 1.15 & \vtop{\hbox{\strut A robotok tudnak egymással}\hbox{\strut ütközni}} & bemutatás & opcionális & & &\tabularnewline
-\hline 1.16 &\vtop{\hbox{\strut Az indulás előtt}\hbox{\strut visszaszámlálás indul}} & bemutatás & opcionális & & &\tabularnewline
-\hline 1.17 &\vtop{\hbox{\strut A robotok sebessége }\hbox{\strut egységnyi méretű tetszőleges }\hbox{\strut irányú vektorral módosítható }} & bemutatás & alapvető & megrendelő  & &\tabularnewline
+\hline 1.13 &\vtop{\hbox{\strut A ragacs és olaj a pályáról}\hbox{\strut idő után eltűnik}} & bemutatás & opcionális & csapat & &\tabularnewline
+\hline 1.14 & \vtop{\hbox{\strut A ragacs és olaj a pályáról,}\hbox{\strut ha belelépnek eltűnik}} & bemutatás & opcionális & csapat & &\tabularnewline
+\hline 1.15 & \vtop{\hbox{\strut A robotok tudnak egymással}\hbox{\strut ütközni}} & bemutatás & opcionális & csapat & &\tabularnewline
+\hline 1.16 &\vtop{\hbox{\strut Az indulás előtt}\hbox{\strut visszaszámlálás indul}} & bemutatás & opcionális & csapat & &\tabularnewline
+\hline 1.17 &\vtop{\hbox{\strut A robotok sebessége }\hbox{\strut egységnyi méretű tetszőleges }\hbox{\strut irányú vektorral módosítható }} & bemutatás & alapvető & megrendelő & &\tabularnewline
 \hline 1.18 &\vtop{\hbox{\strut Egy ugrással a sebességgel}\hbox{\strut egyenesen arányos}\hbox{\strut{távolságra tudnak eljutni}}} & bemutatás & alapvető & megrendelő & &\tabularnewline
 \hline 1.19 &\vtop{\hbox{\strut A robot ragacsra érkezve}\hbox{\strut sebessége a felére csökken}} & bemutatás & alapvető & megrendelő & &\tabularnewline
 \hline 1.20 &\vtop{\hbox{\strut A robot olajfoltra érkezve}\hbox{\strut sebességének módosítása}\hbox{nem lehetséges}} & bemutatás & alapvető & megrendelő & & \tabularnewline
+\hline 1.21 &\vtop{\hbox{\strut A robot olajat vagy}\hbox{\strut ragacsot tudnak lerakni}} & bemutatás & alapvető & megrendelő & \vtop{\hbox{\strut Akadá-}\hbox{\strut lyozás}} & \tabularnewline
+\hline 1.21 & A játékból ki  lehet lépni & bemutatás & alapvető & megrendelő & Kilépés & \tabularnewline
 
 \hline
 \end{longtable}
@@ -226,6 +222,16 @@ Nincs egyéb nem funkcionális követelmény.
 }
 
 \usecase{Kilépés}{Az alkalmazás bezárása}{Játékos}{A Játékos kilép a programból, ha a jobb felső sarokban lévő bezárásra kattint.}
+
+\subsection{Use-case diagram}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.6]{use-case.jpg}
+\caption{Use-Case diagram}
+\label{fig:my_label}
+\end{figure}
+
 
 \section{Szótár}
 \begin{itemize}
