@@ -9,10 +9,10 @@
 
 \subsection{Cél}
 
-A project követelményeinek, alapvető felépítésének és funkcionalitásának ismertetése, ezek segítségével a fejlesztési folyamatok majd a végleges program felépítésének megtervezése. Fejlesztés közben ezeket figyelembe kell majd venni és tőlük eltérni nem szabad.
+A projekt követelményeinek, alapvető felépítésének és funkcionalitásának ismertetése, ezek segítségével a fejlesztési folyamatok majd a végleges program felépítésének megtervezése. Fejlesztés közben ezeket figyelembe kell majd venni és tőlük eltérni nem szabad.
 
 \subsection{Szakterület}
-A project a Szoftver laboratórium 4. tantárgy feladatának megoldására született. Az elkészítendő szoftver egy számítógépes játék, nem kimondottan egy szakterület részére készül, inkább szórakoztatás céljából.
+A projekt a Szoftver laboratórium 4. tantárgy feladatának megoldására született. Az elkészítendő szoftver egy számítógépes játék, nem kimondottan egy szakterület részére készül, inkább szórakoztatás céljából.
 
 \subsection{Definíciók, rövidítések}
 \begin{itemize}
@@ -31,13 +31,13 @@ A project a Szoftver laboratórium 4. tantárgy feladatának megoldására szül
 \item \textbf{LaTex}		Dokumentum formázó rendszer, mellyel magas színvonalú dokumentációk készíthetők.
 \item \textbf{Netbeans}	Fejlesztőkörnyezet, ami Java nyelven alapul. A programban egyszerűen, gyorsan lehet grafikus felületet létrehozni, például menüket.
 \item \textbf{PC}	Personal Computer rövidítése. Jelentése: személyi számítógép, manapság a legtöbb számítógép ilyen.
-\item \textbf{prototípus}	A program azon állapota, melyben meg van valósítva minden funkció működőképesen, de a grafikus felület még nincs beleépítve.
+\item \textbf{Prototípus}	A program azon állapota, melyben meg van valósítva minden funkció működőképesen, de a grafikus felület még nincs beleépítve.
 \item \textbf{ShareLaTeX}	Internetes LaTeX szerkesztő, mely lehetővé teszi dokumentumok szerkesztését, előkészítését valós idejű online környezetben.
 \item \textbf{Sympa}	Egy szoftver, mely lehetővé teszi a levelező listák használatát, menedzselését.
-\item \textbf{szkeleton}	A program azon állapota, melyben a belső felépítés készen van (a függvények osztályok), de még nem csinál semmit.
-\item \textbf{szoftver}	A számítógépen elhelyezhető, futtatható program.
-\item \textbf{use-case}	Lehetséges interakciók leírása a rendszer és az aktor (felhasználó) között.
-\item \textbf{verziókezelés}		Olyan tevékenység, amellyel eltárolhatóak a fájlok régebbi verzió, ezáltal egy-egy módosítás után vissza lehet térni egy adott verzióhoz és nyomon lehet követni a fejlesztést.
+\item \textbf{Szkeleton}	A program azon állapota, melyben a belső felépítés készen van (a függvények osztályok), de még nem csinál semmit.
+\item \textbf{Szoftver}	A számítógépen elhelyezhető, futtatható program.
+\item \textbf{Use-case}	Lehetséges interakciók leírása a rendszer és az aktor (felhasználó) között.
+\item \textbf{Verziókezelés}		Olyan tevékenység, amellyel eltárolhatóak a fájlok régebbi verzió, ezáltal egy-egy módosítás után vissza lehet térni egy adott verzióhoz és nyomon lehet követni a fejlesztést.
 
 \end{itemize}
 
@@ -49,11 +49,11 @@ GitHub - \url{https://github.com/tht-krisztian/Szoftlab4.git}
 \subsection{Összefoglalás}
 A dokumentum további részeiben található:
 \begin{itemize}
-\item 2.2 Áttekintés: A project terveinek, funkcióinak áttekintése, a felhasználók lehetőségeinek áttekintése
-\item 2.3 Követelmények: A project során elvárt követelmények kidolgozása, külön kitérve funkcionális, erőforrás, átadással kapcsolatos és egyéb nem funkcionális követelményekre.
+\item 2.2 Áttekintés: A projekt terveinek, funkcióinak áttekintése, a felhasználók lehetőségeinek áttekintése
+\item 2.3 Követelmények: A projekt során elvárt követelmények kidolgozása, külön kitérve funkcionális, erőforrás, átadással kapcsolatos és egyéb nem funkcionális követelményekre.
 \item 2.4 Lényeges use-case-ek felsorolása, use-case diagram
-\item 2.5 Szótár: A project során bevezetett fogalmak körülírása.
-\item 2.6 Project terv: A project résztvevőinek feladatkörei és határidők részletes kifejtése
+\item 2.5 Szótár: A projekt során bevezetett fogalmak körülírása.
+\item 2.6 Projekt terv: A projekt résztvevőinek feladatkörei és határidők részletes kifejtése
 \item 2.7 Napló: Az elvégzett feladatok és ráfordított idő felsorolása
 \end{itemize}
 \pagebreak
@@ -71,7 +71,7 @@ A dokumentum további részeiben található:
 
 A szoftver fontos eleme a Játékmotor. Ez teremti meg a kezdeti feltételeket és irányítja a játék folyását. Ez fogja ellenőrizni, hogy a robotok leesnek-e a pályáról, ha olajfoltba lépnek letiltja az irányítást a játékos oldalon, illetve ha ragacsba lép egy játékos, akkor lelassuljon. A Játékmotor indulása előtt lekéri a Pályák alrendszertől a kiválasztott pályát.
 
-A director alrendszer feladata az idő léptetése,  a robotok másodpercenkénti ugrását ütemezi.
+A director alrendszer feladata az idő léptetése, a robotok másodpercenkénti mozgását ütemezi.
 
 A HUD alrendszer hivatott jelezni, hogy a játékos számára elérhető-e az olaj vagy ragacskészlet, továbbá a megtett körök számát.
 
@@ -95,15 +95,15 @@ Az idő lejártával (esetleg más játékmódoknál egy adott körszám megtét
 A játékteret a csodálatos Mars környezete adja, ami nagyon veszélyes terep. Tartani kell a különféle sugárzásoktól, nehogy kárt tegyenek a mérnökökben és a nézőkben, ezért ők egy védett szobából szemlélik és irányítják az eseményeket. A pályán különféle nehezítések is helyet kapnak, hogy ne legyen a robotoknak (és mérnökeiknek) könnyű az élete. Olyan akadályokkal kell megbirkózniuk a robotoknak, mint például a lyukak elkerülése, melyek a felépítésüket teszik tönkre, ezáltal nem tudnak tovább versenyezni, vagy az olajfoltok időben való észrevétele, ami meggátolja, hogy a mérnökök irányítsák őket, végül de nem utolsó sorban a ragacsokat is ki kell kerülniük, mert azok a sebességüket csökkentik, ezáltal nagy előnyt adva az ellenfél robotjának. A többi robothoz sem éri meg közel tartózkodni, hiszen mint minden verseny alatt, az ütközésnek itt is ára van, ez most az irányítás bezavarodásában merül ki. Végül a legnagyobb akadály maga a pálya. A versenyeket egy lapos fennsíkon szokták tartani a Marson, jól elszeparálva a marslakóktól, hogy azok ne tudjanak belekontárkodni a futamba, de elakadhatnak vagy leeshetnek a szélén, a mérnököknek erre is nagyon kell figyelniük az irányítás alatt.
 
 A robotok a startvonalról indulnak úgy, hogy figyelembe véve a pálya felépítését, igazságos legyen minden résztvevőnek (a mérnökök a pályán kívülről irányítják őket). A „Start”-ot egy visszaszámolás indítja, melynek következtében a robotok elindulnak. A pályán állomások találhatók, melyek minden robot áthaladásánál ellenőrzik, hogy nem történt-e csalás. Minden körben a pályán adott állomásokon kell áthaladni adott sorrendben. A kör csak akkor érvényes, ha a robot ezeknek a megszorításoknak eleget tud tenni. Továbbá a távolság mérése (ezáltal győzelmi feltételek) is ez alapján történik, szóval egyik mérnöknek sem éri meg ide-oda navigálni a robotját a pontok között, a legnagyobb megtett út reményében.
-A robotok sebessége állandó, a mérnökök csak az ugrások irányát tudják befolyásolni a játék lezajlása alatt, ezért nagyon kell figyelni, hogy a kanyarokat jó ívben vegyék be, az akadályokat pedig megfelelő szakértelemmel kerüljék ki. Továbbá az indulás után máris lehetőséget nyújt a játék, hogy a mérnökök használják a robotokba beépített felszereléseket. Ezek nem mások mint a már feljebb leírt ragacsok és olajfoltok. Ezeket maguk mögött képesek hagyni, és a játék végéig megmaradnak a pálya felületén (illetve amíg valaki bele nem megy, akár a mérnök saját robotja), fejfájást okozva ezzel a versenyzőknek. A felszerelések körönként (fentebb említett „Checkpoint-rendszer” szerint) újratöltődnek, ezért a mérnököknek nem kell taktikázniuk, hogy mikor törjenek borsot az ellenfelük orra alá; körönként megtehetik azt.
+A robotok sebessége állandó, a mérnökök csak az irányt tudják befolyásolni a játék lezajlása alatt, ezért nagyon kell figyelni, hogy a kanyarokat jó ívben vegyék be, az akadályokat pedig megfelelő szakértelemmel kerüljék ki. Továbbá az indulás után máris lehetőséget nyújt a játék, hogy a mérnökök használják a robotokba beépített felszereléseket. Ezek nem mások mint a már feljebb leírt ragacsok és olajfoltok. Ezeket maguk mögött képesek hagyni, és a játék végéig megmaradnak a pálya felületén (illetve amíg valaki bele nem megy, akár a mérnök saját robotja), fejfájást okozva ezzel a versenyzőknek. A felszerelések körönként (fentebb említett „Checkpoint-rendszer” szerint) újratöltődnek, ezért a mérnököknek nem kell taktikázniuk, hogy mikor törjenek borsot az ellenfelük orra alá; körönként megtehetik azt.
 
 A verseny ezen lehetőségek megvalósítása által igen érdekes, veszélyes és néha akár frusztráló is, gondoljunk csak a robotok felszereléseire. Egyszóval ideális időtöltés a Marson unatkozó mérnököknek.
 
 \subsection{Felhasználók}
-A játék 2 játékos módban indíthat. A játékosnak semmiféle előképzettségre nincs szüksége, a játék menete gyorsan elsajátítható. A játékban nem lesz pályaszerkesztő. A játékot nem lehet elmenteni, mindig újból kell kezdeni.
+A szoftver kétjátékos módban indíthat. A játékosnak semmiféle előképzettségre nincs szüksége, a játék menete gyorsan elsajátítható. A játékban nem lesz pályaszerkesztő. A játékot nem lehet elmenteni, mindig újból kell kezdeni.
 
 \subsection{Korlátozások}
-A BME IIT Szoftver Laboratórium tantárgy oktatói (a megrendelők) által kiírt specifikáció megköveteli, hogy a program a HSZK gépein a beadások alkalmával futtathatók legyenek. Ezekre a gépekre már előre feltelepített JRE 1.7-es környezet elérhető, ezért csak a JDK 1.6-es verziójaban már létező függvények, osztályok használhatóak a kód megírása során.
+A BME IIT Szoftver Laboratórium tantárgy oktatói (a megrendelők) által kiírt specifikáció megköveteli, hogy a program a HSZK gépein a beadások alkalmával futtathatók legyenek. Ezekre a gépekre már előre feltelepített JRE 1.6-es környezet elérhető, ezért csak a JDK 1.6-es verziójaban már létező függvények, osztályok használhatóak a kód megírása során.
 
 
 \subsection{Feltételezések, kapcsolatok}
@@ -171,7 +171,9 @@ A BME IIT Szoftver Laboratórium tantárgy oktatói (a megrendelők) által kií
 \hline 2.12 & Google Calendar & nincs  & opcionális  & csapat  & Naptár alkalmazás \tabularnewline
 \hline 2.13 & Google Mail & nincs  & opcionális  & csapat  & Levelező rendszer \tabularnewline
 \hline 2.14 & Sympa levelezőlista & nincs  & opcionális  & csapat & \url{lists.sch.bme.hu}  \tabularnewline
-\hline 2.15 & Doxygen  & nincs  & opcionális  & csapat & Programozói dokumentáció 
+\hline 2.15 & Doxygen  & nincs  & opcionális  & csapat & Programozói dokumentáció \tabularnewline
+\hline 2.16 & ObjectAid  & nincs  & opcionális  & csapat & UML diagrammok 
+\hline 2.17 & Sparx Enterprise Architect  & nincs  & opcionális  & csapat & UML diagrammok 
 \hline
 \end{longtable}
 
@@ -214,7 +216,7 @@ Nincs egyéb nem funkcionális követelmény.
 \end{itemize} 
 }
 
-\usecase{Mozgás}{Robot mozgása}{Játékos}{A játékos képes megváltoztatni a robot ugrásának irányát a jobbra és balra gombokkal.}
+\usecase{Mozgás}{Robot mozgása}{Játékos}{A játékos képes megváltoztatni a robot mozgásának irányát a jobbra és balra gombokkal.}
 
 \usecase{Akadályozás}{Ellenfél lassítása, iránymentesítése}{Játékos}{A Játékos képes az ellenfél robotját akadályozni. Ezt kétféleképpen tudja:
 - ragacsot tesz le: az ellenfél lassabbá válik
@@ -247,17 +249,17 @@ Nincs egyéb nem funkcionális követelmény.
 \item \textbf{Kör} - Egy vonal a pályán, ami minden Checkpointot pontosan egyszer érint és a kezdő- és végpontja a startvonal.
 \item \textbf{Távolság} – Az a mértékegység, ami megmondja, hogy egy robot milyen hosszú utat tett meg a pályán a verseny ideje alatt.
 \item \textbf{Zászlók} – Az az indikátor, ami jelzi, hogy a játékos éppen hány Checkpointon jutott át az adott körben. Minden kör végén törlődik, de a megtett körök száma megnő eggyel.
-\item \textbf{Akadály} - Olyan objektum a pályán, ami megnehezíti a játékosok célba jutását. Lehet állandó, ami megmarad a játék egész ideje alatt, illetve ideiglenes, ami eltűnik, amint egy robot ráugrik.
-\item \textbf{Lyuk} – Állandó akadály, amit a pálya előre tartalmaz, tehát nem a játékosok helyezik el. Ha egy robot ráugrik, akkor tönkre teszi annak felépítését, ezáltal megakadályozza a verseny folytatásában.
+\item \textbf{Akadály} - Olyan objektum a pályán, ami megnehezíti a játékosok célba jutását. Lehet állandó, ami megmarad a játék egész ideje alatt, illetve ideiglenes, ami eltűnik, amint egy robot rálép.
+\item \textbf{Lyuk} – Állandó akadály, amit a pálya előre tartalmaz, tehát nem a játékosok helyezik el. Ha egy robot rálép, akkor tönkre teszi annak felépítését, ezáltal megakadályozza a verseny folytatásában.
 \item \textbf{Felszerelés} – Ragacs vagy olaj, amit a robot magánál hord és bármelyik lépésnél a pályára helyezhet. Lehelyezése után ideiglenes akadályként funkcionál.
-\item \textbf{Ragacs} – Olyan ideiglenes akadály, ami felezi a ráugró robot sebességének a nagyságát.
-\item \textbf{Olaj} – Olyan ideiglenes akadály, ami megakadályozza a ráugró robot irányának megváltoztatását.
+\item \textbf{Ragacs} – Olyan ideiglenes akadály, ami felezi a rálépő robot sebességének a nagyságát.
+\item \textbf{Olaj} – Olyan ideiglenes akadály, ami megakadályozza a rálépő robot irányának megváltoztatását.
 \item \textbf{Irányítás} – Az a folyamat, amikor a játékos a hozzá tartozó robot irányát megváltoztatja.
-\item \textbf{Irány} – A robot sebességének az a komponense, ami meghatározza, hogy a robot hova fog érkezni egy ugrás után.
+\item \textbf{Irány} – A robot sebességének az a komponense, ami meghatározza, hogy a robot merre halad.
 \item \textbf{Sebesség} – Egy kétdimenziós vektor a pálya síkjában, ami eredendően egységnyi méretű minden robotra. Méretét csak ragacsok tudják változtatni. Irányát a játékosok irányítása, illetve az ütközések módosítják.
-\item \textbf{Ugrás} – A robotok helyváltoztatási folyamata a pályán. Az ugrás nagyságát a robothoz tartozó sebességvektor nagysága határozza meg.
-\item \textbf{Leesés} – Az az esemény, amikor egy robot a pálya felületén kívülre ugrik, ezáltal elhagyva a pályát.  
-\item \textbf{Ütközés} – Az az esemény, amikor a két robot egymásra ugrik, azaz minimum érintik egymást egy ugrás után. A következő ugrás irányát ilyenkor a játékos nem változtathatja, hanem az az ütközésnek megfelelően módosul.
+\item \textbf{Ugrás} – A robotok képesek átugrani egy akadályt. Az ugrás nagyságát a robothoz tartozó sebességvektor nagysága határozza meg.
+\item \textbf{Leesés} – Az az esemény, amikor egy robot a pálya felületén kívülre kerül, ezáltal elhagyva a pályát.  
+\item \textbf{Ütközés} – Az az esemény, amikor a két robot találkozik egymással, azaz minimum érintik egymást. A robot irányát ilyenkor a játékos nem változtathatja, hanem az ütközésnek megfelelően módosul.
 \item \textbf{Diszkvalifikáció} - A pálya elhagyásának, a pályáról való leesésnek a következménye. Ilyenkor a pályát elhagyó robotot irányító játékos veszít.
 \item \textbf{Szabálytalanság} – Az az eset, amikor a játékos nem az előírt sorrendben próbál végighaladni a Checkpointokon.
 
@@ -282,25 +284,24 @@ A csapat 5 főből áll. A következő táblázat a személyes preferenciákat t
 \end{longtable}
 
 \subsection {Kommunikáció}
-
-\textbf{GitWiki}
-
-\textbf{Elérhetőség}
-
-\textbf{Levelezőlista}
-
-\textbf{Megbeszélések}
-
+\begin{itemize}
+\item \textbf{Levelezőlista}
+A csapat üzemeltet egy levelezőlistát a Sympa rendszeren belül, ez az egyik formája a kommunikációnknak. 
+\item \textbf{Megbeszélések}
+Heti két-három alkalommal megbeszéléseket tartunk. Illetve csoporttársak révén szinte minden óránk egy időben van, tehát folyamatos kapcsolatban állunk egymással.
+\end{itemize}
 
 \subsection{Használt programok}
+\begin{itemize}
+\item \textbf{Verziókezelés}
 
-\textbf{Verziókezelés}
+A Github nevű szolgáltatást használjuk, mely alkalmas a több személyes szoftver fejlesztésre. 
 
-\textbf{Dokumentáció}
-
-\textbf{Fejlesztőkörnyezet}
+\item \textbf{Fejlesztőkörnyezet}
 
 
+A kódot Eclipse környezetben írjuk, Java nyelven. Emelett a Sparx Enterprise Architect nevű alkalmazást használjuk az UML diagrammok készítésére.
+\end{itemize}
 \subsection{Mérföldkövek, határidők}
 
 
@@ -326,10 +327,14 @@ A csapat 5 főből áll. A következő táblázat a személyes preferenciákat t
 \end{longtable}
 
 
-\textbf{szkeleton}
+A \textbf{szkeleton} változat célja annak bizonyítása, hogy az objektum és dinamikus modellek a definiált feladat egy modelljét alkotják. A szkeleton egy program, amelyben már valamennyi, a végső rendszerben is szereplő business objektum szerepel. Az objektumoknak csak az interfésze definiált. Valamennyi metódus az indulás pillanatában az ernyőre szöveges változatban kiírja a saját nevét, majd meghívja azon metódusokat, amelyeket a szolgáltatás végrehajtása érdekében meg kell hívnia. Amennyiben a metódusból valamely feltétel fennállása esetén hívunk meg más metódusokat, akkor a feltételre vonatkozó kérdést interaktívan az ernyon fel kell tenni és a kapott válasz alapján kell a továbbiakban eljárni. A szkeletonnak alkalmasnak kell lenni arra, hogy a különböző forgatókönyvek és szekvencia diagramok ellen őrizhetők legyenek. Csak karakteres ernyőkezelés fogadható el, mert ez biztosítja a rendszer egyszerűségét. 
 
-\textbf{prototípus}
 
-\textbf{grafikus}
+A \textbf{prototípus} program célja annak demonstrálása, hogy a program elkészült, helyesen működik, valamennyi feladatát teljesíti. A prototípus változat egy elkészült program kivéve a kifejlett grafikus interfészt. A változat tervezési szempontból elkészült, az ütemezés, az aktív objektumok kezelése megoldott. A business objektumok - a megjelenítésre vonatkozó részeket kivéve - valamennyi metódusa a végleges algoritmusokat tartalmazza. A megjelenítés és működtetés egy alfanumerikus ernyőn követhető, ugyanakkor a megjelenítés fájlban is logolható, ezzel megteremtve a rendszer tesztelésének lehetőségét. Különös figyelmet kell fordítani az interfész logikájára, felépítésére, valamint arra, hogy az mennyiben tükrözi és teszi láthatóvá a program működését, a
+beavatkozások hatásait.
+
+
+A \textbf{grafikus} (teljes) változat a prototípustól elvileg csak a kezelői felület minőségében különbözhet. Ennek
+változatnak az értékelésekor a hangsúlyt sokkal inkább a megvalósítás belső szerkezetére, semmint a külalakra kell helyezni.
 
 
