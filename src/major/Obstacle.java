@@ -13,7 +13,6 @@ public abstract class Obstacle extends Unit {
 
 	}
 
-	@Override
-	public abstract boolean intersect();
+
 
 }

@@ -13,10 +13,6 @@ public class Glue extends Obstacle {
 		r.setGlue();
 	}
 
-	@Override
-	public boolean intersect() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 }

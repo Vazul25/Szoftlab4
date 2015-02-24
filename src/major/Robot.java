@@ -1,9 +1,11 @@
 package major;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
-public class Robot extends Unit implements Runnable{
+public class Robot extends Unit{
 	
 
 	private static int[] keyconfig={
@@ -19,6 +21,7 @@ public class Robot extends Unit implements Runnable{
 	int arrowendx=0;//ahova mutat
 	int arrowendy=0;
 	double alpha=1.57;//kerület pontjának számításához kell
+	boolean moved;
 	Phoebe p;
 	
 	public Robot(int x, int y, String imagelocation,Phoebe p) {
@@ -29,31 +32,31 @@ public class Robot extends Unit implements Runnable{
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+	public int getid(){return id;}
 	public void deathanimation(){};
+	public void paint(Graphics g){}
 	public void setGlue(){slowed-=slowed/2;}
 	public void setOiled(){oiled=true;}
 	@Override
 	public void move() {
-		
 		// TODO Auto-generated method stub
+
+		while(moved=false){}//azért kell hogy mig nem okézuk le az irányt, ne ugorjon el
 		arrowendx=(int)(x+40*Math.cos(alpha));
 		arrowendy=(int)(y+40*Math.sin(alpha));	
 	}
-
-	@Override
-	public boolean intersect() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		while(true){
-		move();
+	
+	
+	public void collisionWithObstacles(List<Obstacle> obstacles){}
+	public void bounce(){}
+	public void collisionWithRobot(Robot r){
+		if (id==r.getid())return;
+		if(this.intersect(r)) {
+			bounce();
+			r.bounce();
 		}
 	}
+
 
 	public void keyPressed(KeyEvent e) {
 		if(id%2==1){

@@ -15,10 +15,6 @@ public class Oil extends Obstacle {
 
 	}
 
-	@Override
-	public boolean intersect() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 }
