@@ -11,19 +11,19 @@ import javax.swing.JPanel;
 
 /*
  * Phoebe osztály
- * Felelősség:
+ * Felelősség:A játékmotorját képviselő osztály
  * 
- * Ősosztályok:
+ * Ősosztályok:nincs
  * 
- * Interfészek:
+ * Interfészek:nincs
  * 
  */
 public class Phoebe extends JPanel implements Runnable{
 	//Attribútumok
 	/*
-	 * State változó
+	 * 
 	 * Mire való:
-	 ** ended:
+	 ** ended:Állapot változó, ha vége a játéknak true érték íródik be
 	 *
 	 */
 	boolean ended;
@@ -31,15 +31,15 @@ public class Phoebe extends JPanel implements Runnable{
 	/*
 	 * Adatszerkezetek
 	 * Mire való:
-	 ** robots:
-	 ** obstacles:
+	 ** robots:A játékban szereplő robotok listája
+	 ** obstacles:A játékban szereplő akadályok listája
 	 */
 	List<Robot> robots;
 	List<Obstacle> obstacles;
 	
 	/*
 	 * Phoebe konstuktor
-	 * Felelősség:
+	 * Felelősség:A játék felépítése , a robotok,az alap akadályok és map létrehozása
 	 * 
 	 * Funkció(ki hívja meg és mikor?):
 	 * 
@@ -67,7 +67,7 @@ public class Phoebe extends JPanel implements Runnable{
 				RenderingHints.VALUE_ANTIALIAS_ON);			
 		for(int i=0;i<robots.size();i++)
 		{
-			 robots.get(i).paint(g);
+			 robots.get(i).paint(g2d);
 			
 		}
 	}
@@ -103,8 +103,9 @@ public class Phoebe extends JPanel implements Runnable{
 				for(int j=0;j<robots.size();j++)
 				{
 					robots.get(i).collisionWithRobot(robots.get(j));	
+				if(	robots.get(i).collisionWithObstacles(obstacles.get(j)))obstacles.get(j).effect(robots.get(j));
 				}
-				robots.get(i).collisionWithObstacles(obstacles);
+				
 			}
 			
 			repaint();

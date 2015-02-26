@@ -7,11 +7,11 @@ import java.util.List;
 
 /*
  * Robot osztály
- * Felelősség:
+ * Felelősség:A játékban részvevő ugráló robotok viselkedését és kezelését leíró osztály
  * 
- * Ősosztály:
+ * Ősosztály:Unit
  * 
- * Interfészek:
+ * Interfészek:még nincs
  *  
  */
 public class Robot extends Unit{
@@ -19,25 +19,26 @@ public class Robot extends Unit{
 	/*
 	 * Statikus attribútumok
 	 * Mire valók:
-	 ** staticid:
+	 ** staticid:A robot statikus sorszáma , ebből képezzük a saját azonosító számukat
 	 *
-	 ** WIDTH:
-	 *
-	 ** HEIGHT:
+	 ** WIDTH,HEIGHT:placeholder majd a robot képének szélessége és magassága lesz bent ,arra kell,
+	 *hogy az irányításhoz tartozó nyil jó helyről induljon(de meg lehet úgy is oldani hogy x,y koordinátából 
+	 *kivonjuk a buffer image width/2,height/2 adatát)
 	 *
 	 */
 	static int staticid=0;
 	static int WIDTH=40;//teszt placeholder
 	static int HEIGHT=40;//teszt placeholder
+	//kell majd valami adatszerkezet ami számontartja hogy melyik obstacleből mennyi van a robotnál
 	
 	/*
 	 * Azonosító, állapot
 	 * Mire valók:
-	 ** id:
+	 ** id:a Robot azonosítására ,ami a keybinding-nál fontos, kell hogy ne vizsgáljon önmagával ütközést
 	 *
-	 ** slowed: 
+	 ** slowed: milyen mértékben van lassítva a robot
 	 *
-	 ** oiled:
+	 ** oiled:megcsuszott e a béka
 	 *
 	 */
 	int id;
@@ -47,28 +48,28 @@ public class Robot extends Unit{
 	/*
 	 * Vektor paraméterek
 	 * Mire valók:
-	 ** arrowendx:
+	 ** arrowendx:hova mutat a békából kimenő nyil(x koordináta)
 	 *
-	 ** arrowendy:
+	 ** arrowendy:a békából kimenő nyil y koordinátája
 	 *
-	 ** alpha: 
+	 ** alpha: arrowendx,y kiszámításához szükséges vizszintes tengelyel bezárt szög radiánban
 	 *
 	 */
 	int arrowendx=0;//ahova mutat
 	int arrowendy=0;
-	double alpha=1.57;//kerület pontjának számításához kell
+	double alpha=1.57;//kerület pontjának számításához kell radián , alapérték 90 fok
 	
 	/*
 	 * Mire való:
-	 ** moved:
+	 ** moved:lépett e már a játékos vagy irányitási fázisban van
 	 *
 	 */
 	boolean moved;
 
 	/*
-	 * KeyEvent
+	 * Keyconfig 
 	 * Mire való?
-	 * 
+	 * A játékos irányitását meghatározó mátrix, id vel indexelve a sor
 	 */
 	private static int[] keyconfig={
 		KeyEvent.VK_LEFT   , KeyEvent.VK_RIGHT  ,KeyEvent.VK_UP     ,KeyEvent.VK_DOWN,
@@ -80,9 +81,11 @@ public class Robot extends Unit{
 	
 	/*
 	 * Konstruktor
-	 * Felelősség:
+	 * Felelősség:Létrehozza a robotot és inicializálja a változóit 
+	 * @param x a robot létrehozásának x koordinátája
+	 * @param y a robot létrehizásának y koordinátája
 	 * 
-	 * Funkció(ki hívja meg és mikor?):
+	 * Funkció(ki hívja meg és mikor?):A játék motor a pálya létrehozásakor
 	 * 
 	 */
 	public Robot(int x, int y, String imagelocation,Phoebe p) {
@@ -97,8 +100,8 @@ public class Robot extends Unit{
 	 
 	/*
 	 * GetId függvény
-	 * @return
-	 * Funkció(ki hívja meg és mikor?):
+	 * @return a robot egyedi azonosítója
+	 * Funkció(ki hívja meg és mikor?): egyenlőre senki
 	 * 
 	 */
 	public int getId(){
@@ -107,9 +110,9 @@ public class Robot extends Unit{
 	
 	/*
 	 * setOiled függvény
-	 * Felelősség:
+	 * Felelősség:átállítja a robot olaj effekt követéséhez tartozó állapot változót 
 	 * 
-	 * Funkció(ki hívja meg és mikor?):
+	 * Funkció(ki hívja meg és mikor?):Az Oil osztály effekt függvénye
 	 *  	
 	 */
 	public void setOiled(){
@@ -118,10 +121,9 @@ public class Robot extends Unit{
 	
 	/*
 	 * setGlue függvény
-	 * Felelősség:
+	 * Felelősség:átállítja a robot ragacs effekt követéséhez tartozó állapot változót 
 	 * 
-	 *  Funkció(ki hívja meg és mikor?):	
-	 *
+	 * Funkció(ki hívja meg és mikor?):A Glue osztály effekt függvénye
 	 */
 	public void setGlue(){
 		slowed-=slowed/2;
@@ -129,35 +131,25 @@ public class Robot extends Unit{
 	
 	/*
 	 * DeathAnimation függvény
-	 * Felelősség:
+	 * Felelősség:Ha meghal egy béka akkor ez felel az animációért 
 	 * 
-	 * Funkció(ki hívja meg és mikor?):
+	 * Funkció(ki hívja meg és mikor?):még nem tudom gondolom a isOnMap ha lesz ilyen
 	 * 
 	 */
 	public void deathanimation(){
 		//TODO
 	};
 		
-	/*
-	 * Paint függvény
-	 * @param g 
-	 * Felelősség:
-	 * 
-	 * Funkció(ki hívja meg és mikor?):
-	 * 
-	 */
-	public void paint(Graphics g){
-		//TODO
-	}
+
 	
 	/*
 	 * Paint függvény
 	 * @param g
-	 * Felelősség:
+	 * Felelősség:kirajzolja a robotot a saját koordinátáin + ha nem lép akkor a nyilat is
 	 * 
-	 * Funkció(ki hívja meg és mikor?):
+	 * Funkció(ki hívja meg és mikor?):a játékmotor fő ciklusa
 	 *
-	 * Miben más mint a fenti függvény? 
+	 * 
 	 */
 	public void paint(Graphics2D g) {
 		g.fillRect(x, y, WIDTH, HEIGHT);//placeholder ide jön majd a kép
@@ -168,35 +160,35 @@ public class Robot extends Unit{
 	/*
 	 * Move függvény
 	 * @see major.Unit#move()
-	 * Felelősség:
+	 * Felelősség:a robot léptetését bonyolítja le
 	 * 
-	 * Funkció(ki hívja meg és mikor?):
+	 * Funkció(ki hívja meg és mikor?):a játékmotor minden lépésnél
 	 */
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
 
-		while(moved=false){}//azért kell hogy mig nem okézuk le az irányt, ne ugorjon el
+		//while(moved=false){}//(nem kell ha időosztásos lesz)azért kell hogy mig nem okézuk le az irányt, ne ugorjon el
 		arrowendx=(int)(x+40*Math.cos(alpha));
 		arrowendy=(int)(y+40*Math.sin(alpha));	
 	}
 	
 	/*
 	 * collisionWithObstacles függvény
-	 * @param obstacles
-	 * Felelősség:
+	 * @param obstacle az akadály amire az ütközést vizsgáljuk
+	 * Felelősség:megnézi hogy a robot érintkezett e valami akadállyal
 	 * 
-	 * Funkció(ki hívja meg és mikor?):
+	 * Funkció(ki hívja meg és mikor?):játékmotor a főciklusban
 	 */
-	public void collisionWithObstacles(List<Obstacle> obstacles){
+	public boolean collisionWithObstacles(Obstacle obstacle){return false;
 		
 	}
 	
 	/*
 	 * bounce függvény
-	 * Felelősség:
+	 * Felelősség:A következő lépés végpontjának beállítása ha volt üzközés lepattannak egymásról
 	 * 
-	 * Funkció(ki hívja meg és mikor?):
+	 * Funkció(ki hívja meg és mikor?):collisionWithRobot
 	 * 
 	 */
 	public void bounce(){
@@ -206,9 +198,9 @@ public class Robot extends Unit{
 	/*
 	 * collisionWithRobot függvény
 	 * @param r
-	 * Felelősség:
+	 * Felelősség:azt vizsgálja hogy ütközött e 2 robot és ha igen meghívja a bounce függvényt
 	 * 
-	 * Funkció(ki hívja meg és mikor?):
+	 * Funkció(ki hívja meg és mikor?):játékmotor minden lépéskor
 	 * 
 	 */
 	public void collisionWithRobot(Robot r){
@@ -222,9 +214,9 @@ public class Robot extends Unit{
 	/*
 	 * keyPressed függvény
 	 * @param e
-	 * Felelősség:
+	 * Felelősség:a játékos irányításának eseménykezelése
 	 * 
-	 * Funkció(ki hívja meg és mikor?):
+	 * Funkció(ki hívja meg és mikor?):a játékmotor esemény kezelője
 	 * 
 	 */
 	public void keyPressed(KeyEvent e) {

@@ -2,20 +2,23 @@
 
 /*
  * Obstacle osztály
- * Felelősség:
+ * Felelősség:A pályán/játékosoknál lévő különböző akadályokat(ragacs,olaj esetleg késöbb rakéta) 
+ * összefogó ősosztály
  * 
- * Ősosztályok:
+ * Ősosztályok: Unit
  * 
- * Interfészek:
+ * Interfészek:még nincs
  *  
  */
 public abstract class Obstacle extends Unit {
 
 	/*
 	 * Obstacle kontruktor
-	 * Felelősség:
-	 * 
-	 * Funkció(ki hívja meg és mikor?):
+	 * Felelősség:meghívja a unit konstruktorát a megadott adatokkal
+	 * @param x kezdő koordináta
+	 * @param y kezdő koordináta
+	 * @param imagelocation az akadályhoz tartozó kép helye
+	 * Funkció(ki hívja meg és mikor?):a leszármaztatott osztályok a konstruktoraikban
 	 * 	
 	 */
 	public Obstacle(int x, int y, String imagelocation) {
@@ -24,10 +27,10 @@ public abstract class Obstacle extends Unit {
 	}
 	
 	/*
-	 * Effekt függvény (abstract)
-	 * Felelősség:
-	 * 
-	 * Funkció(ki hívja meg és mikor?):
+	 * Effect függvény (abstract)
+	 * Felelősség:ez határozza meg hogy milyen hatással van a robotra ha érintkezik egy ilyen tárgyal
+	 * @param r azt határozza meg hogy melyik robotra hajtsa végre a változtatásokat
+	 * Funkció(ki hívja meg és mikor?):ütközéskor hívja meg az ütközést vizsgáló függvénye a Robot osztálynak
 	 * 	
 	 */
 	public abstract  void effect(Robot r);
@@ -35,7 +38,8 @@ public abstract class Obstacle extends Unit {
 	/*
 	 * Move függvény
 	 * @see major.Unit#move()
-	 * Felelősség:
+	 * Felelősség:Amennyiben kell mozgatni az akadályokat(pl rakéta) ez fogja 
+	 * elvégezni(ha nem akkor üres függvény) 
 	 * 
 	 * Funkció(ki hívja meg és mikor?):
 	 * 	

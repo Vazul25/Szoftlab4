@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+<class-diagram version="1.1.7" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="major.Glue" project="Szoftlab4" file="/Szoftlab4/src/major/Glue.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="major.Phoebe" project="Szoftlab4" file="/Szoftlab4/src/major/Phoebe.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="259" y="645"/>    
+    <position height="-1" width="-1" x="400" y="39"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="major.Robot" project="Szoftlab4" file="/Szoftlab4/src/major/Robot.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="612" y="253"/>    
+    <position height="-1" width="-1" x="609" y="458"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -60,33 +60,44 @@
     <end type="TARGET" refId="6"/>  
   </generalization>  
   <generalization id="8">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="6"/>  
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
   </generalization>  
   <association id="9">    
-    <bendpoint x="522" y="565"/>    
-    <end type="SOURCE" refId="4" navigable="false" variant="ASSOCIATION">      
-      <attribute id="10" name="robots"/>      
-      <multiplicity id="11" minimum="0" maximum="2147483647"/>    
+    <bendpoint x="553" y="166"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="10" name="robots">        
+        <position height="0" width="0" x="-3" y="205"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-3" y="205"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true" variant="ASSOCIATION"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="12">    
-    <end type="SOURCE" refId="4" navigable="false" variant="ASSOCIATION">      
-      <attribute id="13" name="obstacles"/>      
-      <multiplicity id="14" minimum="0" maximum="2147483647"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="13" name="obstacles">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="14" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true" variant="ASSOCIATION"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="15">    
-    <bendpoint x="653" y="649"/>    
-    <end type="SOURCE" refId="5" navigable="false" variant="ASSOCIATION">      
-      <attribute id="16" name="p"/>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="16" name="p">        
+        <position height="0" width="0" x="141" y="-606"/>      
+      </attribute>      
+      <multiplicity id="17" minimum="0" maximum="1">        
+        <position height="0" width="0" x="141" y="-606"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true" variant="ASSOCIATION"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <generalization id="18">    
@@ -94,8 +105,8 @@
     <end type="TARGET" refId="2"/>  
   </generalization>  
   <generalization id="19">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="2"/>  
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
