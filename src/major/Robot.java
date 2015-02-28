@@ -231,6 +231,7 @@ public class Robot extends Unit{
 				alpha+=0.1;
 			if (e.getKeyCode() == KeyEvent.VK_D)
 				alpha-=0.1;}
+		p.repaint();
 	}
 	
 }

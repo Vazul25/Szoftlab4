@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JPanel;
 
 /*
@@ -28,6 +29,44 @@ public class Phoebe extends JPanel implements Runnable{
 	 */
 	boolean ended;
 	
+	//Beállítások
+	/*
+	 * Setting Enum
+	 */
+	public final static class Settings{
+		//...
+		public static final int LAPLIMIT = 1;
+		public static final int TIMELIMIT = 2;
+		
+		private int information;
+		private int limit;
+		private int step;
+		
+		public Settings(int info){
+			this.information = info;
+		}
+		
+		public int getSettings(){
+			return information;
+		}
+
+		public int getLimit() {
+			return limit;
+		}
+
+		public void setLimit(int limit) {
+			this.limit = limit;
+		}
+
+		public int getStep() {
+			return step;
+		}
+
+		public void setStep(int step) {
+			this.step = step;
+		}
+	}
+	
 	/*
 	 * Adatszerkezetek
 	 * Mire való:
@@ -38,13 +77,13 @@ public class Phoebe extends JPanel implements Runnable{
 	List<Obstacle> obstacles;
 	
 	/*
-	 * Phoebe konstuktor
+	 * Phoebe konstruktor
 	 * Felelősség:A játék felépítése , a robotok,az alap akadályok és map létrehozása
 	 * 
 	 * Funkció(ki hívja meg és mikor?):
 	 * 
 	 */
-	public Phoebe(){
+	public Phoebe(Settings set){
 		ended=false;
 		obstacles=new ArrayList<Obstacle>();
 		robots=new ArrayList<Robot>();
