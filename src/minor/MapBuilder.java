@@ -2,6 +2,7 @@
 
 import java.awt.Polygon;
 import java.awt.Shape;
+import java.awt.geom.Area;
 import java.util.List;
 
 /*
@@ -46,11 +47,17 @@ public class MapBuilder{
 		
 	}
 	
+	/*
+	 * 
+	 * @return visszaadja a Checkpointokat tartalmazó listát
+	 */
 	public List<Shape> getCheckpoints(){
 		return checkpoints;
 	}
 
 	/**
+	 * 
+	 * A pályát reprezentáló objetum get-tere
 	 * @return the map
 	 */
 	public Shape getMap() {
@@ -58,10 +65,24 @@ public class MapBuilder{
 	}
 
 	/**
+	 * 
+	 * A pályát reprezentáló objektum set-tere.
 	 * @param map the map to set
 	 */
 	public void setMap(Shape map) {
 		this.map = map;
+	}
+	
+	/*
+	 * intersectsWithMap függvény
+	 * 
+	 *  @return igaz értékkel tér vissza, ha a robot leesett a pályáról
+	 */
+	public boolean fallingDown(Shape othershape){
+		Area area = new Area(map);
+		Area otherArea = new Area(othershape);
+		area.intersect(otherArea);
+		return !area.isEmpty();
 	}
 	
 	

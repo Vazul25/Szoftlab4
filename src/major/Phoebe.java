@@ -6,7 +6,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
@@ -79,6 +81,7 @@ public class Phoebe extends JPanel implements Runnable{
 	 */
 	private List<Robot> robots;
 	private List<Obstacle> obstacles;
+	private Map<Robot,HUD> huds;
 	
 	/*
 	 * Phoebe konstruktor
@@ -126,18 +129,13 @@ public class Phoebe extends JPanel implements Runnable{
 			
 		}
 	}
-	
 	/*
-	 * Main függvény
+	 * init függvény
 	 * Felelősség:
 	 * 
-	 * Mit indít el:
+	 * Funkcionalitás:
 	 * 
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-	}
-	
 	private void init(){
 		//GameTimer létrehozása, inicializálása
 		Timer gameTimer;
@@ -150,7 +148,7 @@ public class Phoebe extends JPanel implements Runnable{
 		
 		//Pálya létrehozása
 		MapBuilder map = new MapBuilder();
-		//TODO
+		//TODO 
 		
 		//Játékosok létrehozása
 		//TODO
@@ -163,12 +161,13 @@ public class Phoebe extends JPanel implements Runnable{
 		robots.add(two);
 		
 		//HUD létrehozása
-		HUD hudPlayerOne = new HUD(one);
-		HUD hudPlayerTwo = new HUD(two);
+		huds = new HashMap<Robot, HUD>();
+		huds.put(one,new HUD(one));
+		huds.put(two, new HUD(two));
 		
 		//Checkpointok eljuttatása a HUD-ba
-		hudPlayerOne.setCheckpoints(map.getCheckpoints());
-		hudPlayerTwo.setCheckpoints(map.getCheckpoints());
+		huds.get(one).setCheckpoints(map.getCheckpoints());
+		huds.get(two).setCheckpoints(map.getCheckpoints());
 		
 		//Akadályok létrehozása
 		for(int i=1;i<=10;i++){
@@ -196,16 +195,13 @@ public class Phoebe extends JPanel implements Runnable{
 		
 		while(robots.size()>1 ||!ended)
 		{
-			//DirectorTimer inicializálás
-			//TODO
-			Timer directorTimer = new Timer(gameInfo.getStep());
 			//...
 			
 			//Mozgás
 			for(int i=0;i<robots.size();i++)
 			{
 				robots.get(i).move();
-				//TODO
+				//TODO 
 				
 				for(int j=0;j<robots.size();j++){
 					//Ütközés robottal
@@ -214,12 +210,15 @@ public class Phoebe extends JPanel implements Runnable{
 					if(robots.get(i).collisionWithObstacles(obstacles.get(j)))
 						obstacles.get(j).effect(robots.get(j));
 				}
+				//DirectorTimer inicializálás
+				//TODO
+				Timer directorTimer = new Timer(gameInfo.getStep());
 				//Leesés vizsgálata
+				
 				//...
 				//deathanimation
-				
-				
 			}			
+			//várni kell, amíg le nem jár a 3mp
 			repaint();			
 		}		
 	}
