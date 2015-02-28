@@ -18,9 +18,11 @@ public class HUD {
 	private int numOfCheckpoints;
 	private int lap;
 	private List<Shape> checkpoints;
+	Robot robot;
 	
-	public HUD(){
+	public HUD(Robot r){
 		lap = 0;
+		robot = r;
 	}
 	/*
 	 * setCheckpoints függvény
@@ -40,6 +42,16 @@ public class HUD {
 		checkpoints = checkObj;
 		
 		//
+	}
+	
+	/*
+	 * checkpointSearch függvény
+	 * Felelősség:
+	 * 
+	 * Funkció:
+	 */
+	public void checkpointSearch(){
+		
 	}
 
 }

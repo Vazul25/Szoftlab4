@@ -45,6 +45,10 @@ public class MapBuilder{
 		//...
 		
 	}
+	
+	public List<Shape> getCheckpoints(){
+		return checkpoints;
+	}
 
 	/**
 	 * @return the map

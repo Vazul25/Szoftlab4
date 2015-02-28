@@ -27,8 +27,8 @@ public class Phoebe extends JPanel implements Runnable{
 	/*
 	 * 
 	 * Mire való:
-	 ** ended:Állapot változó, ha vége a játéknak true érték íródik be
-	 *
+	 ** ended: Állapot változó, ha vége a játéknak true érték íródik be
+	 ** gameInfo:
 	 */
 	private boolean ended;
 	private Settings gameInfo;
@@ -138,6 +138,48 @@ public class Phoebe extends JPanel implements Runnable{
 		// TODO Auto-generated method stub
 	}
 	
+	private void init(){
+		//GameTimer létrehozása, inicializálása
+		Timer gameTimer;
+		//Ha Időlimites játékmód
+		if(gameInfo.getSettings() == Settings.TIMELIMIT)
+			gameTimer = new Timer(gameInfo.getLimit());
+		//ha körlimites játékmód
+		else if(gameInfo.getSettings() == Settings.LAPLIMIT)
+			gameTimer = new Timer(0);
+		
+		//Pálya létrehozása
+		MapBuilder map = new MapBuilder();
+		//TODO
+		
+		//Játékosok létrehozása
+		//TODO
+		int startPointX = 0; //MApBuilderből
+		int startPointY = 0; //MapBuilderből
+		int secondStartPos = 0; //MapBuilderből
+		Robot one = new Robot(startPointX, startPointY, null, this);
+		Robot two = new Robot(startPointX, startPointY+secondStartPos, null, this);
+		robots.add(one);
+		robots.add(two);
+		
+		//HUD létrehozása
+		HUD hudPlayerOne = new HUD(one);
+		HUD hudPlayerTwo = new HUD(two);
+		
+		//Checkpointok eljuttatása a HUD-ba
+		hudPlayerOne.setCheckpoints(map.getCheckpoints());
+		hudPlayerTwo.setCheckpoints(map.getCheckpoints());
+		
+		//Akadályok létrehozása
+		for(int i=1;i<=10;i++){
+			//TODO Randomgenerált (x,y) pozíciók
+			int x=0;
+			int y=0;
+			obstacles.add(new Oil(x, y, null));
+			obstacles.add(new Glue(x, y, null));
+		}						
+	}
+	
 	/*
 	 * Run függvény
 	 * @see java.lang.Runnable#run()
@@ -150,41 +192,7 @@ public class Phoebe extends JPanel implements Runnable{
 	@Override
 	public void run() {
 		
-		//GameTimer létrehozása, inicializálása
-		Timer gameTimer;
-		//Ha Időlimites játékmód
-		if(gameInfo.getSettings() == Settings.TIMELIMIT)
-			gameTimer = new Timer(gameInfo.getLimit());
-		//ha körlimites játékmód
-		else if(gameInfo.getSettings() == Settings.LAPLIMIT)
-			gameTimer = new Timer(0);
-
-		//HUD létrehozása
-		HUD hud = new HUD();
-		
-		//Pálya létrehozása
-		MapBuilder map = new MapBuilder();
-		//TODO
-		//Checkpointok eljuttatása a HUD-ba
-		
-		
-		//Akadályok létrehozása
-		for(int i=1;i<=10;i++){
-			//TODO Randomgenerált (x,y) pozíciók
-			int x=0;
-			int y=0;
-			obstacles.add(new Oil(x, y, null));
-			obstacles.add(new Glue(x, y, null));
-		}
-		
-		//Játékosok létrehozása
-		//TODO
-		int startPointX = 0; //MApBuilderből
-		int startPointY = 0; //MapBuilderből
-		int secondStartPos = 0; //MapBuilderből
-		robots.add(new Robot(startPointX, startPointY, null, this));
-		robots.add(new Robot(startPointX, startPointY+secondStartPos, null, this));
-		
+		init();
 		
 		while(robots.size()>1 ||!ended)
 		{

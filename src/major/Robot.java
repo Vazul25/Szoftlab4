@@ -36,7 +36,7 @@ public class Robot extends Unit{
 	 *
 	 ** slowed: milyen mértékben van lassítva a robot
 	 *
-	 ** oiled:megcsuszott e a béka
+	 ** oiled:megcsuszott-e a robot
 	 *
 	 */
 	private int id;
@@ -137,6 +137,8 @@ public class Robot extends Unit{
 	public void deathanimation(){
 		//TODO
 	};
+	
+	public 
 		
 
 	
