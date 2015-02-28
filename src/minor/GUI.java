@@ -1,14 +1,14 @@
-package minor;
+Ôªøpackage minor;
 
 import major.Phoebe;
 
 /*
- * GUI oszt·ly
- * FelelıssÈg:
+ * GUI oszt√°ly
+ * Felel≈ëss√©g:
  * 
- * ’soszt·ly:
+ * ≈êsoszt√°ly:
  * 
- * InterfÈszek:
+ * Interf√©szek:
  *  
  */
 public class GUI extends javax.swing.JFrame {
@@ -21,16 +21,16 @@ public class GUI extends javax.swing.JFrame {
 	
 	Phoebe game;
 	
-	//Tagv·ltozÛk
+	//Tagv√°ltoz√≥k
 	//private
 	//JComboBox, JPanel, JLabel, JButton, JTextField, JMenu, JMenuItem
 	//...
 	
 	/*
 	 * GUI konstruktor
-	 * FelelıssÈg:
+	 * Felel≈ëss√©g:
 	 * 
-	 * FunkciÛ(ki hÌvja meg Ès mikor?):
+	 * Funkci√≥(ki h√≠vja meg √©s mikor?):
 	 * 
 	 */
 	public GUI(){
@@ -38,10 +38,10 @@ public class GUI extends javax.swing.JFrame {
 	}
 	
 	/*
-	 * initComponents f¸ggvÈny
-	 * FelelıssÈg: lÈtrehozza az ablak elemeit, be·llÌtja az ActionListener-eket
+	 * initComponents f√ºggv√©ny
+	 * Felel≈ëss√©g: l√©trehozza az ablak elemeit, be√°ll√≠tja az ActionListener-eket
 	 * 
-	 * FunkciÛk(ki hÌvja meg Ès mikor?): A MyGUI konstruktora
+	 * Funkci√≥k(ki h√≠vja meg √©s mikor?): A MyGUI konstruktora
 	 * 
 	 */
 	private void initComponents(){
@@ -49,27 +49,27 @@ public class GUI extends javax.swing.JFrame {
 	}
 	
 	/*
-	 * createGameButtonActionPerformed f¸ggvÈny
-	 * FelelıssÈg: A be·llÌt·sok kiolvas·sa a megfelelı objektumokbÛl, 
-	 * majd ezekkel a paramÈterekkel a j·tÈk elindÌt·sa.
+	 * createGameButtonActionPerformed f√ºggv√©ny
+	 * Felel≈ëss√©g: A be√°ll√≠t√°sok kiolvas√°sa a megfelel≈ë objektumokb√≥l, 
+	 * majd ezekkel a param√©terekkel a j√°t√©k elind√≠t√°sa.
 	 * 
-	 * FunkciÛ(ki hÌvja meg Ès mikor?): A CreateGame gomb megnyom·sa ut·n hÌvÛdik meg.
+	 * Funkci√≥(ki h√≠vja meg √©s mikor?): A CreateGame gomb megnyom√°sa ut√°n h√≠v√≥dik meg.
 	 * 
 	 */
 	private void createGameButtonActionPerformed(java.awt.event.ActionEvent evt){
 		//...
-		//Be·llÌt·sok lekÈrdezÈse
+		//Be√°ll√≠t√°sok lek√©rdez√©se
 		//...
 		int mode = 1; //LapLimit=1, TimeLimit=2
 		Phoebe.Settings set = new Phoebe.Settings(mode);
 		//...
-		int limit = 120; //M·sodperc
+		int limit = 120; //M√°sodperc
 		set.setLimit(limit);
 		//...
-		int step = 3; //M·sodperc
+		int step = 3; //M√°sodperc
 		set.setStep(step);
 		//...
-		//Sz·l lÈtrehoz·sa, indÌt·sa
+		//Sz√°l l√©trehoz√°sa, ind√≠t√°sa
 		game = new Phoebe(set);
 		Thread t = new Thread(game);
 		t.start();
