@@ -10,6 +10,9 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import minor.MapBuilder;
+import minor.Timer;
+
 /*
  * Phoebe osztály
  * Felelősség:A játékmotorját képviselő osztály
@@ -27,7 +30,8 @@ public class Phoebe extends JPanel implements Runnable{
 	 ** ended:Állapot változó, ha vége a játéknak true érték íródik be
 	 *
 	 */
-	boolean ended;
+	private boolean ended;
+	private Settings gameInfo;
 	
 	//Beállítások
 	/*
@@ -73,8 +77,8 @@ public class Phoebe extends JPanel implements Runnable{
 	 ** robots:A játékban szereplő robotok listája
 	 ** obstacles:A játékban szereplő akadályok listája
 	 */
-	List<Robot> robots;
-	List<Obstacle> obstacles;
+	private List<Robot> robots;
+	private List<Obstacle> obstacles;
 	
 	/*
 	 * Phoebe konstruktor
@@ -87,6 +91,18 @@ public class Phoebe extends JPanel implements Runnable{
 		ended=false;
 		obstacles=new ArrayList<Obstacle>();
 		robots=new ArrayList<Robot>();
+		gameInfo = set;
+	}
+	
+	/*
+	 * addObstacle függvény
+	 * Felelősség:
+	 * 
+	 * Funkció:
+	 * 
+	 */
+	public void addObstacle(Obstacle item){
+		obstacles.add(item);
 	}
 	
 /*	public boolean isend(){return ended;}
@@ -133,24 +149,70 @@ public class Phoebe extends JPanel implements Runnable{
 	 */
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		while(robots.size()!=0 ||!ended)
+		
+		//GameTimer létrehozása, inicializálása
+		Timer gameTimer;
+		//Ha Időlimites játékmód
+		if(gameInfo.getSettings() == Settings.TIMELIMIT)
+			gameTimer = new Timer(gameInfo.getLimit());
+		//ha körlimites játékmód
+		else if(gameInfo.getSettings() == Settings.LAPLIMIT)
+			gameTimer = new Timer(0);
+
+		//HUD létrehozása
+		HUD hud = new HUD();
+		
+		//Pálya létrehozása
+		MapBuilder map = new MapBuilder();
+		//TODO
+		//Checkpointok eljuttatása a HUD-ba
+		
+		
+		//Akadályok létrehozása
+		for(int i=1;i<=10;i++){
+			//TODO Randomgenerált (x,y) pozíciók
+			int x=0;
+			int y=0;
+			obstacles.add(new Oil(x, y, null));
+			obstacles.add(new Glue(x, y, null));
+		}
+		
+		//Játékosok létrehozása
+		//TODO
+		int startPointX = 0; //MApBuilderből
+		int startPointY = 0; //MapBuilderből
+		int secondStartPos = 0; //MapBuilderből
+		robots.add(new Robot(startPointX, startPointY, null, this));
+		robots.add(new Robot(startPointX, startPointY+secondStartPos, null, this));
+		
+		
+		while(robots.size()>1 ||!ended)
 		{
+			//DirectorTimer inicializálás
+			//TODO
+			Timer directorTimer = new Timer(gameInfo.getStep());
+			//...
+			
+			//Mozgás
 			for(int i=0;i<robots.size();i++)
 			{
 				robots.get(i).move();
-				for(int j=0;j<robots.size();j++)
-				{
-					robots.get(i).collisionWithRobot(robots.get(j));	
-				if(	robots.get(i).collisionWithObstacles(obstacles.get(j)))obstacles.get(j).effect(robots.get(j));
-				}
+				//TODO
 				
-			}
-			
-			repaint();
-			
-		}
-		
+				for(int j=0;j<robots.size();j++){
+					//Ütközés robottal
+					robots.get(i).collisionWithRobot(robots.get(j));
+					//Ütközés akadállyal
+					if(robots.get(i).collisionWithObstacles(obstacles.get(j)))
+						obstacles.get(j).effect(robots.get(j));
+				}
+				//Leesés vizsgálata
+				//...
+				//deathanimation
+				
+				
+			}			
+			repaint();			
+		}		
 	}
-
 }

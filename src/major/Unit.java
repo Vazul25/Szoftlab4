@@ -38,7 +38,7 @@ public abstract class Unit {
 	 * Melyik függvény használja?
 	 * 
 	 */
-	protected BufferedImage image;
+	protected static BufferedImage image;
 	
 	/*
 	 * Unit konstruktor
@@ -69,7 +69,7 @@ public abstract class Unit {
 	 * 
 	 */
 	public boolean intersect(Unit u){
-		//TODO
-		return true;
+		//Paraméterként kapott Unit hitbox-szal vizsgálat, hogy this.hitbox-szal ütközés történt-e?
+		return false;
 	}
 }

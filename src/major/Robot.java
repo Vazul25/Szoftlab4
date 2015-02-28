@@ -1,9 +1,7 @@
 ﻿package major;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.util.List;
 
 /*
  * Robot osztály
@@ -26,7 +24,7 @@ public class Robot extends Unit{
 	 *kivonjuk a buffer image width/2,height/2 adatát)
 	 *
 	 */
-	static int staticid=0;
+	protected static int staticid=0;
 	static int WIDTH=40;//teszt placeholder
 	static int HEIGHT=40;//teszt placeholder
 	//kell majd valami adatszerkezet ami számontartja hogy melyik obstacleből mennyi van a robotnál
@@ -41,9 +39,9 @@ public class Robot extends Unit{
 	 ** oiled:megcsuszott e a béka
 	 *
 	 */
-	int id;
-	double slowed;//default 1.0
-	boolean oiled;
+	private int id;
+	private double slowed;//default 1.0
+	private boolean oiled;
 	
 	/*
 	 * Vektor paraméterek
@@ -55,16 +53,16 @@ public class Robot extends Unit{
 	 ** alpha: arrowendx,y kiszámításához szükséges vizszintes tengelyel bezárt szög radiánban
 	 *
 	 */
-	int arrowendx=0;//ahova mutat
-	int arrowendy=0;
-	double alpha=1.57;//kerület pontjának számításához kell radián , alapérték 90 fok
+	private int arrowendx=0;//ahova mutat
+	private int arrowendy=0;
+	private double alpha=1.57;//kerület pontjának számításához kell radián , alapérték 90 fok
 	
 	/*
 	 * Mire való:
 	 ** moved:lépett e már a játékos vagy irányitási fázisban van
 	 *
 	 */
-	boolean moved;
+	protected boolean moved;
 
 	/*
 	 * Keyconfig 
@@ -77,7 +75,7 @@ public class Robot extends Unit{
 	};
 	
 	//Tartalmazó objektum
-	Phoebe p;
+	protected Phoebe p;
 	
 	/*
 	 * Konstruktor
@@ -180,8 +178,8 @@ public class Robot extends Unit{
 	 * 
 	 * Funkció(ki hívja meg és mikor?):játékmotor a főciklusban
 	 */
-	public boolean collisionWithObstacles(Obstacle obstacle){return false;
-		
+	public boolean collisionWithObstacles(Obstacle obstacle){
+		return false;		
 	}
 	
 	/*
@@ -204,10 +202,10 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void collisionWithRobot(Robot r){
-		if (id==r.getId())return;
+		if (id==r.getId())
+			return;
 		if(this.intersect(r)) {
 			bounce();
-			r.bounce();
 		}
 	}
 	
@@ -215,11 +213,13 @@ public class Robot extends Unit{
 	 * keyPressed függvény
 	 * @param e
 	 * Felelősség:a játékos irányításának eseménykezelése
+	 * !! hiányzik a ragcs/olaj ledobásának lekezelése
 	 * 
 	 * Funkció(ki hívja meg és mikor?):a játékmotor esemény kezelője
 	 * 
 	 */
 	public void keyPressed(KeyEvent e) {
+		//Nyíl irányányának változtatása
 		if(id%2==1){
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
 			alpha+=0.1;
@@ -231,6 +231,34 @@ public class Robot extends Unit{
 				alpha+=0.1;
 			if (e.getKeyCode() == KeyEvent.VK_D)
 				alpha-=0.1;}
+		
+		//Obstacle lerakás
+		if(id%2 == 1){
+			if(e.getKeyCode() == KeyEvent.VK_UP) ;
+			//TODO
+			//Olaj lerakás
+			Oil item0 = new Oil(x, y, null);
+			p.addObstacle(item0);
+			//...
+			//Ragacs lerakás
+			//TODO
+			Glue item1 = new Glue(x, y, null);
+			p.addObstacle(item1);
+			//...
+		}
+		else{
+			//Olaj lerakás
+			//TODO
+			Oil item0 = new Oil(x, y, null);
+			p.addObstacle(item0);
+			//...
+			//TODO
+			//Ragacs lerakás
+			Glue item1 = new Glue(x, y, null);
+			p.addObstacle(item1);
+			//...
+		}
+		
 		p.repaint();
 	}
 	
