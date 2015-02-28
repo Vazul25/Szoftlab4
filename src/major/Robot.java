@@ -138,10 +138,6 @@ public class Robot extends Unit{
 		//TODO
 	};
 	
-	public 
-		
-
-	
 	/*
 	 * Paint függvény
 	 * @param g
