@@ -204,18 +204,25 @@ public class Phoebe extends JPanel implements Runnable{
 			}
 			
 			//Mozgás
+			for(int i=0;i<robots.size();i++){
+				robots.get(i).move();
+				
+			}
+			//TODO lépésanimálása egyenesen végig léptetgetni a robotot és kirajzolni
 			for(int i=0;i<robots.size();i++)
 			{
-				robots.get(i).move();
+						
+				
+				for(int j=0;j<obstacles.size();j++){
+				//Ütközés akadállyal
+				if(robots.get(i).collisionWithObstacles(obstacles.get(j)))
+					obstacles.get(j).effect(robots.get(j));
+				}
 				
 				for(int j=0;j<robots.size();j++){
 					//Ütközés robottal
 					robots.get(i).collisionWithRobot(robots.get(j));
-					//Ütközés akadállyal
-					if(robots.get(i).collisionWithObstacles(obstacles.get(j)))
-						obstacles.get(j).effect(robots.get(j));
 				}
-				
 				//Leesés vizsgálata
 				
 				//...
