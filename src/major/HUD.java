@@ -60,7 +60,11 @@ public class HUD {
 			int robotID = i.getId();
 			Area robotarea = new Area(i.getHitbox());
 			//következő checkpoint értékének megkeresése
-			Area checkpointarea = new Area(checkpoints.get(checkpointReached[robotID%2]-1));
+			
+			/*	Hibás kód -1-gyel indexelés
+			 * Area checkpointarea = new Area(checkpoints.get(checkpointReached[robotID%2]-1));
+			 */
+			
 			robotarea.intersect(checkpointarea);
 			
 			//Az kezdőhelyen található checkpoint az utolsó
