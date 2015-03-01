@@ -37,20 +37,20 @@ public class Phoebe extends JPanel implements Runnable{
 	 * Setting Enum
 	 */
 	public final static class Settings{
-		//...
+		
 		public static final int LAPLIMIT = 1;
 		public static final int TIMELIMIT = 2;
 		
-		private int information;
+		private int racemode;
 		private int limit;
 		private int step;
 		
 		public Settings(int info){
-			this.information = info;
+			this.racemode = info;
 		}
 		
 		public int getSettings(){
-			return information;
+			return racemode;
 		}
 
 		public int getLimit() {
@@ -224,7 +224,7 @@ public class Phoebe extends JPanel implements Runnable{
 				
 				for(Robot k : robots){
 					//Ütközés robottal
-					i.collisionWithRobot(k);
+					i.collisionWithRobot(kro);
 				}
 				//Leesés vizsgálata
 				if(map.fallingDown(i.getHitbox())){
