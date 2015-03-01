@@ -95,7 +95,7 @@ public class Robot extends Unit{
 	}
 	
 	// Setter-Getterek
-	 
+	
 	/*
 	 * GetId függvény
 	 * @return a robot egyedi azonosítója
@@ -228,17 +228,20 @@ public class Robot extends Unit{
 		
 		//Obstacle lerakás
 		
-			if(e.getKeyCode() == keyconfig[id%2*4+2])  {
-			//TODO
-			//Olaj lerakás
+		if(e.getKeyCode() == keyconfig[id%2*4+2])  {
+		//TODO
+		//Olaj lerakás
 			Oil item0 = new Oil(x, y, null);
-			p.addObstacle(item0);}
-			//...
-			//Ragacs lerakás
-			//TODO
-			if(e.getKeyCode() == keyconfig[id%2*4+3])  {
+			p.addObstacle(item0);
+		}
+		//...
+		//Ragacs lerakás
+		//TODO
+		if(e.getKeyCode() == keyconfig[id%2*4+3])  {
 			Glue item1 = new Glue(x, y, null);
-			p.addObstacle(item1);}
+			p.addObstacle(item1);
+		
+		}
 		
 		
 		p.repaint();

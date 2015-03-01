@@ -72,4 +72,8 @@ public abstract class Unit {
 		//Paraméterként kapott Unit hitbox-szal vizsgálat, hogy this.hitbox-szal ütközés történt-e?
 		return false;
 	}
+	
+	public Rectangle getHitbox(){
+		return hitbox;
+	} 
 }

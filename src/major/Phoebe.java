@@ -1,14 +1,10 @@
 ﻿package major;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JPanel;
 
@@ -25,6 +21,7 @@ import minor.Timer;
  * 
  */
 public class Phoebe extends JPanel implements Runnable{
+	private static final long serialVersionUID = 8435890710077230081L;
 	//Attribútumok
 	/*
 	 * 
@@ -82,6 +79,7 @@ public class Phoebe extends JPanel implements Runnable{
 	private List<Robot> robots;
 	private List<Obstacle> obstacles;
 	private HUD hud;
+	private MapBuilder map;
 	
 	/*
 	 * Phoebe konstruktor
@@ -148,7 +146,7 @@ public class Phoebe extends JPanel implements Runnable{
 			gameTimer = new Timer(0);
 		
 		//Pálya létrehozása
-		MapBuilder map = new MapBuilder();
+		map = new MapBuilder();
 		//TODO 
 		
 		//Játékosok létrehozása
@@ -174,8 +172,8 @@ public class Phoebe extends JPanel implements Runnable{
 			int y=0;
 			Oil item1 = new Oil(x, y, null);
 			Glue item2 = new Glue(x, y, null);
-			if(!fallingDown(item1.getHitbox()))	obstacles.add(item1);
-			obstacles.add();
+			if(!map.fallingDown(item1.getHitbox()))	obstacles.add(item1);
+			if(!map.fallingDown(item2.getHitbox())) obstacles.add(item2);
 		}						
 	}
 	
@@ -193,6 +191,7 @@ public class Phoebe extends JPanel implements Runnable{
 		
 		init();
 		
+		//repaint();
 		//TODO rajzolás
 		Timer directorTimer = new Timer(gameInfo.getStep());
 		
@@ -210,8 +209,7 @@ public class Phoebe extends JPanel implements Runnable{
 			}
 			//TODO lépésanimálása egyenesen végig léptetgetni a robotot és kirajzolni
 			for(int i=0;i<robots.size();i++)
-			{
-						
+			{				
 				
 				for(int j=0;j<obstacles.size();j++){
 				//Ütközés akadállyal
@@ -224,12 +222,12 @@ public class Phoebe extends JPanel implements Runnable{
 					robots.get(i).collisionWithRobot(robots.get(j));
 				}
 				//Leesés vizsgálata
-				
-				//...
-				//deathanimation
+				if(map.fallingDown(robots.get(i).getHitbox())){
+					ended = true;
+					robots.get(i).deathanimation();
+				};			
 			}			
-			//várni kell, amíg le nem jár a 3mp
-			repaint();			
+			//repaint();			
 		}		
 	}
 }
