@@ -22,7 +22,7 @@ public class HUD {
 	private int numOfCheckpoints;
 	private int lap;
 	private List<Shape> checkpoints;
-	List<Robot> robots;
+	private List<Robot> robots;
 	
 	public HUD(List<Robot> robs){
 		lap = 0;
@@ -57,11 +57,12 @@ public class HUD {
 	 */
 	public void checkpointSearch(){
 		//minden lépésnél vizsgál, hogy benne vagyunk-e a következő teljesítendő checkpoint mezőben
+		int i=0;//for ciklus
 		Area area = new Area(robots.get(i).hitbox);//végig iterálni az összesen
 		//következő checkpoint értékének megkeresése
-		int i=0;
 		//...
-		Area checkpoint = new Area(checkpoints.get(i));
+		int j=0;//következő checkpoint az i-edik robotnak
+		Area checkpoint = new Area(checkpoints.get(j));
 		area.intersect(checkpoint);
 		//A teljesített checkpoint adminisztrálása
 		if(!area.isEmpty()) checkpointReached[i] = true; 

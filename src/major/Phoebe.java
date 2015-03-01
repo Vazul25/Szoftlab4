@@ -81,7 +81,7 @@ public class Phoebe extends JPanel implements Runnable{
 	 */
 	private List<Robot> robots;
 	private List<Obstacle> obstacles;
-	private Map<Robot,HUD> huds;
+	private HUD hud;
 	
 	/*
 	 * Phoebe konstruktor
@@ -161,13 +161,10 @@ public class Phoebe extends JPanel implements Runnable{
 		robots.add(two);
 		
 		//HUD létrehozása
-		huds = new HashMap<Robot, HUD>();
-		huds.put(one,new HUD(one));
-		huds.put(two, new HUD(two));
+		hud = new HUD(robots);
 		
 		//Checkpointok eljuttatása a HUD-ba
-		huds.get(one).setCheckpoints(map.getCheckpoints());
-		huds.get(two).setCheckpoints(map.getCheckpoints());
+		hud.setCheckpoints(map.getCheckpoints());
 		
 		//Akadályok létrehozása
 		for(int i=1;i<=10;i++){
