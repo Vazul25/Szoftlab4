@@ -16,17 +16,17 @@ import minor.Timer;
  * Interfészek:
  *  
  */
-public class HUD implements DirectorEvent {
+public class HUD {
 	
 	private boolean[] checkpointReached;
 	private int numOfCheckpoints;
 	private int lap;
 	private List<Shape> checkpoints;
-	Robot robot;
+	List<Robot> robots;
 	
-	public HUD(Robot r){
+	public HUD(List<Robot> robs){
 		lap = 0;
-		robot = r;
+		robots = robs;
 	}
 	/*
 	 * setCheckpoints függvény
@@ -67,16 +67,6 @@ public class HUD implements DirectorEvent {
 		if(!area.isEmpty()) checkpointReached[i] = true; 
 		//Ha minden checkpoint teljesítve, akkor lap növelése eggyel és checkpointReached tömb inicializálása
 		//...
-	}
-	
-	/*
-	 * handleDirectorEvent 
-	 * @see minor.DirectorEvent#handleDirectorEvent(minor.Timer)
-	 */
-	@Override
-	public void handleDirectorEvent(Timer obj) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
