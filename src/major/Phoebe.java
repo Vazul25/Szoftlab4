@@ -171,8 +171,11 @@ public class Phoebe extends JPanel implements Runnable{
 			//TODO Randomgenerált (x,y) pozíciók
 			int x=0;
 			int y=0;
-			obstacles.add(new Oil(x, y, null));
-			obstacles.add(new Glue(x, y, null));
+			Oil item1 = new Oil(x, y, null);
+			Glue item2 = new Glue(x, y, null);
+			if(!fallingDown())
+			obstacles.add();
+			obstacles.add();
 		}						
 	}
 	
