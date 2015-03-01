@@ -10,8 +10,10 @@
  * Interfészek:még nincs
  *  
  */
-public abstract class Obstacle extends Unit {
 
+public abstract class Obstacle extends Unit {
+	protected static  int WIDTH;
+	protected static int HEIGHT;
 	/*
 	 * Obstacle kontruktor
 	 * Felelősség:meghívja a unit konstruktorát a megadott adatokkal
