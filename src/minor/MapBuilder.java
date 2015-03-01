@@ -20,6 +20,9 @@ public class MapBuilder{
 	private Shape map;
 	private List<Shape> checkpoints;
 	
+	private int[] startPosPlayerOne;
+	private int[] startPosPlayerTwo;
+	
 	/*
 	 * MapBuilder konstruktor
 	 * Felelősség:
@@ -29,6 +32,10 @@ public class MapBuilder{
 	public MapBuilder(){
 		//Fájlból olvasás		
 		//...
+		//Kezdő koordináták beolvasása robotonként
+		int[] temp = {200, 300};
+ 		startPosPlayerOne = temp;
+ 		startPosPlayerTwo = temp;
 		//Polygon létrehozása (pálya)
 		int[] xpoints = null;
 		int[] ypoints = null;
@@ -84,7 +91,9 @@ public class MapBuilder{
 		area.intersect(otherArea);
 		return !area.isEmpty();
 	}
-	
-	
+
+	public int[] getStartPosPlayer(int id) {
+		return startPosPlayerOne;
+	}
 
 }

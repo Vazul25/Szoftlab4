@@ -155,8 +155,8 @@ public class Phoebe extends JPanel implements Runnable{
 		int startPointX = 0; //MApBuilderből
 		int startPointY = 0; //MapBuilderből
 		int secondStartPos = 0; //MapBuilderből
-		Robot one = new Robot(startPointX, startPointY, null, this);
-		Robot two = new Robot(startPointX, startPointY+secondStartPos, null, this);
+		Robot one = new Robot(map.getStartPosPlayer(1)[0], map.getStartPosPlayer(1)[1], null, this);
+		Robot two = new Robot(map.getStartPosPlayer(2)[0], map.getStartPosPlayer(2)[2], null, this);
 		robots.add(one);
 		robots.add(two);
 		
@@ -173,8 +173,7 @@ public class Phoebe extends JPanel implements Runnable{
 			int y=0;
 			Oil item1 = new Oil(x, y, null);
 			Glue item2 = new Glue(x, y, null);
-			if(!fallingDown())
-			obstacles.add();
+			if(!fallingDown(item1.getHitbox()))	obstacles.add(item1);
 			obstacles.add();
 		}						
 	}
