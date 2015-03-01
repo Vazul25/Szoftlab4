@@ -85,19 +85,26 @@ A Robotok alrendszer betölti a robotokat a Robotfájlokból, tárolja azokat, m
 
 Hálózatot a szoftver nem igényel. Háttértáron pedig a program .jar archívumainak, a kirajzoláshoz szükséges pálya és robot képeknek, a pályákat tartalmazó fájloknak szükséges helyet biztosítani. Ezeken kívül nincs szükség futás idejű tárhelyigényre. 
 
-\subsection{Funkciók}
-Mivel unalmas a mérnökök munkája a Marson (nem adnak nekik elég érdekes feladatot, mint például a napelem-építés, vagy az ásványi anyag gyűjtése), ezért robotokat versenyeztetnek egymás ellen; ezt valósítja meg az alábbi játékprogram.
+\pagebreak
+\subsection{Funkciók}Mivel unalmas a mérnökök munkája a Marson, nem adnak nekik elég érdekes feladatot, mint például a napelem építés vagy az ásványi anyag gyűjtése, ezért robotokat versenyeztetnek egymás ellen, ezt valósítja meg az alábbi játékprogram.
 
-Egy versenyző játéknak a lényege, hogy a résztvevők egymás ellen próbálnak minél tovább eljutni a pályán, illetve minél jobb időt elérni. Ez itt sincs másként, a verseny célja, hogy a megadott idő alatt több kört tegyünk meg robotunkkal mint az ellenfél. Ebben segítségünkre lehet a pálya kialakítása, és a különböző felszerelések, melyek megnehezíthetik a verseny lefutását. Fontos, hogy a robotok a kijelölt pályán maradjanak, mert csak ezen a területen biztosított a kommunikáció a vezérlőközponttal. Ha egy robot elhagyja a pályát diszkvalifikálják a futamból.
 
-Az idő lejártával (esetleg más játékmódoknál egy adott körszám megtétele után) a játék véget ér. Ebben az esetben az a játékos robotja nyer, amelyik több kört tett meg (vagy elsőként ért be a célba adott kör után), kivéve ha idő előtt letér a pályáról, ezáltal nem vesz részt az eredményhirdetésen a célvonalnál.
+Egy versenynek a lényege beállítástól függően vagy az, hogy a résztvevők megpróbálnak a meghatározott időn belül több kört megtenni vagy bizonyos számú kört hamarabb megtenni, mint a másik játékos. Ebben segítségükre lehet a pálya kialakítása és a különböző felszerelések, melyek megnehezíthetik a verseny lefutását. Ilyenek a ragacs mezők, melyek lelassítják a robotot, ezáltal a következő ugrásának távolságát a felére csökkentik, továbbá az olajfoltok, melyeken megcsúszva a robotok nem tudnak irányt változtatni. Fontos, hogy a robotok a kijelölt pályán maradjanak, mert ha lemennek róla, lezuhannak a fennsík pereméről. Ha egy robot elhagyja a pályát, diszkvalifikálják a futamból és a másik fél győzedelmeskedik.
 
-A játékteret a csodálatos Mars környezete adja, ami nagyon veszélyes terep. Tartani kell a különféle sugárzásoktól, nehogy kárt tegyenek a mérnökökben és a nézőkben, ezért ők egy védett szobából szemlélik és irányítják az eseményeket. A pályán különféle nehezítések is helyet kapnak, hogy ne legyen a robotoknak (és mérnökeiknek) könnyű az élete. Olyan akadályokkal kell megbirkózniuk a robotoknak, mint például a lyukak elkerülése, melyek a felépítésüket teszik tönkre, ezáltal nem tudnak tovább versenyezni, vagy az olajfoltok időben való észrevétele, ami meggátolja, hogy a mérnökök irányítsák őket, végül de nem utolsó sorban a ragacsokat is ki kell kerülniük, mert azok a sebességüket csökkentik, ezáltal nagy előnyt adva az ellenfél robotjának. A többi robothoz sem éri meg közel tartózkodni, hiszen mint minden verseny alatt, az ütközésnek itt is ára van, ez most az irányítás bezavarodásában merül ki. Végül a legnagyobb akadály maga a pálya. A versenyeket egy lapos fennsíkon szokták tartani a Marson, jól elszeparálva a marslakóktól, hogy azok ne tudjanak belekontárkodni a futamba, de elakadhatnak vagy leeshetnek a szélén, a mérnököknek erre is nagyon kell figyelniük az irányítás alatt.
 
-A robotok a startvonalról indulnak úgy, hogy figyelembe véve a pálya felépítését, igazságos legyen minden résztvevőnek (a mérnökök a pályán kívülről irányítják őket). A „Start”-ot egy visszaszámolás indítja, melynek következtében a robotok elindulnak. A pályán állomások találhatók, melyek minden robot áthaladásánál ellenőrzik, hogy nem történt-e csalás. Minden körben a pályán adott állomásokon kell áthaladni adott sorrendben. A kör csak akkor érvényes, ha a robot ezeknek a megszorításoknak eleget tud tenni. Továbbá a távolság mérése (ezáltal győzelmi feltételek) is ez alapján történik, szóval egyik mérnöknek sem éri meg ide-oda navigálni a robotját a pontok között, a legnagyobb megtett út reményében.
-A robotok sebessége állandó, a mérnökök csak az irányt tudják befolyásolni a játék lezajlása alatt, ezért nagyon kell figyelni, hogy a kanyarokat jó ívben vegyék be, az akadályokat pedig megfelelő szakértelemmel kerüljék ki. Továbbá az indulás után máris lehetőséget nyújt a játék, hogy a mérnökök használják a robotokba beépített felszereléseket. Ezek nem mások mint a már feljebb leírt ragacsok és olajfoltok. Ezeket maguk mögött képesek hagyni, és a játék végéig megmaradnak a pálya felületén (illetve amíg valaki bele nem megy, akár a mérnök saját robotja), fejfájást okozva ezzel a versenyzőknek. A felszerelések körönként (fentebb említett „Checkpoint-rendszer” szerint) újratöltődnek, ezért a mérnököknek nem kell taktikázniuk, hogy mikor törjenek borsot az ellenfelük orra alá; körönként megtehetik azt.
+Játékmódtól függően, az idő lejártával vagy egy adott körszám megtétele után a játék véget ér. Ebben az esetben az a játékos robotja nyer, amelyik több kört tett meg vagy elsőként ért be a célba adott kör után, kivéve ha idő előtt letér a pályáról, ezáltal nem vesz részt az eredményhirdetésen .
 
-A verseny ezen lehetőségek megvalósítása által igen érdekes, veszélyes és néha akár frusztráló is, gondoljunk csak a robotok felszereléseire. Egyszóval ideális időtöltés a Marson unatkozó mérnököknek.
+
+A verseny három másodperces visszaszámlálással kezdődik, ami után a játékosok beállíthatják az első ugrásuk irányát, erre minden ugrás után egy előre meghatározott idő áll rendelkezésükre. A pályán különféle nehezítések is helyet kapnak, ennek egy részét véletlenszerűen helyezik még indulás előtt, a többit pedig a játékosok rakják le. A játékosok minden kör teljesítése után kapnak újabb adag ragacs vagy olaj rakományt, amit a következő körben minden ugrás előtt lehetőségük van lerakni maguk alá. A ragacsba lépés a robot sebességét csökkentik, míg az olajfolt a robotnak az irányítását lehetetleníti el egy körig. 
+
+Az akadályok túlzott elszaporodásának elkerülése végett, bizonyos idő múlva maguktól felszáradnak az olajfoltok és ragacs mezők.  A verseny alatt ütközések is előfordulhatnak, ilyenkor a robotok lepattannak egymásról. A robotoknak a verseny alatt figyelniük kell, hogy le ne essenek a pályáról, mert az azonnal a másik versenyző győzelméhez vezet.
+
+A robotok a startvonalról indulnak úgy, hogy figyelembe véve a pálya felépítését, igazságos legyen minden résztvevőnek. A pályán állomások találhatók, melyek minden robot áthaladásánál ellenőrzik, hogy nem történt-e csalás. Minden körben a pályán adott állomásokon kell áthaladni adott sorrendben. A kör csak akkor érvényes, ha a robot ezeknek a megszorításoknak eleget tesz. Továbbá a távolság mérése, ezáltal győzelmi feltételek vizsgálata is ez alapján történik.
+
+
+A robotok sebessége állandó, a mérnökök csak az irányt tudják befolyásolni a játék lezajlása alatt, ezért nagyon kell figyelni, hogy a kanyarokat jó ívben vegyék be, az akadályokat pedig megfelelő szakértelemmel kerüljék ki. Továbbá az indulás után máris lehetőséget nyújt a játék, hogy a mérnökök használják a robotokba beépített felszereléseket. Ezek a már feljebb leírt ragacsok és olajfoltok. Ezeket maguk mögött képesek hagyni, amik vagy egy bizonyos körig maradnak meg a pálya felületén vagy amíg valaki bele nem megy ez akár a mérnök saját robotja is lehet, ezzel nehezítve a versenyzők dolgát. A felszerelések a fentebb említett állomások, azaz „Checkpoint-rendszer” felügyeletével körönként gyarapodhatnak.
+
+A verseny ezen lehetőségek megvalósítása által igen érdekes, veszélyes és néha akár frusztráló is. Egyszóval ideális időtöltés a Marson unatkozó mérnököknek.
 
 \subsection{Felhasználók}
 A szoftver kétjátékos módban indíthat. A játékosnak semmiféle előképzettségre nincs szüksége, a játék menete gyorsan elsajátítható. A játékban nem lesz pályaszerkesztő. A játékot nem lehet elmenteni, mindig újból kell kezdeni.
@@ -203,7 +210,6 @@ Nincs egyéb nem funkcionális követelmény.
 %\hline\hline ... & ... & ... & ... & ... & ... \tabularnewline
 %\hline
 %\end{longtable}
-
 
 \section{Lényeges use-case-ek}
 
