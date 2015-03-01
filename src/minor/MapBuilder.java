@@ -94,6 +94,7 @@ public class MapBuilder{
 	}
 
 	public int[] getStartPosPlayer(int id) {
+		//TODO
 		return startPosPlayerOne;
 	}
 

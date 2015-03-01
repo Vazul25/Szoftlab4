@@ -4,9 +4,6 @@ import java.awt.Shape;
 import java.awt.geom.Area;
 import java.util.List;
 
-
-import minor.Timer;
-
 /*
  * HUD osztály
  * Felelősség:
