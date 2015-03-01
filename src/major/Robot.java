@@ -219,43 +219,27 @@ public class Robot extends Unit{
 	public void keyPressed(KeyEvent e) {
 		//Nyíl irányányának változtatása
 		if(id%2==1){
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		if (e.getKeyCode() == keyconfig[id%2*4])
 			alpha+=0.1;
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		if (e.getKeyCode() == keyconfig[id%2*4+1])
 			alpha-=0.1;
 		}
-		else{
-			if (e.getKeyCode() == KeyEvent.VK_A)
-				alpha+=0.1;
-			if (e.getKeyCode() == KeyEvent.VK_D)
-				alpha-=0.1;}
+
 		
 		//Obstacle lerakás
-		if(id%2 == 1){
-			if(e.getKeyCode() == KeyEvent.VK_UP) ;
+		
+			if(e.getKeyCode() == keyconfig[id%2*4+2])  {
 			//TODO
 			//Olaj lerakás
 			Oil item0 = new Oil(x, y, null);
-			p.addObstacle(item0);
+			p.addObstacle(item0);}
 			//...
 			//Ragacs lerakás
 			//TODO
+			if(e.getKeyCode() == keyconfig[id%2*4+3])  {
 			Glue item1 = new Glue(x, y, null);
-			p.addObstacle(item1);
-			//...
-		}
-		else{
-			//Olaj lerakás
-			//TODO
-			Oil item0 = new Oil(x, y, null);
-			p.addObstacle(item0);
-			//...
-			//TODO
-			//Ragacs lerakás
-			Glue item1 = new Glue(x, y, null);
-			p.addObstacle(item1);
-			//...
-		}
+			p.addObstacle(item1);}
+		
 		
 		p.repaint();
 	}
