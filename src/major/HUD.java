@@ -16,6 +16,8 @@ import java.util.List;
 public class HUD {
 	
 	private int[] checkpointReached;
+	private int[] numGlue;
+	private int[] numOil;
 	private int numOfCheckpoints;
 	private int lap;
 	private List<Shape> checkpoints;
@@ -24,6 +26,12 @@ public class HUD {
 	public HUD(List<Robot> robs){
 		lap = 0;
 		robots = robs;
+		numGlue = new int[robots.size()];
+		numOil = new int[robots.size()];
+		for(Robot i: robots){
+			numGlue[i.getId()%2] = 3;
+			numOil[i.getId()%2] = 3;
+		}
 	}
 	/*
 	 * setCheckpoints függvény
