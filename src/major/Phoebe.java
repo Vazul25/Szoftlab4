@@ -213,23 +213,23 @@ public class Phoebe extends JPanel implements Runnable{
 			hud.checkpointSearch();
 			
 			//Ütközések
-			for(int i=0;i<robots.size();i++)
-			{				
+			for(Robot i : robots)
+			{			
 				
-				for(int j=0;j<obstacles.size();j++){
+				for(Obstacle j : obstacles){
 				//Ütközés akadállyal
-				if(robots.get(i).collisionWithObstacles(obstacles.get(j)))
-					obstacles.get(j).effect(robots.get(j));
+				if(i.collisionWithObstacles(j))
+					j.effect(i);
 				}
 				
-				for(int j=0;j<robots.size();j++){
+				for(Robot k : robots){
 					//Ütközés robottal
-					robots.get(i).collisionWithRobot(robots.get(j));
+					i.collisionWithRobot(k);
 				}
 				//Leesés vizsgálata
-				if(map.fallingDown(robots.get(i).getHitbox())){
+				if(map.fallingDown(i.getHitbox())){
 					ended = true;
-					robots.get(i).deathanimation();
+					i.deathanimation();
 				};			
 			}			
 			//repaint();			
