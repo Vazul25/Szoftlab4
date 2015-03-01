@@ -208,6 +208,11 @@ public class Phoebe extends JPanel implements Runnable{
 				
 			}
 			//TODO lépésanimálása egyenesen végig léptetgetni a robotot és kirajzolni
+			
+			//Checkpointok vizsgálata, áthaladtunk-e?
+			hud.checkpointSearch();
+			
+			//Ütközések
 			for(int i=0;i<robots.size();i++)
 			{				
 				

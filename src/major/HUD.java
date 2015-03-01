@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class HUD {
 	
-	private boolean[] checkpointReached;
+	private int[] checkpointReached;
 	private int numOfCheckpoints;
 	private int lap;
 	private List<Shape> checkpoints;
@@ -35,9 +35,9 @@ public class HUD {
 	public void setCheckpoints(List<Shape> checkObj){
 		//Checkpointokat teljesítését számontartó adatszerkezet inicialziálása
 		numOfCheckpoints = checkObj.size();
-		checkpointReached = new boolean[numOfCheckpoints];
-		for(int i=0;i<numOfCheckpoints;i++){
-			checkpointReached[i] = false;
+		checkpointReached = new int[robots.size()];
+		for(int i=0;i<robots.size();i++){
+			checkpointReached[i] = 0;
 		}
 		//Checkpointok tárolása
 		checkpoints = checkObj;
@@ -54,17 +54,27 @@ public class HUD {
 	 */
 	public void checkpointSearch(){
 		//minden lépésnél vizsgál, hogy benne vagyunk-e a következő teljesítendő checkpoint mezőben
-		int i=0;//for ciklus
-		Area area = new Area(robots.get(i).hitbox);//végig iterálni az összesen
-		//következő checkpoint értékének megkeresése
-		//...
-		int j=0;//következő checkpoint az i-edik robotnak
-		Area checkpoint = new Area(checkpoints.get(j));
-		area.intersect(checkpoint);
-		//A teljesített checkpoint adminisztrálása
-		if(!area.isEmpty()) checkpointReached[i] = true; 
-		//Ha minden checkpoint teljesítve, akkor lap növelése eggyel és checkpointReached tömb inicializálása
-		//...
+		//végig megyünk minden roboton
+		for(Robot i : robots){
+			//Lekérjük az ID-t
+			int robotID = i.getId();
+			Area robotarea = new Area(i.getHitbox());
+			//következő checkpoint értékének megkeresése
+			Area checkpointarea = new Area(checkpoints.get(checkpointReached[robotID%2]-1));
+			robotarea.intersect(checkpointarea);
+			
+			//Az kezdőhelyen található checkpoint az utolsó
+			if(!robotarea.isEmpty()){
+				//Ha az utolsó checkpointhoz érkeztünk nullázuk a checkpointokat és növeljük a körök számát eggyel
+				if(checkpointReached[robotID%2] == (checkpoints.size()-1)) {
+					checkpointReached[robotID%2] = 0;
+					lap += 1;
+				}
+				//Ha belelépünk egy checkpointba akkor nveljük a checkpointReached-et
+				else{
+					checkpointReached[robotID%2] += 1;
+				}
+			}
+		}		
 	}
-
 }

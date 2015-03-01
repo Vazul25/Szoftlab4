@@ -1,6 +1,7 @@
 ﻿package major;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 /*
@@ -88,6 +89,7 @@ public class Robot extends Unit{
 	 */
 	public Robot(int x, int y, String imagelocation,Phoebe p) {
 		super(x, y, imagelocation);
+		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 		id=staticid;
 		staticid+=1;
 		this.p=p;

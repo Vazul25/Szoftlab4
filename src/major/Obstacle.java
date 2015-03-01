@@ -1,5 +1,7 @@
 ﻿package major;
 
+import java.awt.Rectangle;
+
 /*
  * Obstacle osztály
  * Felelősség:A pályán/játékosoknál lévő különböző akadályokat(ragacs,olaj esetleg késöbb rakéta) 
@@ -25,6 +27,7 @@ public abstract class Obstacle extends Unit {
 	 */
 	public Obstacle(int x, int y, String imagelocation) {
 		super(x, y, imagelocation);
+		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 		// TODO Auto-generated constructor stub
 	}
 	
