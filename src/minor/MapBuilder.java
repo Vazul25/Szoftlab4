@@ -89,7 +89,8 @@ public class MapBuilder{
 		Area area = new Area(map);
 		Area otherArea = new Area(othershape);
 		area.intersect(otherArea);
-		return !area.isEmpty();
+		//TODO revision
+		return area.getBounds().getSize().equals(othershape.getBounds().getSize());
 	}
 
 	public int[] getStartPosPlayer(int id) {
