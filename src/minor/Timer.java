@@ -14,4 +14,9 @@ public class Timer {
 	public Timer(int i){
 		
 	}
+	
+	public boolean isZero(){
+		return false;
+		
+	}
 }

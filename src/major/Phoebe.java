@@ -128,6 +128,7 @@ public class Phoebe extends JPanel implements Runnable{
 			 robots.get(i).paint(g2d);
 			
 		}
+		//TODO Akadályok, Map kirajzolása 
 	}
 	/*
 	 * init függvény
@@ -192,15 +193,20 @@ public class Phoebe extends JPanel implements Runnable{
 		
 		init();
 		
+		//TODO rajzolás
+		Timer directorTimer = new Timer(gameInfo.getStep());
+		
 		while(robots.size()>1 ||!ended)
 		{
 			//...
+			while(!directorTimer.isZero()){
+				//várunk amíg le nem jár a három másodperc
+			}
 			
 			//Mozgás
 			for(int i=0;i<robots.size();i++)
 			{
 				robots.get(i).move();
-				//TODO 
 				
 				for(int j=0;j<robots.size();j++){
 					//Ütközés robottal
@@ -209,9 +215,7 @@ public class Phoebe extends JPanel implements Runnable{
 					if(robots.get(i).collisionWithObstacles(obstacles.get(j)))
 						obstacles.get(j).effect(robots.get(j));
 				}
-				//DirectorTimer inicializálás
-				//TODO
-				Timer directorTimer = new Timer(gameInfo.getStep());
+				
 				//Leesés vizsgálata
 				
 				//...
