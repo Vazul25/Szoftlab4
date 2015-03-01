@@ -4,7 +4,7 @@ import java.awt.Shape;
 import java.awt.geom.Area;
 import java.util.List;
 
-import minor.DirectorEvent;
+
 import minor.Timer;
 
 /*
@@ -57,7 +57,7 @@ public class HUD {
 	 */
 	public void checkpointSearch(){
 		//minden lépésnél vizsgál, hogy benne vagyunk-e a következő teljesítendő checkpoint mezőben
-		Area area = new Area(robot.hitbox);
+		Area area = new Area(robots.get(i).hitbox);//végig iterálni az összesen
 		//következő checkpoint értékének megkeresése
 		int i=0;
 		//...
