@@ -24,11 +24,31 @@ A játék logikát megvalósító objektum. Listában tárolja a pályán tartó
 \subsection{Robot}
 Olyan objektum, mely a pályán található robotokat valósítja meg. Leírja a viselkedésüket és a kezelésüket. A „Robot” osztály a Unit-ból származik le, ezáltal van pozíciója és az ütközés is le van kezelve. Felelős a mozgásért, megállapítja egy adott akadállyal vagy robottal ütközött-e és kezeli a felhasználó által leütött gombokat.
 
-\subsection{Timer}
-Az eltelt időt és a fennmaradt idő nyilvántartásáért felelős. Ilyen például a játék elején három másodperces visszaszámlálás vagy a időlimites játékmód esetén, amikor a maximális időtől számol visszafelé. 
-\subsection{Unit}
-A Unit absztarkt osztály a pályán található objektumoknak a szülőosztálya. Tárolja a pozíciót, egy sokszöget, amivel vizsgálható az ütközés és a pályán megjelenő képüket. Továbbá ez az osztály valósítja meg a függvényt, ami ellenőrzi azt, ha két Unit ütközik (robotok egymással, robot akadállyal).
+\subsection{Glue}
+A „Glue” osztály az „Obstacle” osztály egy leszármazottja, mely megvalósít egy adott tulajdonságú akadályt. Ebben az esetben olyan hatást fejt ki arra a robotra, ami belemegy, mely megfelezi a sebességét.
+\subsection{GUI}
+A grafikus felületet valósítja meg. A „GUI” osztály lényegében maga a menü ami játékindítás után ugrik fel, itt találhatóak be a különféle beállítások és játékmódok. Gombnyomásra egy függvényt hív meg, melyben a játékmotor fog elindítja a játék működési szálát.
+\comment{Felelősség informális leírása}
+\subsection{HUD}
+A „HUD” osztály az, ami beállítja és nyilvántartja, hogy a robotok hány checkpoint-on mentek át, mennyi oil és glue van náluk amit felhasználhatnak, illetve kiírja a képernyőre a hátramaradó időt és a körszámlálót.
+\subsection{MapBuilder}
+Magának a pályának az osztálya, ami leírja tulajdonságait. A „MapBuilder” osztály poligonokból generálja le a pályát, így könnyen vizsgálható az objektumok azon való tartózkodása. A checkpoint-ok is itt vannak tárolva.
+\subsection{Obstacle}
+Az „Obstacle” osztály egy unit, ami összefogja a pályán található (lerakott) akadályokat és bevezet egy függvényt, ami hatást gyakorol a robotokra.
+\subsection{Oil}
+Az „Oil” osztály az „Obstacle” osztály egy másik leszármazottja. Hasonlóan a „Glue” osztályhoz, egy adott hatást valósít meg, ami letiltja a következő körben történő irányítását a robotnak
+\subsection{Phoebe}
+A játék motorját megvalósító osztály. Láncolt listában tárolja a pályán tartózkodó robotokat, akadályokat és figyeli, hogy mikor ér véget a játék. A „Phoebe” osztály rajzolja ki az objektumokat a pályán (minden paint függvényt meghív, amire van referenciája), és implementálja a „Runnable” osztályt, ezáltal képes egy szálat létrehozni, melyben maga a játék fut. Játékindításkor berakja a pályára a robotokat és az akadályokat a kezdő pozíciókba. Ebben a szálban történnek az ellenőrzések, és a játékosok által választott döntések.
 
+\subsection{Robot}
+Fontos osztály, mely a pályán található robotokat valósítja meg. Leírja a viselkedésüket és a kezelésüket. A „Robot” osztály a unit-ból származik le, ezáltal van pozíciója és az ütközés is le van kezelve. Különféle attribútumai vannak, melyek például az ID, a boolean-ek melyek az akadályok hatásait érvényesítik, és a mozgásért felelős függvények.
+
+\subsection{Timer}
+A visszaszámlálásokért lesz felelős, mint például a játék indítása vagy a körtimer, ami minden kör végén végén visszaszámol. Illetve a director time is ide tartozik, ami a játékból hátramaradó időt jelzi.
+\subsection{Unit}
+A „Unit” osztály a pályán található objektumoknak a szülőosztálya. Tárolja a pozíciójukat (x, y koordináta), hogy éppen hol tartózkodnak, a hitbox-ukat, a pályán megjelenő képüket. Továbbá ez az osztály valósítja meg a függvényt, ami ellenőrzi azt, ha két unit kapcsolatba kerül (ütközés, akadályba lépés).
+
+>>>>>>> Dokumentacio-szeresztes
 
 \section{Osztályok leírása}
 \comment{Az előző alfejezetben tárgyalt objektumok felelősségének formalizálása attribútumokká, metódusokká. Csak publikus metódusok szerepelhetnek. Ebben az alfejezetben megjelennek az interfészek, az öröklés, az absztrakt osztályok. Segédosztályokra még mindig nincs szükség. Az osztályok ABC sorrendben kövessék egymást. Interfészek esetén az Interfészek, Attribútumok pontok kimaradnak.}
@@ -123,49 +143,60 @@ Unit
 	\end{itemize}
 \end{itemize}
 
-\subsection{Oil}
+
+\subsection{Robot}
 \begin{itemize}
 \item Felelősség\\
-\comment{Mi az osztály felelőssége. Kb 1 bekezdés.}
+A játékban résztvevő ugráló robotok viselkedését és kezelését leíró osztály
 \item Ősosztályok\\
-\comment{Mely osztályokból származik (öröklési hierarchia)\newline
-Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
+Unit
 \item Interfészek\\
-\comment{Mely interfészeket valósítja meg.}
+Nincs
 \item Attribútumok\\
-\comment{Milyen attribútumai vannak}
 	\begin{itemize}
-		\item attribútum1: attribútum jellemzése: mire való
-		\item attribútum2: attribútum jellemzése: mire való
-	\end{itemize}
+		\item static int staticid: Az osztályhoz tartozó statikus azonosító: a példány                azonosítójának(id) meghatározásához szükséges.
+		\item static int HEIGHT: A robot képének magassága: szükséges collision                      detektálásnál, továbbá az irányítást segítő nyil kezdő koordinátájának                  meghatározásához.
+		\item static int WIDTH:A robot képének szélessége: lsd HEIGHT
+		\item int id: A robot példányának egyedi azonosítója: a keyconfig sorának                     indexelésére és a collison detektálásnál az önmagával való ütközés                      kivédésére szükséges.
+		\item double slowed: A sebesség modosításáért felel, default értéje 1.0: amennyiben ragacsba lép a robot ez 0.5-re modosul és minden ugrás végén visszaáll az eredeti értékére, ugrásnál ezzel szorozzuk be a végkordinátát kiszámító sugár hosszát.
+		\item boolean oiled:Azt jelzi ,hogy olajba lépett-e: ennek hatására a mozgás iránya módosíthatatlanná válik 1 körig. 
+		\item int arrowendx:A robot irányítását segítő nyilnak az x koordinátája: a nyil kirajzolásánál van szerepe.
+		\item int arrowendy: A robot irányítását segítő nyilnak az y koordinátája: a nyil kirajzolásánál van szerepe.
+		\item double alpha: A robot irányítását segítő nyil vízszintessel bezárt szöge:A nyil kirajzolásánál, az ugrás végpontjának meghatározánál van szerepe.
+		\item boolean moved:azt jelöli, hogy lépett-e már a robot az aktuális körben: A megjelenítésnél(nyilat ugrás közben nem jelenítjük meg),illetve az irányítás letiltásánál van szerepe.
+		\item static int[][] keyconfig: A játékosok írányítását tároló mátrix:A játékosok irányítását ennek segítségével határozzuk meg a keypressed függvénybe, első(sor)indexelése az id-vel történik.
+\end{itemize}
 \item Metódusok\\
 \comment{Milyen publikus metódusokkal rendelkezik. Metódusonként egy-három mondat arról, hogy a metódus mit csinál.}
 	\begin{itemize}
-		\item int foo(Osztály3 o1, Osztály4 o2): metódus leírása
-		\item int bar(Osztály5 o1): metódus leírása
+		\item Robot(int x,int y,String imagelocation,Phoebe p): Létrehoz egy robotot a megadott x,y kordinátákon , betölti a képét az imagelocation cím alapaján,továbbá beállítja a játékmotorra a referenciáját.
+		\item int getId(): Vissza adja a robot azonosítoját(id).
+		\item void setOiled():Az oiled állapot változót true-ra állítja.
+		\item void setGlue():A slowed változó értékét csökkenti 50\% al.
+		\item void deathanimation():A Robot halálának gafikus megjelenítéséért felelős függvény.
+		\item void paint(Graphics2D g): A robot kirajzolásáért felelős függvény, az x,y koordináta helyén kirjazolja a robot képét ,WIDTH/HEIGHT szélesség/magasság adatok felhasználásával.
+		\item boolean collisionWithObstacle(Obstacle o): Ellenörzi hogy a robot ütközött-e az o akadállyal, igazzal tér vissza ha igen, hamissal ha nem.
+		\item boolean collisionWithRobot(Robot r): Ellenörzi hogy a robot ütközött-e másik robottal , igazzal tér vissza ha igen, hamissal ha nem. Id alapján kiszüri ha önmagára hívják meg.
+		\item void keyPressed(Keyevent e):A robot irányítását megvalósító függvény, a játékmotor keylistener-e által hívodik meg, a lenyomott billentyű keyevent-jére.A következő ugrás beállítása, a ragacs/olaj lerakása történhet itt.A keyconfig változó felhasználásával.
 	\end{itemize}
 \end{itemize}
 
-\subsection{Phoebe}
+\subsection{Glue}
 \begin{itemize}
 \item Felelősség\\
-\comment{Mi az osztály felelőssége. Kb 1 bekezdés.}
+A játékban szereplő Ragacs foltok viselkedését leíró osztály
 \item Ősosztályok\\
-\comment{Mely osztályokból származik (öröklési hierarchia)\newline
-Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
+Unit$\rightarrow$Obstacle
 \item Interfészek\\
-\comment{Mely interfészeket valósítja meg.}
+Nincs
 \item Attribútumok\\
-\comment{Milyen attribútumai vannak}
 	\begin{itemize}
-		\item attribútum1: attribútum jellemzése: mire való
-		\item attribútum2: attribútum jellemzése: mire való
-	\end{itemize}
+	   \item  Nincs
+\end{itemize}
 \item Metódusok\\
 \comment{Milyen publikus metódusokkal rendelkezik. Metódusonként egy-három mondat arról, hogy a metódus mit csinál.}
 	\begin{itemize}
-		\item int foo(Osztály3 o1, Osztály4 o2): metódus leírása
-		\item int bar(Osztály5 o1): metódus leírása
+		\item void effect(Robot r):Ütközéskor hívja meg az ütközést vizsgáló függvénye a Robot osztálynak.Módosítja a robot slowed értékét a 50\%-ra a robot.setGlue() meghívásával.
 	\end{itemize}
 \end{itemize}
 
