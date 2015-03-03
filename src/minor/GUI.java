@@ -2,10 +2,15 @@
 
 import major.Phoebe;
 
-/*
- * GUI osztály
+/**
+ * A grafikus felületet megvalósító objektum. Ez az objektum 
+ * maga a menü ami a játék indítása után ugrik fel, itt találhatóak a beállítások 
+ * (mint például a gondolkodás idő és a maximális játék idő vagy a körök száma) és a 
+ * játékmódok. Gombnyomásra fogja elindítani a játék működési szálát. Ez az objektum 
+ * kezeli az ablak eseményeit és a játék bezárását.
+ *
  * Felelősség:
- * 
+ * A grafikus felületért felelős osztály, mely a menüt és a játékot megjeleníti.
  * Ősosztály:
  * 
  * Interfészek:
@@ -15,7 +20,9 @@ public class GUI extends javax.swing.JFrame {
 	
 	private static final long serialVersionUID = 3610253813412048777L;
 	
-	
+	/*
+	* A {@link Phoebe} játékmotor objektum referenciája.
+	*/
 	Phoebe game;
 	
 	//Tagváltozók
@@ -24,7 +31,9 @@ public class GUI extends javax.swing.JFrame {
 	//...
 	
 	/*
-	 * GUI konstruktor
+	 * Konstruktor. Beállítja az ablak nevét, létrehozza az ablak elemeit, elrendezi őket 
+	 * és beállítja a figyelőket(ActionListener).
+	 * 
 	 * Felelősség:
 	 * 
 	 * Funkció(ki hívja meg és mikor?):

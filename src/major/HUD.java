@@ -4,25 +4,65 @@ import java.awt.Shape;
 import java.awt.geom.Area;
 import java.util.List;
 
-/*
- * HUD osztály
+/**
+ * Ez az objektum követi és nyilvántartja, hogy a robotok hány checkpoint-on mentek át, 
+ * mennyi olaj és ragacs van náluk amit felhasználhatnak, illetve kiírja a képernyőre a 
+ * hátramaradó időt és a megtett körök számát. Feladata, hogy minden körben megvizsgálja, 
+ * hogy a robotok elérték-e a következő checkpointot.
+ * 
  * Felelősség:
- * 
- * Ősosztály:
- * 
- * Interfészek:
- *  
+ * A robotok ragacs- és olajkészletét, illetve megtett köreit és checkpontjait számolja. 
+ * Megvalósítja a checkpoint ellenőrzést.
  */
 public class HUD {
 	
+	/**
+	* Két robot esetén két elemű tömb, ami tárolja a teljesített checkpointokat.
+	* Kezdő érték = 0
+	* Max érték = Ahány checkpoint van.
+	*/
 	private int[] checkpointReached;
+	
+	/**
+	* Két robot esetén két elemű tömb, ami tárolja a még felhasználatlan ragacsokat.
+	* Kezdő érték = 1
+	* Maximális érték = 3
+	*/
+	//TODO kell három függvény hozzá (növelés, csökkentés, isZero)
 	private int[] numGlue;
+	
+	/**
+	* Két robot esetén két elemű tömb, ami tárolja a még felhasználatlan olajfoltokat.
+	* Kezdő érték = 1
+	* Maximális érték = 3
+	*/
+	//TODO kell három függvény hozzá (növelés, csökkentés, isZero)
 	private int[] numOil;
-	private int numOfCheckpoints;
-	private int lap;
+	
+	/**
+	* Két robot esetén két elemű tömb, ami tárolja, hogy hány kört tettek meg a robotok eddig.
+	* Kezdő érték = 0
+	*/
+	private int[] lap;
+	
+	/**
+	* {@link Shape} interfészű, de {@link Polygon} objektumokat tároló ArrayList.
+	* Ezek a Polygonok a checkpointokat megvalósító objektumok.
+	* Konstruktorban fájlból beolvasott (x,y) koordinátákból generáljuk a Polygonokat.
+	* {@link #checkpointsearch()} függvényben használjuk, hogy a {@link Robot#hitbox}
+	*/
 	private List<Shape> checkpoints;
+	
+	/**
+	* {@see Robot} objektumokat tároló ArrayList. Célja, hogy a {@see #checkpointsearch()} függvényben minden robotra elvégezzük a keresést.
+	*/
 	private List<Robot> robots;
 	
+	/**
+	* Konstruktor, inicializálja a köröket számláló változót, az érintett checkpointokat, a 
+	* ragacs és olajkészleteket.
+	* @param robs A játékban résztvevő robotok listája.
+	*/
 	public HUD(List<Robot> robs){
 		lap = 0;
 		robots = robs;
@@ -33,8 +73,8 @@ public class HUD {
 			numOil[i.getId()%2] = 3;
 		}
 	}
-	/*
-	 * setCheckpoints függvény
+	/**
+	 * 
 	 * Felelősség:
 	 * 
 	 * Funkció:
@@ -53,7 +93,7 @@ public class HUD {
 		//
 	}
 	
-	/*
+	/**
 	 * checkpointSearch függvény
 	 * Felelősség:
 	 * 
