@@ -25,8 +25,8 @@ public abstract class Obstacle extends Unit {
 	 * Funkció(ki hívja meg és mikor?):a leszármaztatott osztályok a konstruktoraikban
 	 * 	
 	 */
-	public Obstacle(int x, int y, String imagelocation) {
-		super(x, y, imagelocation);
+	public Obstacle(int x, int y) {
+		super(x, y);
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 		// TODO Auto-generated constructor stub
 	}
@@ -54,7 +54,7 @@ public abstract class Obstacle extends Unit {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 
 
 }

@@ -1,5 +1,12 @@
 ﻿package major;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 /*
  * Glue osztály
  * Felelősség:A pályára lerakható olaj megvalósítása.
@@ -10,7 +17,7 @@
  *  
  */
 public class Oil extends Obstacle {
-	
+	protected static BufferedImage img;
 
 	/*
 	 * Oil kontruktor
@@ -22,8 +29,9 @@ public class Oil extends Obstacle {
 	 * Funkció(ki hívja meg és mikor?):A játék motor hívja meg mikor új olajat tesznek  a pályára
 	 * 	
 	 */
-	public Oil(int x, int y, String imagelocation) {
-		super(x, y, imagelocation);
+	public Oil(int x, int y) {
+		super(x, y);
+		
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -41,6 +49,16 @@ public class Oil extends Obstacle {
 	public void effect(Robot r) {
 		// TODO Auto-generated method stub
 
+	}
+
+
+	@Override
+	public void paint(Graphics2D g) {
+		// TODO Auto-generated method stub
+		g.drawImage(img, x, y, WIDTH, HEIGHT, null);
+	}
+	public  static void setUnitImage() throws IOException{
+		img=ImageIO.read(new File("D:\\Programozas\\2015\\Szoftlab4githf\\Szoftlab4"+"\\"+"oil.jpg"));
 	}
 
 	

@@ -1,5 +1,6 @@
 ﻿package major;
 
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -12,10 +13,10 @@ import java.awt.image.BufferedImage;
  * Interfészek:
  * 
  */
-public abstract class Unit {
+public abstract class Unit implements iVisible{
 	
 	//Atribútumok
-	
+	 
 	/*
 	 * Pozíció koordináták
 	 * Felelősség:
@@ -38,7 +39,7 @@ public abstract class Unit {
 	 * Melyik függvény használja?
 	 * 
 	 */
-	protected static BufferedImage image;
+
 	
 	/*
 	 * Unit konstruktor
@@ -51,15 +52,17 @@ public abstract class Unit {
 	 * Funkció(ki hívja meg és mikor?):
 	 * 
 	 */
-	public Unit(int x,int y,String imagelocation){
+	public Unit(int x,int y){
 		//TODO
+		this.x=x;
+		this.y=y;
 	}
 	
 	/*
 	 * Move függvény (abtsract)
 	 */
 	public abstract void move();
-	
+
 	/*
 	 * intersect függvény
 	 * @param u
@@ -72,6 +75,7 @@ public abstract class Unit {
 		//Paraméterként kapott Unit hitbox-szal vizsgálat, hogy this.hitbox-szal ütközés történt-e?
 		return false;
 	}
+	
 	
 	public Rectangle getHitbox(){
 		return hitbox;

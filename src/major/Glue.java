@@ -1,5 +1,12 @@
 ﻿package major;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 /*
  * Glue osztály
  * Felelősség:A pályára lerakható ragacs megvalósítása.
@@ -10,7 +17,7 @@
  *  
  */
 public class Glue extends Obstacle {
-
+ static BufferedImage img;
 	/*
 	 * Obstacle kontruktor
 	 * Felelősség:Egy Glue elem létrehozása
@@ -21,8 +28,8 @@ public class Glue extends Obstacle {
 	 * Funkció(ki hívja meg és mikor?):A játék motor hívja meg mikor új ragacsot tesznek  a pályára
 	 * 	
 	 */
-	public Glue(int x, int y, String imagelocation) {
-		super(x, y, imagelocation);
+	public Glue(int x, int y) {
+		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -40,6 +47,14 @@ public class Glue extends Obstacle {
 		r.setGlue();
 	}
 
+	@Override
+	public void paint(Graphics2D g) {
+		// TODO Auto-generated method stub
+		g.drawImage(img, x, y, WIDTH, HEIGHT, null);
+	}
+	public  static void setUnitImage() throws IOException{
+		img=ImageIO.read(new File("D:\\Programozas\\2015\\Szoftlab4githf\\Szoftlab4"+"\\"+"glue.jpg"));
+	}
 
 
 }

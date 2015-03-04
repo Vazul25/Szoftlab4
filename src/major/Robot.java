@@ -1,8 +1,14 @@
 ﻿package major;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /*
  * Robot osztály
@@ -29,7 +35,7 @@ public class Robot extends Unit{
 	static int WIDTH=40;//teszt placeholder
 	static int HEIGHT=40;//teszt placeholder
 	//kell majd valami adatszerkezet ami számontartja hogy melyik obstacleből mennyi van a robotnál
-	
+	protected static BufferedImage img[];
 	/*
 	 * Azonosító, állapot
 	 * Mire valók:
@@ -87,8 +93,8 @@ public class Robot extends Unit{
 	 * Funkció(ki hívja meg és mikor?):A játék motor a pálya létrehozásakor
 	 * 
 	 */
-	public Robot(int x, int y, String imagelocation,Phoebe p) {
-		super(x, y, imagelocation);
+	public Robot(int x, int y, Phoebe p) {
+		super(x, y);
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 		id=staticid;
 		staticid+=1;
@@ -151,10 +157,19 @@ public class Robot extends Unit{
 	 */
 	public void paint(Graphics2D g) {
 		g.fillRect(x, y, WIDTH, HEIGHT);//placeholder ide jön majd a kép
+		g.setStroke(new BasicStroke(10));
 		g.drawLine(x+WIDTH/2, y+HEIGHT/2, arrowendx+WIDTH/2, arrowendy+HEIGHT/2);
+		g.drawImage(img[id%2], x, y, WIDTH, HEIGHT, null);
+		
 		//width,height a buffered image adatai lesznek
 	}
-	
+	public  static void setUnitImage() throws IOException{
+		img=new BufferedImage[2];
+		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog0.jpg"));
+		img[1]=ImageIO.read(new File("D:\\Programozas\\2015\\Szoftlab4githf\\Szoftlab4"+"\\"+"frog1.jpg"));
+	}
+
+
 	/*
 	 * Move függvény
 	 * @see major.Unit#move()
@@ -165,10 +180,10 @@ public class Robot extends Unit{
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-
+		x=arrowendx;
+		y=arrowendy;
 		//while(moved=false){}//(nem kell ha időosztásos lesz)azért kell hogy mig nem okézuk le az irányt, ne ugorjon el
-		arrowendx=(int)(x+40*Math.cos(alpha));
-		arrowendy=(int)(y+40*Math.sin(alpha));	
+			
 	}
 	
 	/*
@@ -220,12 +235,12 @@ public class Robot extends Unit{
 	 */
 	public void keyPressed(KeyEvent e) {
 		//Nyíl irányányának változtatása
-		if(id%2==1){
+		
 		if (e.getKeyCode() == keyconfig[id%2*4])
 			alpha+=0.1;
 		if (e.getKeyCode() == keyconfig[id%2*4+1])
 			alpha-=0.1;
-		}
+		
 
 		
 		//Obstacle lerakás
@@ -233,19 +248,20 @@ public class Robot extends Unit{
 		if(e.getKeyCode() == keyconfig[id%2*4+2])  {
 		//TODO
 		//Olaj lerakás
-			Oil item0 = new Oil(x, y, null);
+			Oil item0 = new Oil(x, y);
 			p.addObstacle(item0);
 		}
 		//...
 		//Ragacs lerakás
 		//TODO
 		if(e.getKeyCode() == keyconfig[id%2*4+3])  {
-			Glue item1 = new Glue(x, y, null);
+			Glue item1 = new Glue(x, y);
 			p.addObstacle(item1);
 		
 		}
 		
-		
+		arrowendx=(int)(x+100*Math.cos(alpha));
+		arrowendy=(int)(y+100*Math.sin(alpha));
 		p.repaint();
 	}
 	
