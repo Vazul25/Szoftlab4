@@ -202,7 +202,7 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void collisionWithRobot(Robot r){
-		if (id==r.getId())
+		if (this == r)
 			return;
 		if(this.intersect(r)) {
 			bounce();
