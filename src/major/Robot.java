@@ -33,6 +33,8 @@ public class Robot extends Unit{
 	 *
 	 */
 	protected static int staticid=0;
+	 private  static final  int r=100; //sugár
+	
 	static int WIDTH=40;//teszt placeholder
 	static int HEIGHT=40;//teszt placeholder
 	//kell majd valami adatszerkezet ami számontartja hogy melyik obstacleből mennyi van a robotnál
@@ -98,10 +100,11 @@ public class Robot extends Unit{
 		super(x, y);
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 		id=staticid;
+		slowed=1.0;
 		staticid+=1;
 		this.p=p;
-		arrowendx=(int)(x+100*Math.cos(alpha));
-		arrowendy=(int)(y+100*Math.sin(alpha));
+		arrowendx=(int)(x+r*Math.cos(alpha));
+		arrowendy=(int)(y+r*Math.sin(alpha));
 		// TODO Auto-generated constructor stub
 		
 	}
@@ -136,7 +139,7 @@ public class Robot extends Unit{
 	 * Funkció(ki hívja meg és mikor?):A Glue osztály effekt függvénye
 	 */
 	public void setGlue(){
-		slowed-=slowed/2;
+		slowed=0.5;
 	}
 	
 	/*
@@ -184,13 +187,13 @@ public class Robot extends Unit{
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
+		arrowendx=(int)(x+slowed*r*Math.cos(alpha));
+		arrowendy=(int)(y+slowed*r*Math.sin(alpha));
 		x=arrowendx;	
 		y=arrowendy;
-		arrowendx=(int)(x+100*Math.cos(alpha));
-		arrowendy=(int)(y+100*Math.sin(alpha));
+		slowed=1;
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 		
-		//while(moved=false){}//(nem kell ha időosztásos lesz)azért kell hogy mig nem okézuk le az irányt, ne ugorjon el
 			
 	}
 	
@@ -280,8 +283,8 @@ public class Robot extends Unit{
 		
 		}
 		
-		arrowendx=(int)(x+100*Math.cos(alpha));
-		arrowendy=(int)(y+100*Math.sin(alpha));
+		arrowendx=(int)(x+r*Math.cos(alpha));
+		arrowendy=(int)(y+r*Math.sin(alpha));
 		System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);
 		p.repaint();
 	}
