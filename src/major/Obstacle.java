@@ -54,6 +54,11 @@ public abstract class Obstacle extends Unit {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public String toString() {
+		return "Obstacle [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT + "]";
+	}
 	
 
 

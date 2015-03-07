@@ -1,6 +1,7 @@
 ﻿package major;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class Oil extends Obstacle {
 	 */
 	public Oil(int x, int y) {
 		super(x, y);
-		
+	
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -48,7 +49,8 @@ public class Oil extends Obstacle {
 	@Override
 	public void effect(Robot r) {
 		// TODO Auto-generated method stub
-
+		System.out.println("olajos lett");
+		r.setOiled();
 	}
 
 
@@ -56,12 +58,15 @@ public class Oil extends Obstacle {
 	public void paint(Graphics2D g) {
 		// TODO Auto-generated method stub
 		g.drawImage(img, x, y, WIDTH, HEIGHT, null);
-		System.out.println(x+" "+y+" "+WIDTH+" "+HEIGHT);
+		
 	}
 	public  static void setUnitImage() throws IOException{
 		img=ImageIO.read(new File("D:\\Programozas\\2015\\Szoftlab4githf\\Szoftlab4"+"\\"+"oil.jpg"));
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Oil [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT + "]";
+	}
 
 }

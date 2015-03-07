@@ -73,7 +73,7 @@ public abstract class Unit implements iVisible{
 	 */
 	public boolean intersect(Unit u){
 		//Paraméterként kapott Unit hitbox-szal vizsgálat, hogy this.hitbox-szal ütközés történt-e?
-		return false;
+		return this.hitbox.intersects(u.hitbox);
 	}
 	
 	

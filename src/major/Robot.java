@@ -187,6 +187,7 @@ public class Robot extends Unit{
 		y=arrowendy;
 		arrowendx=(int)(x+100*Math.cos(alpha));
 		arrowendy=(int)(y+100*Math.sin(alpha));
+		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 		
 		//while(moved=false){}//(nem kell ha időosztásos lesz)azért kell hogy mig nem okézuk le az irányt, ne ugorjon el
 			
@@ -200,7 +201,8 @@ public class Robot extends Unit{
 	 * Funkció(ki hívja meg és mikor?):játékmotor a főciklusban
 	 */
 	public boolean collisionWithObstacles(Obstacle obstacle){
-		return false;		
+
+		return this.intersect(obstacle);		
 	}
 	
 	/*
@@ -214,6 +216,14 @@ public class Robot extends Unit{
 		
 	}
 	
+	@Override
+	public String toString() {
+		return "Robot [id=" + id + ", slowed=" + slowed + ", oiled=" + oiled
+				+ ", x=" +x + ",y=" +y
+				+ ", nextx=" + arrowendx + ", nexty=" + arrowendy
+				+ ", alpha=" + alpha + ", width=" + WIDTH +", height=" + HEIGHT +"]";
+	}
+
 	/*
 	 * collisionWithRobot függvény
 	 * @param r
@@ -256,7 +266,7 @@ public class Robot extends Unit{
 		//Olaj lerakás
 			Oil item0 = new Oil(x, y);
 			p.addObstacle(item0);
-			System.out.println("\noil test\n");
+			System.out.println("new oil created at:"+x+","+y);
 		}
 		//...
 		//Ragacs lerakás
@@ -269,6 +279,7 @@ public class Robot extends Unit{
 		
 		arrowendx=(int)(x+100*Math.cos(alpha));
 		arrowendy=(int)(y+100*Math.sin(alpha));
+		System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);
 		p.repaint();
 	}
 	

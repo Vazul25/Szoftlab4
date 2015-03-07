@@ -44,6 +44,7 @@ public class Glue extends Obstacle {
 	@Override
 	public void effect(Robot r) {
 		// TODO Auto-generated method stub
+		System.out.println("ragacsos lett");
 		r.setGlue();
 	}
 
@@ -55,6 +56,9 @@ public class Glue extends Obstacle {
 	public  static void setUnitImage() throws IOException{
 		img=ImageIO.read(new File("D:\\Programozas\\2015\\Szoftlab4githf\\Szoftlab4"+"\\"+"glue.jpg"));
 	}
-
+	@Override
+	public String toString() {
+		return "Glue [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT + "]";
+	}
 
 }

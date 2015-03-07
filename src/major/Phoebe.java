@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 
 
+
 import minor.MapBuilder;
 import minor.Timer;
 
@@ -120,11 +121,11 @@ public class Phoebe extends JPanel implements Runnable{
 			@Override
 			public void keyPressed(KeyEvent e) {
 			
-				robots.get(1).keyPressed(e);
+				//robots.get(1).keyPressed(e);
 				robots.get(0).keyPressed(e);
 			}
 		});
-		
+		setFocusable(true);
 	
 		//ez is csak teszt mint minden frames
 		frame.add(this,BorderLayout.CENTER);
@@ -208,19 +209,19 @@ public class Phoebe extends JPanel implements Runnable{
 		int startPointY = 0; //MapBuilderből
 		int secondStartPos = 0; //MapBuilderből
 		Robot one = new Robot(400/*map.getStartPosPlayer(1)[0]*/,400/* map.getStartPosPlayer(1)[1]*/,  this);
-		
-		Robot two = new Robot(500/*map.getStartPosPlayer(2)[0]*/, 500/*map.getStartPosPlayer(2)[2]*/,  this);
+		//szkeleton teszt célszerűbb eggyel hogy a keybindings os dolgot megusszuk
+	//	Robot two = new Robot(500/*map.getStartPosPlayer(2)[0]*/, 500/*map.getStartPosPlayer(2)[2]*/,  this);
 		robots.add(one);
-		robots.add(two);
+	//  robots.add(two);
 		
 		//HUD létrehozása
 		hud = new HUD(robots);
 		
 		//Checkpointok eljuttatása a HUD-ba
 		hud.setCheckpoints(map.getCheckpoints());
-		
+		//kivettem amig tesztelem ne irjon ki annyi mindent
 		//Akadályok létrehozása
-		for(int i=1;i<=10;i++){
+	/*	for(int i=1;i<=10;i++){
 			//TODO Randomgenerált (x,y) pozíciók
 			int x=0;
 			int y=0;
@@ -228,7 +229,7 @@ public class Phoebe extends JPanel implements Runnable{
 			Glue item2 = new Glue(x, y);
 			if(!map.fallingDown(item1.getHitbox()))	obstacles.add(item1);
 			if(!map.fallingDown(item2.getHitbox())) obstacles.add(item2);
-		}						
+		}	*/					
 	}
 	
 	/*
@@ -254,25 +255,25 @@ public class Phoebe extends JPanel implements Runnable{
 		//TODO rajzolás
 		Timer directorTimer = new Timer(gameInfo.getStep());
 		
-		while(robots.size()>=1 || !ended)
+		while( !ended)
 		{/*
 			//...
 			while(!directorTimer.isZero()){
 				//várunk amíg le nem jár a három másodperc
 			}
 			*/
-
-			//Mozgás
-			for(int i=0;i<robots.size();i++){
-				robots.get(i).move();
-				
-			}	
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			//Mozgás
+			for(int i=0;i<robots.size();i++){
+				robots.get(i).move();
+				
+			}	
+			
 			//TODO lépésanimálása egyenesen végig léptetgetni a robotot és kirajzolni
 			
 			//Checkpointok vizsgálata, áthaladtunk-e?
@@ -281,11 +282,13 @@ public class Phoebe extends JPanel implements Runnable{
 			//Ütközések
 			for(Robot i : robots)
 			{			
-				//System.out.println("lenni ch1:"+i.x+" "+i.getId());
+				System.out.println(i.toString());
 				for(Obstacle j : obstacles){
 				//Ütközés akadállyal
+					System.out.println(j.toString());
 				if(i.collisionWithObstacles(j))
 					j.effect(i);
+				
 				}
 				
 				for(Robot k : robots){
