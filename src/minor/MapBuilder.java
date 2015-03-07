@@ -5,6 +5,8 @@ import java.awt.Shape;
 import java.awt.geom.Area;
 import java.util.List;
 
+import major.Robot;
+
 /*
  * MapBuilder osztály
  * Felelősség:
@@ -81,16 +83,16 @@ public class MapBuilder{
 	}
 	
 	/*
-	 * intersectsWithMap függvény
+	 * robotOutsideOfMap függvény
 	 * 
 	 *  @return igaz értékkel tér vissza, ha a robot leesett a pályáról
 	 */
-	public boolean fallingDown(Shape othershape){
+	public boolean robotOutsideOfMap(Robot r){
 		Area area = new Area(map);
-		Area otherArea = new Area(othershape);
+		Area otherArea = new Area(r.getHitbox());
 		area.intersect(otherArea);
 		//TODO revision
-		return area.getBounds().getSize().equals(othershape.getBounds().getSize());
+		return area.getBounds().getSize().equals(r.getHitbox().getBounds().getSize());
 	}
 
 	public int[] getStartPosPlayer(int id) {

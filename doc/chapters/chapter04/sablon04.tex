@@ -82,14 +82,14 @@ A robotok ragacs- és olajkészletét, illetve megtett köreit és checkpontjait
 		\item \textbf{int[]} lap: Minden robothoz tárolja a megtett körök számát. 
 		\item \textbf{int[]} numGlue: Minden robothoz tárolja a ragacsok számát.
 		\item \textbf{int[]} numOil: Minden robothoz tárolja az olajok számát.
-		\item \textbf{List<Shape>} checkpoints: Tárolja a checkpointokat reprezentáló objektumokat List adatszerkezetben. A checkpointSearch függvény kérdezi le ebből a következő checkpoint helyzetét. 
+		\item \textbf{List} checkpoints: Tárolja a checkpointokat reprezentáló objektumokat List adatszerkezetben. A checkpointSearch függvény kérdezi le ebből a következő checkpoint helyzetét. 
 		\item \textbf{List<Robot>} robots: A robotokat tároló List adatszerkezet. A checkpointSearch függvény kérdezi le ebből a robotokat, majd azok helyzetét.
 	\end{itemize}
 \item Metódusok
 	\begin{itemize}
 		\item \textbf{HUD}(List<Robot> robs): Konstruktor, inicializálja a köröket számláló változót, az érintett checkpointokat, a ragacs és olajkészleteket. 
 		\item void \textbf{checkpointSearch}(): Ellenőrzi hogy a robotok teljesítették-e a következő checkpointot.
-		\item void \textbf{setCheckpoints}(List<Shape> checkObj): Checkpointokat reprezentáló adatszerkezet betöltése.
+		\item void \textbf{setCheckpoints}(List checkObj): Checkpointokat reprezentáló adatszerkezet betöltése.
 		
 	\end{itemize}
 \end{itemize}
@@ -100,15 +100,14 @@ A robotok ragacs- és olajkészletét, illetve megtett köreit és checkpontjait
 A pálya felépítéséért, a checkpointok tárolásáért és a robot pályán tartózkodásának vizsgálatáért felelős osztály.
 \item Attribútumok
 	\begin{itemize}
-		\item \textbf{Shape} map: A pályát reprezentáló objektum. 
-		\item \textbf{List<Shape>} checkpoints: Tárolja a checkpointokat reprezentáló objektumokat List adatszerkezetben.
+		\item \textbf{List} checkpoints: Tárolja a checkpointokat reprezentáló objektumokat List adatszerkezetben.
 		\item \textbf{int[]} startPosPlayerOne: Meghatároz egy (x,y) koordinátát, ahol az első játékos kezd.
 		\item \textbf{int[]} startPosPlayerTwo: Meghatároz egy (x,y) koordinátát, ahol az második játékos kezd.
 	\end{itemize}
 \item Metódusok
 	\begin{itemize}
 		\item \textbf{MapBuilder}(): Konstruktor, a pálya beolvasása fájlból, majd létrehozása.
-		\item boolean \textbf{fallingDown}(Shape othershape): Igaz értéket ad vissza, ha a robot leesett a pályáról, hamisat ha még rajta van.
+		\item boolean \textbf{robotOutsideOfMap}(Robot r): Igaz értéket ad vissza, ha a robot leesett a pályáról, hamisat ha még rajta van.
 	\end{itemize}
 \end{itemize}
 
@@ -153,7 +152,7 @@ A játék motorját képviselő osztály. A robotok pozíciójáért, az akadál
 		\item \textbf{List<Robot>} robots: A játékban szereplő robotok listája.
 		\item \textbf{List<Obstacle>} obstacles: A játékban szereplő akadályok listája.
 		\item \textbf{HUD} hud: A játékosok előrehaladását, ragacs és olajkészleteit tartja számon
-		\item \textbf{MapBuilder} map: 
+		\item \textbf{MapBuilder} map: A pályát reprezentáló objektum. Tárolja még a checkpointokat és a robotok kezdő koordinátáit.
 	\end{itemize}
 \item Metódusok
 	\begin{itemize}
@@ -182,7 +181,6 @@ Nincs interfésze
 		\item \textbf{int} arrowendy: A robot irányítását segítő nyílnak az y koordinátája, a nyíl kirajzolásánál van szerepe.
 		\item \textbf{double} alpha: A robot irányítását segítő nyíl vízszintessel bezárt szöge. A nyil kirajzolásánál, az ugrás végpontjának meghatározánál van szerepe.
 		\item \textbf{boolean} moved: Azt jelöli, hogy lépett-e már a robot az aktuális körben. A megjelenítésnél (a nyilat ugrás közben nem jelenítjük meg), illetve az irányítás letiltásánál van szerepe (olajba lépés esetén).
-		\item \textbf{int[][]} keyconfig: A játékosok írányítását tároló mátrix. A játékosok irányítását ennek segítségével határozzuk meg a keyPressed függvényben. A sor meghatározza a felhasználóhoz tartozó gombokat, az oszlopok a funkciók (olaj/ragacs lerakás, a nyíl jobbra/balra mozgatása).
 \end{itemize}
 \item Metódusok\\
 	\begin{itemize}
@@ -190,7 +188,7 @@ Nincs interfésze
 		\item \textbf{void deathanimation}(): A Robot halálának grafikus megjelenítéséért felelős függvény.
 		\item boolean \textbf{collisionWithObstacle}(Obstacle o): Ellenőrzi hogy a robot ütközött-e az akadállyal. Igazzal tér vissza ha igen, hamissal ha nem.
 		\item void \textbf{collisionWithRobot}(Robot r): Ellenőrzi, hogy a robot ütközött-e másik robottal. Ha igen, akkor gondoskodik róla, hogy a robotok a megfelelő szögben pattanjanak le egymásról.
-		\item void \textbf{keyPressed}(Keyevent e): A robot irányítását megvalósító függvény, a játékmotor keylistener-e által hívódik meg, a lenyomott billentyű keyevent-jére. A következő ugrás beállítása, a ragacs/olaj lerakása történhet itt a keyconfig változó felhasználásával.
+		\item void \textbf{keyPressed}(): A robot irányítását megvalósító függvény, a játékmotor keylistener-e által hívódik meg, a lenyomott billentyű keyevent-jére. A következő ugrás beállítása, a ragacs/olaj lerakása történhet itt a keyconfig változó felhasználásával.
 	\end{itemize}
 \end{itemize}
 
@@ -213,7 +211,7 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 	\begin{itemize}
 		\item \textbf{int} x: Az egység x koordinátája
 		\item \textbf{int} y: Az egység y koordinátája
-		\item \textbf{Rectangle} hitbox: Az egységet a pályán reprezentáló sokszög.
+		\item \textbf{Object} hitbox: Az egységet a pályán reprezentáló sokszög.
 	\end{itemize}
 \item Metódusok
 	\begin{itemize}
