@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
+import major.Phoebe.Settings;
+
 /*
  * Robot osztály
  * Felelősség:A játékban részvevő ugráló robotok viselkedését és kezelését leíró osztály
@@ -64,16 +66,6 @@ public class Robot extends Unit{
 	 *
 	 */
 	protected boolean moved;
-
-	/*
-	 * Keyconfig 
-	 * Mire való?
-	 * A játékos irányitását meghatározó mátrix, id vel indexelve a sor
-	 */
-	private static int[] keyconfig={
-		KeyEvent.VK_LEFT   , KeyEvent.VK_RIGHT  ,KeyEvent.VK_UP     ,KeyEvent.VK_DOWN,
-		KeyEvent.VK_A      , KeyEvent.VK_D      ,KeyEvent.VK_W      ,KeyEvent.VK_S
-	};
 	
 	//Tartalmazó objektum
 	protected Phoebe p;
@@ -219,33 +211,42 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void keyPressed(KeyEvent e) {
-		//Nyíl irányányának változtatása
 		if(id%2==1){
-		if (e.getKeyCode() == keyconfig[id%2*4])
-			alpha+=0.1;
-		if (e.getKeyCode() == keyconfig[id%2*4+1])
-			alpha-=0.1;
+			if (e.getKeyCode() == Settings.ROBOTONE_RIGHT)
+				alpha+=0.1;
+			if (e.getKeyCode() == Settings.ROBOTONE_LEFT)
+				alpha-=0.1;
+			if(e.getKeyCode() == Settings.ROBOTONE_OIL)  {
+				//TODO Ha van a robotnak csak akkor
+				//Olaj lerakás
+					Oil item0 = new Oil(x, y, null);
+					p.addObstacle(item0);
+			}
+			if(e.getKeyCode() == Settings.ROBOTONE_GLUE)  {
+				//TODO Ha van a robotnak csak akkor
+				Glue item1 = new Glue(x, y, null);
+				p.addObstacle(item1);
+			
+			}
 		}
-
-		
-		//Obstacle lerakás
-		
-		if(e.getKeyCode() == keyconfig[id%2*4+2])  {
-		//TODO
-		//Olaj lerakás
-			Oil item0 = new Oil(x, y, null);
-			p.addObstacle(item0);
+		else{
+			if (e.getKeyCode() == Settings.ROBOTTWO_RIGHT)
+				alpha+=0.1;
+			if (e.getKeyCode() == Settings.ROBOTTWO_LEFT)
+				alpha-=0.1;
+			if(e.getKeyCode() == Settings.ROBOTTWO_OIL)  {
+				//TODO Ha van a robotnak csak akkor
+				//Olaj lerakás
+					Oil item0 = new Oil(x, y, null);
+					p.addObstacle(item0);
+			}
+			if(e.getKeyCode() == Settings.ROBOTTWO_GLUE)  {
+				//TODO Ha van a robotnak csak akkor
+				Glue item1 = new Glue(x, y, null);
+				p.addObstacle(item1);
+			
+			}
 		}
-		//...
-		//Ragacs lerakás
-		//TODO
-		if(e.getKeyCode() == keyconfig[id%2*4+3])  {
-			Glue item1 = new Glue(x, y, null);
-			p.addObstacle(item1);
-		
-		}
-		
-		
 		p.repaint();
 	}
 	

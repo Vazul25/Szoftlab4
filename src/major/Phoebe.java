@@ -3,6 +3,7 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +45,23 @@ public class Phoebe extends JPanel implements Runnable{
 		private int racemode;
 		private int limit;
 		private int step;
+		
+		public static final int ROBOTONE_LEFT = KeyEvent.VK_A;
+		public static final int ROBOTONE_RIGHT = KeyEvent.VK_D;
+		public static final int ROBOTONE_OIL = KeyEvent.VK_W;
+		public static final int ROBOTONE_GLUE = KeyEvent.VK_S;
+		
+		public static final int ROBOTTWO_LEFT = KeyEvent.VK_LEFT;
+		public static final int ROBOTTWO_RIGHT = KeyEvent.VK_RIGHT;
+		public static final int ROBOTTWO_OIL = KeyEvent.VK_UP;
+		public static final int ROBOTTWO_GLUE = KeyEvent.VK_DOWN;
+		
+		/*
+		 * Keyconfig 
+		 * Mire való?
+		 * A játékos irányitását meghatározó mátrix, id vel indexelve a sor
+		 */
+
 		
 		public Settings(int info){
 			this.racemode = info;
