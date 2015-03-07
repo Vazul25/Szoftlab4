@@ -214,7 +214,7 @@ public class Phoebe extends JPanel implements Runnable{
 		Timer directorTimer = new Timer(gameInfo.getStep());
 		
 		//Ha csak egy robot marad a pályán vagy ha lejár a idő/kör
-		while(robots.size()>1 || !ended)
+		while(!ended)
 		{
 			//...
 			while(!directorTimer.isZero()){
