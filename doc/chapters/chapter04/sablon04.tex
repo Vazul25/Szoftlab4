@@ -174,23 +174,23 @@ Nincs interfésze
 	\begin{itemize}
 		\item \textbf{int} staticID: Az osztályhoz tartozó statikus azonosító, a példány                azonosítójának(id) meghatározásához szükséges.
 		\item \textbf{int} HEIGHT: A robot képének magassága, collision                      detektálásnál, továbbá az irányítást segítő nyíl kezdő koordinátájának                  meghatározásánál szükséges.
-		\item \textbf{int} WIDTH:A robot képének szélessége, funkcionalitásban hasonló a WIDTH-hez.
+		\item \textbf{int} WIDTH: A robot képének szélessége, funkcionalitásban hasonló a WIDTH-hez.
 		\item \textbf{int} ID: A robot példányának egyedi azonosítója, a keyconfig sorának                     indexelésére szükséges.
-		\item \textbf{double} slowed: A sebesség módosításáért felel, default értéke 1.0. Amennyiben ragacsba lép a robot ez 0.5-re módosul és minden ugrás végén visszaáll az eredeti értékére, ugrásnál ezzel szorozzuk be a végkordinátát kiszámító sugár hosszát.
-		\item \textbf{boolean} oiled: Azt jelzi, hogy olajba lépett-e, ennek hatására a mozgás iránya módosíthatatlanná válik egy kis időre. 
-		\item \textbf{int} arrowendx: A robot irányítását segítő nyilnak az x koordinátája, a nyíl kirajzolásánál van szerepe.
-		\item \textbf{int} arrowendy: A robot irányítását segítő nyilnak az y koordinátája, a nyíl kirajzolásánál van szerepe.
+		\item \textbf{double} slowed: A sebesség módosításáért felel, default értéke 1.0. Amennyiben ragacsba lép a robot ez 0.5-re módosul és minden ugrás végén visszaáll az eredeti értékére. Ugrásnál ezzel szorozzuk be a végkordinátát kiszámító sugár hosszát.
+		\item \textbf{boolean} oiled: Azt jelzi, hogy olajba lépett-e. Ennek hatására a mozgás iránya módosíthatatlanná válik egy kis időre. 
+		\item \textbf{int} arrowendx: A robot irányítását segítő nyílnak az x koordinátája, a nyíl kirajzolásánál van szerepe.
+		\item \textbf{int} arrowendy: A robot irányítását segítő nyílnak az y koordinátája, a nyíl kirajzolásánál van szerepe.
 		\item \textbf{double} alpha: A robot irányítását segítő nyíl vízszintessel bezárt szöge. A nyil kirajzolásánál, az ugrás végpontjának meghatározánál van szerepe.
-		\item \textbf{boolean} moved: Azt jelöli, hogy lépett-e már a robot az aktuális körben. A megjelenítésnél(nyilat ugrás közben nem jelenítjük meg),illetve az irányítás letiltásánál van szerepe(olajba lépés esetén).
-		\item \textbf{int[][]} keyconfig: A játékosok írányítását tároló mátrix. A játékosok irányítását ennek segítségével határozzuk meg a keyPressed függvénybe. A sor meghatározza a felhasználóhoz tartozó gombokat, az oszlopok a funkciók(olaj/ragacs lerakás, a nyíl jobbra/balra mozgatása)
+		\item \textbf{boolean} moved: Azt jelöli, hogy lépett-e már a robot az aktuális körben. A megjelenítésnél (a nyilat ugrás közben nem jelenítjük meg), illetve az irányítás letiltásánál van szerepe (olajba lépés esetén).
+		\item \textbf{int[][]} keyconfig: A játékosok írányítását tároló mátrix. A játékosok irányítását ennek segítségével határozzuk meg a keyPressed függvényben. A sor meghatározza a felhasználóhoz tartozó gombokat, az oszlopok a funkciók (olaj/ragacs lerakás, a nyíl jobbra/balra mozgatása).
 \end{itemize}
 \item Metódusok\\
 	\begin{itemize}
-		\item \textbf{Robot}(int x,int y,String imagelocation,Phoebe p): Létrehoz egy robotot a megadott x,y kordinátákon, betölti a képét az imagelocation cím alapján, továbbá eltárolja a játékmotor referenciáját.
-		\item \textbf{void deathanimation}():A Robot halálának gafikus megjelenítéséért felelős függvény.
-		\item boolean \textbf{collisionWithObstacle}(Obstacle o): Ellenőrzi hogy a robot ütközött-e az akadállyal, igazzal tér vissza ha igen, hamissal ha nem.
-		\item boolean \textbf{collisionWithRobot}(Robot r): Ellenőrzi hogy a robot ütközött-e másik robottal , igazzal tér vissza ha igen, hamissal ha nem. ID alapján kiszüri ha önmagára hívják meg.
-		\item void \textbf{keyPressed}(Keyevent e):A robot irányítását megvalósító függvény, a játékmotor keylistener-e által hívódik meg, a lenyomott billentyű keyevent-jére. A következő ugrás beállítása, a ragacs/olaj lerakása történhet itt. A keyconfig változó felhasználásával.
+		\item \textbf{Robot}(int x,int y,String imagelocation,Phoebe p): Létrehoz egy robotot a megadott x,y koordinátákon, betölti a képét az imagelocation cím alapján, továbbá eltárolja a játékmotor referenciáját.
+		\item \textbf{void deathanimation}(): A Robot halálának grafikus megjelenítéséért felelős függvény.
+		\item boolean \textbf{collisionWithObstacle}(Obstacle o): Ellenőrzi hogy a robot ütközött-e az akadállyal. Igazzal tér vissza ha igen, hamissal ha nem.
+		\item void \textbf{collisionWithRobot}(Robot r): Ellenőrzi, hogy a robot ütközött-e másik robottal. Ha igen, akkor gondoskodik róla, hogy a robotok a megfelelő szögben pattanjanak le egymásról.
+		\item void \textbf{keyPressed}(Keyevent e): A robot irányítását megvalósító függvény, a játékmotor keylistener-e által hívódik meg, a lenyomott billentyű keyevent-jére. A következő ugrás beállítása, a ragacs/olaj lerakása történhet itt a keyconfig változó felhasználásával.
 	\end{itemize}
 \end{itemize}
 
@@ -200,8 +200,8 @@ Nincs interfésze
 A visszaszámlálásért (idő, director time) felelős.
 \item Metódusok
 	\begin{itemize}
-		\item \textbf{Timer}(int i): Konstruktor, inicializál egy viszaszámláló órát.
-		\item boolean \textbf{isZero}(): Igazzal tér vissza ha a megadott idő lejárt;
+		\item \textbf{Timer}(int i): Konstruktor; inicializál egy viszaszámláló órát.
+		\item boolean \textbf{isZero}(): Igazzal tér vissza, ha a megadott idő lejárt.
 	\end{itemize}
 \end{itemize}
 
@@ -249,7 +249,7 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=17cm]{images/collisionWithRobot()_sequence.PNG}
-\caption{Robot ütközése akadállyal}
+\caption{Robot ütközése másik robottal}
 \label{fig:example5}
 \end{center}
 \end{figure}
