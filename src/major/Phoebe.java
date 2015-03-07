@@ -119,11 +119,12 @@ public class Phoebe extends JPanel implements Runnable{
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				robots.get(0).keyPressed(e);
+			
 				robots.get(1).keyPressed(e);
+				robots.get(0).keyPressed(e);
 			}
 		});
-		setFocusable(true);
+		
 	
 		//ez is csak teszt mint minden frames
 		frame.add(this,BorderLayout.CENTER);
@@ -160,17 +161,18 @@ public class Phoebe extends JPanel implements Runnable{
 		g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);			
-		for(int i=0;i<robots.size();i++)
-		{
-			 robots.get(i).paint(g2d);
-			
-		}
+				RenderingHints.VALUE_ANTIALIAS_ON);	
 		for(int i=0;i<obstacles.size();i++)
 		{
 			 obstacles.get(i).paint(g2d);
 			
 		}
+		for(int i=0;i<robots.size();i++)
+		{
+			 robots.get(i).paint(g2d);
+			
+		}
+		
 		
 		//TODO Akadályok, Map kirajzolása 
 	}
@@ -240,13 +242,13 @@ public class Phoebe extends JPanel implements Runnable{
 	 */
 	@Override
 	public void run() {
-		
+		/*
 		try {
-			init();
+		//	init();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 		//repaint();
 		//TODO rajzolás
@@ -279,7 +281,7 @@ public class Phoebe extends JPanel implements Runnable{
 			//Ütközések
 			for(Robot i : robots)
 			{			
-				System.out.println("lenni ch1:"+i.x);
+				//System.out.println("lenni ch1:"+i.x+" "+i.getId());
 				for(Obstacle j : obstacles){
 				//Ütközés akadállyal
 				if(i.collisionWithObstacles(j))

@@ -99,7 +99,10 @@ public class Robot extends Unit{
 		id=staticid;
 		staticid+=1;
 		this.p=p;
+		arrowendx=(int)(x+100*Math.cos(alpha));
+		arrowendy=(int)(y+100*Math.sin(alpha));
 		// TODO Auto-generated constructor stub
+		
 	}
 	
 	// Setter-Getterek
@@ -180,8 +183,11 @@ public class Robot extends Unit{
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		x=arrowendx;
+		x=arrowendx;	
 		y=arrowendy;
+		arrowendx=(int)(x+100*Math.cos(alpha));
+		arrowendy=(int)(y+100*Math.sin(alpha));
+		
 		//while(moved=false){}//(nem kell ha időosztásos lesz)azért kell hogy mig nem okézuk le az irányt, ne ugorjon el
 			
 	}
@@ -236,9 +242,9 @@ public class Robot extends Unit{
 	public void keyPressed(KeyEvent e) {
 		//Nyíl irányányának változtatása
 		
-		if (e.getKeyCode() == keyconfig[id%2*4])
-			alpha+=0.1;
 		if (e.getKeyCode() == keyconfig[id%2*4+1])
+			alpha+=0.1;
+		if (e.getKeyCode() == keyconfig[id%2*4])
 			alpha-=0.1;
 		
 
@@ -250,6 +256,7 @@ public class Robot extends Unit{
 		//Olaj lerakás
 			Oil item0 = new Oil(x, y);
 			p.addObstacle(item0);
+			System.out.println("\noil test\n");
 		}
 		//...
 		//Ragacs lerakás

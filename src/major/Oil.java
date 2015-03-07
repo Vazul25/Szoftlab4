@@ -56,6 +56,7 @@ public class Oil extends Obstacle {
 	public void paint(Graphics2D g) {
 		// TODO Auto-generated method stub
 		g.drawImage(img, x, y, WIDTH, HEIGHT, null);
+		System.out.println(x+" "+y+" "+WIDTH+" "+HEIGHT);
 	}
 	public  static void setUnitImage() throws IOException{
 		img=ImageIO.read(new File("D:\\Programozas\\2015\\Szoftlab4githf\\Szoftlab4"+"\\"+"oil.jpg"));
