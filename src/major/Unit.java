@@ -2,6 +2,7 @@
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.image.BufferedImage;
 
 /*
@@ -75,8 +76,14 @@ public abstract class Unit implements iVisible{
 		//Paraméterként kapott Unit hitbox-szal vizsgálat, hogy this.hitbox-szal ütközés történt-e?
 		return this.hitbox.intersects(u.hitbox);
 	}
-	
-	
+	//volt falling down
+	public boolean isOnMap(Shape map){
+		/*Area area = new Area(this.hitbox);
+		Area otherArea = new Area(map);
+		area.intersect(otherArea);
+		//TODO revision
+		return area.getBounds().getSize().equals(othershape.getBounds().getSize());*/return false;
+	}
 	public Rectangle getHitbox(){
 		return hitbox;
 	} 

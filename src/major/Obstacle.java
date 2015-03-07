@@ -16,6 +16,7 @@ import java.awt.Rectangle;
 public abstract class Obstacle extends Unit {
 	protected static  int WIDTH=40;
 	protected static int HEIGHT=40;
+	protected int lifetime;//ezt növeljük körönként
 	/*
 	 * Obstacle kontruktor
 	 * Felelősség:meghívja a unit konstruktorát a megadott adatokkal

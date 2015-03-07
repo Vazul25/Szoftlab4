@@ -3,6 +3,7 @@
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -239,6 +240,8 @@ public class Robot extends Unit{
 			bounce();
 		}
 	}
+
+	
 	
 	/*
 	 * keyPressed függvény

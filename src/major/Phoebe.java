@@ -254,7 +254,7 @@ public class Phoebe extends JPanel implements Runnable{
 		//repaint();
 		//TODO rajzolás
 		Timer directorTimer = new Timer(gameInfo.getStep());
-		
+		int elteltidoteszt=0;
 		while( !ended)
 		{/*
 			//...
@@ -302,7 +302,12 @@ public class Phoebe extends JPanel implements Runnable{
 				};		
 					
 			}			
-			repaint();			
-		}		
+			repaint();	
+			if(elteltidoteszt>=60)ended=true;
+			elteltidoteszt+=3;
+			System.out.println("eltelt:"+elteltidoteszt+"mp");
+		}
+	if(elteltidoteszt>=60)System.out.println("a játéknak vége, lejárt az idő");
+	else System.out.println("a játékos leesett a pályáról");
 	}
 }
