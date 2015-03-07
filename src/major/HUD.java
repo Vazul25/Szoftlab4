@@ -19,16 +19,18 @@ public class HUD {
 	private int[] numGlue;
 	private int[] numOil;
 	private int numOfCheckpoints;
-	private int lap;
+	private int[] lap;
 	private List<Shape> checkpoints;
 	private List<Robot> robots;
 	
 	public HUD(List<Robot> robs){
-		lap = 0;
+		lap = new int[robs.size()];
+		
 		robots = robs;
 		numGlue = new int[robots.size()];
 		numOil = new int[robots.size()];
 		for(Robot i: robots){
+			lap[i.getId()%2] = 0;
 			numGlue[i.getId()%2] = 3;
 			numOil[i.getId()%2] = 3;
 		}
@@ -73,14 +75,14 @@ public class HUD {
 			 * Area checkpointarea = new Area(checkpoints.get(checkpointReached[robotID%2]-1));
 			 */
 			
-			robotarea.intersect(checkpointarea);
+			//robotarea.intersect(checkpointarea);
 			
 			//Az kezdőhelyen található checkpoint az utolsó
 			if(!robotarea.isEmpty()){
 				//Ha az utolsó checkpointhoz érkeztünk nullázuk a checkpointokat és növeljük a körök számát eggyel
 				if(checkpointReached[robotID%2] == (checkpoints.size()-1)) {
 					checkpointReached[robotID%2] = 0;
-					lap += 1;
+					lap[i.getId()%2] += 1;
 				}
 				//Ha belelépünk egy checkpointba akkor nveljük a checkpointReached-et
 				else{

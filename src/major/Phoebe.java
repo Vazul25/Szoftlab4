@@ -195,7 +195,8 @@ public class Phoebe extends JPanel implements Runnable{
 		//TODO rajzolás
 		Timer directorTimer = new Timer(gameInfo.getStep());
 		
-		while(robots.size()>1 ||!ended)
+		//Ha csak egy robot marad a pályán vagy ha lejár a idő/kör
+		while(robots.size()>1 || !ended)
 		{
 			//...
 			while(!directorTimer.isZero()){
@@ -224,7 +225,7 @@ public class Phoebe extends JPanel implements Runnable{
 				
 				for(Robot k : robots){
 					//Ütközés robottal
-					i.collisionWithRobot(kro);
+					i.collisionWithRobot(k);
 				}
 				//Leesés vizsgálata
 				if(map.fallingDown(i.getHitbox())){
@@ -233,6 +234,7 @@ public class Phoebe extends JPanel implements Runnable{
 				};			
 			}			
 			//repaint();			
-		}		
+		}	
+		//TODO Le kell kezelni, hogy ha vége a játéknak, kiírjuk miért lett vége
 	}
 }
