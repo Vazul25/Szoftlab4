@@ -211,6 +211,8 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void keyPressed(KeyEvent e) {
+		
+		//TODO Nincs megoldva, hogy lekérdezze hány darab olaj/ragacs áll rendelkezésre a robotnál
 		if(id%2==1){
 			if (e.getKeyCode() == Settings.ROBOTONE_RIGHT)
 				alpha+=0.1;
