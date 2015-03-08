@@ -173,7 +173,7 @@ public class Robot extends Unit{
 	public  static void setUnitImage() throws IOException{
 		img=new BufferedImage[2];
 		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog0.jpg"));
-		img[1]=ImageIO.read(new File("D:\\Programozas\\2015\\Szoftlab4githf\\Szoftlab4"+"\\"+"frog1.jpg"));
+		img[1]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
 	}
 
 

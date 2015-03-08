@@ -61,7 +61,7 @@ public class Oil extends Obstacle {
 		
 	}
 	public  static void setUnitImage() throws IOException{
-		img=ImageIO.read(new File("D:\\Programozas\\2015\\Szoftlab4githf\\Szoftlab4"+"\\"+"oil.jpg"));
+		img=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"oil.jpg"));
 	}
 
 	@Override

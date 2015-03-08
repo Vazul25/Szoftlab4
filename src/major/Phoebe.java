@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 
 
 
+
 import minor.MapBuilder;
 import minor.Timer;
 
@@ -202,7 +203,7 @@ public class Phoebe extends JPanel implements Runnable{
 		Robot.setUnitImage();
 		Glue.setUnitImage();
 		Oil.setUnitImage();
-		background=ImageIO.read(new File("D:\\Programozas\\2015\\Szoftlab4githf\\Szoftlab4"+"\\"+"background.jpg"));
+		background=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"background.jpg"));
 		//Játékosok létrehozása
 		//TODO
 		int startPointX = 0; //MApBuilderből

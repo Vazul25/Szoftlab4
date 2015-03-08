@@ -54,7 +54,7 @@ public class Glue extends Obstacle {
 		g.drawImage(img, x, y, WIDTH, HEIGHT, null);
 	}
 	public  static void setUnitImage() throws IOException{
-		img=ImageIO.read(new File("D:\\Programozas\\2015\\Szoftlab4githf\\Szoftlab4"+"\\"+"glue.jpg"));
+		img=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"glue.jpg"));
 	}
 	@Override
 	public String toString() {
