@@ -35,14 +35,6 @@ Az eltelt időt és a fennmaradt idő nyilvántartásáért felelős. Ilyen pél
 \end{figure}
 \pagebreak
 
-\begin{figure}[h]
-\begin{center}
-%\includegraphics[width=17cm]{chapters/chapter04/example.pdf}
-\caption{x}
-\label{fig:example3}
-\end{center}
-\end{figure}
-
 
 \section{Osztályok leírása}
 \subsection{Glue}
@@ -90,7 +82,6 @@ A robotok ragacs- és olajkészletét, illetve megtett köreit és checkpontjait
 		\item \textbf{HUD}(List<Robot> robs): Konstruktor, inicializálja a köröket számláló változót, az érintett checkpointokat, a ragacs és olajkészleteket. 
 		\item void \textbf{checkpointSearch}(): Ellenőrzi hogy a robotok teljesítették-e a következő checkpointot.
 		\item void \textbf{setCheckpoints}(List checkObj): Checkpointokat reprezentáló adatszerkezet betöltése.
-		
 	\end{itemize}
 \end{itemize}
 
@@ -178,8 +169,6 @@ A játék motorját képviselő osztály. A robotok pozíciójáért, az akadál
 A játékban résztvevő robotok viselkedését és kezelését leíró osztály.
 \item Ősosztályok\\
 Unit
-\item Interfészek\\
-Nincs interfésze
 \item Attribútumok
 	\begin{itemize}
     	\item \textbf{Phoebe} p: Referencia a játékmotorra.
@@ -194,7 +183,8 @@ Nincs interfésze
 		\item \textbf{double} alpha: A robot irányítását segítő nyíl vízszintessel bezárt szöge. A nyil kirajzolásánál, az ugrás végpontjának meghatározánál van szerepe.
 		\item \textbf{boolean} moved: Azt jelöli, hogy lépett-e már a robot az aktuális körben. A megjelenítésnél (a nyilat ugrás közben nem jelenítjük meg), illetve az irányítás letiltásánál van szerepe (olajba lépés esetén).
 \end{itemize}
-\item Metódusok\\
+\item Metódusok
+
 	\begin{itemize}
 		\item \textbf{Robot}(int x,int y,String imagelocation,Phoebe p): Létrehoz egy robotot a megadott x,y koordinátákon, betölti a képét az imagelocation cím alapján, továbbá eltárolja a játékmotor referenciáját.
 		\item \textbf{void deathanimation}(): A Robot halálának grafikus megjelenítéséért felelős függvény.
@@ -202,14 +192,14 @@ Nincs interfésze
 		\item void \textbf{collisionWithRobot}(Robot r): Ellenőrzi, hogy a robot ütközött-e másik robottal. Ha igen, akkor gondoskodik róla, hogy a robotok a megfelelő szögben pattanjanak le egymásról.
 		\item void \textbf{bounce}(): Két robot ütközése után meghívódó függvény. Az ütközés függvényében kiszámolja a lepattanás irányát és letiltja egy körre az irány változtatást.
 		\item void \textbf{move}(): A robot mozgását megvalósító függvény.
-		\item void \textbf{keyPressed}(): A robot irányítását megvalósító függvény, a játékmotor keylistener-e által hívódik meg, a lenyomott billentyű keyevent-jére. A következő ugrás beállítása, a ragacs/olaj lerakása történhet itt a keyconfig változó felhasználásával.
+		\item void \textbf{keyPressed}(): A robot irányítását megvalósító függvény, a játékmotor keylistener-e által hívódik meg, a lenyomott billentyű keyevent-jére. A következő ugrás beállítása, a ragacs/olaj lerakása történhet itt.
 	\end{itemize}
 \end{itemize}
 
 \subsection{Timer}
 \begin{itemize}
 \item Felelősség\\
-A visszaszámlálásért (idő, director time) felelős.
+A játék elején a kezdésig visszaszámol. Játéktípustól függően felfelé vagy visszafelé számol. Ez az osztály felelős, hogy ha lejárt az idő, akkor legyen vége a játéknak.
 \item Metódusok
 	\begin{itemize}
 		\item \textbf{Timer}(int i): Konstruktor; inicializál egy viszaszámláló órát.
@@ -234,6 +224,14 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 		\item boolean \textbf{intersect}(Unit u): Két egység ütközését meghatározó függvény.
 	\end{itemize}
 \end{itemize}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=17cm]{images/struktdiagram.PNG}
+\caption{Statikus struktúra diagram}
+\label{fig:example3}
+\end{center}
+\end{figure}
 \pagebreak
 
 \section{Szekvencia diagramok}
