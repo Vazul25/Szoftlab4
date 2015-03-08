@@ -55,6 +55,19 @@ public class HUD {
 		//
 	}
 	
+	private void setCheckpointReached(Robot r){
+		int robotID = r.getId();
+		//Ha az utolsó checkpointhoz érkeztünk nullázuk a checkpointokat és növeljük a körök számát eggyel
+		if(checkpointReached[robotID%2] == (checkpoints.size()-1)) {
+			checkpointReached[robotID%2] = 0;
+			lap[robotID%2] += 1;
+		}
+		//Ha belelépünk egy checkpointba akkor nveljük a checkpointReached-et
+		else{
+			checkpointReached[robotID%2] += 1;
+		}
+	}
+	
 	/*
 	 * checkpointSearch függvény
 	 * Felelősség:
@@ -65,12 +78,9 @@ public class HUD {
 	public void checkpointSearch(){
 		//minden lépésnél vizsgál, hogy benne vagyunk-e a következő teljesítendő checkpoint mezőben
 		//végig megyünk minden roboton
-		for(Robot i : robots){
-			//Lekérjük az ID-t
-			int robotID = i.getId();
+		for(Robot i : robots){			
 			Area robotarea = new Area(i.getHitbox());
-			//következő checkpoint értékének megkeresése
-			
+			//TODO ki kell keresni a következő checkpointot, majd annak a hitbox-ával összemetszeni a robot hitboxát
 			/*	Hibás kód -1-gyel indexelés
 			 * Area checkpointarea = new Area(checkpoints.get(checkpointReached[robotID%2]-1));
 			 */
@@ -79,15 +89,7 @@ public class HUD {
 			
 			//Az kezdőhelyen található checkpoint az utolsó
 			if(!robotarea.isEmpty()){
-				//Ha az utolsó checkpointhoz érkeztünk nullázuk a checkpointokat és növeljük a körök számát eggyel
-				if(checkpointReached[robotID%2] == (checkpoints.size()-1)) {
-					checkpointReached[robotID%2] = 0;
-					lap[i.getId()%2] += 1;
-				}
-				//Ha belelépünk egy checkpointba akkor nveljük a checkpointReached-et
-				else{
-					checkpointReached[robotID%2] += 1;
-				}
+				setCheckpointReached(i);
 			}
 		}		
 	}

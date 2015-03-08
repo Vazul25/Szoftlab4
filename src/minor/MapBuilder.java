@@ -5,6 +5,7 @@ import java.awt.Shape;
 import java.awt.geom.Area;
 import java.util.List;
 
+import major.Obstacle;
 import major.Robot;
 
 /*
@@ -93,6 +94,19 @@ public class MapBuilder{
 		area.intersect(otherArea);
 		//TODO revision
 		return area.getBounds().getSize().equals(r.getHitbox().getBounds().getSize());
+	}
+	
+	/*
+	 * obstacleOutsideOfMap függvény
+	 * 
+	 *  @return igaz értékkel tér vissza, ha a robot leesett a pályáról
+	 */
+	public boolean obstacleOutsideOfMap(Obstacle r){
+		Area area = new Area(map);
+		Area otherArea = new Area(r.getHitbox());
+		area.intersect(otherArea);
+		//TODO revision
+		return area.getBounds().getSize().equals( r.getHitbox().getBounds().getSize() );
 	}
 
 	public int[] getStartPosPlayer(int id) {

@@ -98,6 +98,7 @@ public class Phoebe extends JPanel implements Runnable{
 	private List<Obstacle> obstacles;
 	private HUD hud;
 	private MapBuilder map;
+	private Timer gameTimer;
 	
 	/*
 	 * Phoebe konstruktor
@@ -155,7 +156,6 @@ public class Phoebe extends JPanel implements Runnable{
 	 */
 	private void init(){
 		//GameTimer létrehozása, inicializálása
-		Timer gameTimer;
 		//Ha Időlimites játékmód
 		if(gameInfo.getSettings() == Settings.TIMELIMIT)
 			gameTimer = new Timer(gameInfo.getLimit());
@@ -190,8 +190,8 @@ public class Phoebe extends JPanel implements Runnable{
 			int y=0;
 			Oil item1 = new Oil(x, y, null);
 			Glue item2 = new Glue(x, y, null);
-			if(!map.fallingDown(item1.getHitbox()))	obstacles.add(item1);
-			if(!map.fallingDown(item2.getHitbox())) obstacles.add(item2);
+			if(!map.obstacleOutsideOfMap(item1)) obstacles.add(item1);
+			if(!map.obstacleOutsideOfMap(item2)) obstacles.add(item2);
 		}						
 	}
 	
@@ -211,15 +211,19 @@ public class Phoebe extends JPanel implements Runnable{
 		
 		//repaint();
 		//TODO rajzolás
-		Timer directorTimer = new Timer(gameInfo.getStep());
 		
+		Timer startTimer = new Timer(3);
+		startTimer.start();
+		
+		while(!startTimer.isZero()){
+			//Idő kiírása
+		}
+		gameTimer.start();
 		//Ha csak egy robot marad a pályán vagy ha lejár a idő/kör
 		while(!ended)
 		{
-			//...
-			while(!directorTimer.isZero()){
-				//várunk amíg le nem jár a három másodperc
-			}
+			
+			//várunk amíg le nem jár a három másodperc			
 			
 			//Mozgás
 			for(int i=0;i<robots.size();i++){
@@ -246,7 +250,7 @@ public class Phoebe extends JPanel implements Runnable{
 					i.collisionWithRobot(k);
 				}
 				//Leesés vizsgálata
-				if(map.fallingDown(i.getHitbox())){
+				if(map.robotOutsideOfMap(i)){
 					ended = true;
 					i.deathanimation();
 				};			
