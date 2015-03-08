@@ -16,7 +16,7 @@ public class GUI extends javax.swing.JFrame {
 	private static final long serialVersionUID = 3610253813412048777L;
 	
 	
-	Phoebe game;
+	private Phoebe game;
 	
 	//Tagváltozók
 	//private

@@ -91,4 +91,18 @@ public class HUD {
 			}
 		}		
 	}
+	
+	/*
+	 * endOfTheGame függvény
+	 * Felelősség:
+	 * A játé végén eldönti, hogy melyik játékos nyert. Visszatér egy számmal, 
+	 * amiből egyértelműen eldönthető, hogy ki nyert. Ha negatív akkor az 1-es számú játékos nyert, 
+	 * ha nulla akkor döntetlen, ha pozitív akkor a 2-es számú játékos nyert.
+	 * 
+	 * Funkció: Amikor a Phoebe ended értéke igazzá válik, a run metódus fogja meghívni.
+	 * 
+	 */
+	public int endOfTheGame(){
+		return 0;
+	}
 }

@@ -34,7 +34,6 @@ Az eltelt időt és a fennmaradt idő nyilvántartásáért felelős. Ilyen pél
 \end{center}
 \end{figure}
 \pagebreak
-\pagebreak
 
 \begin{figure}[h]
 \begin{center}
@@ -54,6 +53,7 @@ A játékban szereplő Ragacs foltok viselkedését leíró osztály
 Unit$\rightarrow$Obstacle
 \item Metódusok
 	\begin{itemize}
+	    \item \textbf{Glue}(int x, int y): Amikor létrehozunk valahol egy ragacs objektumot, akkor ez a konstruktor hívódik meg. Meghívja az ősosztály konstruktorát.
 		\item void \textbf{effect}(Robot r): Ütközéskor hívja meg az ütközést vizsgáló függvénye a Robot osztálynak. Módosítja a robot slowed értékét 50\%-ra a robot slowed attribútum setterének meghívásával.
 	\end{itemize}
 \end{itemize}
