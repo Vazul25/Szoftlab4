@@ -54,7 +54,7 @@ public class GUI extends javax.swing.JFrame {
 	 * 
 	 * Funkció(ki hívja meg és mikor?): A CreateGame gomb megnyomása után hívódik meg.
 	 * 
-	 */
+	 *//*
 	private void createGameButtonActionPerformed(java.awt.event.ActionEvent evt) throws IOException{
 		//...
 		//Beállítások lekérdezése
@@ -73,7 +73,7 @@ public class GUI extends javax.swing.JFrame {
 		Thread t = new Thread(game);
 		t.start();
 		//...
-	}
+	}*/
 
 
 }

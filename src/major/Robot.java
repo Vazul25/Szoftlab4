@@ -34,9 +34,9 @@ public class Robot extends Unit{
 	 */
 	protected static int staticid=0;
 	 private  static final  int r=100; //sugár
-	
-	static int WIDTH=40;//teszt placeholder
-	static int HEIGHT=40;//teszt placeholder
+	 private  static final  int ANIMATIONSPEED=5;
+	/*static */int WIDTH=40;//teszt placeholder
+	/*static*/ int HEIGHT=40;//teszt placeholder
 	//kell majd valami adatszerkezet ami számontartja hogy melyik obstacleből mennyi van a robotnál
 	protected static BufferedImage img[];
 	/*
@@ -101,6 +101,7 @@ public class Robot extends Unit{
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 		id=staticid;
 		slowed=1.0;
+		oiled=false;
 		staticid+=1;
 		this.p=p;
 		arrowendx=(int)(x+r*Math.cos(alpha));
@@ -165,6 +166,7 @@ public class Robot extends Unit{
 	public void paint(Graphics2D g) {
 		g.fillRect(x, y, WIDTH, HEIGHT);//placeholder ide jön majd a kép
 		g.setStroke(new BasicStroke(10));
+		if(!oiled)
 		g.drawLine(x+WIDTH/2, y+HEIGHT/2, arrowendx+WIDTH/2, arrowendy+HEIGHT/2);
 		g.drawImage(img[id%2], x, y, WIDTH, HEIGHT, null);
 		
@@ -185,16 +187,42 @@ public class Robot extends Unit{
 	 * Funkció(ki hívja meg és mikor?):a játékmotor minden lépésnél
 	 */
 	@Override
-	public void move() {
+	public void move() throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
+		oiled=true;
 		arrowendx=(int)(x+slowed*r*Math.cos(alpha));
 		arrowendy=(int)(y+slowed*r*Math.sin(alpha));
-		x=arrowendx;	
-		y=arrowendy;
-		slowed=1;
-		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
+		//x=arrowendx;	
+		//y=arrowendy;
 		
-			
+
+	
+		double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
+		double speedy=Math.round((arrowendy-y)/ANIMATIONSPEED);
+		slowed=1;
+		//while(!reached){
+		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
+		HEIGHT=60;
+		//if(Math.abs((int)(arrowendx-x))<20 &&Math.abs((int)(arrowendy-y))<20) reached=true;
+		for(int i=0;i<ANIMATIONSPEED;i++){
+			if(i<ANIMATIONSPEED/2){WIDTH+=2;HEIGHT+=2;}
+			else {WIDTH-=2;HEIGHT-=2;}
+			x+=speedx;
+			y+=speedy;
+			p.repaint();
+			Thread.sleep(50);
+		}
+		
+		WIDTH=40;
+
+		HEIGHT=40;
+		x=arrowendx;
+		y=arrowendy;
+		oiled=false;
+		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog0.jpg"));
+		
+		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
+				
 	}
 	
 	/*
@@ -205,7 +233,7 @@ public class Robot extends Unit{
 	 * Funkció(ki hívja meg és mikor?):játékmotor a főciklusban
 	 */
 	public boolean collisionWithObstacles(Obstacle obstacle){
-
+			
 		return this.intersect(obstacle);		
 	}
 	
@@ -257,12 +285,12 @@ public class Robot extends Unit{
 	 */
 	public void keyPressed(KeyEvent e) {
 		//Nyíl irányányának változtatása
-		
+		if(!oiled){
 		if (e.getKeyCode() == keyconfig[id%2*4+1])
 			alpha+=0.1;
 		if (e.getKeyCode() == keyconfig[id%2*4])
 			alpha-=0.1;
-		
+		}
 
 		
 		//Obstacle lerakás
@@ -282,9 +310,10 @@ public class Robot extends Unit{
 			p.addObstacle(item1);
 		
 		}
-		
+		if(!oiled){
 		arrowendx=(int)(x+r*Math.cos(alpha));
 		arrowendy=(int)(y+r*Math.sin(alpha));
+		}
 		System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);
 		p.repaint();
 	}

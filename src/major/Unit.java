@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /*
  * Unit osztály
@@ -62,7 +63,7 @@ public abstract class Unit implements iVisible{
 	/*
 	 * Move függvény (abtsract)
 	 */
-	public abstract void move();
+	public abstract void move() throws InterruptedException, IOException;
 
 	/*
 	 * intersect függvény
