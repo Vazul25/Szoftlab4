@@ -42,8 +42,8 @@ public class GUI extends javax.swing.JFrame {
 	 * Funkció(ki hívja meg és mikor?):
 	 * 
 	 */
-	public GUI(){
-		
+	public GUI(Phoebe p){
+		game=p;
 	}
 	
 	/*

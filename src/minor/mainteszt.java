@@ -9,7 +9,7 @@ public class mainteszt {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 
-		GUI g=new GUI();
+	//	GUI g=new GUI();
 		int mode = 1; //LapLimit=1, TimeLimit=2
 		Phoebe.Settings set = new Phoebe.Settings(mode);
 		//...
@@ -20,8 +20,8 @@ public class mainteszt {
 		set.setStep(step);
 		//...
 		//Szál létrehozása, indítása
-		g.game = new Phoebe(set);
-		Thread t = new Thread(g.game);
+	//	g.game = new Phoebe(set);
+		Thread t = new Thread(/*g.game*/ new Phoebe(set));
 		t.start();
 		//...
 		

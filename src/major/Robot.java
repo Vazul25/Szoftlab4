@@ -35,8 +35,8 @@ public class Robot extends Unit{
 	 *
 	 */
 	protected static int staticid=0;
-	 private  static final  int r=100; //sugár
-	 private  static final  int ANIMATIONSPEED=5;
+	private  static final  int r=100; //sugár
+	private  static final  int ANIMATIONSPEED=5;
 	/*static */int WIDTH=40;//teszt placeholder
 	/*static*/ int HEIGHT=40;//teszt placeholder
 	//kell majd valami adatszerkezet ami számontartja hogy melyik obstacleből mennyi van a robotnál
@@ -54,7 +54,7 @@ public class Robot extends Unit{
 	private int id;
 	private double slowed;//default 1.0
 	private boolean oiled;
-	
+
 	/*
 	 * Vektor paraméterek
 	 * Mire valók:
@@ -68,17 +68,17 @@ public class Robot extends Unit{
 	private int arrowendx=0;//ahova mutat
 	private int arrowendy=0;
 	private double alpha=1.57;//kerület pontjának számításához kell radián , alapérték 90 fok
-	
+
 	/*
 	 * Mire való:
 	 ** moved:lépett e már a játékos vagy irányitási fázisban van
 	 *
 	 */
 	protected boolean moved;
-	
+
 	//Tartalmazó objektum
 	protected Phoebe p;
-	
+
 	/*
 	 * Konstruktor
 	 * Felelősség:Létrehozza a robotot és inicializálja a változóit 
@@ -99,11 +99,11 @@ public class Robot extends Unit{
 		arrowendx=(int)(x+r*Math.cos(alpha));
 		arrowendy=(int)(y+r*Math.sin(alpha));
 		// TODO Auto-generated constructor stub
-		
+
 	}
-	
+
 	// Setter-Getterek
-	
+
 	/*
 	 * GetId függvény
 	 * @return a robot egyedi azonosítója
@@ -113,7 +113,7 @@ public class Robot extends Unit{
 	public int getId(){
 		return id;
 	}
-	
+
 	/*
 	 * setOiled függvény
 	 * Felelősség:átállítja a robot olaj effekt követéséhez tartozó állapot változót 
@@ -124,7 +124,7 @@ public class Robot extends Unit{
 	public void setOiled(){
 		oiled=true;
 	}
-	
+
 	/*
 	 * setGlue függvény
 	 * Felelősség:átállítja a robot ragacs effekt követéséhez tartozó állapot változót 
@@ -134,7 +134,7 @@ public class Robot extends Unit{
 	public void setGlue(){
 		slowed=0.5;
 	}
-	
+
 	/*
 	 * DeathAnimation függvény
 	 * Felelősség:Ha meghal egy béka akkor ez felel az animációért 
@@ -145,7 +145,7 @@ public class Robot extends Unit{
 	public void deathanimation(){
 		//TODO
 	};
-	
+
 	/*
 	 * Paint függvény
 	 * @param g
@@ -159,9 +159,9 @@ public class Robot extends Unit{
 		g.fillRect(x, y, WIDTH, HEIGHT);//placeholder ide jön majd a kép
 		g.setStroke(new BasicStroke(10));
 		if(!oiled)
-		g.drawLine(x+WIDTH/2, y+HEIGHT/2, arrowendx+WIDTH/2, arrowendy+HEIGHT/2);
+			g.drawLine(x+WIDTH/2, y+HEIGHT/2, arrowendx+WIDTH/2, arrowendy+HEIGHT/2);
 		g.drawImage(img[id%2], x, y, WIDTH, HEIGHT, null);
-		
+
 		//width,height a buffered image adatai lesznek
 	}
 	public  static void setUnitImage() throws IOException{
@@ -186,9 +186,9 @@ public class Robot extends Unit{
 		arrowendy=(int)(y+slowed*r*Math.sin(alpha));
 		//x=arrowendx;	
 		//y=arrowendy;
-		
 
-	
+
+
 		double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
 		double speedy=Math.round((arrowendy-y)/ANIMATIONSPEED);
 		slowed=1;
@@ -204,7 +204,7 @@ public class Robot extends Unit{
 			p.repaint();
 			Thread.sleep(50);
 		}
-		
+
 		WIDTH=40;
 
 		HEIGHT=40;
@@ -212,11 +212,11 @@ public class Robot extends Unit{
 		y=arrowendy;
 		oiled=false;
 		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog0.jpg"));
-		
+
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
-				
+
 	}
-	
+
 	/*
 	 * collisionWithObstacles függvény
 	 * @param obstacle az akadály amire az ütközést vizsgáljuk
@@ -225,10 +225,10 @@ public class Robot extends Unit{
 	 * Funkció(ki hívja meg és mikor?):játékmotor a főciklusban
 	 */
 	public boolean collisionWithObstacles(Obstacle obstacle){
-			
+
 		return this.intersect(obstacle);		
 	}
-	
+
 	/*
 	 * bounce függvény
 	 * Felelősség:A következő lépés végpontjának beállítása ha volt üzközés lepattannak egymásról
@@ -237,9 +237,9 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void bounce(){
-		
+
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Robot [id=" + id + ", slowed=" + slowed + ", oiled=" + oiled
@@ -264,8 +264,8 @@ public class Robot extends Unit{
 		}
 	}
 
-	
-	
+
+
 	/*
 	 * keyPressed függvény
 	 * @param e
@@ -281,36 +281,36 @@ public class Robot extends Unit{
 		//TODO Nincs megoldva, hogy lekérdezze hány darab olaj/ragacs áll rendelkezésre a robotnál
 		//Nyíl irányányának változtatása
 		if(!oiled){
-		if (e.getKeyCode() == Phoebe.keyconfig[id%2*4+1])
-			alpha+=0.1;
-		if (e.getKeyCode() == Phoebe.keyconfig[id%2*4])
-			alpha-=0.1;
-		}
+			if (e.getKeyCode() == Phoebe.Settings.keyconfig[id%2*4+1])
+				alpha+=0.1;
+			if (e.getKeyCode() == Phoebe.Settings.keyconfig[id%2*4])
+				alpha-=0.1;
 
-		
-		//Obstacle lerakás
-		
-		if(e.getKeyCode() == Phoebe.keyconfig[id%2*4+2])  {
-		//TODO
-		//Olaj lerakás
-			Oil item0 = new Oil(x, y);
-			p.addObstacle(item0);
-			System.out.println("new oil created at:"+x+","+y);
-		}
-		//...
-		//Ragacs lerakás
-	    //TODO Ha van a robotnak csak akkor
-		if(e.getKeyCode() == Phoebe.keyconfig[id%2*4+3])  {
-			Glue item1 = new Glue(x, y);
-			p.addObstacle(item1);
-		
-		}
-		if(!oiled){
-		arrowendx=(int)(x+r*Math.cos(alpha));
-		arrowendy=(int)(y+r*Math.sin(alpha));
+
+
+			//Obstacle lerakás
+
+			if(e.getKeyCode() == Phoebe.Settings.keyconfig[id%2*4+2])  {
+				//TODO
+				//Olaj lerakás
+				Oil item0 = new Oil(x, y);
+				p.addObstacle(item0);
+				System.out.println("new oil created at:"+x+","+y);
+			}
+			//...
+			//Ragacs lerakás
+			//TODO Ha van a robotnak csak akkor
+			if(e.getKeyCode() == Phoebe.Settings.keyconfig[id%2*4+3])  {
+				Glue item1 = new Glue(x, y);
+				p.addObstacle(item1);
+
+			}
+
+			arrowendx=(int)(x+r*Math.cos(alpha));
+			arrowendy=(int)(y+r*Math.sin(alpha));
 		}
 		System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);
 		p.repaint();
 	}
-	
+
 }

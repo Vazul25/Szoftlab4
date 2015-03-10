@@ -136,7 +136,7 @@ public class Phoebe extends JPanel implements Runnable{
 			@Override
 			public void keyPressed(KeyEvent e) {
 
-				//	robots.get(1).keyPressed(e);
+				robots.get(1).keyPressed(e);
 				robots.get(0).keyPressed(e);
 			}
 		});
@@ -222,11 +222,11 @@ public class Phoebe extends JPanel implements Runnable{
 		int startPointX = 0; //MApBuilderből
 		int startPointY = 0; //MapBuilderből
 		int secondStartPos = 0; //MapBuilderből
-		Robot one = new Robot(400/*map.getStartPosPlayer(1)[0]*/,400/* map.getStartPosPlayer(1)[1]*/,  this);
+		Robot one = new Robot(300/*map.getStartPosPlayer(1)[0]*/,200/* map.getStartPosPlayer(1)[1]*/,  this);
 		//szkeleton teszt célszerűbb eggyel hogy a keybindings os dolgot megusszuk
-		//Robot two = new Robot(500/*map.getStartPosPlayer(2)[0]*/, 500/*map.getStartPosPlayer(2)[2]*/,  this);
+		Robot two = new Robot(500/*map.getStartPosPlayer(2)[0]*/, 500/*map.getStartPosPlayer(2)[2]*/,  this);
 		robots.add(one);
-		//    robots.add(two);
+		    robots.add(two);
 
 		//HUD létrehozása
 		hud = new HUD(robots);
@@ -272,10 +272,11 @@ public class Phoebe extends JPanel implements Runnable{
 		
 		Timer startTimer = new Timer(3);
 		startTimer.start();
-		
+		/*
 		while(!startTimer.isZero()){
 			//Idő kiírása
-		}
+			System.out.println(startTimer.getTime());
+		}*/
 		gameTimer.start();
 		//Ha csak egy robot marad a pályán vagy ha lejár a idő/kör
 
@@ -308,7 +309,7 @@ public class Phoebe extends JPanel implements Runnable{
 			//TODO lépésanimálása egyenesen végig léptetgetni a robotot és kirajzolni
 
 			//Checkpointok vizsgálata, áthaladtunk-e?
-			hud.checkpointSearch();
+		//	hud.checkpointSearch();
 
 			//Ütközések
 			for(Robot i : robots)
@@ -330,10 +331,10 @@ public class Phoebe extends JPanel implements Runnable{
 
 				}
 				//Leesés vizsgálata
-				if(map.robotOutsideOfMap(i)){
+			/*	if(map.robotOutsideOfMap(i)){
 					ended = true;
 					i.deathanimation();
-				};		
+				};*/		
 
 			}			
 			repaint();	
