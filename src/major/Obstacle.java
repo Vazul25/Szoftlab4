@@ -14,8 +14,9 @@ import java.awt.Rectangle;
  */
 
 public abstract class Obstacle extends Unit {
-	protected static  int WIDTH;
-	protected static int HEIGHT;
+	protected static  int WIDTH=40;
+	protected static int HEIGHT=40;
+	protected int lifetime;//ezt növeljük körönként
 	/*
 	 * Obstacle kontruktor
 	 * Felelősség:meghívja a unit konstruktorát a megadott adatokkal
@@ -25,8 +26,8 @@ public abstract class Obstacle extends Unit {
 	 * Funkció(ki hívja meg és mikor?):a leszármaztatott osztályok a konstruktoraikban
 	 * 	
 	 */
-	public Obstacle(int x, int y, String imagelocation) {
-		super(x, y, imagelocation);
+	public Obstacle(int x, int y) {
+		super(x, y);
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 		// TODO Auto-generated constructor stub
 	}
@@ -55,6 +56,11 @@ public abstract class Obstacle extends Unit {
 
 	}
 
+	@Override
+	public String toString() {
+		return "Obstacle [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT + "]";
+	}
+	
 
 
 }

@@ -43,7 +43,7 @@ public class MapBuilder{
 		int[] xpoints = null;
 		int[] ypoints = null;
 		int npoints = 0;
-		setMap(new Polygon(xpoints, ypoints, npoints));
+	//	setMap(new Polygon(xpoints, ypoints, npoints)); // null pointerekkel nem fordul
 		
 		//checkpointok létrehozása
 		//...
@@ -51,7 +51,7 @@ public class MapBuilder{
 		for(int i=1;i<=numberOfCheckpoints;i++){
 			//Checkpointot határoló pontok beolvasása
 			//...
-			checkpoints.add(new Polygon());
+		//	checkpoints.add(new Polygon()); null pointerekkel nem megy
 		}
 		//...
 		
@@ -107,6 +107,8 @@ public class MapBuilder{
 		area.intersect(otherArea);
 		//TODO revision
 		return area.getBounds().getSize().equals( r.getHitbox().getBounds().getSize() );
+
+	
 	}
 
 	public int[] getStartPosPlayer(int id) {

@@ -1,7 +1,10 @@
 ﻿package major;
 
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /*
  * Unit osztály
@@ -12,10 +15,10 @@ import java.awt.image.BufferedImage;
  * Interfészek:
  * 
  */
-public abstract class Unit {
+public abstract class Unit implements iVisible{
 	
 	//Atribútumok
-	
+	 
 	/*
 	 * Pozíció koordináták
 	 * Felelősség:
@@ -38,7 +41,7 @@ public abstract class Unit {
 	 * Melyik függvény használja?
 	 * 
 	 */
-	protected static BufferedImage image;
+
 	
 	/*
 	 * Unit konstruktor
@@ -51,15 +54,17 @@ public abstract class Unit {
 	 * Funkció(ki hívja meg és mikor?):
 	 * 
 	 */
-	public Unit(int x,int y,String imagelocation){
+	public Unit(int x,int y){
 		//TODO
+		this.x=x;
+		this.y=y;
 	}
 	
 	/*
 	 * Move függvény (abtsract)
 	 */
-	public abstract void move();
-	
+	public abstract void move() throws InterruptedException, IOException;
+
 	/*
 	 * intersect függvény
 	 * @param u
@@ -70,9 +75,16 @@ public abstract class Unit {
 	 */
 	public boolean intersect(Unit u){
 		//Paraméterként kapott Unit hitbox-szal vizsgálat, hogy this.hitbox-szal ütközés történt-e?
-		return false;
+		return this.hitbox.intersects(u.hitbox);
 	}
-	
+	//volt falling down
+	public boolean isOnMap(Shape map){
+		/*Area area = new Area(this.hitbox);
+		Area otherArea = new Area(map);
+		area.intersect(otherArea);
+		//TODO revision
+		return area.getBounds().getSize().equals(othershape.getBounds().getSize());*/return false;
+	}
 	public Rectangle getHitbox(){
 		return hitbox;
 	} 

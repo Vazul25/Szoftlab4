@@ -1,4 +1,11 @@
 ﻿package major;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 
 /**
  * A „Glue” objektum megvalósít egy adott tulajdonságú 
@@ -15,6 +22,7 @@
  * nincs 
  * @see major.Obstacle
  */
+
 public class Glue extends Obstacle {
 
 	/**
@@ -24,18 +32,19 @@ public class Glue extends Obstacle {
 	 * Funkció(ki hívja meg és mikor?):
 	 * A játék motor hívja meg mikor új ragacsot tesznek a pályára.
 	 *
+	 * @see major.Unit#Unit()
 	 * @param x kezdő koordináta
 	 * @param y kezdő koordináta
-	 * @param imagelocation a ragacs  képének a helye
-	 *
 	 * @see major.Unit#Unit()
 	 * @see major.Obstacle#Obstacle()
 	 */
-	public Glue(int x, int y, String imagelocation) {
-		super(x, y, imagelocation);
+	public Glue(int x, int y) {
+		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
-	
+	//TODO comment
+	 static BufferedImage img;
+
 	/**
 	 * Felelősség:
 	 * Ez határozza meg hogy milyen hatással van a robotra a ragacs
@@ -46,9 +55,23 @@ public class Glue extends Obstacle {
 	 */
 	@Override
 	public void effect(Robot r) {
-		//r.setGlue();
+	
+		// TODO Auto-generated method stub
+		System.out.println("ragacsos lett");
+		r.setGlue();
 	}
 
-
+	@Override
+	public void paint(Graphics2D g) {
+		// TODO Auto-generated method stub
+		g.drawImage(img, x, y, WIDTH, HEIGHT, null);
+	}
+	public  static void setUnitImage() throws IOException{
+		img=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"glue.jpg"));
+	}
+	@Override
+	public String toString() {
+		return "Glue [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT + "]";
+	}
 
 }

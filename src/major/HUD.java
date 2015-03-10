@@ -92,7 +92,7 @@ public class HUD {
 	 */
 	public void setCheckpoints(List<Shape> checkObj){
 		//Checkpointokat teljesítését számontartó adatszerkezet inicialziálása
-		numOfCheckpoints = checkObj.size();
+		//numOfCheckpoints = checkObj.size();
 		checkpointReached = new int[robots.size()];
 		for(int i=0;i<robots.size();i++){
 			checkpointReached[i] = 0;
@@ -141,6 +141,21 @@ public class HUD {
 			if(!robotarea.isEmpty()){
 				setCheckpointReached(i);
 			}
+
+		//	robotarea.intersect(checkpointarea);
+			
+			//Az kezdőhelyen található checkpoint az utolsó
+			/*if(!robotarea.isEmpty()){
+				//Ha az utolsó checkpointhoz érkeztünk nullázuk a checkpointokat és növeljük a körök számát eggyel
+				if(checkpointReached[robotID%2] == (checkpoints.size()-1)) {
+					checkpointReached[robotID%2] = 0;
+					lap += 1;
+				}
+				//Ha belelépünk egy checkpointba akkor nveljük a checkpointReached-et
+				else{
+					checkpointReached[robotID%2] += 1;*/
+				//}
+			//}
 		}		
 	}
 	
