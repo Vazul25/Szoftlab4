@@ -123,7 +123,8 @@ public class Phoebe extends JPanel implements Runnable{
 		gameInfo = set;
 		init();
 		JFrame frame = new JFrame("Phoebe");//ez nincs itt csak tesztelés 
-		addKeyListener(new KeyListener() {
+		 MyListener listener=new MyListener(robots);
+		addKeyListener(listener);/*new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
 			}
@@ -135,13 +136,14 @@ public class Phoebe extends JPanel implements Runnable{
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-
+			
 				robots.get(1).keyPressed(e);
-				robots.get(0).keyPressed(e);
+			    robots.get(0).keyPressed(e);
 			}
-		});
+		});*/
 		setFocusable(true);
-
+		Thread listenert=new Thread(listener);
+		listenert.start();
 		//ez is csak teszt mint minden frames
 		frame.add(this,BorderLayout.CENTER);
 		frame.setSize(1000,700);

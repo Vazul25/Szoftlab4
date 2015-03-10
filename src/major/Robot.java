@@ -275,22 +275,22 @@ public class Robot extends Unit{
 	 * Funkció(ki hívja meg és mikor?):a játékmotor esemény kezelője
 	 * 
 	 */
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(int e) {
 
 
 		//TODO Nincs megoldva, hogy lekérdezze hány darab olaj/ragacs áll rendelkezésre a robotnál
 		//Nyíl irányányának változtatása
 		if(!oiled){
-			if (e.getKeyCode() == Phoebe.Settings.keyconfig[id%2*4+1])
+			if (e== Phoebe.Settings.keyconfig[id%2*4+1])
 				alpha+=0.1;
-			if (e.getKeyCode() == Phoebe.Settings.keyconfig[id%2*4])
+			if (e== Phoebe.Settings.keyconfig[id%2*4])
 				alpha-=0.1;
 
 
 
 			//Obstacle lerakás
 
-			if(e.getKeyCode() == Phoebe.Settings.keyconfig[id%2*4+2])  {
+			if(e== Phoebe.Settings.keyconfig[id%2*4+2])  {
 				//TODO
 				//Olaj lerakás
 				Oil item0 = new Oil(x, y);
@@ -300,7 +300,7 @@ public class Robot extends Unit{
 			//...
 			//Ragacs lerakás
 			//TODO Ha van a robotnak csak akkor
-			if(e.getKeyCode() == Phoebe.Settings.keyconfig[id%2*4+3])  {
+			if(e== Phoebe.Settings.keyconfig[id%2*4+3])  {
 				Glue item1 = new Glue(x, y);
 				p.addObstacle(item1);
 
