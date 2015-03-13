@@ -87,6 +87,7 @@ public class HUD {
 	 * Felelősség:
 	 * Checkpointokat reprezentáló adatszerkezet betöltése.
 	 * int[] checkpointReached inicializálása a checkpointok számától függően.
+	 *
 	 * Funkció:
 	 * Phoebe hívja meg, miután lekérdezte a MapBuildertől a checkpointok tömbjét.
 	 */
@@ -103,7 +104,22 @@ public class HUD {
 		//
 	}
 	
-
+	/**
+	* setCheckpoints metódus
+	*
+	* Felelősség: 
+	* Ha a paraméterként átadott robot következő 
+	* checkpointja a célvonal (utolsó checkpoint) akkor 
+	* lenullázza a checkpointReached-et és növeli a megtett 
+	* körök számát, illetve ha nem akkor növeli az érintett 
+	* checkpointok számát.
+	*
+	* Funkció: 
+	* A chechkpointSearch nevü metódus hívja meg, ha érzékelt 
+	* következő checkpointtal ütközést.	
+	* 
+	* @param r Az a Robot, amelyik elérte a következő checkpointot. 
+	*/
 	private void setCheckpointReached(Robot r){
 		int robotID = r.getId();
 		//Ha az utolsó checkpointhoz érkeztünk nullázuk a checkpointokat és növeljük a körök számát eggyel
@@ -122,7 +138,7 @@ public class HUD {
 	 * 
 	 * Felelősség:
 	 * Minden híváskor ellenőrzi, hogy a robot és a checkpoint metszete üres-e.
-	 * Ha nem üres, akkor ezt bevezeti a checkpointReached változóba.
+	 * Ha nem üres, meghívja a setCheckpointReached metódust.
 	 * 
 	 * Funkció: 
 	 * A játékmotor hívja meg minden ciklusban, lépés után. 

@@ -11,26 +11,45 @@ import major.Robot;
 /*
  * MapBuilder osztály
  * Felelősség:
- * 
- * Ősosztály:
- * 
- * Interfészek:
+ * Fájlból beolvassa és létrehozza a memóriában a pályát, a 
+ * kezdő pozíciókat és a checkpointokat reprezentáló 
+ * objektumokat.  Mivel a  MapBuilder objektum tárolja a pályát 
+ * így feladat, hogy vizsgálja a robotok azon belül tartózkodását. 
  *  
  */
 public class MapBuilder{
 	
 	//Adatszerkezetek
+	/**
+	* Shape interfészű pályát tároló objektum
+	*/
 	private Shape map;
+	
+	/**
+	* Tárolja a checkpointokat reprezentáló objektumokat List 
+	* adatszerkezetben. 
+	*/
 	private List<Shape> checkpoints;
 	
+	/*
+	* Meghatároz egy (x,y) koordinátát, ahol az első játékos kezd.
+	*/
 	private int[] startPosPlayerOne;
+	/*
+	* Meghatároz egy (x,y) koordinátát, ahol az második játékos kezd.
+	*/
 	private int[] startPosPlayerTwo;
 	
 	/*
 	 * MapBuilder konstruktor
 	 * Felelősség:
+	 * Konstruktor, a pálya beolvasása fájlból, majd létrehozása.
+	 * A robotok kezdőkoordinátáját, pályán található checkpointokat.
 	 * 
 	 * Funkció:
+	 * A Játékmotor indulása közben jön létre. A robotoknak 
+	 * szolgáltatja a kezdőkoordinátájukat, a HUD-nak 
+	 * szolgáltatja a checkpointokat.
 	 */
 	public MapBuilder(){
 		//Fájlból olvasás		
@@ -57,7 +76,7 @@ public class MapBuilder{
 		
 	}
 	
-	/*
+	/**
 	 * 
 	 * @return visszaadja a Checkpointokat tartalmazó listát
 	 */
