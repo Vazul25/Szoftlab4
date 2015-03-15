@@ -9,10 +9,10 @@ import java.io.IOException;
 /*
  * Unit osztály
  * Felelősség:
- * 
- * Ősosztályok:
- * 
+ * A pályán található objektumokért felel és azok viszonyáról (például ütközésükről).
+ *
  * Interfészek:
+ * IVisible
  * 
  */
 public abstract class Unit implements iVisible{
@@ -22,6 +22,7 @@ public abstract class Unit implements iVisible{
 	/*
 	 * Pozíció koordináták
 	 * Felelősség:
+	 * Az egység (x,y) koordinátájának tárolása
 	 */
 	protected int x,y;
 	
@@ -30,29 +31,22 @@ public abstract class Unit implements iVisible{
 	 * Felelősség:
 	 * 
 	 * Melyik függvény használja?:
+	 * intersect(Unit)
 	 * 
 	 */
 	protected Rectangle hitbox;
 	
 	/*
-	 * Kép fájl
-	 * Felelősség:
-	 * 
-	 * Melyik függvény használja?
-	 * 
-	 */
-
-	
-	/*
 	 * Unit konstruktor
-	 * @param x
-	 * @param y
-	 * @param imagelocation
 	 * 
 	 * Felelősség:
+	 * A Unit osztály konstruktora. Feladata, hogy eltárolja az x,y koordinátát.
 	 * 
 	 * Funkció(ki hívja meg és mikor?):
-	 * 
+	 * Amikor létrehozunk egy leszármazott osztályt, annak konstruktora.
+	 *
+	 * @param x X koordináta
+	 * @param y Y koordináta 
 	 */
 	public Unit(int x,int y){
 		//TODO
@@ -62,29 +56,31 @@ public abstract class Unit implements iVisible{
 	
 	/*
 	 * Move függvény (abtsract)
+	 * Felelősség:
+	 * Absztrakt függvény, mely a leszármazottakban fog megvalósulni. Az egységek mozgásáért felelős.
+	 * 
+	 * Funkció: 
+	 * A Phoebe hívja meg minden körben.
 	 */
 	public abstract void move() throws InterruptedException, IOException;
 
 	/*
 	 * intersect függvény
-	 * @param u
+	 * 
 	 * Felelősség:
+	 * Két egység ütközését meghatározó függvény.
 	 * 
 	 * Funkció(ki hívja meg és mikor?):
-	 * 
+	 * CollisionWithObstacle(), minden körben
+	 * CollisionWithRobot(), minden körben
+	 *
+	 * @param u Egység, amivel vizsgálni kell az ütközést.
 	 */
 	public boolean intersect(Unit u){
 		//Paraméterként kapott Unit hitbox-szal vizsgálat, hogy this.hitbox-szal ütközés történt-e?
 		return this.hitbox.intersects(u.hitbox);
 	}
-	//volt falling down
-	public boolean isOnMap(Shape map){
-		/*Area area = new Area(this.hitbox);
-		Area otherArea = new Area(map);
-		area.intersect(otherArea);
-		//TODO revision
-		return area.getBounds().getSize().equals(othershape.getBounds().getSize());*/return false;
-	}
+	
 	public Rectangle getHitbox(){
 		return hitbox;
 	} 

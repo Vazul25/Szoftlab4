@@ -35,8 +35,6 @@ public class Glue extends Obstacle {
 	 * @see major.Unit#Unit()
 	 * @param x kezdő koordináta
 	 * @param y kezdő koordináta
-	 * @see major.Unit#Unit()
-	 * @see major.Obstacle#Obstacle()
 	 */
 	public Glue(int x, int y) {
 		super(x, y);

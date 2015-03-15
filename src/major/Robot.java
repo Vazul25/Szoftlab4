@@ -54,6 +54,13 @@ public class Robot extends Unit{
 	*/
 	private int[] numOil;
 	
+	/*
+	 * Kép fájl
+	 * Felelősség:
+	 * 
+	 * Melyik függvény használja?
+	 * 
+	 */
 	protected static BufferedImage img[];
 	/*
 	 * Azonosító, állapot
