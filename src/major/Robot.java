@@ -39,7 +39,21 @@ public class Robot extends Unit{
 	private  static final  int ANIMATIONSPEED=5;
 	/*static */int WIDTH=40;//teszt placeholder
 	/*static*/ int HEIGHT=40;//teszt placeholder
-	//kell majd valami adatszerkezet ami számontartja hogy melyik obstacleből mennyi van a robotnál
+	
+	/**
+	* Tárolja a még felhasználatlan ragacsokat.
+	* Kezdő érték = 1
+	* Maximális érték = 3
+	*/
+	private int numGlue;
+	
+	/**
+	* Tárolja a még felhasználatlan olajfoltokat.
+	* Kezdő érték = 1
+	* Maximális érték = 3
+	*/
+	private int[] numOil;
+	
 	protected static BufferedImage img[];
 	/*
 	 * Azonosító, állapot
@@ -134,7 +148,59 @@ public class Robot extends Unit{
 	public void setGlue(){
 		slowed=0.5;
 	}
-
+	
+	/**
+	* getNumGlue függvénye
+	* Felelősség:
+	* Visszatér a felhasználható ragcsok számával.
+	*
+	* Funkció: 
+	* A HUD kérdezi le, hogy megjeleníthesse a képernyőn.
+	*/
+	public int getNumGlue(){
+		return numGlue;
+	}
+	
+	/**
+	* getNumOil függvény
+	* Felelősség: 
+	* Visszatér a felhasználható olajok számával
+	*
+	* Funkciók: 
+	* A HUD kérdezi le, hogy megjelenítse a képernyőn.
+	*/
+	public int getNumOil(){
+	
+	}
+	
+	/**
+	* incNumGlue függvény
+	* Felelősség:
+	* Növeli a robotnál tárolt ragacsok számát.
+	*
+	* Funkció:
+	* Amikor a robot checkpointot ér, akkor hívódik meg.
+	*/
+	public void incNumGlue(){
+		if(numGlue < 3){
+			numGlue++;
+		}
+	}
+	
+	/**
+	* incNumOil függvény
+	* Felelősség:
+	* Növeli a robotnál tárolt olajok számát.
+	*
+	* Funkció:
+	* Amikor a robot checkpointot ér, akkor hívódik meg.
+	*/
+	public void incNumOil(){
+		if(numOil < 3){
+			numOil++;
+		}
+	}
+	
 	/*
 	 * DeathAnimation függvény
 	 * Felelősség:Ha meghal egy béka akkor ez felel az animációért 
@@ -270,45 +336,41 @@ public class Robot extends Unit{
 	 * keyPressed függvény
 	 * @param e
 	 * Felelősség:a játékos irányításának eseménykezelése
-	 * !! hiányzik a ragcs/olaj ledobásának lekezelése
 	 * 
 	 * Funkció(ki hívja meg és mikor?):a játékmotor esemény kezelője
 	 * 
 	 */
 	public void keyPressed(int e) {
 
-
-		//TODO Nincs megoldva, hogy lekérdezze hány darab olaj/ragacs áll rendelkezésre a robotnál
-		//Nyíl irányányának változtatása
+	//Nyíl irányányának változtatása és akadlyok lerakása, ha a robot nem lépett olajba
 		if(!oiled){
+	//Nyíl irányának megváltoztatása
 			if (e== Phoebe.Settings.keyconfig[id%2*4+1])
 				alpha+=0.1;
 			if (e== Phoebe.Settings.keyconfig[id%2*4])
 				alpha-=0.1;
-
-
-
-			//Obstacle lerakás
-
-			if(e== Phoebe.Settings.keyconfig[id%2*4+2])  {
-				//TODO
-				//Olaj lerakás
-				Oil item0 = new Oil(x, y);
-				p.addObstacle(item0);
-				System.out.println("new oil created at:"+x+","+y);
+	//Olaj lerakás
+			if(e == Phoebe.Settings.keyconfig[id%2*4+2])  {
+				if(numOil > 0){
+					Oil item0 = new Oil(x, y);
+					p.addObstacle(item0);
+					System.out.println("new oil created at:"+x+","+y);
+					numOil--;
+				}
 			}
-			//...
-			//Ragacs lerakás
-			//TODO Ha van a robotnak csak akkor
-			if(e== Phoebe.Settings.keyconfig[id%2*4+3])  {
-				Glue item1 = new Glue(x, y);
-				p.addObstacle(item1);
-
+	//Ragacs lerakás
+			if(e== Phoebe.Settings.keyconfig[id%2*4+3]){
+				if(numGlue > 0){
+					Glue item1 = new Glue(x, y);
+					p.addObstacle(item1);
+					numGlue--;
+				}
 			}
-
+	//Nyíl végpontjainak kiszámolása
 			arrowendx=(int)(x+r*Math.cos(alpha));
 			arrowendy=(int)(y+r*Math.sin(alpha));
 		}
+	
 		System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);
 		p.repaint();
 	}

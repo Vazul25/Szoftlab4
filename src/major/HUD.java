@@ -25,25 +25,6 @@ public class HUD {
 	private int[] checkpointReached;
 	
 	/**
-	* Két robot esetén két elemű tömb, ami tárolja a még felhasználatlan ragacsokat.
-	* Indexelés: Robot.id%2
-	* Kezdő érték = 1
-	* Maximális érték = 3
-	*/
-	//TODO kell három függvény hozzá (növelés, csökkentés, isZero)
-	private int[] numGlue;
-	
-	/**
-	* Két robot esetén két elemű tömb, ami tárolja a még felhasználatlan olajfoltokat.
-	* Indexelés: Robot.id%2
-	* Kezdő érték = 1
-	* Maximális érték = 3
-	*/
-	//TODO kell három függvény hozzá (növelés, csökkentés, isZero)
-	private int[] numOil;
-	private int numOfCheckpoints;
-	
-	/**
 	* Két robot esetén két elemű tömb, ami tárolja, hogy hány kört tettek meg a robotok eddig.
 	* Indexelés: Robot.id%2
 	* Kezdő érték = 0
@@ -105,14 +86,14 @@ public class HUD {
 	}
 	
 	/**
-	* setCheckpoints metódus
+	* setCheckpointsReached metódus
 	*
 	* Felelősség: 
 	* Ha a paraméterként átadott robot következő 
 	* checkpointja a célvonal (utolsó checkpoint) akkor 
 	* lenullázza a checkpointReached-et és növeli a megtett 
 	* körök számát, illetve ha nem akkor növeli az érintett 
-	* checkpointok számát.
+	* checkpointok számát. 
 	*
 	* Funkció: 
 	* A chechkpointSearch nevü metódus hívja meg, ha érzékelt 
@@ -122,12 +103,12 @@ public class HUD {
 	*/
 	private void setCheckpointReached(Robot r){
 		int robotID = r.getId();
-		//Ha az utolsó checkpointhoz érkeztünk nullázuk a checkpointokat és növeljük a körök számát eggyel
+	//Ha az utolsó checkpointhoz érkeztünk nullázuk a checkpointokat és növeljük a körök számát eggyel
 		if(checkpointReached[robotID%2] == (checkpoints.size()-1)) {
 			checkpointReached[robotID%2] = 0;
 			lap[robotID%2] += 1;
 		}
-		//Ha belelépünk egy checkpointba akkor nveljük a checkpointReached-et
+	//Ha belelépünk egy checkpointba akkor növeljük a checkpointReached-et
 		else{
 			checkpointReached[robotID%2] += 1;
 		}
@@ -138,40 +119,38 @@ public class HUD {
 	 * 
 	 * Felelősség:
 	 * Minden híváskor ellenőrzi, hogy a robot és a checkpoint metszete üres-e.
-	 * Ha nem üres, meghívja a setCheckpointReached metódust.
+	 * Ha nem üres, meghívja a setCheckpointReached metódust. 
+	 * Ha eléri a checkpointot egy robot, akkor kap egy 
+	 * olajat és egy ragacsot a készletébe.
 	 * 
 	 * Funkció: 
 	 * A játékmotor hívja meg minden ciklusban, lépés után. 
 	 */
 	public void checkpointSearch(){
-		//minden lépésnél vizsgál, hogy benne vagyunk-e a következő teljesítendő checkpoint mezőben
-		//végig megyünk minden roboton
+	//minden lépésnél vizsgáljuk, hogy benne van-e valamelyik robot a következő teljesítendő checkpoint mezőben
 		for(Robot i : robots){			
-			Area robotarea = new Area(i.getHitbox());
-			//TODO ki kell keresni a következő checkpointot, majd annak a hitbox-ával összemetszeni a robot hitboxát
-			/*	Hibás kód -1-gyel indexelés
-			 * Area checkpointarea = new Area(checkpoints.get(checkpointReached[robotID%2]-1));
-			 */
-			//robotarea.intersect(checkpointarea);
+	//kiszámoljuk a következő checkpoint indexét
+			int nextCheckpoint;
+			if(checkpointReached < (checkpoints.size()-1) ){
+				nextCheckpoint = checkpointReached + 1;
+			}
+			else{
+				nextCheckpoint = 0;
+			}
 			
+	//TODO tesztelés
+			Area robotarea = new Area(i.getHitbox());
+			Area checkpointarea = new Area(checkpoints.get(nextCheckpoint)); 
+			robotarea.intersect(checkpointarea);
+			
+	//Ha a checkpoint és a robot metszik egymást, akkor növeljük a 
+	//náluk levő olaj, ragacskészletet és feljegyezzük a 
+	//checkpoint teljesítését
 			if(!robotarea.isEmpty()){
 				setCheckpointReached(i);
+				i.incNumGlue();
+				i.incNumOil();
 			}
-
-		//	robotarea.intersect(checkpointarea);
-			
-			//Az kezdőhelyen található checkpoint az utolsó
-			/*if(!robotarea.isEmpty()){
-				//Ha az utolsó checkpointhoz érkeztünk nullázuk a checkpointokat és növeljük a körök számát eggyel
-				if(checkpointReached[robotID%2] == (checkpoints.size()-1)) {
-					checkpointReached[robotID%2] = 0;
-					lap += 1;
-				}
-				//Ha belelépünk egy checkpointba akkor nveljük a checkpointReached-et
-				else{
-					checkpointReached[robotID%2] += 1;*/
-				//}
-			//}
 		}		
 	}
 	

@@ -1,7 +1,7 @@
-The MIT License (MIT)
+﻿The MIT License (MIT)
 
-Copyright (c) 2015 Kov�cs Levente, Magyar Mil�n, Graics Bence, Lov�sz Attila, 
-T�th Kriszti�n
+Copyright (c) 2015 Kovács Levente, Magyar Milán, Graics Vince, Lovász Attila, 
+Tóth Krisztián
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
