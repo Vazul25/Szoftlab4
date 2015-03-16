@@ -8,49 +8,184 @@
 \section{A szkeleton modell valóságos use-case-ei}
 
 \subsection{Use-case diagram}
-\comment{Kisebb problémám akadt a diagrammal, szerettem volna minél szebben megcsinálni (UGRÁS-ba extend nyíl: checkpointugrás, ragacs/olajba ugrás, meghalás) csak most melyik aktorhoz melyik tartozik kicsit belezavarodtam /Attó}
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=17cm]{skeleton_use_case3.PNG}
-\caption{x}
+\caption{Use-case diagramm}
 \label{fig:SzkeletonUseCase}
 \end{center}
 \end{figure}
 \newpage
 
 \subsection{Use-case leírások}
-\comment{Szerintem bele lehetne venni a use-case-ekbe még a "robottal való ütközés"-t és a "checkpoint-ba ugrás"-t is. //Winnie}
-\comment{Egyetértek, javítva, megoldva! ;) //Attó}
 
-\usecase{Új játék indítása}{A játékos elindítja a játékot.}{Játékos}{A grafikus felületen (menüben) a felhasználó rákattinthat az „Új Játék indítása” menüpontra.}
-\usecase{Irányváltoztatás}{A robot irányának beállítása.}{Játékos}{A robot ugrása előtt lehetőség van beállítani az irányát 3 másodpercig.}
-\usecase{Játékmód kiválasztás}{Választás a játékmódok közül}{Játékos}{A játékos tud választani két játékmód közül, hogy milyen játékmódban szeretne játszani.}
-\usecase{Checkpointba ugrás}{A robot beleugrik egy checkpointba.}{Robot}{A robot körmegtételének ellenőrzése miatt a robotnak checkpointokba kell beleugrálnia.}
-\usecase{Ütközés}{Robotok ütköznek}{Robot}{Két robot összeütközése után lepattannak egymásról.}
-\usecase{Idő játékmód kiválasztása}{A játékos kiválasztja az idő játékmódot.}{Játékos}{A grafikus felületen (menüben) a felhasználó olyan játékmódban indítja el a játékot amiben egy számláló fut visszafelé, és ha lejár, vége a játéknak.}
-\newpage
-\usecase{Kör játékmód kiválasztása}{A játékos kiválasztja a kör játékmódot.}{Játékos}{A grafikus felületen (menüben) a felhasználó olyan játékmódban indítja el a játékot, melyben el kell érni egy megadott körszámot, és ezután ér véget a játék.}
-\usecase{Ugrás}{A robot ugrik a megadott irányba.}{Robot}{A játékos a megadott billentyűkkel beállítja az ugrás irányát, majd a robot ugrik.}
-\usecase{Várakozás}{Egy számláló 3 másodpercig visszaszámol.}{Director time}{A körökre osztás miatt a robot csak három másodpercenként ugrik.}
-\usecase{Meghalás}{A robot meghal.}{Pálya}{Az ugrás után, ha a robot nem tartózkodik a pályán, akkor meghal.}
-\usecase{Akadályozás}{A pályára akadályok kerülnek.}{Játékos, Pálya}{A játékos utasíthatja a robotot, hogy rakjon le akadályt a pályára, illetve a pályára is kerülnek akadályok a játék elején.}
-\usecase{Ragacs lerakás}{A pályára ragacs kerül.}{Játékos}{A robot ragacsot rak le a pályára a játékos utasítására.}
-\usecase{Olajfolt lerakás}{A pályára olajfolt kerül.}{Játékos}{A robot olajfoltot rak le a pályára a játékos utasítására.}
-\newpage
-\usecase{Olajba ugrás}{A játékos olajfoltba ugrik.}{Robot}{A robot az ugrás után egy olajfoltra érkezik a pályán.}
-\usecase{Irányíthatatlan}{A robot irányíthatatlan lesz.}{Olajfolt}{A játékos nem fogja tudni megváltoztatni a következő körben a robot ugrásának irányát, az „csúszni” fog tovább.}
-\usecase{Ragacsba ugrás}{A játékos ragacsba ugrik.}{Robot}{A robot az ugrás után egy ragacsba érkezik a pályán.}
-\usecase{Lassulás}{A robot sebessége a felére csökken.}{Ragacs}{Ha a robot ragacsba ugrik a pályán, akkor sebessége a felére csökken, a következő körben nem tud akkorát ugrani.}
-\usecase{Kilépés}{A játékos kilép a játékból.}{Játékos}{A felhasználó visszalép a menübe, vagy teljesen leállítja a játék működését.}
+\usecase{Új játék indítása}
+{A játékos elindítja a játékot.}
+{Játékos}
+{A grafikus felületen (menüben) a felhasználó rákattinthat az „Új Játék indítása” menüpontra.}
 
+\usecase{Játékmód kiválasztás}
+{Választás a játékmódok közül}
+{Játékos}
+{A játékos tud választani két játékmód közül, hogy milyen játékmódban szeretne játszani.}
+
+\usecase{Idő játékmód kiválasztása}
+{A játékos kiválasztja az idő játékmódot.}
+{Játékos}
+{A grafikus felületen (menüben) a felhasználó olyan játékmódban indítja el a játékot amiben egy számláló fut visszafelé, és ha lejár, vége a játéknak.}
+
+\usecase{Kör játékmód kiválasztása}
+{A játékos kiválasztja a kör játékmódot.}
+{Játékos}
+{A grafikus felületen (menüben) a felhasználó olyan játékmódban indítja el a játékot, melyben el kell érni egy megadott körszámot, és ezután ér véget a játék.}
+
+\usecase{Irányváltoztatás}
+{A robot irányának beállítása.}
+{Játékos}
+{A robot ugrása előtt lehetőség van beállítani az irányát 3 másodpercig.}
+
+\usecase{Várakozás}
+{Egy számláló 3 másodpercig visszaszámol.}
+{Director time}
+{A körökre osztás miatt a robot csak három másodpercenként ugrik.}
+\pagebreak
+
+\usecase{Akadályozás}
+{A pályára akadályok kerülnek.}
+{Játékos, Pálya}
+{A játékos utasíthatja a robotot, hogy rakjon le akadályt a pályára, illetve a pályára is kerülnek akadályok a játék elején.}
+
+\usecase{Olajfolt lerakás}
+{A pályára olajfolt kerül.}
+{Játékos}
+{A robot olajfoltot rak le a pályára a játékos utasítására.}
+
+\usecase{Ragacs lerakás}
+{A pályára ragacs kerül.}
+{Játékos}
+{A robot ragacsot rak le a pályára a játékos utasítására.}
+
+\usecase{Kilépés}
+{A játékos kilép a játékból.}
+{Játékos}
+{A felhasználó visszalép a menübe, vagy teljesen leállítja a játék működését.}
+
+\usecase{Ütközés}
+{Robotok ütköznek}
+{Robot}
+{Két robot összeütközése után lepattannak egymásról.}
+
+\usecase{Ugrás}
+{A robot ugrik a megadott irányba.}
+{Robot}
+{A játékos a megadott billentyűkkel beállítja az ugrás irányát, majd a robot ugrik.}
+\newpage
+
+\usecase{Checkpointba ugrás}
+{A robot beleugrik egy checkpointba.}
+{Robot}
+{A robot körmegtételének ellenőrzése miatt a robotnak checkpointokba kell beleugrálnia.}
+
+\usecase{Meghalás}
+{A robot meghal.}
+{Pálya}
+{Az ugrás után, ha a robot nem tartózkodik a pályán, akkor meghal.}
+
+\usecase{Olajba ugrás}
+{A játékos olajfoltba ugrik.}
+{Robot}
+{A robot az ugrás után egy olajfoltra érkezik a pályán.}
+
+\usecase{Irányíthatatlan}
+{A robot irányíthatatlan lesz.}
+{Olajfolt}
+{A játékos nem fogja tudni megváltoztatni a következő körben a robot ugrásának irányát, az „csúszni” fog tovább.}
+
+\usecase{Ragacsba ugrás}
+{A játékos ragacsba ugrik.}
+{Robot}
+{A robot az ugrás után egy ragacsba érkezik a pályán.}
+
+\usecase{Lassulás}
+{A robot sebessége a felére csökken.}
+{Ragacs}
+{Ha a robot ragacsba ugrik a pályán, akkor sebessége a felére csökken, a következő körben nem tud akkorát ugrani.}
+\pagebreak
 
 \section{A szkeleton kezelői felületének terve, dialógusok}
-\comment{A szkeleton által elfogadott bemenetek , valamint a szöveges konzolon megjelenő kimenetek. A kiemenet formátuma olyan kell legyen, ami alapján a működés összevethető a korábbi szekvencia-diagramokkal.}
 
-\section{Szekvencia diagramok a belső működésre}
+A szkeleton egy konzolosan megvalósított program lesz, melyen a felhasználó választhatja ki a teszt eseteket a lenyomott billentyűk segítségével. Az eseteken belül a különféle lehetőségeket eldöntendő kérdésekre való válaszolással lehet megadni.
+Miután futtatjuk a programot, a felhasználónak ki kell választania a lehetséges játékmódok közül egyet, majd el indul a játék. A menü felépítése itt látható:\\
+
+
+\indent 0. Játék beállítása, Játékmód kiválasztása (Új Játék Indítása)
+\begin{itemize}
+\item 0.1 Idő Játékmód
+\item 0.2 Kör Játékmód
+\end{itemize} 
+\begin{enumerate}
+\item Robot irányváltoztatás, ugrása
+\begin{itemize}
+\item 1.1 Adja meg, milyen szögben ugorjon a robot! (0 - 360)
+\end{itemize}
+\item Ragacs lerakása
+\begin{itemize}
+\item 2.1 Van-e nálunk ragacs? (I / N)
+\end{itemize}
+
+\item Olajfolt lerakása
+\begin{itemize}
+\item 3.1 Van-e nálunk olaj? (I / N)
+\end{itemize}
+
+\item Ragacsba lépés
+\begin{itemize}
+\item 4.1 Van-e a ponton ragacs? (I / N)
+\end{itemize}
+
+\item Olajfoltba lépés
+\begin{itemize}
+\item 5.1 Van-e a ponton olajfolt? (I / N)
+\end{itemize}
+
+\item Checkpointba lépés
+\begin{itemize}
+\item 6.1 Van-e a ponton checkpoint? (I / N)
+\end{itemize}
+
+\item Robotok ütközése
+\begin{itemize}
+\item 7.1 Érintkezik-e a két robot? (I / N)
+\end{itemize}
+
+\item Pályáról való 
+\begin{itemize}
+\item 8.1 Elhagyta-e a robot a pálya kereteit? (I /N)
+\end{itemize}
+
+\item Idő lejárása/Megtettünk-e minden kört?
+\begin{itemize}
+\item 9.1 Lejárt-e a a megadott idő? /\\ Körbeértünk-e a pályán annyiszor, ahány kört meg kelett tenni? (I / N)
+\end{itemize}
+
+\item Kilépés
+\end{enumerate}
+\pagebreak
+Az eldöntendő kérdéseket nem kell kiválasztani, azok alapból kiírásra kerülnek majd a szülő tag kiválasztása után. A “Robot mozgatása” kivételével, ami egy számot vár válasznak, ezekre a kérdésekre igen - nemmel kell válaszolni, majd ezek után meghívásra kerülnek a szükséges függvények.
+Az alábbi példa a szkeleton egy lehetséges működési folyamatát mutatja be, ahol a robot olajfoltba lépése van lemodellezve:
+
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=17cm]{images/szkeleton.JPG}
+\label{fig:example2}
+\end{center}
+\end{figure}
 
 \pagebreak
+
+\section{Szekvencia diagramok a belső működésre}
 \subsection{Robot::CheckpointSearch}
 \begin{figure}[h]
 \begin{center}
