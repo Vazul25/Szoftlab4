@@ -4,27 +4,36 @@ import java.awt.Rectangle;
 
 /*
  * Obstacle osztály
- * Felelősség:A pályán/játékosoknál lévő különböző akadályokat(ragacs,olaj esetleg késöbb rakéta) 
- * összefogó ősosztály
+ * Felelősség:
+ * A pályán/játékosoknál lévő különböző akadályokat (ragacs,olaj) összefogó ősosztály.
  * 
  * Ősosztályok: Unit
- * 
- * Interfészek:még nincs
  *  
  */
 
 public abstract class Obstacle extends Unit {
+	/*
+	 * WIDTH : Az akadályokat jellemző szélesség. Szükség van rá,
+	 *		   hogy létrehozzuk a leszármazottak hitbox-át(sokszög pályaelem).
+	 * HEIGHT : Az akadályokat jellemző hosszúság. Szükség van rá, 
+	 * 		   hogy létrehozzuk a leszármazottak hitbox-át(sokszög pályaelem).
+	 */
 	protected static  int WIDTH=40;
 	protected static int HEIGHT=40;
 	protected int lifetime;//ezt növeljük körönként
 	/*
 	 * Obstacle kontruktor
-	 * Felelősség:meghívja a unit konstruktorát a megadott adatokkal
+	 * 
+	 * Felelősség:
+	 * Meghívja a Unit konstruktorát a megadott adatokkal és létrehoz egy sokszög elemet ami 
+	 * reprezentálja a pályán majd.
+	 *
+	 * Funkció(ki hívja meg és mikor?):
+	 * A leszármaztatott osztályok a konstruktoraikban.
+	 * 
 	 * @param x kezdő koordináta
 	 * @param y kezdő koordináta
-	 * @param imagelocation az akadályhoz tartozó kép helye
-	 * Funkció(ki hívja meg és mikor?):a leszármaztatott osztályok a konstruktoraikban
-	 * 	
+	 *	
 	 */
 	public Obstacle(int x, int y) {
 		super(x, y);
@@ -34,20 +43,27 @@ public abstract class Obstacle extends Unit {
 	
 	/*
 	 * Effect függvény (abstract)
-	 * Felelősség:ez határozza meg hogy milyen hatással van a robotra ha érintkezik egy ilyen tárgyal
+	 * 
+	 * Felelősség:
+	 * Meghatározza, milyen hatással van a robotra, ha érintkezik egy Obstacle-lel.
+	 * 
+	 * Funkció(ki hívja meg és mikor?):
+	 * Ütközéskor hívja meg az ütközést vizsgáló függvénye a Robot osztálynak.
+	 *
 	 * @param r azt határozza meg hogy melyik robotra hajtsa végre a változtatásokat
-	 * Funkció(ki hívja meg és mikor?):ütközéskor hívja meg az ütközést vizsgáló függvénye a Robot osztálynak
-	 * 	
 	 */
 	public abstract  void effect(Robot r);
 	
 	/*
 	 * Move függvény
 	 * @see major.Unit#move()
-	 * Felelősség:Amennyiben kell mozgatni az akadályokat(pl rakéta) ez fogja 
-	 * elvégezni(ha nem akkor üres függvény) 
+	 * Felelősség:
+	 * Mozgatásért felelős függvény. Ősosztályból öröklött, felülírt függvény. 
+	 * Mivel nem lehetséges az akadályok mozgása, ezért üres a függvény törzse.
 	 * 
 	 * Funkció(ki hívja meg és mikor?):
+	 * Rendes működés során sehol nem hívódik meg, csupán azért van implementálva, 
+	 * mert absztrakt az ősosztályban
 	 * 	
 	 */
 	@Override

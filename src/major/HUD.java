@@ -54,12 +54,8 @@ public class HUD {
 		lap = new int[robs.size()];
 		
 		robots = robs;
-		numGlue = new int[robots.size()];
-		numOil = new int[robots.size()];
 		for(Robot i: robots){
 			lap[i.getId()%2] = 0;
-			numGlue[i.getId()%2] = 3;
-			numOil[i.getId()%2] = 3;
 		}
 	}
 	/**
@@ -131,8 +127,8 @@ public class HUD {
 		for(Robot i : robots){			
 	//kiszámoljuk a következő checkpoint indexét
 			int nextCheckpoint;
-			if(checkpointReached < (checkpoints.size()-1) ){
-				nextCheckpoint = checkpointReached + 1;
+			if(checkpointReached[i.getId()%2] < (checkpoints.size()-1) ){
+				nextCheckpoint = checkpointReached[i.getId()%2] + 1;
 			}
 			else{
 				nextCheckpoint = 0;

@@ -2,7 +2,6 @@ package major;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyListener implements KeyListener, Runnable  {

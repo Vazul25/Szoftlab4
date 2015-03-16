@@ -1,33 +1,42 @@
 ﻿package major;
 
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-/*
+/**
  * Glue osztály
- * Felelősség:A pályára lerakható olaj megvalósítása.
  * 
- * Ősosztályok: Az Obstacle ami a Unit leszármazottja
+ * Felelősség:
+ * Ez az objektum az Obstacle osztály leszármazottja. Hasonlóan a Glue objektumhoz, egy adott hatást 
+ * valósít meg, ami letiltja a következő körben történő irányítását a robotnak, ami belelépett.
+ * Ha belelép egy játékos egy ilyen olajfoltba, az effect függvény letiltja a mozgatást az adott roboton a 
+ * következő ugrásig.
  * 
- * Interfészek:még nincs
+ * Ősosztályok: 
+ * Unit <- Obstacle
+ *
+ * Interfésze:
+ * Unit-ból származott IVisible
  *  
  */
 public class Oil extends Obstacle {
 	protected static BufferedImage img;
 
-	/*
+	/**
 	 * Oil kontruktor
-	 * Felelősség:Egy Oil elem létrehozása
-	 * @see major.Unit#Unit()
+	 *
+	 * Felelősség:
+	 * Egy Oil elem létrehozásáért felelős.
+	 *
 	 * @param x kezdő koordináta
 	 * @param y kezdő koordináta
-	 * @param imagelocation a ragacs  képének a helye
-	 * Funkció(ki hívja meg és mikor?):A játék motor hívja meg mikor új olajat tesznek  a pályára
+	 
+	 * Funkció(ki hívja meg és mikor?):
+	 * A játék motor hívja meg mikor új olajat tesznek a pályára.
 	 * 	
 	 */
 	public Oil(int x, int y) {
@@ -37,13 +46,17 @@ public class Oil extends Obstacle {
 	}
 	
 
-	/*
+	/**
 	 * Effect függvény
-	 * @see major.Obstacle#effect(major.Robot)
-	 * Felelősség:ez határozza meg hogy milyen hatással van a robotra az olaj
-	 * @param r azt határozza meg hogy melyik robotra hajtsa végre a változtatásokat
-	 * Funkció(ki hívja meg és mikor?):ütközéskor hívja meg az ütközést vizsgáló függvénye a Robot osztálynak
-	 * || a játék motor hivja meg a robotra ami ütközött
+	 * 
+	 * Felelősség:
+	 * Meghatározza, milyen hatással van a robotra, ha beleugrik egy olajfoltba. Ebben az esetben letiltja 
+	 * a játékost, hogy irányt váltson.
+	 * 
+	 * Funkció(ki hívja meg és mikor?):
+	 * A Phoebe hivja meg a robotra ami ütközött.
+	 *
+	 * @param r Azt határozza meg hogy melyik robotra hajtsa végre a változtatásokat
 	 * 	
 	 */
 	@Override

@@ -1,7 +1,5 @@
 ﻿package minor;
 
-import java.io.IOException;
-
 import major.Phoebe;
 
 /**

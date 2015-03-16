@@ -1,6 +1,5 @@
 ﻿package minor;
 
-import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.Area;
 import java.util.List;

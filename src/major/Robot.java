@@ -3,19 +3,19 @@
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import major.Phoebe.Settings;
-
 /*
  * Robot osztály
- * Felelősség:A játékban részvevő ugráló robotok viselkedését és kezelését leíró osztály
+ * Felelősség:
+ * A játékban részvevő ugráló robotok viselkedését és kezelését leíró osztály.
+ * Olyan objektum, mely a pályán található robotokat valósítja meg. Leírja a viselkedésüket és a kezelésüket. 
+ * A „Robot” osztály a Unit-ból származik le, ezáltal van pozíciója és az ütközés is le van kezelve. 
+ * Felelős a mozgásért, megállapítja egy adott akadállyal vagy robottal ütközött-e és kezeli a felhasználó által leütött gombokat.
  * 
  * Ősosztály:Unit
  * 
@@ -30,12 +30,14 @@ public class Robot extends Unit{
 	 ** staticid:A robot statikus sorszáma , ebből képezzük a saját azonosító számukat
 	 *
 	 ** WIDTH,HEIGHT:placeholder majd a robot képének szélessége és magassága lesz bent ,arra kell,
-	 *hogy az irányításhoz tartozó nyil jó helyről induljon(de meg lehet úgy is oldani hogy x,y koordinátából 
-	 *kivonjuk a buffer image width/2,height/2 adatát)
+	 * hogy az irányításhoz tartozó nyil jó helyről induljon(de meg lehet úgy is oldani hogy x,y koordinátából 
+	 * kivonjuk a buffer image width/2,height/2 adatát)
 	 *
 	 */
 	protected static int staticid=0;
 	private  static final  int r=100; //sugár
+	
+	//TESZT
 	private  static final  int ANIMATIONSPEED=5;
 	/*static */int WIDTH=40;//teszt placeholder
 	/*static*/ int HEIGHT=40;//teszt placeholder
@@ -52,7 +54,7 @@ public class Robot extends Unit{
 	* Kezdő érték = 1
 	* Maximális érték = 3
 	*/
-	private int[] numOil;
+	private int numOil;
 	
 	/*
 	 * Kép fájl
@@ -100,57 +102,69 @@ public class Robot extends Unit{
 	//Tartalmazó objektum
 	protected Phoebe p;
 
-	/*
+	/**
 	 * Konstruktor
-	 * Felelősség:Létrehozza a robotot és inicializálja a változóit 
+	 * Felelősség:
+	 * Létrehozza a robotot és inicializálja a változóit 
+	 * 
+	 * Funkció(ki hívja meg és mikor?):
+	 * A Phoebe.init() a pálya létrehozásakor
+	 * 
 	 * @param x a robot létrehozásának x koordinátája
 	 * @param y a robot létrehizásának y koordinátája
-	 * 
-	 * Funkció(ki hívja meg és mikor?):A játék motor a pálya létrehozásakor
-	 * 
 	 */
 	public Robot(int x, int y, Phoebe p) {
 		super(x, y);
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
+		
 		id=staticid;
+		staticid+=1;
+		
 		slowed=1.0;
 		oiled=false;
-		staticid+=1;
+
+		numGlue = 3;
+		numOil = 3;
+		
 		this.p=p;
+		
 		arrowendx=(int)(x+r*Math.cos(alpha));
 		arrowendy=(int)(y+r*Math.sin(alpha));
-		// TODO Auto-generated constructor stub
-
 	}
 
 	// Setter-Getterek
 
-	/*
+	/**
 	 * GetId függvény
-	 * @return a robot egyedi azonosítója
+	 * 
 	 * Funkció(ki hívja meg és mikor?): egyenlőre senki
 	 * 
+	 * @return a robot egyedi azonosítója
 	 */
 	public int getId(){
 		return id;
 	}
 
-	/*
+	/**
 	 * setOiled függvény
-	 * Felelősség:átállítja a robot olaj effekt követéséhez tartozó állapot változót 
+	 * Felelősség:
+	 * Átállítja a robot olaj effekt követéséhez tartozó állapot változót 
 	 * 
-	 * Funkció(ki hívja meg és mikor?):Az Oil osztály effekt függvénye
+	 * Funkció(ki hívja meg és mikor?):
+	 * Az Oil osztály effekt függvénye
 	 *  	
 	 */
 	public void setOiled(){
 		oiled=true;
 	}
 
-	/*
+	/**
 	 * setGlue függvény
-	 * Felelősség:átállítja a robot ragacs effekt követéséhez tartozó állapot változót 
+	 * Felelősség:
+	 * Átállítja a robot ragacs effekt követéséhez tartozó állapot változót.
 	 * 
-	 * Funkció(ki hívja meg és mikor?):A Glue osztály effekt függvénye
+	 * Funkció(ki hívja meg és mikor?):
+	 * A Glue osztály effekt függvénye.
 	 */
 	public void setGlue(){
 		slowed=0.5;
@@ -177,7 +191,7 @@ public class Robot extends Unit{
 	* A HUD kérdezi le, hogy megjelenítse a képernyőn.
 	*/
 	public int getNumOil(){
-	
+		return numOil;
 	}
 	
 	/**
@@ -208,7 +222,7 @@ public class Robot extends Unit{
 		}
 	}
 	
-	/*
+	/**
 	 * DeathAnimation függvény
 	 * Felelősség:Ha meghal egy béka akkor ez felel az animációért 
 	 * 
@@ -219,13 +233,15 @@ public class Robot extends Unit{
 		//TODO
 	};
 
-	/*
+	/**
 	 * Paint függvény
-	 * @param g
+	 * 
 	 * Felelősség:kirajzolja a robotot a saját koordinátáin + ha nem lép akkor a nyilat is
 	 * 
-	 * Funkció(ki hívja meg és mikor?):a játékmotor fő ciklusa
-	 *
+	 * Funkció(ki hívja meg és mikor?):
+	 * a játékmotor fő ciklusa
+	 * 
+	 * @param g grafikus felület
 	 * 
 	 */
 	public void paint(Graphics2D g) {
@@ -244,31 +260,37 @@ public class Robot extends Unit{
 	}
 
 
-	/*
+	/**
 	 * Move függvény
-	 * @see major.Unit#move()
-	 * Felelősség:a robot léptetését bonyolítja le
 	 * 
-	 * Funkció(ki hívja meg és mikor?):a játékmotor minden lépésnél
+	 * Felelősség:
+	 * A robot léptetését kezeli le.
+	 * 
+	 * Funkció(ki hívja meg és mikor?):
+	 * A játékmotor minden lépésnél.
 	 */
 	@Override
 	public void move() throws InterruptedException, IOException {
-		// TODO Auto-generated method stub
+	//User általi változtatás letiltása (lásd Robot.keyPressed())
 		oiled=true;
+	//Nyíl koordinátáinak kiszámolása
 		arrowendx=(int)(x+slowed*r*Math.cos(alpha));
 		arrowendy=(int)(y+slowed*r*Math.sin(alpha));
 		//x=arrowendx;	
 		//y=arrowendy;
-
-
-
+	
+	//TESZT
 		double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
 		double speedy=Math.round((arrowendy-y)/ANIMATIONSPEED);
+	
+	//Olajjal ütközés hatásának eltüntetése
 		slowed=1;
-		//while(!reached){
+		
+	//TESZT, GRAFIKA
 		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
 		HEIGHT=60;
 		//if(Math.abs((int)(arrowendx-x))<20 &&Math.abs((int)(arrowendy-y))<20) reached=true;
+		
 		for(int i=0;i<ANIMATIONSPEED;i++){
 			if(i<ANIMATIONSPEED/2){WIDTH+=2;HEIGHT+=2;}
 			else {WIDTH-=2;HEIGHT-=2;}
@@ -290,23 +312,29 @@ public class Robot extends Unit{
 
 	}
 
-	/*
+	/**
 	 * collisionWithObstacles függvény
-	 * @param obstacle az akadály amire az ütközést vizsgáljuk
-	 * Felelősség:megnézi hogy a robot érintkezett e valami akadállyal
 	 * 
-	 * Funkció(ki hívja meg és mikor?):játékmotor a főciklusban
+	 * Felelősség:
+	 * Megnézi hogy a robot érintkezett-e valami akadállyal.
+	 * 
+	 * Funkció(ki hívja meg és mikor?):
+	 * Phoebe.run()
+	 * 
+	 * @param obstacle az akadály amire az ütközést vizsgáljuk
 	 */
 	public boolean collisionWithObstacles(Obstacle obstacle){
 
 		return this.intersect(obstacle);		
 	}
 
-	/*
+	/**
 	 * bounce függvény
-	 * Felelősség:A következő lépés végpontjának beállítása ha volt üzközés lepattannak egymásról
+	 * Felelősség:
+	 * A következő lépés végpontjának beállítása ha volt ütközés lepattannak egymásról.
 	 * 
-	 * Funkció(ki hívja meg és mikor?):collisionWithRobot
+	 * Funkció(ki hívja meg és mikor?):
+	 * Robot.collisionWithRobot()
 	 * 
 	 */
 	public void bounce(){
@@ -323,10 +351,14 @@ public class Robot extends Unit{
 
 	/*
 	 * collisionWithRobot függvény
-	 * @param r
-	 * Felelősség:azt vizsgálja hogy ütközött e 2 robot és ha igen meghívja a bounce függvényt
 	 * 
-	 * Funkció(ki hívja meg és mikor?):játékmotor minden lépéskor
+	 * Felelősség:
+	 * Azt vizsgálja hogy ütközött e 2 robot és ha igen meghívja a bounce függvényt
+	 * 
+	 * Funkció(ki hívja meg és mikor?):
+	 * Phoebe.run() minden lépéskor
+	 * 
+	 * @param r A robot, amivel az ütközést vizsgálni kell.
 	 * 
 	 */
 	public void collisionWithRobot(Robot r){
@@ -341,11 +373,14 @@ public class Robot extends Unit{
 
 	/*
 	 * keyPressed függvény
-	 * @param e
-	 * Felelősség:a játékos irányításának eseménykezelése
+	 *
+	 * Felelősség:
+	 * A játékos irányításának eseménykezelése.
 	 * 
-	 * Funkció(ki hívja meg és mikor?):a játékmotor esemény kezelője
+	 * Funkció(ki hívja meg és mikor?):
+	 * MyListener.run()
 	 * 
+	 * @param e (lásd Phoebe.Settings.keyconfig)
 	 */
 	public void keyPressed(int e) {
 
