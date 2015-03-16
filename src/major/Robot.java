@@ -37,8 +37,6 @@ public class Robot extends Unit{
 	protected static int staticid=0;
 	private  static final  int r=100; //sugár
 	
-	//TESZT
-	private  static final  int ANIMATIONSPEED=5;
 	/*static */int WIDTH=40;//teszt placeholder
 	/*static*/ int HEIGHT=40;//teszt placeholder
 	
@@ -123,8 +121,8 @@ public class Robot extends Unit{
 		slowed=1.0;
 		oiled=false;
 
-		numGlue = 3;
-		numOil = 3;
+		numGlue = 1;
+		numOil = 1;
 		
 		this.p=p;
 		
@@ -233,32 +231,6 @@ public class Robot extends Unit{
 		//TODO
 	};
 
-	/**
-	 * Paint függvény
-	 * 
-	 * Felelősség:kirajzolja a robotot a saját koordinátáin + ha nem lép akkor a nyilat is
-	 * 
-	 * Funkció(ki hívja meg és mikor?):
-	 * a játékmotor fő ciklusa
-	 * 
-	 * @param g grafikus felület
-	 * 
-	 */
-	public void paint(Graphics2D g) {
-		g.fillRect(x, y, WIDTH, HEIGHT);//placeholder ide jön majd a kép
-		g.setStroke(new BasicStroke(10));
-		if(!oiled)
-			g.drawLine(x+WIDTH/2, y+HEIGHT/2, arrowendx+WIDTH/2, arrowendy+HEIGHT/2);
-		g.drawImage(img[id%2], x, y, WIDTH, HEIGHT, null);
-
-		//width,height a buffered image adatai lesznek
-	}
-	public  static void setUnitImage() throws IOException{
-		img=new BufferedImage[2];
-		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog0.jpg"));
-		img[1]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
-	}
-
 
 	/**
 	 * Move függvény
@@ -276,37 +248,13 @@ public class Robot extends Unit{
 	//Nyíl koordinátáinak kiszámolása
 		arrowendx=(int)(x+slowed*r*Math.cos(alpha));
 		arrowendy=(int)(y+slowed*r*Math.sin(alpha));
-		//x=arrowendx;	
-		//y=arrowendy;
-	
-	//TESZT
-		double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
-		double speedy=Math.round((arrowendy-y)/ANIMATIONSPEED);
+		x=arrowendx;	
+		y=arrowendy;
 	
 	//Olajjal ütközés hatásának eltüntetése
 		slowed=1;
-		
-	//TESZT, GRAFIKA
-		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
-		HEIGHT=60;
-		//if(Math.abs((int)(arrowendx-x))<20 &&Math.abs((int)(arrowendy-y))<20) reached=true;
-		
-		for(int i=0;i<ANIMATIONSPEED;i++){
-			if(i<ANIMATIONSPEED/2){WIDTH+=2;HEIGHT+=2;}
-			else {WIDTH-=2;HEIGHT-=2;}
-			x+=speedx;
-			y+=speedy;
-			p.repaint();
-			Thread.sleep(50);
-		}
-
-		WIDTH=40;
-
-		HEIGHT=40;
-		x=arrowendx;
-		y=arrowendy;
+	//User általi változtatás engedélyezése
 		oiled=false;
-		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog0.jpg"));
 
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 
@@ -396,7 +344,6 @@ public class Robot extends Unit{
 				if(numOil > 0){
 					Oil item0 = new Oil(x, y);
 					p.addObstacle(item0);
-					System.out.println("new oil created at:"+x+","+y);
 					numOil--;
 				}
 			}
@@ -412,9 +359,5 @@ public class Robot extends Unit{
 			arrowendx=(int)(x+r*Math.cos(alpha));
 			arrowendy=(int)(y+r*Math.sin(alpha));
 		}
-	
-		System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);
-		p.repaint();
 	}
-
 }

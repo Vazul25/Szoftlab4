@@ -12,7 +12,9 @@ import java.io.IOException;
  * IVisible
  * 
  */
-public abstract class Unit implements iVisible{
+public abstract class Unit 
+//implements iVisible
+{
 	
 	//Atribútumok
 	 

@@ -24,7 +24,7 @@ public class MyTimer {
 	}
 	
 	public boolean isZero(){
-		return false;
+		return true;
 		
 	}
 	

@@ -107,11 +107,13 @@ public class MapBuilder{
 	 *  @return igaz értékkel tér vissza, ha a robot leesett a pályáról
 	 */
 	public boolean robotOutsideOfMap(Robot r){
-		Area area = new Area(map);
-		Area otherArea = new Area(r.getHitbox());
-		area.intersect(otherArea);
+		//Area area = new Area(map);
+		//Area otherArea = new Area(r.getHitbox());
+		//area.intersect(otherArea);
 		//TODO revision
-		return area.getBounds().getSize().equals(r.getHitbox().getBounds().getSize());
+		//return area.getBounds().getSize().equals(r.getHitbox().getBounds().getSize());
+		//TODO kérdés
+		return true;
 	}
 	
 	/*
@@ -120,12 +122,13 @@ public class MapBuilder{
 	 *  @return igaz értékkel tér vissza, ha a robot leesett a pályáról
 	 */
 	public boolean obstacleOutsideOfMap(Obstacle r){
-		Area area = new Area(map);
-		Area otherArea = new Area(r.getHitbox());
-		area.intersect(otherArea);
+		//Area area = new Area(map);
+		//Area otherArea = new Area(r.getHitbox());
+		//area.intersect(otherArea);
 		//TODO revision
-		return area.getBounds().getSize().equals( r.getHitbox().getBounds().getSize() );
-
+		//return area.getBounds().getSize().equals( r.getHitbox().getBounds().getSize() );
+		//TODO kérdés
+		return true;
 	
 	}
 

@@ -10,12 +10,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import minor.MapBuilder;
 import minor.*;
 
 /*
@@ -29,15 +29,15 @@ import minor.*;
  * robotba ütközések, pályáról leesés)
  * 
  * Ősosztályok:
- * JPanel
+ * 
  * 
  * Interfészek:
  * Runnable
  * 
  */
-public class Phoebe extends JPanel implements Runnable{
-	
-	private static final long serialVersionUID = 8435890710077230081L;
+public class Phoebe 
+//implements Runnable //Szkeletonhoz nem kell
+{
 	
 	//Attribútumok
 	/**
@@ -127,7 +127,7 @@ public class Phoebe extends JPanel implements Runnable{
 	 * GUI hívja meg, ha megnyomják a NewGame gombot.
 	 * 
 	 */
-	public Phoebe(Settings set) throws IOException{
+	public Phoebe(Settings set){
 		//Változók inicializálása, adatszerkezetek létrehozása
 		ended=false;
 		obstacles=new ArrayList<Obstacle>();
@@ -135,24 +135,7 @@ public class Phoebe extends JPanel implements Runnable{
 		gameInfo = set;
 		
 		//Játék incializálása
-		init();
-		
-		//Teszt
-		JFrame frame = new JFrame("Phoebe");//ez nincs itt csak tesztelés 
-		
-		//KeyListener (gombok lenyomásának lekezelése)
-		MyListener listener=new MyListener(robots);
-		addKeyListener(listener);
-		setFocusable(true);
-		Thread listenert=new Thread(listener);
-		listenert.start();
-		
-		//Teszt
-		frame.add(this,BorderLayout.CENTER);
-		frame.setSize(1000,700);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(true);
+		init();		
 	}
 
 	/**
@@ -169,35 +152,6 @@ public class Phoebe extends JPanel implements Runnable{
 		obstacles.add(item);
 	}
 
-	/**
-	 * paint függvény
-	 * 
-	 * Felelősség:
-	 * Rajzolás
-	 * 
-	 * Funkció(ki hívja meg és mikor?):
-	 * Külön szál, repaint()
-	 * 	 
-	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
-	 */
-	public void paint(Graphics g) {
-		super.paint(g);
-		g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);	
-		for(int i=0;i<obstacles.size();i++)
-		{
-			obstacles.get(i).paint(g2d);
-
-		}
-		for(int i=0;i<robots.size();i++)
-		{
-			robots.get(i).paint(g2d);
-
-		}
-		//TODO Akadályok, Map kirajzolása 
-	}
 	/*
 	 * init függvény
 	 * Felelősség:
@@ -207,7 +161,7 @@ public class Phoebe extends JPanel implements Runnable{
 	 * Funkcionalitás:
 	 * run() hívja meg.
 	 */
-	private void init() throws IOException{
+	private void init(){
 	//GameTimer létrehozása, inicializálása
 		//Ha Időlimites játékmód
 		if(gameInfo.getSettings() == Settings.TIMELIMIT)
@@ -219,17 +173,10 @@ public class Phoebe extends JPanel implements Runnable{
 		//Pálya létrehozása
 		map = new MapBuilder();
 
-	//Teszt
-		Robot.setUnitImage();
-		Glue.setUnitImage();
-		Oil.setUnitImage();
-		background=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"background.jpg"));
-		
+	
 	//Játékosok létrehozása
-		//TODO
-		Robot one = new Robot(300/*map.getStartPosPlayer(1)[0]*/,200/* map.getStartPosPlayer(1)[1]*/,  this);
-		
-		Robot two = new Robot(500/*map.getStartPosPlayer(2)[0]*/, 500/*map.getStartPosPlayer(2)[2]*/,  this);
+		Robot one = new Robot(map.getStartPosPlayer(1)[0], map.getStartPosPlayer(1)[1], this);		
+		Robot two = new Robot(map.getStartPosPlayer(2)[0], map.getStartPosPlayer(2)[1], this);
 		
 		robots.add(one);
 		robots.add(two);
@@ -242,17 +189,17 @@ public class Phoebe extends JPanel implements Runnable{
 		
 
 	//Akadályok létrehozása
-			/*for(int i=1;i<=10;i++){
+		for(int i=1;i<=10;i++){
 			//TODO Randomgenerált (x,y) pozíciók
 			int x=0;
 			int y=0;
 
-			Oil item1 = new Oil(x, y, null);
-			Glue item2 = new Glue(x, y, null);
+			Oil item1 = new Oil(x, y);
+			Glue item2 = new Glue(x, y);
 			if(!map.obstacleOutsideOfMap(item1)) obstacles.add(item1);
 			if(!map.obstacleOutsideOfMap(item2)) obstacles.add(item2);
 		}						
-*/
+
 	}
 
 	/*
@@ -264,35 +211,92 @@ public class Phoebe extends JPanel implements Runnable{
 	 * 
 	 * Mire való(kit hív meg, ki hívja meg):
 	 * Thread.start()
+	 * 
+	 * @param sc Console-ról olvasáshoz, ez csak a szkeleton felület miatt kell.
 	 */
-	@Override
-	public void run() {
-		
-		/*try {
-		//	init();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-
-		//TESZT
-		//repaint();
-		
+	public void run(Scanner sc) {				
 	//Játék eleji visszaszámlálás
 		MyTimer startTimer = new MyTimer(3);
 		startTimer.start();
-		/*
+		
 		while(!startTimer.isZero()){
 			//Idő kiírása
 			System.out.println(startTimer.getTime());
-		}*/
+		}
 		
 	//Játék visszaszámláló elindítása
 		gameTimer.start();
 		
-	//Teszt
-		int elteltidoteszt=0;
-		while( !ended)
+		System.out.println("|	                      Init Game END                           |");
+		System.out.print("|Írjon be egy karaktert és nyomjon ENTER-t a menü megjelenítéséhez:");
+		sc.nextLine();
+		
+		boolean quit = false;
+		
+		while(!quit){		
+			System.out.flush();
+			
+			System.out.println("========================================================");
+			System.out.println("|           Phoebe Szkeleton by Scrum_That!            |");
+			System.out.println("========================================================");
+			System.out.println("| 1. Robot irányváltoztatás, ugrása                    |");
+			System.out.println("| 2. Ragacs lerakása                                   |");
+			System.out.println("| 3. Olajfolt lerakása                                 |");
+			System.out.println("| 4. Ragacsba lépés                                    |");
+			System.out.println("| 5. Olajfoltba lépés                                  |");
+			System.out.println("| 6. Checkpointba lépés                                |");
+			System.out.println("| 7. Robotok ütközése                                  |");
+			System.out.println("| 8. Pályáról való leesés                              |");
+			if(gameInfo.getSettings()==Settings.TIMELIMIT) 
+				System.out.println("| 9. Idő lejárása                                      |");
+			else
+				System.out.println("| 9. Minden kör teljesítése                            |");
+			System.out.println("| 10. Kilépés                                          |");
+			System.out.println("========================================================");
+			int usecase = 0;
+			while(usecase <= 0 || usecase >= 11){
+				System.out.print("            Adja meg a játékmódot (1-10): ");
+				usecase = Integer.parseInt(sc.nextLine());
+				System.out.println("");
+			}
+			
+			switch(usecase){
+			case 1:
+				//TODO
+				break;
+			case 2:
+				//TODO
+				break;
+			case 3:
+				//TODO
+				break;
+			case 4:
+				//TODO
+				break;
+			case 5:
+				//TODO
+				break;
+			case 6:
+				//TODO
+				break;
+			case 7:
+				//TODO
+				break;
+			case 8:
+				//TODO
+				break;
+			case 9:
+				//TODO
+				break;
+			case 10:
+				quit = true;
+				break;
+			}
+			
+		}
+		//TODO Innen lehet ihletet meríteni
+		/*
+		while(!ended)
 		{
 	//A User ideje, hogy változtathasson az ugrás irányán
 			try {
@@ -314,17 +318,14 @@ public class Phoebe extends JPanel implements Runnable{
 
 			}	
 
-	//TODO lépésanimálása egyenesen végig léptetgetni a robotot és kirajzolni
-
 	//Checkpointok vizsgálata, áthaladtunk-e?
-			//hud.checkpointSearch();
+			hud.checkpointSearch();
 
 	//Ütközések vizsgálata robottal, akadállyal
 			for(Robot i : robots)
 			{			
 				for(Obstacle j : obstacles){
 				//Ütközés akadállyal
-					//	System.out.println(j.toString());
 					if(i.collisionWithObstacles(j)){
 						System.out.println("utkozes "+j.toString());
 						j.effect(i);
@@ -338,20 +339,13 @@ public class Phoebe extends JPanel implements Runnable{
 
 				}
 				//Leesés vizsgálata
-				/*if(map.robotOutsideOfMap(i)){
+				if(map.robotOutsideOfMap(i)){
 					ended = true;
 					i.deathanimation();
-				};*/		
+				};		
 
 			}		
-	//Teszt
-			repaint();	
-			if(elteltidoteszt>=60) ended=true;
-			elteltidoteszt+=3;
-			System.out.println("eltelt:"+elteltidoteszt+"mp");
-		}
-		if(elteltidoteszt>=60)System.out.println("a játéknak vége, lejárt az idő");
-		else System.out.println("a játékos leesett a pályáról");
 
+		}*/
 	}
 }
