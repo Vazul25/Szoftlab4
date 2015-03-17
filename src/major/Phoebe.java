@@ -1,22 +1,12 @@
 ﻿package major;
 
-import java.awt.BorderLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import minor.*;
+import minor.MapBuilder;
 
 /*
  * Phoebe osztály
@@ -116,7 +106,7 @@ public class Phoebe
 	private List<Obstacle> obstacles;
 	private HUD hud;
 	private MapBuilder map;
-	private MyTimer gameTimer;
+	//private MyTimer gameTimer;
 	
 	/**
 	 * Phoebe konstruktor
@@ -164,11 +154,11 @@ public class Phoebe
 	private void init(){
 	//GameTimer létrehozása, inicializálása
 		//Ha Időlimites játékmód
-		if(gameInfo.getSettings() == Settings.TIMELIMIT)
+	/*	if(gameInfo.getSettings() == Settings.TIMELIMIT)
 			gameTimer = new MyTimer(gameInfo.getLimit());
 		//ha körlimites játékmód
 		else if(gameInfo.getSettings() == Settings.LAPLIMIT)
-			gameTimer = new MyTimer(0);
+			gameTimer = new MyTimer(0);*/
 
 		//Pálya létrehozása
 		map = new MapBuilder();
@@ -216,16 +206,16 @@ public class Phoebe
 	 */
 	public void run(Scanner sc) {				
 	//Játék eleji visszaszámlálás
-		MyTimer startTimer = new MyTimer(3);
-		startTimer.start();
+		//MyTimer startTimer = new MyTimer(3);
+	/*	startTimer.start();
 		
 		while(!startTimer.isZero()){
 			//Idő kiírása
 			System.out.println(startTimer.getTime());
-		}
+		}*/
 		
 	//Játék visszaszámláló elindítása
-		gameTimer.start();
+	//	gameTimer.start();
 		
 		System.out.println("|	                      Init Game END                           |");
 		System.out.print("|Írjon be egy karaktert és nyomjon ENTER-t a menü megjelenítéséhez:");
@@ -259,13 +249,20 @@ public class Phoebe
 				usecase = Integer.parseInt(sc.nextLine());
 				System.out.println("");
 			}
-			
+			char temp='t';
 			switch(usecase){
 			case 1:
 				//TODO
 				break;
 			case 2:
 				//TODO
+				System.out.println("\t->Az olajfolt lerakását választotta."
+						+ "Van rendelkezésre  álló olaj?: i/n");
+					while(temp!='i'||temp!='n')temp=sc.nextLine().charAt(0);
+					if(temp=='i') robots.get(0).keyPressed(KeyEvent.VK_DOWN);
+					else;
+					System.out.println("\t\t->A ");
+				
 				break;
 			case 3:
 				//TODO

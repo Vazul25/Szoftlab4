@@ -344,6 +344,7 @@ public class Robot extends Unit{
 				if(numOil > 0){
 					Oil item0 = new Oil(x, y);
 					p.addObstacle(item0);
+					System.out.println("New oil created at:"+x+", "+y);
 					numOil--;
 				}
 			}
@@ -352,6 +353,7 @@ public class Robot extends Unit{
 				if(numGlue > 0){
 					Glue item1 = new Glue(x, y);
 					p.addObstacle(item1);
+					System.out.println("New glue created at:"+x+", "+y);
 					numGlue--;
 				}
 			}

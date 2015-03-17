@@ -1,6 +1,7 @@
 package minor;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 import major.Phoebe;
 
@@ -21,10 +22,12 @@ public class mainteszt {
 		//...
 		//Szál létrehozása, indítása
 	//	g.game = new Phoebe(set);
-		Thread t = new Thread(/*g.game*/ new Phoebe(set));
-		t.start();
+		//Thread t = new Thread(/*g.game*/ new Phoebe(set));
+	//	t.start();
 		//...
-		
+		 Scanner sc = new Scanner(System.in);
+
+		new Phoebe(set).run(sc);
 	}
 
 }
