@@ -249,37 +249,84 @@ public class Phoebe
 				usecase = Integer.parseInt(sc.nextLine());
 				System.out.println("");
 			}
-			char temp='t';
+			int temp=0;
 			switch(usecase){
 			case 1:
 				//TODO
 				break;
 			case 2:
 				//TODO
-				System.out.println("\t->Az olajfolt lerakását választotta."
-						+ "Van rendelkezésre  álló olaj?: i/n");
-					while(temp!='i'||temp!='n')temp=sc.nextLine().charAt(0);
-					if(temp=='i') robots.get(0).keyPressed(KeyEvent.VK_DOWN);
-					else;
-					System.out.println("\t\t->A ");
+				System.out.print("\t->A ragacs lerakását választotta."
+						+"\n\tVan rendelkezésre  álló ragacs?: i/n ");
+				
+					while(temp!='i'&& temp!='n')temp=sc.nextLine().charAt(0);
+					if(temp=='i'){
+						System.out.print("\t\t-> ");
+						 robots.get(0).keyPressed(KeyEvent.VK_DOWN);
+						 }
+					else{System.out.println("\t\t->Nem áll rendelkezésre ragacs a lerakáshoz");}
+					
 				
 				break;
 			case 3:
 				//TODO
+				System.out.print("\t->Az olaj lerakását választotta."
+						+"\n\tVan rendelkezésre  álló olaj?: i/n ");
+				
+					while(temp!='i'&& temp!='n')temp=sc.nextLine().charAt(0);
+					if(temp=='i'){
+						System.out.print("\t\t-> ");
+						 robots.get(0).keyPressed(KeyEvent.VK_UP);
+						 }
+					else{System.out.println("\t\t->Nem áll rendelkezésre olaj a lerakáshoz");}
+					
 				break;
-			case 4:			
+			case 4:		
+				System.out.println("Ragacsba lépést választotta. Van-e ott ragacs?: i/n");
+				robots.get(0).collisionWithObstacles(null);
+				System.out.println("collisionWithObstacles(obstacles)");
+				System.out.println("Van ragacs!");
+				System.out.println("A robot következő ugrása feleakkora lesz.");
+				System.out.println("setGlue()");
 				//TODO
 				break;
 			case 5:
+
+				System.out.println("Olajba lépést választotta.");
+				System.out.println("collisionWithObstacles(obstacles)");
+				System.out.println("Van olaj!");
+				System.out.println("A játékos nem tudja meghatározni a robot következő ugrása során az irányt");
+				System.out.println("setOiled()");
+
 				//TODO
 				break;
 			case 6:
 				//TODO
+				System.out.print("\t->A Robot ütközését választotta.");
+				robots.get(0).collisionWithRobot(robots.get(1));
+				System.out.print("\tÜtköztek e a robotok?: i/n ");
+				
+					while(temp!='i'&& temp!='n')temp=sc.nextLine().charAt(0);
+					if(temp=='i'){
+						
+						System.out.print("\t\t-> ");
+						 robots.get(0).bounce();
+						System.out.print("\t\t-> ");
+						 robots.get(1).bounce();
+						 }
+					else{System.out.println("\t\t->Nem ütköztek a robotok(visszatért false al)");}
 				break;
 			case 7:
 				//TODO
 				break;
 			case 8:
+				System.out.println("Pályáról leugrást választotta.");
+				System.out.println("collisionWithObstacles(obstacles)");
+				System.out.println("A robot leugrott a pályáról!");
+				System.out.println("deathanimation()");
+				System.out.println("A játéknak vége!");
+				System.out.println("Ended!");
+				ended = true;
 				//TODO
 				break;
 			case 9:
