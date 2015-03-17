@@ -272,7 +272,7 @@ public class Robot extends Unit{
 	 * @param obstacle az akadály amire az ütközést vizsgáljuk
 	 */
 	public boolean collisionWithObstacles(Obstacle obstacle){
-
+	
 		return this.intersect(obstacle);		
 	}
 
@@ -286,6 +286,7 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void bounce(){
+		System.out.println("Meghívodott a bounce függvénye a "+id+" azonosítoju robotnak");
 
 	}
 
@@ -310,11 +311,14 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void collisionWithRobot(Robot r){
-		if (this == r)
-			return;
-		if(this.intersect(r)) {
+		
+	/*	if (this == r)	{System.out.println("Meghívodott a collisionWithRobot önmagára");
+			return;}*/
+		System.out.println("Meghívodott a collisionWithRobot");
+		/*if(this.intersect(r)) {
 			bounce();
-		}
+			r.bounce();
+		}*/
 	}
 
 
@@ -344,7 +348,7 @@ public class Robot extends Unit{
 				if(numOil > 0){
 					Oil item0 = new Oil(x, y);
 					p.addObstacle(item0);
-					System.out.println("New oil created at:"+x+", "+y);
+					System.out.println("Új olajat raktak le az alábbi koordinátán:"+x+", "+y);
 					numOil--;
 				}
 			}
@@ -353,7 +357,7 @@ public class Robot extends Unit{
 				if(numGlue > 0){
 					Glue item1 = new Glue(x, y);
 					p.addObstacle(item1);
-					System.out.println("New glue created at:"+x+", "+y);
+					System.out.println("Új ragacsot raktak le az alábbi koordinátán:"+x+", "+y);
 					numGlue--;
 				}
 			}
