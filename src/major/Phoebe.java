@@ -186,8 +186,10 @@ public class Phoebe
 
 			Oil item1 = new Oil(x, y);
 			Glue item2 = new Glue(x, y);
-			if(!map.obstacleOutsideOfMap(item1)) obstacles.add(item1);
-			if(!map.obstacleOutsideOfMap(item2)) obstacles.add(item2);
+			//if(!map.obstacleOutsideOfMap(item1)) 
+				obstacles.add(item1);
+			//if(!map.obstacleOutsideOfMap(item2)) 
+				obstacles.add(item2);
 		}						
 
 	}
@@ -282,17 +284,15 @@ public class Phoebe
 					
 				break;
 			case 4:		
-				Glue item0 = new Glue(10,10);
 				System.out.println("Ragacsba lépést választotta.");
-				robots.get(0).collisionWithObstacles(item0);
-				robots.get(0).setGlue();
+				robots.get(0).collisionWithObstacles(obstacles.get(1));
+				obstacles.get(1).effect(robots.get(0));
 				//TODO
 				break;
 			case 5:
-				Oil item1 = new Oil(10,10);
 				System.out.println("Olajba lépést választotta.");
-				robots.get(0).collisionWithObstacles(item1);
-				robots.get(0).setOiled();
+				robots.get(0).collisionWithObstacles(obstacles.get(0));
+				obstacles.get(0).effect(robots.get(0));
 				//TODO
 				break;
 			case 6:
@@ -315,9 +315,8 @@ public class Phoebe
 				//TODO
 				break;
 			case 8:
-				MapBuilder palya = new MapBuilder();
 				System.out.println("Pályáról leesést választotta.");
-				palya.robotOutsideOfMap(robots.get(0));
+				map.robotOutsideOfMap(robots.get(0));
 				robots.get(0).deathanimation();
 				System.out.println("ended := 0 Vége a játéknak");
 				ended = true;

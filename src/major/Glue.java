@@ -55,8 +55,9 @@ public class Glue extends Obstacle {
 	public void effect(Robot r) {
 	
 		// TODO Auto-generated method stub
-		System.out.println("ragacsos lett");
+		System.out.println("\t->[:Glue].effect(robots.get(0)):");
 		r.setGlue();
+		System.out.println("\t<-[:Glue].effect(robots.get(0)):");
 	}
 
 	@Override
