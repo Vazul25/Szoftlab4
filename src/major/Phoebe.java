@@ -282,22 +282,17 @@ public class Phoebe
 					
 				break;
 			case 4:		
-				System.out.println("Ragacsba lépést választotta. Van-e ott ragacs?: i/n");
-				robots.get(0).collisionWithObstacles(null);
-				System.out.println("collisionWithObstacles(obstacles)");
-				System.out.println("Van ragacs!");
-				System.out.println("A robot következő ugrása feleakkora lesz.");
-				System.out.println("setGlue()");
+				Glue item0 = new Glue(10,10);
+				System.out.println("Ragacsba lépést választotta.");
+				robots.get(0).collisionWithObstacles(item0);
+				robots.get(0).setGlue();
 				//TODO
 				break;
 			case 5:
-
+				Oil item1 = new Oil(10,10);
 				System.out.println("Olajba lépést választotta.");
-				System.out.println("collisionWithObstacles(obstacles)");
-				System.out.println("Van olaj!");
-				System.out.println("A játékos nem tudja meghatározni a robot következő ugrása során az irányt");
-				System.out.println("setOiled()");
-
+				robots.get(0).collisionWithObstacles(item1);
+				robots.get(0).setOiled();
 				//TODO
 				break;
 			case 6:
@@ -320,12 +315,11 @@ public class Phoebe
 				//TODO
 				break;
 			case 8:
-				System.out.println("Pályáról leugrást választotta.");
-				System.out.println("collisionWithObstacles(obstacles)");
-				System.out.println("A robot leugrott a pályáról!");
-				System.out.println("deathanimation()");
-				System.out.println("A játéknak vége!");
-				System.out.println("Ended!");
+				MapBuilder palya = new MapBuilder();
+				System.out.println("Pályáról leesést választotta.");
+				palya.robotOutsideOfMap(robots.get(0));
+				robots.get(0).deathanimation();
+				System.out.println("ended := 0 Vége a játéknak");
 				ended = true;
 				//TODO
 				break;

@@ -107,6 +107,9 @@ public class MapBuilder{
 	 *  @return igaz értékkel tér vissza, ha a robot leesett a pályáról
 	 */
 	public boolean robotOutsideOfMap(Robot r){
+		System.out.println("\t->[:MapBuilder].robotOutsideOfMap(robots.get(0)):");
+		System.out.println("\t\t A robot leesett a pályáról? I/N: I");		
+		System.out.println("\t<-[:MapBuilder].robotOutsideOfMap(robots.get(0)):");
 		//Area area = new Area(map);
 		//Area otherArea = new Area(r.getHitbox());
 		//area.intersect(otherArea);
