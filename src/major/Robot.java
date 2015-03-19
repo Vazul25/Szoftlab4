@@ -296,8 +296,8 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void bounce(){
-		System.out.println("Meghívodott a bounce függvénye a "+id+" azonosítoju robotnak");
-
+		System.out.println("\t\t->["+id+":Robot].bounce()");
+		System.out.println("\t\t<-["+id+":Robot].bounce()");
 	}
 
 	@Override
@@ -324,7 +324,12 @@ public class Robot extends Unit{
 		
 	/*	if (this == r)	{System.out.println("Meghívodott a collisionWithRobot önmagára");
 			return;}*/
-		System.out.println("Meghívodott a collisionWithRobot");
+
+		System.out.println("\t->[:Robot].collisionWithRobot(r):");
+		System.out.println("\t\t Van-e ütközés? I/N: I");
+		bounce();
+		r.bounce();
+		System.out.println("\t<-[:Robot].collisionWithRobot(r):");		
 		/*if(this.intersect(r)) {
 			bounce();
 			r.bounce();
@@ -356,20 +361,35 @@ public class Robot extends Unit{
 	//Olaj lerakás
 			if(e == Phoebe.Settings.keyconfig[id%2*4+2])  {
 				if(numOil > 0){
+					
+					//System.out.println("Új olajat raktak le az alábbi koordinátán:"+x+", "+y);
+					//numOil--;
+					System.out.println("\t->[:Robot].KeyPressed(KeyEvent.VK_UP)");
+					System.out.println("\t\tVan-e rendelkezésre állo olaj? I/N: I");
 					Oil item0 = new Oil(x, y);
 					p.addObstacle(item0);
-					System.out.println("Új olajat raktak le az alábbi koordinátán:"+x+", "+y);
-					numOil--;
+					
+				
+				//System.out.println("Új ragacsot raktak le az alábbi koordinátán:"+x+", "+y);
+				
+				System.out.println("\t<-[:Robot].KeyPressed(KeyEvent.VK_UP)");
+			
 				}
 			}
 	//Ragacs lerakás
 			if(e== Phoebe.Settings.keyconfig[id%2*4+3]){
-				if(numGlue > 0){
-					Glue item1 = new Glue(x, y);
+			//	if(numGlue > 0){
+				System.out.println("\t->[:Robot].KeyPressed(KeyEvent.VK_DOWN)");
+				System.out.println("\t\tVan-e rendelkezésre állo ragacs? I/N: I");
+				
+				Glue item1 = new Glue(x, y);
 					p.addObstacle(item1);
-					System.out.println("Új ragacsot raktak le az alábbi koordinátán:"+x+", "+y);
-					numGlue--;
-				}
+					
+				//System.out.println("Új ragacsot raktak le az alábbi koordinátán:"+x+", "+y);
+				
+				System.out.println("\t<-[:Robot].KeyPressed(KeyEvent.VK_DOWN)");
+					//numGlue--;
+				//}
 			}
 	//Nyíl végpontjainak kiszámolása
 			arrowendx=(int)(x+r*Math.cos(alpha));

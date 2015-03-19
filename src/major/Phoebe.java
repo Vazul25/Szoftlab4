@@ -139,6 +139,9 @@ public class Phoebe
 	 * @param item Akadályt reprezentáló objektum.
 	 */
 	public void addObstacle(Obstacle item){
+		System.out.println("\t\t->[:Phoebe].AddObstacle(item)");
+		System.out.println("\t\t<-[:Phoebe].AddObstacle(item)");
+	
 		obstacles.add(item);
 	}
 
@@ -258,29 +261,18 @@ public class Phoebe
 				break;
 			case 2:
 				//TODO
-				System.out.print("\t->A ragacs lerakását választotta."
-						+"\n\tVan rendelkezésre  álló ragacs?: i/n ");
-				
-					while(temp!='i'&& temp!='n')temp=sc.nextLine().charAt(0);
-					if(temp=='i'){
-						System.out.print("\t\t-> ");
-						 robots.get(0).keyPressed(KeyEvent.VK_DOWN);
-						 }
-					else{System.out.println("\t\t->Nem áll rendelkezésre ragacs a lerakáshoz");}
+				System.out.println("A ragacs lerakását választotta.");
+				robots.get(0).keyPressed(KeyEvent.VK_DOWN);
+				//Van rendelkezésre  álló ragacs?: i/n ");
+						
+					
 					
 				
 				break;
 			case 3:
 				//TODO
-				System.out.print("\t->Az olaj lerakását választotta."
-						+"\n\tVan rendelkezésre  álló olaj?: i/n ");
-				
-					while(temp!='i'&& temp!='n')temp=sc.nextLine().charAt(0);
-					if(temp=='i'){
-						System.out.print("\t\t-> ");
-						 robots.get(0).keyPressed(KeyEvent.VK_UP);
-						 }
-					else{System.out.println("\t\t->Nem áll rendelkezésre olaj a lerakáshoz");}
+				System.out.println("Az olaj lerakását választotta.");
+				robots.get(0).keyPressed(KeyEvent.VK_UP);
 					
 				break;
 			case 4:		
@@ -297,23 +289,12 @@ public class Phoebe
 				break;
 			case 6:
 				//TODO
-				System.out.print("\t->A Robot ütközését választotta.");
-				robots.get(0).collisionWithRobot(robots.get(1));
-				System.out.print("\tÜtköztek e a robotok?: i/n ");
-				
-					while(temp!='i'&& temp!='n')temp=sc.nextLine().charAt(0);
-					if(temp=='i'){
-						
-						System.out.print("\t\t-> ");
-						 robots.get(0).bounce();
-						System.out.print("\t\t-> ");
-						 robots.get(1).bounce();
-						 }
-					else{System.out.println("\t\t->Nem ütköztek a robotok(visszatért false al)");}
-				break;
+			
+					break;
 			case 7:
 				//TODO
-				break;
+				System.out.println("->A Robot ütközését választotta.");
+				robots.get(0).collisionWithRobot(robots.get(1));break;
 			case 8:
 				System.out.println("Pályáról leesést választotta.");
 				map.robotOutsideOfMap(robots.get(0));
