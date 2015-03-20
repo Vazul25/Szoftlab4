@@ -55,7 +55,7 @@ public class Glue extends Obstacle {
 	public void effect(Robot r) {
 	
 		// TODO Auto-generated method stub
-		System.out.println("ragacsos lett");
+		System.out.println("you have been glued");
 		r.setGlue();
 	}
 

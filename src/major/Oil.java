@@ -62,7 +62,7 @@ public class Oil extends Obstacle {
 	@Override
 	public void effect(Robot r) {
 		// TODO Auto-generated method stub
-		System.out.println("olajos lett");
+		System.out.println("you jumped into oil");
 		r.setOiled();
 	}
 

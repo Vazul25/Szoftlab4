@@ -55,6 +55,11 @@ public class Robot extends Unit{
 	 * Maximális érték = 3
 	 */
 	private int numOil;
+	/**
+	 * Megmondja hogy raktunk-e már le ebbe a körbe olajat vagy ragacsot
+	 * kezdő érték false, minden lépés után vissza áll false ra és minden obstacle lerakásnál true ra 
+	 */
+	private boolean leftobstacle;
 
 	/*
 	 * Kép fájl
@@ -283,6 +288,7 @@ public class Robot extends Unit{
 		double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
 		double speedy=Math.round((arrowendy-y)/ANIMATIONSPEED);
 
+		
 		//Olajjal ütközés hatásának eltüntetése
 		slowed=1;
 
@@ -299,12 +305,13 @@ public class Robot extends Unit{
 			p.repaint();
 			Thread.sleep(50);
 		}
-
+		
 		WIDTH=40;
 
 		HEIGHT=40;
 		x=arrowendx;
 		y=arrowendy;
+		leftobstacle=false;
 		oiled=false;
 		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog0.jpg"));
 
@@ -396,27 +403,30 @@ public class Robot extends Unit{
 			System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);
 
 		}
-		//Olaj lerakás
-		if(e == Phoebe.Settings.keyconfig[id%2*4+2])  {
-			if(numOil > 0){
-				Oil item0 = new Oil(x, y);
-				p.addObstacle(item0);
-				System.out.println("new oil created at:"+x+","+y);
-				numOil--;
-			}
+		if(!leftobstacle){
+			//Olaj lerakás
+			if(e == Phoebe.Settings.keyconfig[id%2*4+2])  {
+				if(numOil > 0){
+					Oil item0 = new Oil(x, y);
+					p.addObstacle(item0);
+					leftobstacle=true;
+					System.out.println("new oil created at:"+x+","+y);
+					numOil--;
+				}
 
-			System.out.println("Not enough oil");
-		}
-		//Ragacs lerakás
-		if(e== Phoebe.Settings.keyconfig[id%2*4+3]){
-			if(numGlue > 0){
-				Glue item1 = new Glue(x, y);
-				p.addObstacle(item1);
-
-				System.out.println("new glue created at:"+x+","+y);
-				numGlue--;
+				else System.out.println("Not enough oil");
 			}
-			System.out.println("Not enough glue");
+			//Ragacs lerakás
+			if(e== Phoebe.Settings.keyconfig[id%2*4+3]){
+				if(numGlue > 0){
+					Glue item1 = new Glue(x, y);
+					p.addObstacle(item1);
+					leftobstacle=true;
+					System.out.println("new glue created at:"+x+","+y);
+					numGlue--;
+				}
+				else System.out.println("Not enough glue");
+			}
 		}
 		//Nyíl végpontjainak kiszámolása
 		p.repaint();
