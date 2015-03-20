@@ -263,10 +263,7 @@ public class Phoebe
 				//TODO
 				System.out.println("A ragacs lerakását választotta.");
 				robots.get(0).keyPressed(KeyEvent.VK_DOWN);
-				//Van rendelkezésre  álló ragacs?: i/n ");
-						
-					
-					
+				//Van rendelkezésre  álló ragacs?: i/n ");	
 				
 				break;
 			case 3:

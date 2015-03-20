@@ -1,10 +1,4 @@
 ﻿package major;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 
 /**
@@ -40,8 +34,6 @@ public class Glue extends Obstacle {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
-	//TODO comment
-	 static BufferedImage img;
 
 	/**
 	 * Felelősség:
@@ -53,24 +45,8 @@ public class Glue extends Obstacle {
 	 */
 	@Override
 	public void effect(Robot r) {
-	
-		// TODO Auto-generated method stub
 		System.out.println("\t->[:Glue].effect(robots.get(0)):");
 		r.setGlue();
 		System.out.println("\t<-[:Glue].effect(robots.get(0)):");
 	}
-
-	@Override
-	public void paint(Graphics2D g) {
-		// TODO Auto-generated method stub
-		g.drawImage(img, x, y, WIDTH, HEIGHT, null);
-	}
-	public  static void setUnitImage() throws IOException{
-		img=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"glue.jpg"));
-	}
-	@Override
-	public String toString() {
-		return "Glue [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT + "]";
-	}
-
 }

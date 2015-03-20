@@ -1,12 +1,4 @@
 ﻿package major;
-
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 /**
  * Glue osztály
  * 
@@ -24,7 +16,6 @@ import javax.imageio.ImageIO;
  *  
  */
 public class Oil extends Obstacle {
-	protected static BufferedImage img;
 
 	/**
 	 * Oil kontruktor
@@ -66,21 +57,4 @@ public class Oil extends Obstacle {
 		r.setOiled();
 		System.out.println("\t<-[:Oil].effect(robots.get(0)):");
 	}
-
-
-	@Override
-	public void paint(Graphics2D g) {
-		// TODO Auto-generated method stub
-		g.drawImage(img, x, y, WIDTH, HEIGHT, null);
-		
-	}
-	public  static void setUnitImage() throws IOException{
-		img=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"oil.jpg"));
-	}
-
-	@Override
-	public String toString() {
-		return "Oil [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT + "]";
-	}
-
 }

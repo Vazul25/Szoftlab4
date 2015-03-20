@@ -11,7 +11,9 @@ import java.awt.Rectangle;
  *  
  */
 
-public abstract class Obstacle extends Unit implements iVisible {
+public abstract class Obstacle extends Unit 
+//implements iVisible 
+{
 	/*
 	 * WIDTH : Az akadályokat jellemző szélesség. Szükség van rá,
 	 *		   hogy létrehozzuk a leszármazottak hitbox-át(sokszög pályaelem).

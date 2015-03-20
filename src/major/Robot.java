@@ -1,13 +1,8 @@
 ﻿package major;
 
-import java.awt.BasicStroke;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 /*
  * Robot osztály
@@ -61,7 +56,7 @@ public class Robot extends Unit{
 	 * Melyik függvény használja?
 	 * 
 	 */
-	protected static BufferedImage img[];
+	//protected static BufferedImage img[];
 	/*
 	 * Azonosító, állapot
 	 * Mire valók:
@@ -236,7 +231,6 @@ public class Robot extends Unit{
 	public void deathanimation(){
 		System.out.println("\t->[:Robot].deathanimation()");
 		System.out.println("\t<-[:Robot].deathanimation()");
-		//TODO
 	};
 
 
@@ -298,14 +292,6 @@ public class Robot extends Unit{
 	public void bounce(){
 		System.out.println("\t\t->["+id+":Robot].bounce()");
 		System.out.println("\t\t<-["+id+":Robot].bounce()");
-	}
-
-	@Override
-	public String toString() {
-		return "Robot [id=" + id + ", slowed=" + slowed + ", oiled=" + oiled
-				+ ", x=" +x + ",y=" +y
-				+ ", nextx=" + arrowendx + ", nexty=" + arrowendy
-				+ ", alpha=" + alpha + ", width=" + WIDTH +", height=" + HEIGHT +"]";
 	}
 
 	/*
