@@ -1,3 +1,4 @@
 src/major/testuml.ucls
-bin/**
+bin/major/**
+bin/minor/**
 .settings/**
