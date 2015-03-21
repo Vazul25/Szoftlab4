@@ -261,14 +261,14 @@ public class Phoebe
 				break;
 			case 2:
 				//TODO
-				System.out.println("A ragacs lerakását választotta.");
+				System.out.println("2. A ragacs lerakását választotta.");
 				robots.get(0).keyPressed(KeyEvent.VK_DOWN);
 				//Van rendelkezésre  álló ragacs?: i/n ");	
 				
 				break;
 			case 3:
 				//TODO
-				System.out.println("Az olaj lerakását választotta.");
+				System.out.println("3. Az olaj lerakását választotta.");
 				robots.get(0).keyPressed(KeyEvent.VK_UP);
 					
 				break;
@@ -290,7 +290,7 @@ public class Phoebe
 					break;
 			case 7:
 				//TODO
-				System.out.println("->A Robot ütközését választotta.");
+				System.out.println("7. A Robot ütközését választotta.");
 				robots.get(0).collisionWithRobot(robots.get(1));break;
 			case 8:
 				System.out.println("Pályáról leesést választotta.");

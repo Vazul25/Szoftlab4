@@ -2,7 +2,10 @@
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
 
 /*
  * Robot osztály
@@ -31,24 +34,24 @@ public class Robot extends Unit{
 	 */
 	protected static int staticid=0;
 	private  static final  int r=100; //sugár
-	
+
 	/*static */int WIDTH=40;//teszt placeholder
 	/*static*/ int HEIGHT=40;//teszt placeholder
-	
+
 	/**
-	* Tárolja a még felhasználatlan ragacsokat.
-	* Kezdő érték = 1
-	* Maximális érték = 3
-	*/
+	 * Tárolja a még felhasználatlan ragacsokat.
+	 * Kezdő érték = 1
+	 * Maximális érték = 3
+	 */
 	private int numGlue;
-	
+
 	/**
-	* Tárolja a még felhasználatlan olajfoltokat.
-	* Kezdő érték = 1
-	* Maximális érték = 3
-	*/
+	 * Tárolja a még felhasználatlan olajfoltokat.
+	 * Kezdő érték = 1
+	 * Maximális érték = 3
+	 */
 	private int numOil;
-	
+
 	/*
 	 * Kép fájl
 	 * Felelősség:
@@ -109,18 +112,18 @@ public class Robot extends Unit{
 	public Robot(int x, int y, Phoebe p) {
 		super(x, y);
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
-		
+
 		id=staticid;
 		staticid+=1;
-		
+
 		slowed=1.0;
 		oiled=false;
 
 		numGlue = 1;
 		numOil = 1;
-		
+
 		this.p=p;
-		
+
 		arrowendx=(int)(x+r*Math.cos(alpha));
 		arrowendy=(int)(y+r*Math.sin(alpha));
 	}
@@ -168,59 +171,59 @@ public class Robot extends Unit{
 		slowed=0.5;
 		System.out.println("\t\t<-[:Robot].setGlue():");
 	}
-	
+
 	/**
-	* getNumGlue függvénye
-	* Felelősség:
-	* Visszatér a felhasználható ragcsok számával.
-	*
-	* Funkció: 
-	* A HUD kérdezi le, hogy megjeleníthesse a képernyőn.
-	*/
+	 * getNumGlue függvénye
+	 * Felelősség:
+	 * Visszatér a felhasználható ragcsok számával.
+	 *
+	 * Funkció: 
+	 * A HUD kérdezi le, hogy megjeleníthesse a képernyőn.
+	 */
 	public int getNumGlue(){
 		return numGlue;
 	}
-	
+
 	/**
-	* getNumOil függvény
-	* Felelősség: 
-	* Visszatér a felhasználható olajok számával
-	*
-	* Funkciók: 
-	* A HUD kérdezi le, hogy megjelenítse a képernyőn.
-	*/
+	 * getNumOil függvény
+	 * Felelősség: 
+	 * Visszatér a felhasználható olajok számával
+	 *
+	 * Funkciók: 
+	 * A HUD kérdezi le, hogy megjelenítse a képernyőn.
+	 */
 	public int getNumOil(){
 		return numOil;
 	}
-	
+
 	/**
-	* incNumGlue függvény
-	* Felelősség:
-	* Növeli a robotnál tárolt ragacsok számát.
-	*
-	* Funkció:
-	* Amikor a robot checkpointot ér, akkor hívódik meg.
-	*/
+	 * incNumGlue függvény
+	 * Felelősség:
+	 * Növeli a robotnál tárolt ragacsok számát.
+	 *
+	 * Funkció:
+	 * Amikor a robot checkpointot ér, akkor hívódik meg.
+	 */
 	public void incNumGlue(){
 		if(numGlue < 3){
 			numGlue++;
 		}
 	}
-	
+
 	/**
-	* incNumOil függvény
-	* Felelősség:
-	* Növeli a robotnál tárolt olajok számát.
-	*
-	* Funkció:
-	* Amikor a robot checkpointot ér, akkor hívódik meg.
-	*/
+	 * incNumOil függvény
+	 * Felelősség:
+	 * Növeli a robotnál tárolt olajok számát.
+	 *
+	 * Funkció:
+	 * Amikor a robot checkpointot ér, akkor hívódik meg.
+	 */
 	public void incNumOil(){
 		if(numOil < 3){
 			numOil++;
 		}
 	}
-	
+
 	/**
 	 * DeathAnimation függvény
 	 * Felelősség:Ha meghal egy béka akkor ez felel az animációért 
@@ -245,17 +248,17 @@ public class Robot extends Unit{
 	 */
 	@Override
 	public void move() throws InterruptedException, IOException {
-	//User általi változtatás letiltása (lásd Robot.keyPressed())
+		//User általi változtatás letiltása (lásd Robot.keyPressed())
 		oiled=true;
-	//Nyíl koordinátáinak kiszámolása
+		//Nyíl koordinátáinak kiszámolása
 		arrowendx=(int)(x+slowed*r*Math.cos(alpha));
 		arrowendy=(int)(y+slowed*r*Math.sin(alpha));
 		x=arrowendx;	
 		y=arrowendy;
-	
-	//Olajjal ütközés hatásának eltüntetése
+
+		//Olajjal ütközés hatásának eltüntetése
 		slowed=1;
-	//User általi változtatás engedélyezése
+		//User általi változtatás engedélyezése
 		oiled=false;
 
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
@@ -274,9 +277,9 @@ public class Robot extends Unit{
 	 * @param obstacle az akadály amire az ütközést vizsgáljuk
 	 */
 	public boolean collisionWithObstacles(Obstacle obstacle){
-	System.out.println("\t->[:Robot].collisionWithObstacles(obstacle):");
-	System.out.println("\t\t Van-e ott ragacs/olaj? I/N: I");
-	System.out.println("\t<-[:Robot].collisionWithObstacles(obstacle):");
+		System.out.println("\t->[:Robot].collisionWithObstacles(obstacle):");
+		System.out.println("\t\t Van-e ott ragacs/olaj? I/N: I");
+		System.out.println("\t<-[:Robot].collisionWithObstacles(obstacle):");
 		return this.intersect(obstacle);		
 	}
 
@@ -307,14 +310,19 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void collisionWithRobot(Robot r){
-		
-	/*	if (this == r)	{System.out.println("Meghívodott a collisionWithRobot önmagára");
-			return;}*/
 
+		/*	if (this == r)	{System.out.println("Meghívodott a collisionWithRobot önmagára");
+			return;}*/
+		Scanner sc = new Scanner(System.in);
 		System.out.println("\t->[:Robot].collisionWithRobot(r):");
-		System.out.println("\t\t Van-e ütközés? I/N: I");
-		bounce();
-		r.bounce();
+		System.out.print("\t\t Van-e ütközés? I/N:");
+		int temp='0';
+		while(temp!='i'&& temp!='n'&&temp!='I'&& temp!='N')temp=sc.nextLine().charAt(0);
+		if(temp=='i'||temp=='I'){
+			bounce();
+			r.bounce();
+		}
+		else;
 		System.out.println("\t<-[:Robot].collisionWithRobot(r):");		
 		/*if(this.intersect(r)) {
 			bounce();
@@ -336,48 +344,65 @@ public class Robot extends Unit{
 	 * @param e (lásd Phoebe.Settings.keyconfig)
 	 */
 	public void keyPressed(int e) {
-
-	//Nyíl irányányának változtatása és akadlyok lerakása, ha a robot nem lépett olajba
+		Scanner sc = new Scanner(System.in);
+		//Nyíl irányányának változtatása és akadlyok lerakása, ha a robot nem lépett olajba
 		if(!oiled){
-	//Nyíl irányának megváltoztatása
+			//Nyíl irányának megváltoztatása
 			if (e== Phoebe.Settings.keyconfig[id%2*4+1])
 				alpha+=0.1;
 			if (e== Phoebe.Settings.keyconfig[id%2*4])
 				alpha-=0.1;
-	//Olaj lerakás
+			//Olaj lerakás
 			if(e == Phoebe.Settings.keyconfig[id%2*4+2])  {
-				if(numOil > 0){
-					
+				int temp='0';
+				System.out.println("\t->[:Robot].KeyPressed(KeyEvent.VK_UP)");
+				System.out.print("\t\tVan-e rendelkezésre állo olaj? I/N:");
+				while(temp!='i'&& temp!='n'&&temp!='I'&& temp!='N')temp=sc.nextLine().charAt(0);
+				if(temp=='i'||temp=='I'){Oil item0 = new Oil(x, y);
+				p.addObstacle(item0);}
+				
+			
+
 					//System.out.println("Új olajat raktak le az alábbi koordinátán:"+x+", "+y);
 					//numOil--;
-					System.out.println("\t->[:Robot].KeyPressed(KeyEvent.VK_UP)");
-					System.out.println("\t\tVan-e rendelkezésre állo olaj? I/N: I");
-					Oil item0 = new Oil(x, y);
-					p.addObstacle(item0);
+
+
 					
+
+
+					//System.out.println("Új ragacsot raktak le az alábbi koordinátán:"+x+", "+y);
+
+
+
 				
-				//System.out.println("Új ragacsot raktak le az alábbi koordinátán:"+x+", "+y);
-				
+
 				System.out.println("\t<-[:Robot].KeyPressed(KeyEvent.VK_UP)");
-			
-				}
 			}
-	//Ragacs lerakás
+			//Ragacs lerakás
 			if(e== Phoebe.Settings.keyconfig[id%2*4+3]){
-			//	if(numGlue > 0){
+				//	if(numGlue > 0){
+				int temp='0';
 				System.out.println("\t->[:Robot].KeyPressed(KeyEvent.VK_DOWN)");
-				System.out.println("\t\tVan-e rendelkezésre állo ragacs? I/N: I");
-				
-				Glue item1 = new Glue(x, y);
+
+				System.out.print("\t\tVan-e rendelkezésre állo ragacs? I/N:");
+				while(temp!='i'&& temp!='n'&&temp!='I'&& temp!='N')temp=sc.nextLine().charAt(0);
+				if(temp=='i'||temp=='I'){	
+					Glue item1 = new Glue(x, y);
 					p.addObstacle(item1);
-					
+				}
+
+
+
+
+
+
 				//System.out.println("Új ragacsot raktak le az alábbi koordinátán:"+x+", "+y);
-				
+
 				System.out.println("\t<-[:Robot].KeyPressed(KeyEvent.VK_DOWN)");
-					//numGlue--;
+				//numGlue--;
 				//}
 			}
-	//Nyíl végpontjainak kiszámolása
+			//Nyíl végpontjainak kiszámolása
 			arrowendx=(int)(x+r*Math.cos(alpha));
 			arrowendy=(int)(y+r*Math.sin(alpha));
 		}
