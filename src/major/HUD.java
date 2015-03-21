@@ -99,7 +99,7 @@ public class HUD {
 	* @param r Az a Robot, amelyik elérte a következő checkpointot. 
 	*/
 	private void setCheckpointReached(Robot r){
-		System.out.println("\t\t\t->[:HUD].setCheckpointReached(Robot r):");
+		System.out.println("\t\t\t->[:HUD].setCheckpointReached(robots.get.("+r.getId()+"):");
 		int robotID = r.getId();
 		//Ha az utolsó checkpointhoz érkeztünk nullázuk a checkpointokat és növeljük a körök számát eggyel
 		//Nincsenek még checkpointjaink - szkeleton fordításhoz legyen 5 db
@@ -111,7 +111,7 @@ public class HUD {
 		else{
 			checkpointReached[robotID%2] += 1;
 		}
-		System.out.println("\t\t\t<-[:HUD].setCheckpointReached(Robot r):");
+		System.out.println("\t\t\t<-[:HUD].setCheckpointReached(robots.get.("+r.getId()+"):");
 	}
 	
 	/**
