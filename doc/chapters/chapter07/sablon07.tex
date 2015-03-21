@@ -1,4 +1,4 @@
-% Szglab4
+%\textit{% Szglab4
 % ===========================================================================
 %
 \chapter{Prototípus koncepciója}
@@ -32,6 +32,51 @@
 
 \subsection{Kimeneti nyelv}
 \comment{Egyértelműen definiálni kell, hogy az egyes bemeneti parancsok végrehajtása után előálló állapot milyen formában jelenik meg a szabványos kimeneten.}
+jelölés:<osztály tagváltozója>
+\begin{itemize}
+\item Robot: 
+	\begin{itemize}
+	\item ToString():(nem írja ki automatikusan a szöveget csak vissza ad egy stringet, amit a run be kell kiíratni)
+	        \begin{itemize}
+	\item "Robot [id=<id>,  slowed=<slowed>,oiled=<oiled>, x=<x>,y=<y>,nextx=<arrowendx>,nexty=
+	        <arrowendy>,alpha=<alpha>,width=<WIDTH>,height=<HEIGHT>]” 
+	        \end{itemize}
+	\item Keypressed(int k):
+	       \begin{itemize}
+	        \item nextx ,nexty modified to:<arrowendx>,<arrowendy>
+            \item new oil created at: <x>,<y> ( ha volt olajunk és k == VK\_DOWN)
+            \item „not enough oil”( ha nincs olajunk és k==VK\_DOWN)
+            \item "new glue created at:<x>,<y>”(ha volt ragacsunk és k== VK\_UP)
+            \item „not enough glue”( ha nincs ragacsunk és k==VK\_UP)
+
+	       \end{itemize}
+	\end{itemize}
+	
+	
+\item Oil:
+	\begin{itemize}
+	\item effect(robot r):
+	        \begin{itemize}
+	        \item  „you jumped into oil”
+	        \end{itemize}
+	\item toString():
+	       \begin{itemize}
+	        \item "Oil[x=<x>, y=<y>, Width=<WIDTH>, Height=<HEIGHT>]"
+	       \end{itemize}
+	\end{itemize}
+\item Glue:
+	\begin{itemize}
+	\item effect(robot r):
+	        \begin{itemize}
+	        \item „you have been glued”
+	        \end{itemize}
+	\item toString():
+	       \begin{itemize}
+	        \item"Glue [x=<x>, y=<y>, Width=<WIDTH>, Height=<HEIGHT>]";
+	       \end{itemize}
+	\end{itemize}
+\end{itemize}
+
 
 \section{Összes részletes use-case}
 \comment{A use-case-eknek a részletezettsége feleljen meg a kezelői felületnek, azaz a felület elemeire kell hivatkozniuk.
@@ -55,3 +100,4 @@ Alábbi táblázat minden use-case-hez külön-külön.}
 \section{Tesztelést támogató segéd- és fordítóprogramok specifikálása}
 \comment{Specifikálni kell a tesztelést támogató segédprogramokat.}
 
+}
