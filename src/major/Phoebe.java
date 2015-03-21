@@ -285,9 +285,9 @@ public class Phoebe
 				//TODO
 				break;
 			case 6:
-				//TODO
-			
-					break;
+				System.out.println("A checkpointba lépést választotta.");
+				hud.checkpointSearch();
+				break;
 			case 7:
 				//TODO
 				System.out.println("7. A Robot ütközését választotta.");

@@ -195,7 +195,14 @@ public class Robot extends Unit{
 	public int getNumOil(){
 		return numOil;
 	}
-
+	
+	
+	public Rectangle getHitbox(){
+		System.out.println("\t\t->["+id+":Robot].getHitbox():");
+		System.out.println("\t\t<-["+id+":Robot].getHitbox():");
+		return hitbox;
+	}
+	
 	/**
 	 * incNumGlue függvény
 	 * Felelősség:
@@ -205,9 +212,11 @@ public class Robot extends Unit{
 	 * Amikor a robot checkpointot ér, akkor hívódik meg.
 	 */
 	public void incNumGlue(){
+		System.out.println("\t\t\t->["+id+":Robot].incNumGlue():");
 		if(numGlue < 3){
 			numGlue++;
 		}
+		System.out.println("\t\t\t<-["+id+":Robot].incNumGlue():");
 	}
 
 	/**
@@ -219,9 +228,11 @@ public class Robot extends Unit{
 	 * Amikor a robot checkpointot ér, akkor hívódik meg.
 	 */
 	public void incNumOil(){
+		System.out.println("\t\t\t->["+id+":Robot].incNumOil():");
 		if(numOil < 3){
 			numOil++;
 		}
+		System.out.println("\t\t\t<-["+id+":Robot].incNumOil():");
 	}
 
 	/**

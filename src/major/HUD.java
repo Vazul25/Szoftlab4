@@ -3,6 +3,7 @@ package major;
 import java.awt.Shape;
 import java.awt.geom.Area;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Ez az objektum követi és nyilvántartja, hogy a robotok hány checkpoint-on mentek át, 
@@ -98,16 +99,19 @@ public class HUD {
 	* @param r Az a Robot, amelyik elérte a következő checkpointot. 
 	*/
 	private void setCheckpointReached(Robot r){
+		System.out.println("\t\t\t->[:HUD].setCheckpointReached(Robot r):");
 		int robotID = r.getId();
-	//Ha az utolsó checkpointhoz érkeztünk nullázuk a checkpointokat és növeljük a körök számát eggyel
-		if(checkpointReached[robotID%2] == (checkpoints.size()-1)) {
+		//Ha az utolsó checkpointhoz érkeztünk nullázuk a checkpointokat és növeljük a körök számát eggyel
+		//Nincsenek még checkpointjaink - szkeleton fordításhoz legyen 5 db
+		if(checkpointReached[robotID%2] == (4)) { //4 = checkpoints.size()-1
 			checkpointReached[robotID%2] = 0;
 			lap[robotID%2] += 1;
 		}
-	//Ha belelépünk egy checkpointba akkor növeljük a checkpointReached-et
+		//Ha belelépünk egy checkpointba akkor növeljük a checkpointReached-et
 		else{
 			checkpointReached[robotID%2] += 1;
 		}
+		System.out.println("\t\t\t<-[:HUD].setCheckpointReached(Robot r):");
 	}
 	
 	/**
@@ -123,31 +127,46 @@ public class HUD {
 	 * A játékmotor hívja meg minden ciklusban, lépés után. 
 	 */
 	public void checkpointSearch(){
-	//minden lépésnél vizsgáljuk, hogy benne van-e valamelyik robot a következő teljesítendő checkpoint mezőben
+		//minden lépésnél vizsgáljuk, hogy benne van-e valamelyik robot a következő teljesítendő checkpoint mezőben
+		System.out.println("\t->[:HUD].chechpointSearch():");
 		for(Robot i : robots){			
-	//kiszámoljuk a következő checkpoint indexét
+			//kiszámoljuk a következő checkpoint indexét
+			//Nincsenek még checkpointjaink - szkeleton fordításhoz legyen 5 db
 			int nextCheckpoint;
-			if(checkpointReached[i.getId()%2] < (checkpoints.size()-1) ){
+			if(checkpointReached[i.getId()%2] < (4) ){ // 4 = checkpoints.size()-1
 				nextCheckpoint = checkpointReached[i.getId()%2] + 1;
 			}
 			else{
 				nextCheckpoint = 0;
 			}
 			
-	//TODO tesztelés
 			Area robotarea = new Area(i.getHitbox());
-			Area checkpointarea = new Area(checkpoints.get(nextCheckpoint)); 
-			robotarea.intersect(checkpointarea);
-			
-	//Ha a checkpoint és a robot metszik egymást, akkor növeljük a 
-	//náluk levő olaj, ragacskészletet és feljegyezzük a 
-	//checkpoint teljesítését
-			if(!robotarea.isEmpty()){
+			//Nem tudunk intersectelni, mert nincsenek checkpointok
+			/*Area checkpointarea = new Area(checkpoints.get(nextCheckpoint)); 
+			robotarea.intersect(checkpointarea);*/
+				
+			//Ha a checkpoint és a robot metszik egymást, akkor növeljük a 
+			//náluk levő olaj, ragacskészletet és feljegyezzük a 
+			//checkpoint teljesítését
+			Scanner sc = new Scanner(System.in);
+			System.out.print("\t\t\t Van a ponton checkpoint? I/N:");
+			int temp='0';
+			temp=sc.nextLine().charAt(0);
+			while(temp!='i'&& temp!='n' && temp!='I' && temp!='N'){
+				System.out.print("\t\t\t Van a ponton checkpoint? I/N:");
+				temp=sc.nextLine().charAt(0);
+			}
+			if(temp=='i'||temp=='I'){
 				setCheckpointReached(i);
 				i.incNumGlue();
 				i.incNumOil();
 			}
+			/*else{
+				System.out.println("\t<-[:HUD].chechpointSearch():");
+				return;
+			}*/
 		}		
+		System.out.println("\t<-[:HUD].chechpointSearch():");
 	}
 	
 	/*
