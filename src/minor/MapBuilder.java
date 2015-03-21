@@ -111,7 +111,7 @@ public class MapBuilder{
 		Scanner sc = new Scanner(System.in);
 		char temp = '0';
 		System.out.println("\t->[:MapBuilder].robotOutsideOfMap(robots.get(0)):");
-		System.out.print("\t\t A robot leesett a pályáról? I/N: ");
+		System.out.println("\t\t A robot leesett a pályáról? I/N:");
 		
 		while(temp!='i'&& temp!='n'&& temp!='I'&& temp!='N') {
 			temp=sc.nextLine().charAt(0);
