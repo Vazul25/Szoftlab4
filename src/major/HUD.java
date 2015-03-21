@@ -149,12 +149,11 @@ public class HUD {
 			//náluk levő olaj, ragacskészletet és feljegyezzük a 
 			//checkpoint teljesítését
 			Scanner sc = new Scanner(System.in);
-			System.out.print("\t\t\t Van a ponton checkpoint? I/N:");
 			int temp='0';
-			temp=sc.nextLine().charAt(0);
 			while(temp!='i'&& temp!='n' && temp!='I' && temp!='N'){
 				System.out.print("\t\t\t Van a ponton checkpoint? I/N:");
 				temp=sc.nextLine().charAt(0);
+					
 			}
 			if(temp=='i'||temp=='I'){
 				setCheckpointReached(i);

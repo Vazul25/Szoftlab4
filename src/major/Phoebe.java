@@ -301,7 +301,18 @@ public class Phoebe
 				//TODO
 				break;
 			case 9:
-				//TODO
+				int tmp='0';
+				while(tmp!='i'&& tmp!='n' && tmp!='I' && tmp!='N'){
+					if(gameInfo.getSettings()==Settings.TIMELIMIT) 
+						System.out.print("Lejárt az idő? I/N:");
+					else
+						System.out.print("Minden kör teljesítve van? I/N:");
+					tmp=sc.nextLine().charAt(0);
+				}
+				if(tmp=='i'||tmp=='I'){
+					quit = true;
+				}
+				
 				break;
 			case 10:
 				quit = true;
