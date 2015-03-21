@@ -7,7 +7,7 @@ import major.Phoebe;
 
 public class mainteszt {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 
 	//	GUI g=new GUI();

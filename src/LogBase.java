@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 import major.Phoebe;
@@ -9,7 +10,7 @@ public class LogBase {
 		for(int i=1;i<=50;i++) System.out.println();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("");
