@@ -261,9 +261,20 @@ public class Robot extends Unit{
 	public void move() throws InterruptedException, IOException {
 		//User általi változtatás letiltása (lásd Robot.keyPressed())
 		oiled=true;
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("\t->[:Robot].move():");
+		
+		int temp = -1;
+		
+		while(temp < 0 || temp > 180){
+			System.out.print("\t\t Milyen szögben ugrik a robot? (0-180):");
+			temp=sc.nextLine().charAt(0);
+		}
+		
 		//Nyíl koordinátáinak kiszámolása
-		arrowendx=(int)(x+slowed*r*Math.cos(alpha));
-		arrowendy=(int)(y+slowed*r*Math.sin(alpha));
+		arrowendx=(int)(x+slowed*r*Math.cos(temp));
+		arrowendy=(int)(y+slowed*r*Math.sin(temp));
 		x=arrowendx;	
 		y=arrowendy;
 
@@ -273,7 +284,8 @@ public class Robot extends Unit{
 		oiled=false;
 
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
-
+		System.out.print("\t\t\t A robot új koordinátái: " + x + " " + y + "\n");
+		System.out.println("\t<-[:Robot].move():");
 	}
 
 	/**

@@ -2,6 +2,7 @@ package major;
 
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -259,7 +260,14 @@ public class Phoebe
 			int temp=0;
 			switch(usecase){
 			case 1:
-				//TODO
+				System.out.println("1. A Robot irányváltoztatását, ugrását választotta.");
+				try {
+					robots.get(0).move();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			case 2:
 				System.out.println("2. A ragacs lerakását választotta.");
