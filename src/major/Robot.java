@@ -387,7 +387,7 @@ public class Robot extends Unit{
 				while(temp!='i'&& temp!='n'&&temp!='I'&& temp!='N'){
 					System.out.print("\t\tVan-e rendelkezésre állo ragacs? I/N:");
 					temp=sc.nextLine().charAt(0);
-					System.out.println();
+					
 				}
 				if(temp=='i'||temp=='I'){	
 					Glue item1 = new Glue(x, y);
