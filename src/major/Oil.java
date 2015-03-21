@@ -1,4 +1,4 @@
-﻿package major;
+package major;
 /**
  * Glue osztály
  * 

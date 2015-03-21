@@ -1,4 +1,4 @@
-﻿package major;
+package major;
 
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;

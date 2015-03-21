@@ -14,13 +14,13 @@ public class mainteszt {
 		int mode = 1; //LapLimit=1, TimeLimit=2
 		Phoebe.Settings set = new Phoebe.Settings(mode);
 		//...
-		int limit = 120; //Másodperc
+		int limit = 120; //MÃ¡sodperc
 		set.setLimit(limit);
 		//...
-		int step = 3; //Másodperc
+		int step = 3; //MÃ¡sodperc
 		set.setStep(step);
 		//...
-		//Szál létrehozása, indítása
+		//SzÃ¡l lÃ©trehozÃ¡sa, indÃ­tÃ¡sa
 	//	g.game = new Phoebe(set);
 		//Thread t = new Thread(/*g.game*/ new Phoebe(set));
 	//	t.start();

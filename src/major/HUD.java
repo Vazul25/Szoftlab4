@@ -1,4 +1,4 @@
-﻿package major;
+package major;
 
 import java.awt.Shape;
 import java.awt.geom.Area;

@@ -1,4 +1,4 @@
-﻿package minor;
+package minor;
 
 import java.awt.Shape;
 import java.awt.geom.Area;

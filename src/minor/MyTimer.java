@@ -1,4 +1,4 @@
-﻿package minor;
+package minor;
 
 /*
  * Timer osztály

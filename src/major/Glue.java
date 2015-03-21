@@ -1,5 +1,4 @@
-﻿package major;
-
+package major;
 
 /**
  * A „Glue” objektum megvalósít egy adott tulajdonságú 
