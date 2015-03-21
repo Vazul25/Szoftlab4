@@ -160,10 +160,7 @@ public class HUD {
 				i.incNumGlue();
 				i.incNumOil();
 			}
-			/*else{
-				System.out.println("\t<-[:HUD].chechpointSearch():");
-				return;
-			}*/
+
 		}		
 		System.out.println("\t<-[:HUD].chechpointSearch():");
 	}
