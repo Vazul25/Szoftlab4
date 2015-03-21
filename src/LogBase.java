@@ -4,6 +4,10 @@ import major.Phoebe;
 
 public class LogBase {
 	private static Phoebe game;
+	
+	public static void consoleErase(){
+		for(int i=1;i<=50;i++) System.out.println();
+	}
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

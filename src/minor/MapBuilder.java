@@ -3,6 +3,7 @@ package minor;
 import java.awt.Shape;
 import java.awt.geom.Area;
 import java.util.List;
+import java.util.Scanner;
 
 import major.Obstacle;
 import major.Robot;
@@ -107,16 +108,17 @@ public class MapBuilder{
 	 *  @return igaz értékkel tér vissza, ha a robot leesett a pályáról
 	 */
 	public boolean robotOutsideOfMap(Robot r){
+		Scanner sc = new Scanner(System.in);
+		char temp = '0';
 		System.out.println("\t->[:MapBuilder].robotOutsideOfMap(robots.get(0)):");
-		System.out.println("\t\t A robot leesett a pályáról? I/N: I");		
+		System.out.println("\t\t A robot leesett a pályáról? I/N:");
+		
+		while(temp!='i'&& temp!='n'&& temp!='I'&& temp!='N') {
+			temp=sc.nextLine().charAt(0);
+		}
 		System.out.println("\t<-[:MapBuilder].robotOutsideOfMap(robots.get(0)):");
-		//Area area = new Area(map);
-		//Area otherArea = new Area(r.getHitbox());
-		//area.intersect(otherArea);
-		//TODO revision
-		//return area.getBounds().getSize().equals(r.getHitbox().getBounds().getSize());
-		//TODO kérdés
-		return true;
+		if(temp == 'i' || temp == 'I') return true;
+		else return false;
 	}
 	
 	/*

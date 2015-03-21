@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import minor.MapBuilder;
+import LogBase;
 
 /*
  * Phoebe osztály
@@ -230,6 +231,7 @@ public class Phoebe
 		
 		while(!quit){		
 			System.out.flush();
+			LogBase
 			
 			System.out.println("========================================================");
 			System.out.println("|           Phoebe Szkeleton by Scrum_That!            |");
@@ -260,46 +262,45 @@ public class Phoebe
 				//TODO
 				break;
 			case 2:
-				//TODO
 				System.out.println("2. A ragacs lerakását választotta.");
-				robots.get(0).keyPressed(KeyEvent.VK_DOWN);
-				//Van rendelkezésre  álló ragacs?: i/n ");	
+				robots.get(0).keyPressed(KeyEvent.VK_DOWN);				
+				break;
 				
-				break;
 			case 3:
-				//TODO
 				System.out.println("3. Az olaj lerakását választotta.");
-				robots.get(0).keyPressed(KeyEvent.VK_UP);
-					
+				robots.get(0).keyPressed(KeyEvent.VK_UP);					
 				break;
+				
 			case 4:		
 				System.out.println("Ragacsba lépést választotta.");
 				robots.get(0).collisionWithObstacles(obstacles.get(1));
 				obstacles.get(1).effect(robots.get(0));
 				//TODO
 				break;
+				
 			case 5:
 				System.out.println("Olajba lépést választotta.");
 				robots.get(0).collisionWithObstacles(obstacles.get(0));
 				obstacles.get(0).effect(robots.get(0));
 				//TODO
 				break;
+				
 			case 6:
 				//TODO
 			
-					break;
-			case 7:
-				//TODO
-				System.out.println("7. A Robot ütközését választotta.");
-				robots.get(0).collisionWithRobot(robots.get(1));break;
-			case 8:
-				System.out.println("Pályáról leesést választotta.");
-				map.robotOutsideOfMap(robots.get(0));
-				robots.get(0).deathanimation();
-				System.out.println("ended := 0 Vége a játéknak");
-				ended = true;
-				//TODO
 				break;
+			case 7:
+				System.out.println("7. A Robot ütközését választotta.");
+				robots.get(0).collisionWithRobot(robots.get(1));
+				break;
+				
+			case 8:
+				System.out.println("8. Pályáról leesést választotta.");
+				if(map.robotOutsideOfMap(robots.get(0))){
+					robots.get(0).deathanimation();
+				}
+				break;
+				
 			case 9:
 				//TODO
 				break;
