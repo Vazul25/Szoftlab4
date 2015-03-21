@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import minor.MapBuilder;
-import LogBase;
 
 /*
  * Phoebe osztály
@@ -231,7 +230,6 @@ public class Phoebe
 		
 		while(!quit){		
 			System.out.flush();
-			LogBase
 			
 			System.out.println("========================================================");
 			System.out.println("|           Phoebe Szkeleton by Scrum_That!            |");
@@ -374,5 +372,9 @@ public class Phoebe
 			}		
 
 		}*/
+	}
+	
+	public static void consoleErase(){
+		for(int i=1;i<=50;i++) System.out.println();
 	}
 }
