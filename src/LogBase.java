@@ -12,14 +12,14 @@ public class LogBase {
 		System.out.println("==================================================================");
 		System.out.println("|               Phoebe Szkeleton by Scrum_That!                  |");
 		System.out.println("==================================================================");
-		System.out.println("| 0. Játék beállítása, Játékmód kiválasztása (Új Játék Indítása) |");
-		System.out.println("|  0.1 Idõ Játékmód                                              |");
-		System.out.println("|  0.2 Kör Játékmód                                              |");
+		System.out.println("| 0. JÃ¡tÃ©k beÃ¡llÃ­tÃ¡sa, JÃ¡tÃ©kmÃ³d kivÃ¡lasztÃ¡sa (Ãšj JÃ¡tÃ©k IndÃ­tÃ¡sa) |");
+		System.out.println("|  0.1 IdÅ‘ JÃ¡tÃ©kmÃ³d                                              |");
+		System.out.println("|  0.2 KÃ¶r JÃ¡tÃ©kmÃ³d                                              |");
 		System.out.println("==================================================================");
 		
 		int settings = 0;
 		while(settings != 1 && settings != 2){
-			System.out.print("              Adja meg a játékmódot (1/2): ");
+			System.out.print("              Adja meg a jÃ¡tÃ©kmÃ³dot (1/2): ");
 			settings = Integer.parseInt(sc.nextLine());
 			System.out.println("");
 		}
@@ -28,11 +28,11 @@ public class LogBase {
 		switch(settings){
 			case 1: 
 				set = new Phoebe.Settings(Phoebe.Settings.TIMELIMIT); 
-				System.out.println("              A választott játékmód: Idõ Játékmód");
+				System.out.println("              A vÃ¡lasztott jÃ¡tÃ©kmÃ³d: IdÅ‘ JÃ¡tÃ©kmÃ³d");
 				break;
 			default: 
 				set = new Phoebe.Settings(Phoebe.Settings.LAPLIMIT); 
-				System.out.println("              A választott játékmód: Kör Játékmód");
+				System.out.println("              A vÃ¡lasztott jÃ¡tÃ©kmÃ³d: KÃ¶r JÃ¡tÃ©kmÃ³d");
 				break;
 		}
 		

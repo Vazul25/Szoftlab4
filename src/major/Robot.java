@@ -310,24 +310,22 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void collisionWithRobot(Robot r){
-
-		/*	if (this == r)	{System.out.println("Meghívodott a collisionWithRobot önmagára");
-			return;}*/
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\t->[:Robot].collisionWithRobot(r):");
-		System.out.print("\t\t Van-e ütközés? I/N:");
+		
 		int temp='0';
-		while(temp!='i'&& temp!='n'&&temp!='I'&& temp!='N')temp=sc.nextLine().charAt(0);
+		
+		while(temp!='i'&& temp!='n'&&temp!='I'&& temp!='N'){
+			System.out.print("\t\t Van-e ütközés? I/N:");
+			temp=sc.nextLine().charAt(0);
+		}
+			
 		if(temp=='i'||temp=='I'){
 			bounce();
 			r.bounce();
 		}
-		else;
-		System.out.println("\t<-[:Robot].collisionWithRobot(r):");		
-		/*if(this.intersect(r)) {
-			bounce();
-			r.bounce();
-		}*/
+		System.out.println("\t<-[:Robot].collisionWithRobot(r):");
 	}
 
 
@@ -345,66 +343,47 @@ public class Robot extends Unit{
 	 */
 	public void keyPressed(int e) {
 		Scanner sc = new Scanner(System.in);
-		//Nyíl irányányának változtatása és akadlyok lerakása, ha a robot nem lépett olajba
-		if(!oiled){
+		//Nyíl irányányának változtatása és akadályok lerakása, ha a robot nem lépett olajba
+			 
 			//Nyíl irányának megváltoztatása
-			if (e== Phoebe.Settings.keyconfig[id%2*4+1])
+			if (e == Phoebe.Settings.keyconfig[id%2*4+1])
 				alpha+=0.1;
-			if (e== Phoebe.Settings.keyconfig[id%2*4])
+			if (e == Phoebe.Settings.keyconfig[id%2*4])
 				alpha-=0.1;
+			
 			//Olaj lerakás
 			if(e == Phoebe.Settings.keyconfig[id%2*4+2])  {
 				int temp='0';
+				
 				System.out.println("\t->[:Robot].KeyPressed(KeyEvent.VK_UP)");
-				System.out.print("\t\tVan-e rendelkezésre állo olaj? I/N:");
-				while(temp!='i'&& temp!='n'&&temp!='I'&& temp!='N')temp=sc.nextLine().charAt(0);
-				if(temp=='i'||temp=='I'){Oil item0 = new Oil(x, y);
-				p.addObstacle(item0);}
+				System.out.print("\t\tVan-e rendelkezésre álló olaj? I/N:");
 				
-			
-
-					//System.out.println("Új olajat raktak le az alábbi koordinátán:"+x+", "+y);
-					//numOil--;
-
-
-					
-
-
-					//System.out.println("Új ragacsot raktak le az alábbi koordinátán:"+x+", "+y);
-
-
-
+				while(temp!='i'&& temp!='n'&& temp!='I'&& temp!='N') 
+					temp=sc.nextLine().charAt(0);
 				
-
-				System.out.println("\t<-[:Robot].KeyPressed(KeyEvent.VK_UP)");
+				if(temp =='i' || temp == 'I'){
+					Oil item0 = new Oil(x, y);
+					p.addObstacle(item0);
+				}
+				System.out.println("\t<-[:Robot].KeyPressed(KeyEvent.VK_UP):");
 			}
+			
 			//Ragacs lerakás
-			if(e== Phoebe.Settings.keyconfig[id%2*4+3]){
-				//	if(numGlue > 0){
+			if(e == Phoebe.Settings.keyconfig[id%2*4+3]){
 				int temp='0';
-				System.out.println("\t->[:Robot].KeyPressed(KeyEvent.VK_DOWN)");
+				System.out.println("\t->[:Robot].KeyPressed(KeyEvent.VK_DOWN):");
 
-				System.out.print("\t\tVan-e rendelkezésre állo ragacs? I/N:");
-				while(temp!='i'&& temp!='n'&&temp!='I'&& temp!='N')temp=sc.nextLine().charAt(0);
+				while(temp!='i'&& temp!='n'&&temp!='I'&& temp!='N'){
+					System.out.print("\t\tVan-e rendelkezésre állo ragacs? I/N:");
+					temp=sc.nextLine().charAt(0);
+					System.out.println();
+				}
 				if(temp=='i'||temp=='I'){	
 					Glue item1 = new Glue(x, y);
 					p.addObstacle(item1);
 				}
 
-
-
-
-
-
-				//System.out.println("Új ragacsot raktak le az alábbi koordinátán:"+x+", "+y);
-
 				System.out.println("\t<-[:Robot].KeyPressed(KeyEvent.VK_DOWN)");
-				//numGlue--;
-				//}
 			}
-			//Nyíl végpontjainak kiszámolása
-			arrowendx=(int)(x+r*Math.cos(alpha));
-			arrowendy=(int)(y+r*Math.sin(alpha));
-		}
 	}
 }
