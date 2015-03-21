@@ -151,10 +151,10 @@ public class Robot extends Unit{
 	 *  	
 	 */
 	public void setOiled(){
-		System.out.println("\t\t->[:Robot].setOiled():");
-		System.out.println("\t\t\t Tudja a játékos a robot irányát változtatni következő ugrásnál? I/N: N");
+		System.out.println("\t\t\t\t->[:Robot].setOiled():");
+		System.out.println("\t\t\t\t\t A játékos nem tudja a robot irányát változtatni következő ugrásnál.");
 		oiled=true;
-		System.out.println("\t\t<-[:Robot].setOiled():");
+		System.out.println("\t\t\t\t<-[:Robot].setOiled():");
 	}
 
 	/**
@@ -166,10 +166,10 @@ public class Robot extends Unit{
 	 * A Glue osztály effekt függvénye.
 	 */
 	public void setGlue(){
-		System.out.println("\t\t->[:Robot].setGlue():");
-		System.out.println("\t\t\t Lelassult a robot? I/N: I");
+		System.out.println("\t\t\t\t->[:Robot].setGlue():");
+		System.out.println("\t\t\t\t\t Robot következő ugrása feleakkora lesz.");
 		slowed=0.5;
-		System.out.println("\t\t<-[:Robot].setGlue():");
+		System.out.println("\t\t\t\t<-[:Robot].setGlue():");
 	}
 
 	/**
@@ -288,8 +288,22 @@ public class Robot extends Unit{
 	 * @param obstacle az akadály amire az ütközést vizsgáljuk
 	 */
 	public boolean collisionWithObstacles(Obstacle obstacle){
-		System.out.println("\t->[:Robot].collisionWithObstacles(obstacle):");
-		System.out.println("\t\t Van-e ott ragacs/olaj? I/N: I");
+		Scanner sc = new Scanner(System.in);
+		String temp = "";
+		
+		while (!temp.equals("i")  && !temp.equals("n") && !temp.equals("I")  && !temp.equals("N")) {
+			
+			System.out.println("\t->[:Robot].collisionWithObstacles(obstacle):");
+			System.out.print("\t\t Rossz helyre lépett a robot? i/n: ");
+			temp = sc.nextLine();
+		
+			if (temp.equals("i") || temp.equals("I"))
+			{
+				obstacle.effect(this);	
+			}
+			if (temp.equals("n")  || temp.equals("N")) ;
+		}
+		
 		System.out.println("\t<-[:Robot].collisionWithObstacles(obstacle):");
 		return this.intersect(obstacle);		
 	}

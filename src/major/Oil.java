@@ -53,8 +53,8 @@ public class Oil extends Obstacle {
 	@Override
 	public void effect(Robot r) {
 		// TODO Auto-generated method stub
-		System.out.println("\t->[:Oil].effect(robots.get(0)):");
+		System.out.println("\t\t\t->[:Oil].effect(robots.get(0)):");
 		r.setOiled();
-		System.out.println("\t<-[:Oil].effect(robots.get(0)):");
+		System.out.println("\t\t\t<-[:Oil].effect(robots.get(0)):");
 	}
 }

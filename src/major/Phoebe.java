@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import minor.MapBuilder;
-import LogBase;
+//import LogBase;
 
 /*
  * Phoebe osztály
@@ -231,7 +231,7 @@ public class Phoebe
 		
 		while(!quit){		
 			System.out.flush();
-			LogBase
+			//LogBase
 			
 			System.out.println("========================================================");
 			System.out.println("|           Phoebe Szkeleton by Scrum_That!            |");
@@ -256,7 +256,7 @@ public class Phoebe
 				usecase = Integer.parseInt(sc.nextLine());
 				System.out.println("");
 			}
-			int temp=0;
+			//int temp = 0;
 			switch(usecase){
 			case 1:
 				//TODO
@@ -271,17 +271,16 @@ public class Phoebe
 				robots.get(0).keyPressed(KeyEvent.VK_UP);					
 				break;
 				
-			case 4:		
+			case 4:
 				System.out.println("Ragacsba lépést választotta.");
 				robots.get(0).collisionWithObstacles(obstacles.get(1));
-				obstacles.get(1).effect(robots.get(0));
-				//TODO
+						//TODO
 				break;
 				
 			case 5:
 				System.out.println("Olajba lépést választotta.");
 				robots.get(0).collisionWithObstacles(obstacles.get(0));
-				obstacles.get(0).effect(robots.get(0));
+					
 				//TODO
 				break;
 				
