@@ -46,6 +46,6 @@ public class Glue extends Obstacle {
 	public void effect(Robot r) {
 		System.out.println("\t\t\t->[:Glue].effect(robots.get(0)):");
 		r.setGlue();
-		System.out.println("\t\t\t<-[:Glue].effect(robots.get(0)):");
+		System.out.println("\t\t\t<-[:Glue].effect(robots.get(0))");
 	}
 }

@@ -151,7 +151,7 @@ public class HUD {
 			Scanner sc = new Scanner(System.in);
 			int temp='0';
 			while(temp!='i'&& temp!='n' && temp!='I' && temp!='N'){
-				System.out.print("\t\t\t Van a ponton checkpoint? I/N:");
+				System.out.print("\t\t\t Elérte a Robot"+i.getId()%2" a következő checkpointot? I/N:");
 				temp=sc.nextLine().charAt(0);
 					
 			}

@@ -22,7 +22,6 @@ public class MyListener implements KeyListener, Runnable  {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		while(true){
 			if(isUpPressed) robots.get(0).keyPressed(KeyEvent.VK_UP);
 			if (isDownPressed)robots.get(0).keyPressed(KeyEvent.VK_DOWN);
@@ -35,7 +34,6 @@ public class MyListener implements KeyListener, Runnable  {
 			try {
 				Thread.sleep(30);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -44,7 +42,6 @@ public class MyListener implements KeyListener, Runnable  {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_UP: isUpPressed = true; break;
 		case KeyEvent.VK_DOWN: isDownPressed = true; break;
@@ -59,7 +56,6 @@ public class MyListener implements KeyListener, Runnable  {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_UP: isUpPressed = false; break;
 		case KeyEvent.VK_DOWN: isDownPressed = false; break;
@@ -75,7 +71,6 @@ public class MyListener implements KeyListener, Runnable  {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 	
 }

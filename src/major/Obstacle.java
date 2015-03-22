@@ -11,18 +11,17 @@ import java.awt.Rectangle;
  *  
  */
 
-public abstract class Obstacle extends Unit 
-//implements iVisible 
-{
+public abstract class Obstacle extends Unit {
 	/*
 	 * WIDTH : Az akadályokat jellemző szélesség. Szükség van rá,
 	 *		   hogy létrehozzuk a leszármazottak hitbox-át(sokszög pályaelem).
 	 * HEIGHT : Az akadályokat jellemző hosszúság. Szükség van rá, 
 	 * 		   hogy létrehozzuk a leszármazottak hitbox-át(sokszög pályaelem).
+	 * lifetime: Az akadály a lerakástól számított eltelt körök száma. 
 	 */
 	protected static  int WIDTH=40;
 	protected static int HEIGHT=40;
-	protected int lifetime;//ezt növeljük körönként
+	protected int lifetime;
 	/*
 	 * Obstacle kontruktor
 	 * 
@@ -40,7 +39,6 @@ public abstract class Obstacle extends Unit
 	public Obstacle(int x, int y) {
 		super(x, y);
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/*
@@ -50,7 +48,7 @@ public abstract class Obstacle extends Unit
 	 * Meghatározza, milyen hatással van a robotra, ha érintkezik egy Obstacle-lel.
 	 * 
 	 * Funkció(ki hívja meg és mikor?):
-	 * Ütközéskor hívja meg az ütközést vizsgáló függvénye a Robot osztálynak.
+	 * Ütközéskor hívja meg az ütközést vizsgáló függvénye a Robot osztálynak, Robot.collisionWithObstable().
 	 *
 	 * @param r azt határozza meg hogy melyik robotra hajtsa végre a változtatásokat
 	 */
@@ -69,16 +67,5 @@ public abstract class Obstacle extends Unit
 	 * 	
 	 */
 	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public String toString() {
-		return "Obstacle [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT + "]";
-	}
-	
-
-
+	public void move() {}
 }

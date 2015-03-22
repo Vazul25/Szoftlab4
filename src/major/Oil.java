@@ -10,9 +10,6 @@ package major;
  * 
  * Ősosztályok: 
  * Unit <- Obstacle
- *
- * Interfésze:
- * Unit-ból származott IVisible
  *  
  */
 public class Oil extends Obstacle {
@@ -32,8 +29,6 @@ public class Oil extends Obstacle {
 	 */
 	public Oil(int x, int y) {
 		super(x, y);
-	
-		// TODO Auto-generated constructor stub
 	}
 	
 
@@ -45,14 +40,13 @@ public class Oil extends Obstacle {
 	 * a játékost, hogy irányt váltson.
 	 * 
 	 * Funkció(ki hívja meg és mikor?):
-	 * A Phoebe hivja meg a robotra ami ütközött.
+	 * A Phoebe hivja meg a robotra ami ütközött. Robot.collisionWithObstacle()
 	 *
 	 * @param r Azt határozza meg hogy melyik robotra hajtsa végre a változtatásokat
 	 * 	
 	 */
 	@Override
 	public void effect(Robot r) {
-		// TODO Auto-generated method stub
 		System.out.println("\t\t\t->[:Oil].effect(robots.get(0)):");
 		r.setOiled();
 		System.out.println("\t\t\t<-[:Oil].effect(robots.get(0)):");

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import minor.MapBuilder;
-//import LogBase;
 
 /*
  * Phoebe osztály
@@ -34,10 +33,10 @@ public class Phoebe
 	//Attribútumok
 	/**
 	 * Mire való:
-	 ** ended: Állapot változó, ha vége a játéknak true érték íródik be. Ha beteljesül egy játék végét jelentő esemény, akkor ezen a változón keresztül leáll a játék és megállapítódik a nyertes.
+	 ** ended:  Állapot változó, ha vége a játéknak true érték íródik be. 
+	 * 			Ha beteljesül egy játék végét jelentő esemény, akkor ezen a változón keresztül leáll a játék és megállapítódik a nyertes.
 	 ** gameInfo: A játék kezdeti beállításait tárolja (kör/idő mód, max kör/max idő).
 	 */
-	public static BufferedImage background;
 	private boolean ended;
 	private Settings gameInfo;
 
@@ -72,6 +71,8 @@ public class Phoebe
 
 		public Settings(int info){
 			this.racemode = info;
+			step = 3;
+			limit = 180;
 		}
 
 		public int getSettings(){
@@ -117,9 +118,9 @@ public class Phoebe
 	 * 
 	 * Funkció(ki hívja meg és mikor?):
 	 * GUI hívja meg, ha megnyomják a NewGame gombot.
-	 * 
 	 */
 	public Phoebe(Settings set){
+		System.out.println("> \t->[:Phoebe].Phoebe(Settings):");
 		//Változók inicializálása, adatszerkezetek létrehozása
 		ended=false;
 		obstacles=new ArrayList<Obstacle>();
@@ -128,6 +129,7 @@ public class Phoebe
 		
 		//Játék incializálása
 		init();		
+		System.out.println("< \t<-[:Phoebe].PhoebeSettings()");
 	}
 
 	/**
