@@ -1,19 +1,14 @@
 package major;
 
 import java.awt.Rectangle;
-import java.io.IOException;
 
 /*
  * Unit osztály
  * Felelősség:
  * A pályán található objektumokért felel és azok viszonyáról (például ütközésükről).
- *
- * Interfészek:
- * IVisible
  * 
  */
 public abstract class Unit 
-//implements iVisible
 {
 	
 	//Atribútumok
@@ -77,15 +72,7 @@ public abstract class Unit
 	 * @param u Egység, amivel vizsgálni kell az ütközést.
 	 */
 	public boolean intersect(Unit u){
-		//Paraméterként kapott Unit hitbox-szal vizsgálat, hogy this.hitbox-szal ütközés történt-e?
-		System.out.println("Unit.intersect");
-		
+		//Paraméterként kapott Unit hitbox-szal vizsgálat, hogy this.hitbox-szal ütközés történt-e?		
 		return this.hitbox.intersects(u.hitbox);
 	}
-	
-	public Rectangle getHitbox(){
-		System.out.println("> \t ->[:Unit].getHitbox():");
-		System.out.println("< \t <-[:Unit].Unit(x,y)");
-		return hitbox;
-	} 
 }

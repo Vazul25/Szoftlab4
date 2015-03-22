@@ -27,7 +27,7 @@ public class mainteszt {
 		//...
 		 Scanner sc = new Scanner(System.in);
 
-		new Phoebe(set).run(sc);
+		new Phoebe(set).run();
 	}
 
 }

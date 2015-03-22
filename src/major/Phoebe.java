@@ -1,8 +1,6 @@
 package major;
 
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -142,11 +140,11 @@ public class Phoebe
 		System.out.println("<\t\t<-[:Phoebe].AddObstacle(Obstacle)");
 	}
 
-	/*
+	/**
 	 * init függvény
 	 * Felelősség:
-	 * Timer létrehozása. Pálya létrehozása. Játékosok létrehozása. HUD létrehozása. 
-	 * Checkpointok átadása a HUD-nak. Kezdeti akadályok létrehozása.
+	 * Pálya létrehozása. Játékosok létrehozása. HUD létrehozása. 
+	 * Kezdeti akadályok létrehozása.
 	 * 
 	 * Funkcionalitás:
 	 * run() hívja meg.
@@ -169,7 +167,6 @@ public class Phoebe
 
 	//Akadályok létrehozása
 		for(int i=1;i<=2;i++){
-			//TODO Randomgenerált (x,y) pozíciók
 			int x=0;
 			int y=0;
 
@@ -191,9 +188,9 @@ public class Phoebe
 	 * 
 	 * @param sc Console-ról olvasáshoz, ez csak a szkeleton felület miatt kell.
 	 */
-	public void run(Scanner sc) {				
+	public void run() {				
 	
-		
+		Scanner sc = new Scanner(System.in);
 		System.out.println("|	                      Init Game END                           |");
 		System.out.print("|Írjon be egy karaktert és nyomjon ENTER-t a menü megjelenítéséhez:");
 		sc.nextLine();

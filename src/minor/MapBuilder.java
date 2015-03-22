@@ -1,7 +1,6 @@
 package minor;
 
 import java.awt.Shape;
-import java.awt.geom.Area;
 import java.util.List;
 import java.util.Scanner;
 
@@ -58,22 +57,13 @@ public class MapBuilder{
 	}
 	
 	/**
-	 * 
+	 * getCheckpoints függvény
 	 * @return visszaadja a Checkpointokat tartalmazó listát
 	 */
 	public List<Shape> getCheckpoints(){
 		System.out.println("> \t ->[:MapBuilder].getCheckpoints():");
 		System.out.println("< \t <-[:MapBuilder].getCheckpoints()");
 		return checkpoints;		
-	}
-
-	/**
-	 * 
-	 * A pályát reprezentáló objektum set-tere.
-	 * @param map the map to set
-	 */
-	public void setMap(Shape map) {
-		this.map = map;
 	}
 	
 	/*
@@ -94,23 +84,4 @@ public class MapBuilder{
 		if(temp == 'i' || temp == 'I') return true;
 		else return false;
 	}
-	
-	/*
-	 * obstacleOutsideOfMap függvény
-	 * 
-	 *  @return igaz értékkel tér vissza, ha a robot leesett a pályáról
-	 */
-	public boolean obstacleOutsideOfMap(Obstacle r){
-		System.out.println("> \t ->[:MapBuilder].obstacleOutsideOfMap(Robot):");
-		System.out.println("< \t <-[:MapBuilder].obstacleOutsideOfMap(Robot)");
-		return true;
-	
-	}
-
-	public int[] getStartPosPlayer(int id) {
-		System.out.println("> \t ->[:MapBuilder].getStartPosPlayer(int):");
-		System.out.println("< \t <-[:MapBuilder].getStartPosPlayer(int)");
-		return null;
-	}
-
 }

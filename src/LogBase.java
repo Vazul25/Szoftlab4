@@ -1,5 +1,3 @@
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 import major.Phoebe;
@@ -49,7 +47,7 @@ public class LogBase {
 		System.out.println("===================================================================");
 		System.out.println("|	                          Init Game                           |");
 		game = new Phoebe(set);
-		game.run(sc);
+		game.run();
 		
 		
 	}

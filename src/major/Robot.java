@@ -1,10 +1,6 @@
 package major;
 
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /*
@@ -118,9 +114,7 @@ public class Robot extends Unit{
 		staticid+=1;
 
 		this.p=p;
-
-		arrowendx=(int)(x+r*Math.cos(alpha));
-		arrowendy=(int)(y+r*Math.sin(alpha));
+		
 		System.out.println("< \t <-[:Robot].Robot(int,int,Phoebe):");
 	}
 
@@ -259,20 +253,6 @@ public class Robot extends Unit{
 			System.out.print("? \t\t 1.1 Milyen szögben ugrik a robot? (0-180):");
 			temp=Integer.parseInt(sc.nextLine());
 		}
-		
-		//Nyíl koordinátáinak kiszámolása
-		//arrowendx=(int)(x+slowed*r*Math.cos(temp));
-		//arrowendy=(int)(y+slowed*r*Math.sin(temp));
-		//x=arrowendx;	
-		//y=arrowendy;
-
-		//Olajjal ütközés hatásának eltüntetése
-		//slowed=1;
-		//User általi változtatás engedélyezése
-		//oiled=false;
-
-		//hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
-		//System.out.print("\t\t\t A robot új koordinátái: " + x + " " + y + "\n");
 		System.out.println("<\t<-[:Robot].move()");
 	}
 

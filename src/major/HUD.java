@@ -1,11 +1,9 @@
 package major;
 
+import java.awt.Polygon;
 import java.awt.Shape;
-import java.awt.geom.Area;
 import java.util.List;
 import java.util.Scanner;
-
-import major.Phoebe.Settings;
 
 /**
  * Ez az objektum követi és nyilvántartja, hogy a robotok hány checkpoint-on mentek át, 
@@ -141,10 +139,7 @@ public class HUD {
 	 * 
 	 */
 	public int endOfTheGame(){
-		System.out.println("> \t ->[:HUD].endOfTheGame():");
-		Scanner sc = new Scanner(System.in);
-		int tmp='0';
-		
+		System.out.println("> \t ->[:HUD].endOfTheGame():");		
 		System.out.println("< \t <-[:HUD].endOfTheGame()");
 		return 0;
 	}
