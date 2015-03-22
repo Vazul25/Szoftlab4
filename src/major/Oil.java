@@ -29,6 +29,8 @@ public class Oil extends Obstacle {
 	 */
 	public Oil(int x, int y) {
 		super(x, y);
+		System.out.println("> \t ->[:Oil].Oil(int,int):");		
+		System.out.println("< \t <-[:Oil].Oil(int,int)");
 	}
 	
 
@@ -47,8 +49,8 @@ public class Oil extends Obstacle {
 	 */
 	@Override
 	public void effect(Robot r) {
-		System.out.println("\t\t\t->[:Oil].effect(robots.get(0)):");
+		System.out.println(">\t\t\t->[:Oil].effect(Robot):");
 		r.setOiled();
-		System.out.println("\t\t\t<-[:Oil].effect(robots.get(0)):");
+		System.out.println("<\t\t\t<-[:Oil].effect(Robot)");
 	}
 }

@@ -43,14 +43,14 @@ public class Robot extends Unit{
 	 * Kezdő érték = 1
 	 * Maximális érték = 3
 	 */
-	private int numGlue;
+	private int numGlue = 1;
 
 	/**
 	 * Tárolja a még felhasználatlan olajfoltokat.
 	 * Kezdő érték = 1
 	 * Maximális érték = 3
 	 */
-	private int numOil;
+	private int numOil = 1;
 
 	/*
 	 * Kép fájl
@@ -71,8 +71,8 @@ public class Robot extends Unit{
 	 *
 	 */
 	private int id;
-	private double slowed;//default 1.0
-	private boolean oiled;
+	private double slowed = 1.0;//default 1.0
+	private boolean oiled = false;
 
 	/*
 	 * Vektor paraméterek
@@ -111,24 +111,18 @@ public class Robot extends Unit{
 	 */
 	public Robot(int x, int y, Phoebe p) {
 		super(x, y);
+		System.out.println("> \t ->[:Robot].Robot(int,int,Phoebe):");		
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 
 		id=staticid;
 		staticid+=1;
 
-		slowed=1.0;
-		oiled=false;
-
-		numGlue = 1;
-		numOil = 1;
-
 		this.p=p;
 
 		arrowendx=(int)(x+r*Math.cos(alpha));
 		arrowendy=(int)(y+r*Math.sin(alpha));
+		System.out.println("< \t <-[:Robot].Robot(int,int,Phoebe):");
 	}
-
-	// Setter-Getterek
 
 	/**
 	 * GetId függvény
@@ -151,10 +145,8 @@ public class Robot extends Unit{
 	 *  	
 	 */
 	public void setOiled(){
-		System.out.println("\t\t\t\t->[:Robot].setOiled():");
-		//System.out.println("\t\t\t\t\t Tudja a játékos a robot irányát változtatni következő ugrásnál? I/N: N");
-		oiled=true;
-		System.out.println("\t\t\t\t<-[:Robot].setOiled():");
+		System.out.println(">\t\t\t\t->[:Robot].setOiled():");
+		System.out.println("<\t\t\t\t<-[:Robot].setOiled()");
 	}
 
 	/**
@@ -166,10 +158,8 @@ public class Robot extends Unit{
 	 * A Glue osztály effekt függvénye.
 	 */
 	public void setGlue(){
-		System.out.println("\t\t\t\t->[:Robot].setGlue():");
-		//System.out.println("\t\t\t\t\t Lelassult a robot? I/N: I");
-		slowed=0.5;
-		System.out.println("\t\t\t\t<-[:Robot].setGlue():");
+		System.out.println(">\t\t\t\t->[:Robot].setGlue():");
+		System.out.println("<\t\t\t\t<-[:Robot].setGlue()");
 	}
 
 	/**
@@ -181,6 +171,8 @@ public class Robot extends Unit{
 	 * A HUD kérdezi le, hogy megjeleníthesse a képernyőn.
 	 */
 	public int getNumGlue(){
+		System.out.println("> \t ->[:Robot].getNumGlue():");
+		System.out.println("< \t <-[:Robot].getNumGlue()");
 		return numGlue;
 	}
 
@@ -193,13 +185,15 @@ public class Robot extends Unit{
 	 * A HUD kérdezi le, hogy megjelenítse a képernyőn.
 	 */
 	public int getNumOil(){
+		System.out.println("> \t ->[:Robot].getNumOil():");
+		System.out.println("< \t <-[:Robot].getNumOil()");
 		return numOil;
 	}
 	
 	
 	public Rectangle getHitbox(){
-		System.out.println("\t\t->["+id+":Robot].getHitbox():");
-		System.out.println("\t\t<-["+id+":Robot].getHitbox():");
+		System.out.println(">\t\t->["+id+":Robot].getHitbox():");
+		System.out.println("<\t\t<-["+id+":Robot].getHitbox():");
 		return hitbox;
 	}
 	
@@ -212,11 +206,8 @@ public class Robot extends Unit{
 	 * Amikor a robot checkpointot ér, akkor hívódik meg.
 	 */
 	public void incNumGlue(){
-		System.out.println("\t\t\t->["+id+":Robot].incNumGlue():");
-		if(numGlue < 3){
-			numGlue++;
-		}
-		System.out.println("\t\t\t<-["+id+":Robot].incNumGlue():");
+		System.out.println(">\t\t\t->["+id+":Robot].incNumGlue():");
+		System.out.println("<\t\t\t<-["+id+":Robot].incNumGlue():");
 	}
 
 	/**
@@ -228,11 +219,8 @@ public class Robot extends Unit{
 	 * Amikor a robot checkpointot ér, akkor hívódik meg.
 	 */
 	public void incNumOil(){
-		System.out.println("\t\t\t->["+id+":Robot].incNumOil():");
-		if(numOil < 3){
-			numOil++;
-		}
-		System.out.println("\t\t\t<-["+id+":Robot].incNumOil():");
+		System.out.println(">\t\t\t->["+id+":Robot].incNumOil():");
+		System.out.println("<\t\t\t<-["+id+":Robot].incNumOil()");
 	}
 
 	/**
@@ -243,8 +231,8 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void deathanimation(){
-		System.out.println("\t->[:Robot].deathanimation()");
-		System.out.println("\t<-[:Robot].deathanimation()");
+		System.out.println(">\t->[:Robot].deathanimation()");
+		System.out.println("<\t<-[:Robot].deathanimation()");
 	};
 
 
@@ -258,34 +246,34 @@ public class Robot extends Unit{
 	 * A játékmotor minden lépésnél.
 	 */
 	@Override
-	public void move() throws InterruptedException, IOException {
+	public void move() {
 		//User általi változtatás letiltása (lásd Robot.keyPressed())
-		oiled=true;
+		//oiled=true;
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.println("\t->[:Robot].move():");
+		System.out.println(">\t->[:Robot].move():");
 		
 		int temp = -1;
 		
 		while(temp < 0 || temp > 180){
-			System.out.print("\t\t Milyen szögben ugrik a robot? (0-180):");
-			temp=sc.nextLine().charAt(0);
+			System.out.print("? \t\t 1.1 Milyen szögben ugrik a robot? (0-180):");
+			temp=Integer.parseInt(sc.nextLine());
 		}
 		
 		//Nyíl koordinátáinak kiszámolása
-		arrowendx=(int)(x+slowed*r*Math.cos(temp));
-		arrowendy=(int)(y+slowed*r*Math.sin(temp));
-		x=arrowendx;	
-		y=arrowendy;
+		//arrowendx=(int)(x+slowed*r*Math.cos(temp));
+		//arrowendy=(int)(y+slowed*r*Math.sin(temp));
+		//x=arrowendx;	
+		//y=arrowendy;
 
 		//Olajjal ütközés hatásának eltüntetése
-		slowed=1;
+		//slowed=1;
 		//User általi változtatás engedélyezése
-		oiled=false;
+		//oiled=false;
 
-		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
-		System.out.print("\t\t\t A robot új koordinátái: " + x + " " + y + "\n");
-		System.out.println("\t<-[:Robot].move():");
+		//hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
+		//System.out.print("\t\t\t A robot új koordinátái: " + x + " " + y + "\n");
+		System.out.println("<\t<-[:Robot].move()");
 	}
 
 	/**
@@ -305,8 +293,8 @@ public class Robot extends Unit{
 		
 		while (!temp.equals("i")  && !temp.equals("n") && !temp.equals("I")  && !temp.equals("N")) {
 			
-			System.out.println("\t->[:Robot].collisionWithObstacles(obstacle):");
-			System.out.print("\t\t Rossz helyre lépett a robot? i/n: ");
+			System.out.println(">\t->[:Robot].collisionWithObstacles(obstacle):");
+			System.out.print("?\t\t(4/5).1 Akadályba lépett a robot? i/n: ");
 			temp = sc.nextLine();
 		
 			if (temp.equals("i") || temp.equals("I"))
@@ -316,7 +304,7 @@ public class Robot extends Unit{
 			if (temp.equals("n")  || temp.equals("N")) ;
 		}
 		System.out.println("\t->[:Robot].collisionWithObstacles(obstacle):");
-		return this.intersect(obstacle);		
+		return true;		
 	}
 
 	/**
@@ -329,8 +317,8 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void bounce(){
-		System.out.println("\t\t->["+id+":Robot].bounce()");
-		System.out.println("\t\t<-["+id+":Robot].bounce()");
+		System.out.println(">\t\t->["+id+":Robot].bounce():");
+		System.out.println("<\t\t<-["+id+":Robot].bounce()");
 	}
 
 	/*
@@ -348,12 +336,12 @@ public class Robot extends Unit{
 	public void collisionWithRobot(Robot r){
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.println("\t->[:Robot].collisionWithRobot(r):");
+		System.out.println(">\t->[:Robot].collisionWithRobot(r):");
 		
 		int temp='0';
 		
 		while(temp!='i'&& temp!='n'&&temp!='I'&& temp!='N'){
-			System.out.print("\t\t Van-e ütközés? I/N:");
+			System.out.print("?\t\t7.1 Van-e ütközés? I/N:");
 			temp=sc.nextLine().charAt(0);
 		}
 			
@@ -361,7 +349,7 @@ public class Robot extends Unit{
 			bounce();
 			r.bounce();
 		}
-		System.out.println("\t<-[:Robot].collisionWithRobot(r):");
+		System.out.println("<\t<-[:Robot].collisionWithRobot(r)");
 	}
 
 
@@ -391,8 +379,8 @@ public class Robot extends Unit{
 			if(e == Phoebe.Settings.keyconfig[id%2*4+2])  {
 				int temp='0';
 				
-				System.out.println("\t->[:Robot].KeyPressed(KeyEvent.VK_UP)");
-				System.out.print("\t\tVan-e rendelkezésre álló olaj? I/N:");
+				System.out.println("> ->[:Robot].KeyPressed(KeyEvent.VK_UP):");
+				System.out.print("?\t3.1 Van-e rendelkezésre álló olaj? I/N:");
 				
 				while(temp!='i'&& temp!='n'&& temp!='I'&& temp!='N') 
 					temp=sc.nextLine().charAt(0);
@@ -401,25 +389,24 @@ public class Robot extends Unit{
 					Oil item0 = new Oil(x, y);
 					p.addObstacle(item0);
 				}
-				System.out.println("\t<-[:Robot].KeyPressed(KeyEvent.VK_UP):");
+				System.out.println("< <-[:Robot].KeyPressed(KeyEvent.VK_UP)");
 			}
 			
 			//Ragacs lerakás
 			if(e == Phoebe.Settings.keyconfig[id%2*4+3]){
 				int temp='0';
-				System.out.println("\t->[:Robot].KeyPressed(KeyEvent.VK_DOWN):");
+				System.out.println("> ->[:Robot].KeyPressed(KeyEvent.VK_DOWN):");
 
 				while(temp!='i'&& temp!='n'&&temp!='I'&& temp!='N'){
-					System.out.print("\t\tVan-e rendelkezésre állo ragacs? I/N:");
+					System.out.print("?\t2.1 Van-e rendelkezésre állo ragacs? I/N:");
 					temp=sc.nextLine().charAt(0);
-					System.out.println();
 				}
 				if(temp=='i'||temp=='I'){	
 					Glue item1 = new Glue(x, y);
 					p.addObstacle(item1);
 				}
 
-				System.out.println("\t<-[:Robot].KeyPressed(KeyEvent.VK_DOWN)");
+				System.out.println("< <-[:Robot].KeyPressed(KeyEvent.VK_DOWN)");
 			}
 	}
 }

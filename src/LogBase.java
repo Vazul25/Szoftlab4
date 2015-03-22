@@ -1,3 +1,5 @@
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 import major.Phoebe;

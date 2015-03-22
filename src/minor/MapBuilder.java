@@ -29,7 +29,7 @@ public class MapBuilder{
 	* Tárolja a checkpointokat reprezentáló objektumokat List 
 	* adatszerkezetben. 
 	*/
-	private List<Shape> checkpoints;
+	private List<Shape> checkpoints = null;
 	
 	/*
 	* Meghatároz egy (x,y) koordinátát, ahol az első játékos kezd.
@@ -52,28 +52,9 @@ public class MapBuilder{
 	 * szolgáltatja a checkpointokat.
 	 */
 	public MapBuilder(){
-		//Fájlból olvasás		
-		//...
-		//Kezdő koordináták beolvasása robotonként
-		int[] temp = {200, 300};
- 		startPosPlayerOne = temp;
- 		startPosPlayerTwo = temp;
-		//Polygon létrehozása (pálya)
-		int[] xpoints = null;
-		int[] ypoints = null;
-		int npoints = 0;
-	//	setMap(new Polygon(xpoints, ypoints, npoints)); // null pointerekkel nem fordul
-		
-		//checkpointok létrehozása
-		//...
-		int numberOfCheckpoints = 5;
-		for(int i=1;i<=numberOfCheckpoints;i++){
-			//Checkpointot határoló pontok beolvasása
-			//...
-		//	checkpoints.add(new Polygon()); null pointerekkel nem megy
-		}
-		//...
-		
+		System.out.println("> \t ->[:MapBuilder].MapBuilder():");
+
+		System.out.println("< \t <-[:MapBuilder].MapBuilder()");
 	}
 	
 	/**
@@ -81,16 +62,9 @@ public class MapBuilder{
 	 * @return visszaadja a Checkpointokat tartalmazó listát
 	 */
 	public List<Shape> getCheckpoints(){
-		return checkpoints;
-	}
-
-	/**
-	 * 
-	 * A pályát reprezentáló objetum get-tere
-	 * @return the map
-	 */
-	public Shape getMap() {
-		return map;
+		System.out.println("> \t ->[:MapBuilder].getCheckpoints():");
+		System.out.println("< \t <-[:MapBuilder].getCheckpoints()");
+		return checkpoints;		
 	}
 
 	/**
@@ -110,13 +84,13 @@ public class MapBuilder{
 	public boolean robotOutsideOfMap(Robot r){
 		Scanner sc = new Scanner(System.in);
 		char temp = '0';
-		System.out.println("\t->[:MapBuilder].robotOutsideOfMap(robots.get(0)):");
-		System.out.print("\t\t A robot leesett a pályáról? I/N: ");
+		System.out.println("> \t ->[:MapBuilder].robotOutsideOfMap(Robot):");
 		
 		while(temp!='i'&& temp!='n'&& temp!='I'&& temp!='N') {
+			System.out.print("?\t\t8.1 A robot leesett a pályáról? I/N: ");
 			temp=sc.nextLine().charAt(0);
 		}
-		System.out.println("\t<-[:MapBuilder].robotOutsideOfMap(robots.get(0)):");
+		System.out.println("< \t <-[:MapBuilder].robotOutsideOfMap(Robot)");
 		if(temp == 'i' || temp == 'I') return true;
 		else return false;
 	}
@@ -127,19 +101,16 @@ public class MapBuilder{
 	 *  @return igaz értékkel tér vissza, ha a robot leesett a pályáról
 	 */
 	public boolean obstacleOutsideOfMap(Obstacle r){
-		//Area area = new Area(map);
-		//Area otherArea = new Area(r.getHitbox());
-		//area.intersect(otherArea);
-		//TODO revision
-		//return area.getBounds().getSize().equals( r.getHitbox().getBounds().getSize() );
-		//TODO kérdés
+		System.out.println("> \t ->[:MapBuilder].obstacleOutsideOfMap(Robot):");
+		System.out.println("< \t <-[:MapBuilder].obstacleOutsideOfMap(Robot)");
 		return true;
 	
 	}
 
 	public int[] getStartPosPlayer(int id) {
-		//TODO
-		return startPosPlayerOne;
+		System.out.println("> \t ->[:MapBuilder].getStartPosPlayer(int):");
+		System.out.println("< \t <-[:MapBuilder].getStartPosPlayer(int)");
+		return null;
 	}
 
 }

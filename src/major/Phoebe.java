@@ -37,8 +37,8 @@ public class Phoebe
 	 * 			Ha beteljesül egy játék végét jelentő esemény, akkor ezen a változón keresztül leáll a játék és megállapítódik a nyertes.
 	 ** gameInfo: A játék kezdeti beállításait tárolja (kör/idő mód, max kör/max idő).
 	 */
-	private boolean ended;
-	private Settings gameInfo;
+	private boolean ended = false;
+	public static Settings gameInfo;
 
 	//Beállítások
 	/*
@@ -109,7 +109,8 @@ public class Phoebe
 	private List<Obstacle> obstacles;
 	private HUD hud;
 	private MapBuilder map;
-	//private MyTimer gameTimer;
+	Oil oil1; //szekelton 5. usecase-hez
+	Glue glue1; //szkeleton 4. usecase-hez
 	
 	/**
 	 * Phoebe konstruktor
@@ -120,16 +121,10 @@ public class Phoebe
 	 * GUI hívja meg, ha megnyomják a NewGame gombot.
 	 */
 	public Phoebe(Settings set){
-		System.out.println("> \t->[:Phoebe].Phoebe(Settings):");
-		//Változók inicializálása, adatszerkezetek létrehozása
-		ended=false;
-		obstacles=new ArrayList<Obstacle>();
-		robots=new ArrayList<Robot>();
+		System.out.println("> ->[:Phoebe].Phoebe(Settings):");
 		gameInfo = set;
-		
-		//Játék incializálása
 		init();		
-		System.out.println("< \t<-[:Phoebe].PhoebeSettings()");
+		System.out.println("< <-[:Phoebe].Phoebe(Settings)");
 	}
 
 	/**
@@ -143,10 +138,8 @@ public class Phoebe
 	 * @param item Akadályt reprezentáló objektum.
 	 */
 	public void addObstacle(Obstacle item){
-		System.out.println("\t\t->[:Phoebe].AddObstacle(item)");
-		System.out.println("\t\t<-[:Phoebe].AddObstacle(item)");
-	
-		obstacles.add(item);
+		System.out.println(">\t\t->[:Phoebe].AddObstacle(Obstacle)");
+		System.out.println("<\t\t<-[:Phoebe].AddObstacle(Obstacle)");
 	}
 
 	/*
@@ -159,44 +152,29 @@ public class Phoebe
 	 * run() hívja meg.
 	 */
 	private void init(){
-	//GameTimer létrehozása, inicializálása
-		//Ha Időlimites játékmód
-	/*	if(gameInfo.getSettings() == Settings.TIMELIMIT)
-			gameTimer = new MyTimer(gameInfo.getLimit());
-		//ha körlimites játékmód
-		else if(gameInfo.getSettings() == Settings.LAPLIMIT)
-			gameTimer = new MyTimer(0);*/
-
-		//Pálya létrehozása
+	//Pálya létrehozása
 		map = new MapBuilder();
-
+		
 	
 	//Játékosok létrehozása
-		Robot one = new Robot(map.getStartPosPlayer(1)[0], map.getStartPosPlayer(1)[1], this);		
-		Robot two = new Robot(map.getStartPosPlayer(2)[0], map.getStartPosPlayer(2)[1], this);
+		robots = new ArrayList<Robot>();
+		Robot one = new Robot(200,300, this);		
+		Robot two = new Robot(200,300, this);
 		
 		robots.add(one);
 		robots.add(two);
 
 	//HUD létrehozása
-		hud = new HUD(robots);
-
-	//Checkpointok eljuttatása a HUD-ba
-		hud.setCheckpoints(map.getCheckpoints());
-		
+		hud = new HUD(robots);		
 
 	//Akadályok létrehozása
-		for(int i=1;i<=10;i++){
+		for(int i=1;i<=2;i++){
 			//TODO Randomgenerált (x,y) pozíciók
 			int x=0;
 			int y=0;
 
-			Oil item1 = new Oil(x, y);
-			Glue item2 = new Glue(x, y);
-			//if(!map.obstacleOutsideOfMap(item1)) 
-				obstacles.add(item1);
-			//if(!map.obstacleOutsideOfMap(item2)) 
-				obstacles.add(item2);
+			oil1 = new Oil(x, y);
+			glue1 = new Glue(x, y);						
 		}						
 
 	}
@@ -214,17 +192,7 @@ public class Phoebe
 	 * @param sc Console-ról olvasáshoz, ez csak a szkeleton felület miatt kell.
 	 */
 	public void run(Scanner sc) {				
-	//Játék eleji visszaszámlálás
-		//MyTimer startTimer = new MyTimer(3);
-	/*	startTimer.start();
-		
-		while(!startTimer.isZero()){
-			//Idő kiírása
-			System.out.println(startTimer.getTime());
-		}*/
-		
-	//Játék visszaszámláló elindítása
-	//	gameTimer.start();
+	
 		
 		System.out.println("|	                      Init Game END                           |");
 		System.out.print("|Írjon be egy karaktert és nyomjon ENTER-t a menü megjelenítéséhez:");
@@ -263,13 +231,9 @@ public class Phoebe
 			switch(usecase){
 			case 1:
 				System.out.println("1. A Robot irányváltoztatását, ugrását választotta.");
-				try {
-					robots.get(0).move();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				System.out.println("> ->[:Phoebe].run():");
+				robots.get(0).move();				
+				System.out.println("< <-[:Phoebe].run()");
 				break;
 			case 2:
 				System.out.println("2. A ragacs lerakását választotta.");
@@ -282,105 +246,61 @@ public class Phoebe
 				break;
 				
 			case 4:		
-				System.out.println("Ragacsba lépést választotta.");
-				robots.get(0).collisionWithObstacles(obstacles.get(1));
-				//TODO
+				System.out.println("4. Ragacsba lépést választotta.");
+				System.out.println("> ->[:Phoebe].run():");
+				robots.get(0).collisionWithObstacles(glue1);
+				System.out.println("< <-[:Phoebe].run()");
 				break;
 				
 			case 5:
-				System.out.println("Olajba lépést választotta.");
-				robots.get(0).collisionWithObstacles(obstacles.get(0));
-				//TODO
+				System.out.println("5. Olajba lépést választotta.");
+				System.out.println("> ->[:Phoebe].run():");
+				robots.get(0).collisionWithObstacles(oil1);
+				System.out.println("< <-[:Phoebe].run()");
 				break;
 				
 			case 6:
-				System.out.println("A checkpointba lépést választotta.");
+				System.out.println("6. A checkpointba lépést választotta.");
+				System.out.println("> ->[:Phoebe].run():");
 				hud.checkpointSearch();
+				System.out.println("< <-[:Phoebe].run()");
 				break;
 			case 7:
 				System.out.println("7. A Robot ütközését választotta.");
+				System.out.println("> ->[:Phoebe].run():");
 				robots.get(0).collisionWithRobot(robots.get(1));
+				System.out.println("< <-[:Phoebe].run()");
 				break;
 				
 			case 8:
 				System.out.println("8. Pályáról leesést választotta.");
+				System.out.println("> ->[:Phoebe].run():");
 				if(map.robotOutsideOfMap(robots.get(0))){
 					robots.get(0).deathanimation();
 				}
+				System.out.println("< <-[:Phoebe].run()");
 				break;
 				
 			case 9:
-				int tmp='0';
-				while(tmp!='i'&& tmp!='n' && tmp!='I' && tmp!='N'){
-					if(gameInfo.getSettings()==Settings.TIMELIMIT) 
-						System.out.print("Lejárt az idő? I/N:");
+				if(gameInfo.getSettings() == Settings.TIMELIMIT)
+					System.out.println("9. Az idő lejárását választotta.");
+				else 
+					System.out.println("9. A minden kör teljesítését választotta.");
+				System.out.println("< <-[:Phoebe].run()");
+				while(temp!='i'&& temp!='n' && temp!='I' && temp!='N'){
+					if(Phoebe.gameInfo.getSettings()==Settings.TIMELIMIT) 
+						System.out.print("?\t 9.1 Lejárt az idő? I/N:");
 					else
-						System.out.print("Minden kör teljesítve van? I/N:");
-					tmp=sc.nextLine().charAt(0);
+						System.out.print("?\t 9.1 Minden kör teljesítve van? I/N:");
+					temp=sc.nextLine().charAt(0);
 				}
-				if(tmp=='i'||tmp=='I'){
-					quit = true;
-				}
-				
+				if(temp == 'i' || temp == 'I')	hud.endOfTheGame();
+				System.out.println("< <-[:Phoebe].run()");
 				break;
 			case 10:
 				quit = true;
 				break;
 			}
-			
 		}
-		//TODO Innen lehet ihletet meríteni
-		/*
-		while(!ended)
-		{
-	//A User ideje, hogy változtathasson az ugrás irányán
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
-	//Mozgás
-			for(int i=0;i<robots.size();i++){
-				System.out.println(robots.get(i).toString());
-				try {
-					robots.get(i).move();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-			}	
-
-	//Checkpointok vizsgálata, áthaladtunk-e?
-			hud.checkpointSearch();
-
-	//Ütközések vizsgálata robottal, akadállyal
-			for(Robot i : robots)
-			{			
-				for(Obstacle j : obstacles){
-				//Ütközés akadállyal
-					if(i.collisionWithObstacles(j)){
-						System.out.println("utkozes "+j.toString());
-						j.effect(i);
-					}
-
-				}
-
-				for(Robot k : robots){
-				//Ütközés robottal
-					i.collisionWithRobot(k);
-
-				}
-				//Leesés vizsgálata
-				if(map.robotOutsideOfMap(i)){
-					ended = true;
-					i.deathanimation();
-				};		
-
-			}		
-
-		}*/
 	}
 }

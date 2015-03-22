@@ -38,7 +38,9 @@ public abstract class Obstacle extends Unit {
 	 */
 	public Obstacle(int x, int y) {
 		super(x, y);
+		System.out.println("> \t ->[:Obstacle].Obstacle(int,int):");		
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
+		System.out.println("< \t <-[:Obstacle].Obstacle(int,int)");
 	}
 	
 	/*

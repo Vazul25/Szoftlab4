@@ -48,9 +48,10 @@ public abstract class Unit
 	 * @param y Y koordináta 
 	 */
 	public Unit(int x,int y){
-		//TODO
+		System.out.println("> \t ->[:Unit].Unit(int,int):");
 		this.x=x;
 		this.y=y;
+		System.out.println("< \t <-[:Unit].Unit(int,int)");
 	}
 	
 	/*
@@ -61,7 +62,7 @@ public abstract class Unit
 	 * Funkció: 
 	 * A Phoebe hívja meg minden körben.
 	 */
-	public abstract void move() throws InterruptedException, IOException;
+	public abstract void move();
 
 	/*
 	 * intersect függvény
@@ -77,10 +78,14 @@ public abstract class Unit
 	 */
 	public boolean intersect(Unit u){
 		//Paraméterként kapott Unit hitbox-szal vizsgálat, hogy this.hitbox-szal ütközés történt-e?
+		System.out.println("Unit.intersect");
+		
 		return this.hitbox.intersects(u.hitbox);
 	}
 	
 	public Rectangle getHitbox(){
+		System.out.println("> \t ->[:Unit].getHitbox():");
+		System.out.println("< \t <-[:Unit].Unit(x,y)");
 		return hitbox;
 	} 
 }

@@ -31,7 +31,9 @@ public class Glue extends Obstacle {
 	 */
 	public Glue(int x, int y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
+		System.out.println("> \t ->[:Glue].Glue(int,int):");
+		
+		System.out.println("< \t <-[:Glue].Glue(int,int)");
 	}
 
 	/**
@@ -44,8 +46,8 @@ public class Glue extends Obstacle {
 	 */
 	@Override
 	public void effect(Robot r) {
-		System.out.println("\t\t\t->[:Glue].effect(robots.get(0)):");
+		System.out.println(">\t\t\t->[:Glue].effect(Robot):");
 		r.setGlue();
-		System.out.println("\t\t\t<-[:Glue].effect(robots.get(0))");
+		System.out.println("<\t\t\t<-[:Glue].effect(Robot)");
 	}
 }
