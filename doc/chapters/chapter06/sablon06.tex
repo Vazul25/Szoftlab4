@@ -6,54 +6,94 @@
 \thispagestyle{fancy}
 
 \section{Fordítási és futtatási útmutató}
-\comment{A feltöltött program fordításával és futtatásával kapcsolatos útmutatás. Ennek tartalmaznia kell leltárszerűen az egyes fájlok pontos nevét, méretét byte-ban, keletkezési idejét, valamint azt, hogy a fájlban mi került megvalósításra.}
 
 \subsection{Fájllista}
 
 \begin{fajllista}
 
 \fajl
-{Main.java} % Kezdet
-{250 byte} % Idptartam
-{2009.10.10~18:05~} % Résztvevők
-{...} % Leírás
+{LogBase.java} % Kezdet
+{2069 byte} % Idptartam
+{2015.03.23~00:23~} % Résztvevők
+{Szkeleton felületének kialakítása} % Leírás
 
 \fajl
-{...}
-{...}
-{...}
-{...}
+{MapBuilder.java}
+{2455 byte}
+{2015.03.23~00:23~}
+{MapBuilder osztály}
+
+\fajl
+{Glue.java}
+{1476 byte}
+{2015.03.23~00:23~}
+{Glue osztály}
+
+\fajl
+{HUD.java}
+{5193 byte}
+{2015.03.23~00:23~}
+{HUD osztály}
+
+\fajl
+{Obstacle.java}
+{2316 byte}
+{2015.03.23~00:23~}
+{Obstacle osztály}
+
+\fajl
+{Oil.java}
+{1593 byte}
+{2015.03.23~00:23~}
+{Oil osztály}
+
+\fajl
+{Phoebe.java}
+{9491 byte}
+{2015.03.23~00:23~}
+{Phoebe osztály, Settings osztály}
+
+\fajl
+{Robot.java}
+{10649 byte}
+{2015.03.23~00:23~}
+{Robot osztály}
+
+\fajl
+{Unit.java}
+{1846 byte}
+{2015.03.23~00:23~}
+{Unit osztály}
 
 \end{fajllista}
 
 \subsection{Fordítás}
-\comment{A fenti listában szereplő forrásfájlokból milyen műveletekkel lehet a bináris, futtatható kódot előállítani. Az előállításhoz csak a 2. Követelmények c. dokumentumban leírt környezetet szabad előírni.}
 
 \lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
 \begin{lstlisting}
-javac -d bin *.java
+mkdir bin
+javac -encoding UTF8 -d bin *.java
 \end{lstlisting}
 
 \subsection{Futtatás}
-\comment{A futtatható kód elindításával kapcsolatos teendők leírása. Az indításhoz csak a 2. Követelmények c. dokumentumban leírt környezetet szabad előírni.}
-
 \lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
 \begin{lstlisting}
 cd bin
-java Main.java
+java LogBase
 \end{lstlisting}
 
 \section{Értékelés}
-\comment{A projekt kezdete óta az értékelésig eltelt időben tagokra bontva, százalékban.}
 
 \begin{ertekeles}
-\tag{Horváth} % Tag neve
-{23.5}        % Munka szazalekban
-\tag{Német}
-{24.5}
+\tag{Kovács} % Tag neve
+{22}        % Munka szazalekban
+\tag{Lovász}
+{20}
+\tag{Graics}
+{17}
+\tag{Magyar}
+{20}
 \tag{Tóth}
-{25}
-\tag{Oláh}
-{27}
+{21}
 \end{ertekeles}
 
