@@ -121,7 +121,7 @@ public class Phoebe extends JPanel implements Runnable{
 	/**
 	 * Phoebe konstruktor
 	 * Felelősség:
-	 * A játék felépítése, a robotok lista, az akadályok lista létrehozása.
+	 * A játék felépítése, adatszerkezetek inicializálása. Gomb lenyomását lekezlő szál létrehozása.
 	 * 
 	 * Funkció(ki hívja meg és mikor?):
 	 * GUI hívja meg, ha megnyomják a NewGame gombot.
@@ -180,10 +180,9 @@ public class Phoebe extends JPanel implements Runnable{
 	 * 	 
 	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
 	 */
-	public void paint(Graphics g) {
-		super.paint(g);
+	public void paint(Graphics2D g2d) {
+		super.paint(g2d);
 		g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
-		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);	
 		for(int i=0;i<obstacles.size();i++)

@@ -41,8 +41,6 @@ public class Oil extends Obstacle {
 	 */
 	public Oil(int x, int y) {
 		super(x, y);
-	
-		// TODO Auto-generated constructor stub
 	}
 	
 
@@ -50,8 +48,8 @@ public class Oil extends Obstacle {
 	 * Effect függvény
 	 * 
 	 * Felelősség:
-	 * Meghatározza, milyen hatással van a robotra, ha beleugrik egy olajfoltba. Ebben az esetben letiltja 
-	 * a játékost, hogy irányt váltson.
+	 * Meghatározza, milyen hatással van a robotra, ha beleugrik egy 
+	 * olajfoltba. Ebben az esetben letiltja a játékost, hogy irányt váltson.
 	 * 
 	 * Funkció(ki hívja meg és mikor?):
 	 * A Phoebe hivja meg a robotra ami ütközött.
@@ -61,7 +59,6 @@ public class Oil extends Obstacle {
 	 */
 	@Override
 	public void effect(Robot r) {
-		// TODO Auto-generated method stub
 		System.out.println("you jumped into oil");
 		r.setOiled();
 	}
@@ -73,7 +70,7 @@ public class Oil extends Obstacle {
 		g.drawImage(img, x, y, WIDTH, HEIGHT, null);
 		
 	}
-	public  static void setUnitImage() throws IOException{
+	public static void setUnitImage() throws IOException{
 		img=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"oil.jpg"));
 	}
 

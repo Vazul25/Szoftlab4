@@ -4,6 +4,10 @@
  * Timer osztály
  * Felelősség:
  * 
+ * A játék elején a kezdésig visszaszámol. Játéktípustól függően felfelé 
+ * vagy visszafelé számol. Ez az osztály felelős, hogy ha lejárt az idő, 
+ * akkor legyen vége a játéknak.
+ * 
  * Ősosztály:
  * 
  * Interfészek:

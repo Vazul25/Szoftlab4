@@ -12,14 +12,15 @@ import javax.imageio.ImageIO;
 /*
  * Robot osztály
  * Felelősség:
- * A játékban részvevő ugráló robotok viselkedését és kezelését leíró osztály.
+ * A játékban résztvevő ugráló robotok viselkedését és kezelését leíró osztály, tárolja és kezeli a felhasználható akadályok számát.
  * Olyan objektum, mely a pályán található robotokat valósítja meg. Leírja a viselkedésüket és a kezelésüket. 
  * A „Robot” osztály a Unit-ból származik le, ezáltal van pozíciója és az ütközés is le van kezelve. 
  * Felelős a mozgásért, megállapítja egy adott akadállyal vagy robottal ütközött-e és kezeli a felhasználó által leütött gombokat.
  * 
  * Ősosztály:Unit
  * 
- * Interfészek:még nincs
+ * Interfészek:
+ * IVisible Unitból származva
  *  
  */
 public class Robot extends Unit{
@@ -110,7 +111,7 @@ public class Robot extends Unit{
 	/**
 	 * Konstruktor
 	 * Felelősség:
-	 * Létrehozza a robotot és inicializálja a változóit 
+	 * Létrehozza a robotot és inicializálja a változóit.
 	 * 
 	 * Funkció(ki hívja meg és mikor?):
 	 * A Phoebe.init() a pálya létrehozásakor

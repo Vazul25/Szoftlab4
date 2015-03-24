@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
  * Az Obstacle ami a Unit leszármazottja
  * 
  * Interfészek:
- * nincs 
+ * IVisisble Unit-ból származva
  * @see major.Obstacle
  */
 

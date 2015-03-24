@@ -5,13 +5,13 @@ import java.awt.geom.Area;
 import java.util.List;
 
 /**
- * Ez az objektum követi és nyilvántartja, hogy a robotok hány checkpoint-on mentek át, 
- * mennyi olaj és ragacs van náluk amit felhasználhatnak, illetve kiírja a képernyőre a 
- * hátramaradó időt és a megtett körök számát. Feladata, hogy minden körben megvizsgálja, 
- * hogy a robotok elérték-e a következő checkpointot.
+ * Ez az objektum követi és nyilvántartja, hogy a robotok hány 
+ * checkpoint-on mentek át, illetve kiírja a képernyőre a hátramaradó 
+ * időt és a megtett körök számát. Feladata, hogy minden körben 
+ * megvizsgálja, hogy a robotok elérték-e a következő checkpointot.
  * 
  * Felelősség:
- * A robotok ragacs- és olajkészletét, illetve megtett köreit és checkpontjait számolja. 
+ * A robotok megtett köreit és checkpontjait tartja számon.
  * Megvalósítja a checkpoint ellenőrzést.
  */
 public class HUD {
@@ -32,7 +32,7 @@ public class HUD {
 	private int[] lap;
 	
 	/**
-	* {@link Shape} interfészű, de {@link Polygon} objektumokat tároló ArrayList.
+	* Shape interfészű, de Polygon objektumokat tároló ArrayList.
 	* Ezek a Polygonok a checkpointokat megvalósító objektumok.
 	* MapBuilder hívja meg a setCheckpoints(List<Shape> checkobj) és ebben fog 
 	* inicializálódni.
@@ -41,13 +41,12 @@ public class HUD {
 	private List<Shape> checkpoints;
 	
 	/**
-	* {@see Robot} objektumokat tároló ArrayList. Célja, hogy a {@see #checkpointsearch()} függvényben minden robotra elvégezzük a keresést.
+	* Robot objektumokat tároló ArrayList. Célja, hogy a checkpointsearch() függvényben minden robotra elvégezzük a keresést.
 	*/
 	private List<Robot> robots;
 	
 	/**
-	* Konstruktor, inicializálja a köröket számláló változót, az érintett checkpointokat, a 
-	* ragacs és olajkészleteket.
+	* Konstruktor, inicializálja a köröket számláló változót.
 	* @param robs A játékban résztvevő robotok listája.
 	*/
 	public HUD(List<Robot> robs){
@@ -70,15 +69,12 @@ public class HUD {
 	 */
 	public void setCheckpoints(List<Shape> checkObj){
 		//Checkpointokat teljesítését számontartó adatszerkezet inicialziálása
-		//numOfCheckpoints = checkObj.size();
 		checkpointReached = new int[robots.size()];
 		for(int i=0;i<robots.size();i++){
 			checkpointReached[i] = 0;
 		}
 		//Checkpointok tárolása
 		checkpoints = checkObj;
-		
-		//
 	}
 	
 	/**
@@ -153,7 +149,7 @@ public class HUD {
 	/*
 	 * endOfTheGame függvény
 	 * Felelősség:
-	 * A játé végén eldönti, hogy melyik játékos nyert. Visszatér egy számmal, 
+	 * A játék végén eldönti, hogy melyik játékos nyert. Visszatér egy számmal, 
 	 * amiből egyértelműen eldönthető, hogy ki nyert. Ha negatív akkor az 1-es számú játékos nyert, 
 	 * ha nulla akkor döntetlen, ha pozitív akkor a 2-es számú játékos nyert.
 	 * 

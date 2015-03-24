@@ -3,14 +3,31 @@ package major;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
-
+/*
+ * MyListener osztály
+ *
+ * A MyListener osztály hivatott megoldani, hogy egyszerre több gomb lenyomásást helyesen kezelje a játékmotor. Külön szálon fut, a gombokhoz rendelt KeyListener interfészt valósítja meg.
+ *
+ * Interfészek:
+ * KeyListener, Runnable
+ *
+ * Felelősség:
+ * Nyilvántartja a gombok lenyomását és felengedését. Meghívja a gombhoz tartozó robotnak a gombnyomást lekezelő metódusát.
+ *
+ * Funkció:
+ * Külön szálon fut a háttérben.
+ */
 public class MyListener implements KeyListener, Runnable  {
-	boolean isUpPressed, isDownPressed, isRight,isLeft,isW,isD,isS,isA;
+	
+	//
+	boolean isUp, isDown, isRight,isLeft,isW,isD,isS,isA;
+	
 	List<Robot> robots;
+	
 	public MyListener(List<Robot> r) {
 		super();
-		this.isUpPressed = false;
-		this.isDownPressed = false;
+		this.isUp = false;
+		this.isDown = false;
 		this.isRight = false;
 		this.isLeft = false;
 		this.isW = false;
@@ -22,10 +39,9 @@ public class MyListener implements KeyListener, Runnable  {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		while(true){
-			if(isUpPressed) robots.get(0).keyPressed(KeyEvent.VK_UP);
-			if (isDownPressed)robots.get(0).keyPressed(KeyEvent.VK_DOWN);
+			if(isUp) robots.get(0).keyPressed(KeyEvent.VK_UP);
+			if (isDown)robots.get(0).keyPressed(KeyEvent.VK_DOWN);
 			if(isRight)robots.get(0).keyPressed(KeyEvent.VK_RIGHT);
 			if(isLeft)robots.get(0).keyPressed(KeyEvent.VK_LEFT);
 			if(isD)robots.get(1).keyPressed(KeyEvent.VK_D);
@@ -35,7 +51,6 @@ public class MyListener implements KeyListener, Runnable  {
 			try {
 				Thread.sleep(30);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -44,10 +59,9 @@ public class MyListener implements KeyListener, Runnable  {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		switch(e.getKeyCode()) {
-		case KeyEvent.VK_UP: isUpPressed = true; break;
-		case KeyEvent.VK_DOWN: isDownPressed = true; break;
+		case KeyEvent.VK_UP: isUp = true; break;
+		case KeyEvent.VK_DOWN: isDown = true; break;
 		case KeyEvent.VK_RIGHT: isRight = true; break;
 		case KeyEvent.VK_LEFT: isLeft= true; break;
 		case KeyEvent.VK_W: isW = true; break;
@@ -59,10 +73,9 @@ public class MyListener implements KeyListener, Runnable  {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 		switch(e.getKeyCode()) {
-		case KeyEvent.VK_UP: isUpPressed = false; break;
-		case KeyEvent.VK_DOWN: isDownPressed = false; break;
+		case KeyEvent.VK_UP: isUp = false; break;
+		case KeyEvent.VK_DOWN: isDown = false; break;
 		case KeyEvent.VK_RIGHT: isRight = false; break;
 		case KeyEvent.VK_LEFT: isLeft= false; break;
 		case KeyEvent.VK_W: isW = false; break;
@@ -74,7 +87,6 @@ public class MyListener implements KeyListener, Runnable  {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 	
