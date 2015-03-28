@@ -179,8 +179,8 @@ A BME IIT Szoftver Laboratórium tantárgy oktatói (a megrendelők) által kií
 \hline 2.13 & Google Mail & nincs  & opcionális  & csapat  & Levelező rendszer \tabularnewline
 \hline 2.14 & Sympa levelezőlista & nincs  & opcionális  & csapat & \url{lists.sch.bme.hu}  \tabularnewline
 \hline 2.15 & Doxygen  & nincs  & opcionális  & csapat & Programozói dokumentáció \tabularnewline
-\hline 2.16 & ObjectAid  & nincs  & opcionális  & csapat & UML diagrammok 
-\hline 2.17 & Sparx Enterprise Architect  & nincs  & opcionális  & csapat & UML diagrammok 
+\hline 2.16 & ObjectAid  & nincs  & opcionális  & csapat & UML diagrammok \tabularnewline
+\hline 2.17 & Sparx Enterprise Architect  & nincs  & opcionális  & csapat & UML diagrammok \tabularnewline
 \hline
 \end{longtable}
 
@@ -210,17 +210,17 @@ Nincs egyéb nem funkcionális követelmény.
 %\hline\hline ... & ... & ... & ... & ... & ... \tabularnewline
 %\hline
 %\end{longtable}
-
+\pagebreak
 \section{Lényeges use-case-ek}
 
 \subsection{Use-case leírások}
 
-\usecase{Új Játék indítás}{Új Játék indul}{Játékos}{A Játékos kiválasztja a „New Game”-t. Ezután két módból választhat:
+\usecase{Új Játék indítás}{Új Játék indul}{Játékos}{A Játékos kiválasztja a „New Game”-t. Ezután két módból választhat:}
 \begin{itemize}
 \item Kör: adott kört kell megtenni
 \item Idő: adott idő alatt kell elérni minél nagyobb távolságot
 \end{itemize} 
-}
+
 
 \usecase{Mozgás}{Robot mozgása}{Játékos}{A játékos képes megváltoztatni a robot mozgásának irányát a jobbra és balra gombokkal.}
 
@@ -239,36 +239,35 @@ Nincs egyéb nem funkcionális követelmény.
 \caption{Use-Case diagram}
 \label{fig:my_label}
 \end{figure}
-
+\pagebreak
 
 \section{Szótár}
 \begin{itemize}
-\item \textbf{Játékos} - A program felhasználója, a robot irányítója, aki játszik.
-\item \textbf{Robot} - A játékos által irányított virtuális gépezet. Képes ugrani, ragacsot és olajat helyezni a pályára, illetve le tud esni a pályáról.
-\item \textbf{Verseny} – A játék folyamata. Célja minél több kör megtétele adott idő alatt vagy adott körszám megtétele minél rövidebb idő alatt.
-\item \textbf{Pálya} - A verseny helyszíne: az a sík, amin a játék zajlik. A játék közben nem változik, a robotok ide helyezhetik az olajfoltokat és a ragacsokat.
-\item \textbf{Start} – Az az időpillanat, amikor a játék elindul és a játékosok megkezdik a versenyzést. Ezt egy visszaszámlálás előzi meg.
-\item \textbf{Checkpoint} – Olyan vonal a pályán, ami ellenőrzi, hogy a játékos megfelelő irányban halad és nem próbál szabálytalanságot elkövetni.
-\item \textbf{Célvonal} – Ha játékosok adott körszám megtételéig versenyeznek, akkor az a Checkpoint, amit bizonyos körszám után elérve a játéknak vége van.
-\item \textbf{Startvonal} – Az a Checkpoint, amiről a robotok elindulnak.
-\item \textbf{Idő lejárta} – Az a pillanat, amikor a játékosok rendelkezésére álló idő elfogy, eléri a nullát. Ilyenkor az adott játéknak vége van.
-\item \textbf{Kör} - Egy vonal a pályán, ami minden Checkpointot pontosan egyszer érint és a kezdő- és végpontja a startvonal.
-\item \textbf{Távolság} – Az a mértékegység, ami megmondja, hogy egy robot milyen hosszú utat tett meg a pályán a verseny ideje alatt.
-\item \textbf{Zászlók} – Az az indikátor, ami jelzi, hogy a játékos éppen hány Checkpointon jutott át az adott körben. Minden kör végén törlődik, de a megtett körök száma megnő eggyel.
 \item \textbf{Akadály} - Olyan objektum a pályán, ami megnehezíti a játékosok célba jutását. Lehet állandó, ami megmarad a játék egész ideje alatt, illetve ideiglenes, ami eltűnik, amint egy robot rálép.
-\item \textbf{Lyuk} – Állandó akadály, amit a pálya előre tartalmaz, tehát nem a játékosok helyezik el. Ha egy robot rálép, akkor tönkre teszi annak felépítését, ezáltal megakadályozza a verseny folytatásában.
-\item \textbf{Felszerelés} – Ragacs vagy olaj, amit a robot magánál hord és bármelyik lépésnél a pályára helyezhet. Lehelyezése után ideiglenes akadályként funkcionál.
-\item \textbf{Ragacs} – Olyan ideiglenes akadály, ami felezi a rálépő robot sebességének a nagyságát.
-\item \textbf{Olaj} – Olyan ideiglenes akadály, ami megakadályozza a rálépő robot irányának megváltoztatását.
-\item \textbf{Irányítás} – Az a folyamat, amikor a játékos a hozzá tartozó robot irányát megváltoztatja.
-\item \textbf{Irány} – A robot sebességének az a komponense, ami meghatározza, hogy a robot merre halad.
-\item \textbf{Sebesség} – Egy kétdimenziós vektor a pálya síkjában, ami eredendően egységnyi méretű minden robotra. Méretét csak ragacsok tudják változtatni. Irányát a játékosok irányítása, illetve az ütközések módosítják.
-\item \textbf{Ugrás} – A robotok képesek átugrani egy akadályt. Az ugrás nagyságát a robothoz tartozó sebességvektor nagysága határozza meg.
-\item \textbf{Leesés} – Az az esemény, amikor egy robot a pálya felületén kívülre kerül, ezáltal elhagyva a pályát.  
-\item \textbf{Ütközés} – Az az esemény, amikor a két robot találkozik egymással, azaz minimum érintik egymást. A robot irányát ilyenkor a játékos nem változtathatja, hanem az ütközésnek megfelelően módosul.
+\item \textbf{Célvonal} – Ha játékosok adott körszám megtételéig versenyeznek, akkor az a Checkpoint, amit bizonyos körszám után elérve a játéknak vége van.
+\item \textbf{Checkpoint} – Olyan vonal a pályán, ami ellenőrzi, hogy a játékos megfelelő irányban halad és nem próbál szabálytalanságot elkövetni.
 \item \textbf{Diszkvalifikáció} - A pálya elhagyásának, a pályáról való leesésnek a következménye. Ilyenkor a pályát elhagyó robotot irányító játékos veszít.
+\item \textbf{Felszerelés} – Ragacs vagy olaj, amit a robot magánál hord és bármelyik lépésnél a pályára helyezhet. Lehelyezése után ideiglenes akadályként funkcionál.
+\item \textbf{Idő lejárta} – Az a pillanat, amikor a játékosok rendelkezésére álló idő elfogy, eléri a nullát. Ilyenkor az adott játéknak vége van.
+\item \textbf{Irány} – A robot sebességének az a komponense, ami meghatározza, hogy a robot merre halad.
+\item \textbf{Irányítás} – Az a folyamat, amikor a játékos a hozzá tartozó robot irányát megváltoztatja.
+\item \textbf{Játékos} - A program felhasználója, a robot irányítója, aki játszik.
+\item \textbf{Kör} - Egy vonal a pályán, ami minden Checkpointot pontosan egyszer érint és a kezdő- és végpontja a startvonal.
+\item \textbf{Leesés} – Az az esemény, amikor egy robot a pálya felületén kívülre kerül, ezáltal elhagyva a pályát. 
+\item \textbf{Lyuk} – Állandó akadály, amit a pálya előre tartalmaz, tehát nem a játékosok helyezik el. Ha egy robot rálép, akkor tönkre teszi annak felépítését, ezáltal megakadályozza a verseny folytatásában.
+\item \textbf{Olaj} – Olyan ideiglenes akadály, ami megakadályozza a rálépő robot irányának megváltoztatását.
+\item \textbf{Pálya} - A verseny helyszíne: az a sík, amin a játék zajlik. A játék közben nem változik, a robotok ide helyezhetik az olajfoltokat és a ragacsokat.
+\item \textbf{Ragacs} – Olyan ideiglenes akadály, ami felezi a rálépő robot sebességének a nagyságát.
+\item \textbf{Robot} - A játékos által irányított virtuális gépezet. Képes ugrani, ragacsot és olajat helyezni a pályára, illetve le tud esni a pályáról.
+\item \textbf{Sebesség} – Egy kétdimenziós vektor a pálya síkjában, ami eredendően egységnyi méretű minden robotra. Méretét csak ragacsok tudják változtatni. Irányát a játékosok irányítása, illetve az ütközések módosítják.
+\item \textbf{Start} – Az az időpillanat, amikor a játék elindul és a játékosok megkezdik a versenyzést. Ezt egy visszaszámlálás előzi meg.
+\item \textbf{Startvonal} – Az a Checkpoint, amiről a robotok elindulnak.
 \item \textbf{Szabálytalanság} – Az az eset, amikor a játékos nem az előírt sorrendben próbál végighaladni a Checkpointokon.
-
+\item \textbf{Távolság} – Az a mértékegység, ami megmondja, hogy egy robot milyen hosszú utat tett meg a pályán a verseny ideje alatt.
+\item \textbf{Ugrás} – A robotok képesek átugrani egy akadályt. Az ugrás nagyságát a robothoz tartozó sebességvektor nagysága határozza meg.
+\item \textbf{Ütközés} – Az az esemény, amikor a két robot találkozik egymással, azaz minimum érintik egymást. A robot irányát ilyenkor a játékos nem változtathatja, hanem az ütközésnek megfelelően módosul.
+\item \textbf{Verseny} – A játék folyamata. Célja minél több kör megtétele adott idő alatt vagy adott körszám megtétele minél rövidebb idő alatt.
+\item \textbf{Zászlók} – Az az indikátor, ami jelzi, hogy a játékos éppen hány Checkpointon jutott át az adott körben. Minden kör végén törlődik, de a megtett körök száma megnő eggyel.
 \end{itemize}
 
 

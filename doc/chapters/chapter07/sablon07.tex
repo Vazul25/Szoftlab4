@@ -4,13 +4,85 @@
 \setcounter{chapter}{-1}
 \chapter{Módosítások}
 \comment{Feladatok: Objektum katalógus szövegeinek ellenőrzése, Osztályok leírásának pontjainak ellenőrzése, újonnan hozzáadott elemeinek felelősségének leírása}
+
+\section{Követelmények}
+\subsection{Funkcionális követelmények}
+
+% Azonosító, Leírás, Ellenőrzés, Prioritás, Forrás, Use-case, Komment
+\begin{longtable}{| l | l | l | l | l | l | l |}
+\hline
+\textbf{Azonosító}   & \textbf{Leírás} & \textbf{Ellenőrzés} & \textbf{Prioritás} & \textbf{Forrás} & \textbf{Use-case} & \textbf{Komment} \tabularnewline
+\hline 1.01 & Játék menü & bemutatás & alapvető & csapat & &\tabularnewline
+\hline 1.02 & Beállítások kezelése & bemutatás & opcionális & csapat & &\tabularnewline
+\hline 1.03 & Játék elindítása & bemutatás & alapvető & megrednelő &\vtop{\hbox{\strut Új Játék}\hbox{\strut indítás}}&\tabularnewline
+\hline 1.04 & Pályáról leesők kiesnek & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.05 & Előre elkészített versenypálya & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.06 & \vtop{\hbox{\strut Robotok a kezdőpozíciójukból}\hbox{\strut indulnak}}& bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.07 &\vtop{\hbox{\strut Pályán vannak olajfoltok és}\hbox{\strut ragacsfoltok}}& bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.08 &\vtop{\hbox{\strut Robotok fel vannak szerelve }\hbox{\strut olaj és ragacskészlettel}} & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.09 &\vtop{\hbox{\strut 2 személy tudjon játszani}\hbox{\strut egyszerre}} & bemutatás & alapvető & csapat & &\tabularnewline
+\hline 1.10 &  Körlimites játékmód & bemutatás & opcionális & csapat & &\tabularnewline
+\hline 1.11 &  Időlimites játékmód & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.12 & A robotok tudjanak ugrani & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.13 &\comment{...} & bemutatás & opcionális & \comment{...} & &\tabularnewline
+\hline 1.14 & \vtop{\hbox{\strut A ragacs és olaj a pályáról,}\hbox{\strut ha belelépnek eltűnik\comment{...}}} & bemutatás & opcionális & \comment{...} & &\tabularnewline
+\hline 1.15 & \vtop{\hbox{\strut A robotok tudnak egymással}\hbox{\strut ütközni}} & bemutatás & opcionális & \comment{...} & &\tabularnewline
+\hline 1.16 &\vtop{\hbox{\strut Az indulás előtt}\hbox{\strut visszaszámlálás indul}} & bemutatás & opcionális & csapat & &\tabularnewline
+\hline 1.17 &\vtop{\hbox{\strut A robotok sebessége }\hbox{\strut egységnyi méretű tetszőleges }\hbox{\strut irányú vektorral módosítható }} & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.18 &\vtop{\hbox{\strut Egy ugrással a sebességgel}\hbox{\strut egyenesen arányos}\hbox{\strut{távolságra tudnak eljutni}}} & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.19 &\vtop{\hbox{\strut A robot ragacsra érkezve}\hbox{\strut sebessége a felére csökken}} & bemutatás & alapvető & megrendelő & &\tabularnewline
+\hline 1.20 &\vtop{\hbox{\strut A robot olajfoltra érkezve}\hbox{\strut sebességének módosítása}\hbox{nem lehetséges}} & bemutatás & alapvető & megrendelő & & \tabularnewline
+\hline 1.21 &\vtop{\hbox{\strut A robot olajat vagy}\hbox{\strut ragacsot tudnak lerakni}} & bemutatás & alapvető & megrendelő & \vtop{\hbox{\strut Akadá-}\hbox{\strut lyozás}} & \tabularnewline
+\hline 1.22 & & & alapvető & megrendelő & & \tabularnewline
+\hline 1.23 & & & alapvető & megrendelő & & \tabularnewline
+\hline 1.24 & & & alapvető & megrendelő & & \tabularnewline
+\hline 1.25 & & & alapvető & megrendelő & & \tabularnewline
+
+\hline
+\end{longtable}
+
 \section{Objektum katalógus}
 \subsection{HUD}
 Ez az objektum követi és nyilvántartja, hogy a robotok hány checkpoint-on mentek át, illetve kiírja a képernyőre a hátramaradó időt és a megtett körök számát. Feladata, hogy minden körben megvizsgálja, hogy a robotok elérték-e a következő checkpointot.
+
+\subsection{MapBuilder}
+Fájlból beolvassa és létrehozza a memóriában a pályát, a kezdő pozíciókat és a checkpointokat reprezentáló objektumokat.  Mivel a  MapBuilder objektum tárolja a pályát így feladat, hogy vizsgálja a robotok, akadályok azon belül tartózkodását.  
+
+\subsection{Robot}
+Olyan objektum, mely a pályán található robotokat valósítja meg. Leírja a viselkedésüket és a kezelésüket. A „Robot” osztály a Unit-ból származik le, ezáltal van pozíciója és az ütközés is le van kezelve. Felelős a mozgásért, megállapítja egy adott akadállyal vagy robottal ütközött-e és kezeli a robot által felhasználható akadálykészleteket, illetve tartalmaz gombnyomást lekezelő metódusokat is.
+
 \subsection{MyListener}
 \comment{...}
 
 \section{Osztályok leírása}
+
+\subsection{Glue}
+\begin{itemize}
+\item Felelősség\\
+A játékban szereplő Ragacs foltok viselkedését leíró osztály
+\item Ősosztályok\\
+Unit$\rightarrow$Obstacle
+\item Metódusok
+	\begin{itemize}
+	    \item \textbf{Glue}(int x, int y): Amikor létrehozunk valahol egy ragacs objektumot, akkor ez a konstruktor hívódik meg. Meghívja az ősosztály konstruktorát.
+		\item void \textbf{effect}(Robot r): Ütközéskor hívja meg az ütközést vizsgáló függvénye a Robot osztálynak. Módosítja a robot slowed értékét 50\%-ra a robot slowed attribútum setterének meghívásával.
+	\end{itemize}
+\end{itemize}
+
+\subsection{GUI}
+\begin{itemize}
+\item Felelősség\\
+A grafikus felületért felelős osztály, amely a menüt és a játékot jeleníti meg.
+\item Attribútumok
+	\begin{itemize}
+		\item \textbf{Phoebe} game: referencia a játékra
+	\end{itemize}
+\item Metódusok
+	\begin{itemize}
+		\item\textbf{GUI}(): Konstruktor. Beállítja az ablak nevét, létrehozza az ablak elemeit, elrendezi őket és beállítja a figyelőket(ActionListener).
+	\end{itemize}
+\end{itemize}
+
 \subsection{HUD}
 \begin{itemize}
 \item Felelősség\\
@@ -26,9 +98,9 @@ A robotok megtett köreit és checkpontjait tartja számon. Megvalósítja a che
 	\begin{itemize}
 		\item \textbf{HUD}(List<Robot> robs): Robot objektumokat tároló ArrayList. Célja, hogy a checkpointsearch() függvényben minden robotra elvégezzük a keresést.
 		\item void \textbf{checkpointSearch}(): Minden híváskor ellenőrzi, hogy a robot és a checkpoint metszete üres-e. 
-		\item void \textbf{setCheckpoints}(List checkObj): Checkpointokat reprezentáló adatszerkezet betöltése.CheckpointReached inicializálása a checkpointok számától függően.
-		\item void \textbf{setCheckpointReached}(Robot r): Ha a paraméterként átadott robot következő checkpointja a célvonal (utolsó checkpoint) akkor lenullázza a checkpointReached-et és növeli a megtett körök számát, illetve ha nem akkor növeli az érintett checkpointok számát.
 		\item int \textbf{endOfTheGame}(): A játék végén eldönti, hogy melyik játékos nyert. Visszatér egy számmal, amiből egyértelműen eldönthető, hogy ki nyert. Ha negatív akkor az 1-es számú játékos nyert, ha nulla akkor döntetlen, ha pozitív akkor a 2-es számú játékos nyert.
+		\item void \textbf{setCheckpointReached}(Robot r): Ha a paraméterként átadott robot következő checkpointja a célvonal (utolsó checkpoint) akkor lenullázza a checkpointReached-et és növeli a megtett körök számát, illetve ha nem akkor növeli az érintett checkpointok számát.
+		\item void \textbf{setCheckpoints}(List checkObj): Checkpointokat reprezentáló adatszerkezet betöltése.CheckpointReached inicializálása a checkpointok számától függően.
 	\end{itemize}
 \end{itemize}
 
@@ -36,7 +108,7 @@ A robotok megtett köreit és checkpontjait tartja számon. Megvalósítja a che
 \begin{itemize}
 \item Felelősség\\
 A grafikus motorhoz szükséges interfész. Olyan osztályok, melyek kirajzolható elemeket tartalmaznak megvalósítják ezt az interfészt.
-\item Metódusok\\
+\item Metódusok
 	\begin{itemize}
 		\item void \textbf{paint}(Graphics2D g): Rajzolást elvégző metódus.
 	\end{itemize}
@@ -49,16 +121,16 @@ A pálya felépítéséért, a checkpointok tárolásáért és a robot pályán
 \item Attribútumok
 	\begin{itemize}
 		\item \textbf{List} checkpoints: Tárolja a checkpointokat reprezentáló objektumokat List adatszerkezetben.
+		\item \textbf{Object} map: A pályát reprezentáló objektum.
 		\item \textbf{int[]} startPosPlayerOne: Meghatároz egy (x,y) koordinátát, ahol az első játékos kezd.
 		\item \textbf{int[]} startPosPlayerTwo: Meghatároz egy (x,y) koordinátát, ahol az második játékos kezd.
-		\item \textbf{Object} map: \comment{...}
 	\end{itemize}
 \item Metódusok
 	\begin{itemize}
 		\item \textbf{MapBuilder}(): Konstruktor, a pálya beolvasása fájlból, majd létrehozása.
+		\item int[] \textbf{getStartPosPlayer}(int id): Paraméterül kap egy Robot id-t, majd visszatér egy int tömbbel, melyben található a robot kezdőpozíciója a pályán.
+		 \item boolean \textbf{obstacleOutsideOfMap}(Obstacle obs): Egy akadályt vizsgál, hogy a pályán van-e.
 		\item boolean \textbf{robotOutsideOfMap}(Robot r): Igaz értéket ad vissza, ha a robot leesett a pályáról, hamisat ha még rajta van.
-	    \item boolean \textbf{obstacleOutsideOfMap}(Obstacle obs): \comment{...}
-	    \item int[] \textbf{getStartPosPlayer}(int id): \comment{...}
 	\end{itemize}
 \end{itemize}
 
@@ -68,7 +140,7 @@ A pálya felépítéséért, a checkpointok tárolásáért és a robot pályán
 Nyilvántartja a gombok lenyomását és felengedését. Meghívja a gombhoz tartozó robotnak a gombnyomást lekezelő metódusát.
 \item Interfészek\\
 KeyListener, Runnable
-\item Attribútumok\\
+\item Attribútumok
 	\begin{itemize}
 	    \item \textbf{List} robots: \comment{...}
 		\item \textbf{boolean} isUp: \comment{...}
@@ -80,7 +152,7 @@ KeyListener, Runnable
 		\item \textbf{boolean} isS: \comment{...}
 		\item \textbf{boolean} isA: \comment{...}
 	\end{itemize}
-\item Metódusok\\
+\item Metódusok
 	\begin{itemize}
 		\item \textbf{MyListener}(List robots): \comment{...}
 		\item void \textbf{run}():  \comment{...}
@@ -97,10 +169,11 @@ A pályán/játékosoknál lévő különböző akadályokat (ragacs,olaj) össz
 Unit
 \item Attribútumok
 	\begin{itemize}
-		\item \textbf{int} WIDTH: Az akadályokat jellemző szélesség. Szükség van rá, hogy létrehozzuk a leszármazottak hitbox-át(sokszög pályaelem).
-		\item \textbf{int} HEIGHT: Az akadályokat jellemző hosszúság. Szükség van rá, hogy létrehozzuk a leszármazottak hitbox-át(sokszög pályaelem).
 		\item \textbf{int} lifetime: Megmondja, hogy hány kör óta lett letéve az akadály.
 	\end{itemize}
+		\item \textbf{int} HEIGHT: Az akadályokat jellemző hosszúság. Szükség van rá, hogy létrehozzuk a leszármazottak hitbox-át(sokszög pályaelem).
+		\item \textbf{int} WIDTH: Az akadályokat jellemző szélesség. Szükség van rá, hogy létrehozzuk a leszármazottak hitbox-át(sokszög pályaelem).
+		
 \item Metódusok
 	\begin{itemize}
 		\item \textbf{Obstacle}(int x, int y, String imagelocation): Meghívja a Unit konstruktorát a megadott adatokkal és létrehoz egy sokszög elemet ami reprezentálja a pályán majd.
@@ -129,20 +202,20 @@ A játék motorját képviselő osztály. A robotok pozíciójáért, az akadál
 \item Attribútumok
 	\begin{itemize}
 		\item \textbf{boolean} ended: Állapot változó, ha vége a játéknak, akkor true. Ha beteljesül egy játék végét jelentő esemény, akkor ezen a változón keresztül leáll a játék és megállapítódik a nyertes.
-		\item \textbf{Settings} gameInfo: \comment{...}
-		\item \textbf{List<Robot>} robots: A játékban szereplő robotok listája.
-		\item \textbf{List<Obstacle>} obstacles: A játékban szereplő akadályok listája.
-		\item \textbf{HUD} hud: A játékosok előrehaladását, ragacs és olajkészleteit tartja számon
+		\item \textbf{Settings} gameInfo: A játék beállításait tartalmazó osztály referenciája.
+		\item \textbf{MyTimer} gameTimer: A játékhoz tartozó számlálóra mutató referencia.
+		\item \textbf{HUD} hud: A játékosok előrehaladását, ragacs és olajkészleteit tartja számon.
 		\item \textbf{MapBuilder} map: A pályát reprezentáló objektum. Tárolja még a checkpointokat és a robotok kezdő koordinátáit.
-		\item \textbf{MyTimer} gameTimer: \comment{...}
+		\item \textbf{List<Obstacle>} obstacles: A játékban szereplő akadályok listája.
+		\item \textbf{List<Robot>} robots: A játékban szereplő robotok listája.
 	\end{itemize}
 \item Metódusok
 	\begin{itemize}
 		\item \textbf{Phoebe}(Setting set): A játék felépítése, a robotok lista, az akadályok lista létrehozása.
 		\item void \textbf{addObstacle}(Obstacle ob): Az obstacles tárolóba helyez egy akadályt.
+		\item void \textbf{init}(): Inicializáló függvény. Feladat, hogy robotokat, akadályokat készítsen a játék kezdete előtt, létrehozza a pályát.
+		\item void \textbf{paint}(Graphics2D g): Rajzoló függvény.
 		\item void \textbf{run}(): Ez a metódus futtatja a főciklust, amelyben maga a játék működik.
-		\item void \textbf{paint}(Graphics2D g): \comment{...}
-		\item void \textbf{init}(): \comment{...}
 	\end{itemize}
 \end{itemize}
 
@@ -156,40 +229,40 @@ IVisible, Unitból származva
 Unit
 \item Attribútumok
 	\begin{itemize}
-    	\item \textbf{Phoebe} p: Referencia a játékmotorra.
-		\item \textbf{int} staticID: Az osztályhoz tartozó statikus azonosító, a példány                azonosítójának(id) meghatározásához szükséges.
-		\item \textbf{int} ID: A robot példányának egyedi azonosítója, a keyconfig sorának indexelésére szükséges.
-		\item \textbf{int} HEIGHT: A robot képének magassága, collision                      detektálásnál, továbbá az irányítást segítő nyíl kezdő koordinátájának                  meghatározásánál szükséges.
-		\item \textbf{int} WIDTH: A robot képének szélessége, funkcionalitásban hasonló a WIDTH-hez.
-
-		\item \textbf{double} slowed: A sebesség módosításáért felel, default értéke 1.0. Amennyiben ragacsba lép a robot ez 0.5-re módosul és minden ugrás végén visszaáll az eredeti értékére. Ugrásnál ezzel szorozzuk be a végkordinátát kiszámító sugár hosszát.
-		\item \textbf{boolean} oiled: Azt jelzi, hogy olajba lépett-e. Ennek hatására a mozgás iránya módosíthatatlanná válik egy kis időre.
-		\item \textbf{int} r: \comment{...}
-		\item \textbf{int} arrowendx: A robot irányítását segítő nyílnak az x koordinátája, a nyíl kirajzolásánál van szerepe.
+	    \item \textbf{int} arrowendx: A robot irányítását segítő nyílnak az x koordinátája, a nyíl kirajzolásánál van szerepe.
 		\item \textbf{int} arrowendy: A robot irányítását segítő nyílnak az y koordinátája, a nyíl kirajzolásánál van szerepe.
 		\item \textbf{double} alpha: A robot irányítását segítő nyíl vízszintessel bezárt szöge. A nyil kirajzolásánál, az ugrás végpontjának meghatározánál van szerepe.
-		\item \textbf{boolean} moved: Azt jelöli, hogy lépett-e már a robot az aktuális körben. A megjelenítésnél (a nyilat ugrás közben nem jelenítjük meg), illetve az irányítás letiltásánál van szerepe (olajba lépés esetén).
-		\item \textbf{int} numGlue: \comment{...}
-	    \item \textbf{int} numOil: \comment{...}
-	    \item \textbf{boolean} leftobstacle: \comment{...}
+		\item \textbf{int} HEIGHT: A robot képének magassága, collision                      detektálásnál, továbbá az irányítást segítő nyíl kezdő koordinátájának                  meghatározásánál szükséges.
+		\item \textbf{int} WIDTH: A robot képének szélessége, funkcionalitásban hasonló a WIDTH-hez.
+    	\item \textbf{int} ID: A robot példányának egyedi azonosítója, a keyconfig sorának indexelésére szükséges.
+    	\item \textbf{boolean} leftobstacle: Logikai változó, tárolja, hogy az adott körben raktunk-e le már akadályt.
+    	\item \textbf{boolean} moved: Azt jelöli, hogy lépett-e már a robot az aktuális körben. A megjelenítésnél (a nyilat ugrás közben nem jelenítjük meg), illetve az irányítás letiltásánál van szerepe (olajba lépés esetén).
+		\item \textbf{int} numGlue: A robot számára felhasználható ragacsok száma.
+	    \item \textbf{int} numOil: A robot számára felhasználható olajok száma.
+	    \item \textbf{boolean} oiled: Azt jelzi, hogy olajba lépett-e. Ennek hatására a mozgás iránya módosíthatatlanná válik egy kis időre.
+    	\item \textbf{Phoebe} p: Referencia a játékmotorra.
+    	\item \textbf{int} r: A robot következő ugrását mutató nyíl hossza
+    	\item \textbf{double} slowed: A sebesség módosításáért felel, default értéke 1.0. Amennyiben ragacsba lép a robot ez 0.5-re módosul és minden ugrás végén visszaáll az eredeti értékére. Ugrásnál ezzel szorozzuk be a végkordinátát kiszámító sugár hosszát.
+		\item \textbf{int} staticID: Az osztályhoz tartozó statikus azonosító, a példány azonosítójának(id) meghatározásához szükséges.
 \end{itemize}
 \item Metódusok
 
 	\begin{itemize}
 		\item \textbf{Robot}(int x,int y,String imagelocation,Phoebe p): Létrehoz egy robotot a megadott x,y koordinátákon, betölti a képét az imagelocation cím alapján, eltárolja a játékmotor referenciáját, továbbá inicializálja felhasználható akadályok számát.
-		\item void \textbf{setOiled}(): Átállítja a robot olaj effekt követéséhez tartozó állapot változót.
-		\item void \textbf{setGlue}(): Átállítja a robot ragacs effekt követéséhez tartozó állapot változót.
+		\item void \textbf{bounce}(): Két robot ütközése után meghívódó függvény. Az ütközés függvényében kiszámolja a lepattanás irányát és letiltja egy körre az irány változtatást.
+		\item boolean \textbf{collisionWithObstacle}(Obstacle o): Ellenőrzi hogy a robot ütközött-e az akadállyal. Igazzal tér vissza ha igen, hamissal ha nem.
+		\item void \textbf{collisionWithRobot}(Robot r): Ellenőrzi, hogy a robot ütközött-e másik robottal. Ha igen, akkor gondoskodik róla, hogy a robotok a megfelelő szögben pattanjanak le egymásról.
+		\item void \textbf{deathanimation}(): A Robot halálának grafikus megjelenítéséért felelős függvény.
 		\item int \textbf{getNumGlue}(): Visszatér a felhasználható ragcsok számával.
 		\item int \textbf{getNumOil}(): Visszatér a felhasználható olajok számával.
 		\item void \textbf{incNumGlue}(): Növeli a robotnál tárolt ragacsok számát.
 		\item void \textbf{incNumOil}(): Növeli a robotnál tárolt olajok számát.
-		\item \textbf{void deathanimation}(): A Robot halálának grafikus megjelenítéséért felelős függvény.
-		\item boolean \textbf{collisionWithObstacle}(Obstacle o): Ellenőrzi hogy a robot ütközött-e az akadállyal. Igazzal tér vissza ha igen, hamissal ha nem.
-		\item void \textbf{collisionWithRobot}(Robot r): Ellenőrzi, hogy a robot ütközött-e másik robottal. Ha igen, akkor gondoskodik róla, hogy a robotok a megfelelő szögben pattanjanak le egymásról.
-		\item void \textbf{bounce}(): Két robot ütközése után meghívódó függvény. Az ütközés függvényében kiszámolja a lepattanás irányát és letiltja egy körre az irány változtatást.
-		\item void \textbf{move}(): A robot mozgását megvalósító függvény.
 		\item void \textbf{keyPressed}(int e): A robot irányítását megvalósító függvény, a játékmotor keylistener-e által hívódik meg, a lenyomott billentyű keyevent-jére. A következő ugrás beállítása, a ragacs/olaj lerakása történhet itt.
-		\item void \textbf{paint}(Graphics2D g): \comment{...}
+		\item void \textbf{move}(): A robot mozgását megvalósító függvény.
+		\item void \textbf{paint}(Graphics2D g): Rajzoló függvény.
+		\item void \textbf{setOiled}(): Átállítja a robot olaj effekt követéséhez tartozó állapot változót.
+		\item void \textbf{setGlue}(): Átállítja a robot ragacs effekt követéséhez tartozó állapot változót.
+
 	\end{itemize}
 \end{itemize}
 
@@ -201,8 +274,8 @@ A játék elején a kezdésig visszaszámol. Játéktípustól függően felfel�
 	\begin{itemize}
 		\item \textbf{MyTimer}(int i): Konstruktor; inicializál egy viszaszámláló órát.
 		\item boolean \textbf{isZero}(): Igazzal tér vissza, ha a megadott idő lejárt.
-		\item void \textbf{start}(): \comment{...}
-		\item int \textbf{getTime}(): \comment{...}
+		\item int \textbf{getTime}(): Visszaadja az eltelt időt másodpercben.
+		\item void \textbf{start}(): Elindítja / újraindítja a számlálót.
 	\end{itemize}
 \end{itemize}
 
@@ -212,15 +285,15 @@ A játék elején a kezdésig visszaszámol. Játéktípustól függően felfel�
 A pályán található objektumokért felel és azok viszonyáról (például ütközésükről).
 \item Attribútumok
 	\begin{itemize}
+		\item \textbf{Object} hitbox: Az egységet a pályán reprezentáló sokszög.
 		\item \textbf{int} x: Az egység x koordinátája
 		\item \textbf{int} y: Az egység y koordinátája
-		\item \textbf{Object} hitbox: Az egységet a pályán reprezentáló sokszög.
 	\end{itemize}
 \item Metódusok
 	\begin{itemize}
 	    \item \textbf{Unit}(): A Unit osztály konstruktora. Feladata, hogy eltárolja az x,y koordinátát.
-		\item void \textbf{move}() : Absztrakt függvény, mely a leszármazottakban fog megvalósulni. Az egységek mozgásáért felelős.
 		\item boolean \textbf{intersect}(Unit u): Két egység ütközését meghatározó függvény.
+		\item void \textbf{move}() : Absztrakt függvény, mely a leszármazottakban fog megvalósulni. Az egységek mozgásáért felelős.
 	\end{itemize}
 \end{itemize}
 
@@ -262,18 +335,35 @@ jelölés:<osztály tagváltozója>
 	\begin{itemize}
 	\item ToString():(nem írja ki automatikusan a szöveget csak vissza ad egy stringet, amit a run be kell kiíratni)
 	        \begin{itemize}
-	\item "Robot [id=<id>,  slowed=<slowed>,oiled=<oiled>, x=<x>,y=<y>,nextx=<arrowendx>,nexty=
-	        <arrowendy>,alpha=<alpha>,width=<WIDTH>,height=<HEIGHT>]” 
+	\item "Robot [id=<id>,  slowed=<slowed>,oiled=<oiled>, x=<x>,y=<y>,numGlue=<numGlue>,numOil=<numOil>,nextx=<arrowendx>,nexty=
+	        <arrowendy>,alpha=<alpha>,width=<WIDTH>,height=<HEIGHT>]" 
 	        \end{itemize}
 	\item Keypressed(int k):
 	       \begin{itemize}
-	        \item nextx ,nexty modified to:<arrowendx>,<arrowendy>
-            \item new oil created at: <x>,<y> ( ha volt olajunk és k == VK\_DOWN)
-            \item „not enough oil”( ha nincs olajunk és k==VK\_DOWN)
-            \item "new glue created at:<x>,<y>”(ha volt ragacsunk és k== VK\_UP)
-            \item „not enough glue”( ha nincs ragacsunk és k==VK\_UP)
-
+	        \item "nextx ,nexty modified to:<arrowendx>,<arrowendy>"
+            \item "new oil created at: <x>,<y>" ( ha volt olajunk és k == VK\_DOWN)
+            \item "not enough oil"( ha nincs olajunk és k==VK\_DOWN)
+            \item "new glue created at:<x>,<y>"(ha volt ragacsunk és k== VK\_UP)
+            \item "not enough glue"( ha nincs ragacsunk és k==VK\_UP)
+        
 	       \end{itemize}
+	 \item CollisionWithRobot(Robot robot2):
+	       	
+	        \begin{itemize}
+	        \item  "there was a collision between this: <this.toString()> and this: <robot2.toString()>"
+	        
+	        \end{itemize}
+    \item deathAnimation():
+	        \begin{itemize}
+	        \item  "This:<robot.toString()> died"
+	        
+	        \end{itemize}
+	 \item CollisionWithObstacle(Obstacle o):
+	       	
+	        \begin{itemize}
+	        \item  "there was a collision between this: <this.toString()> and this: <o.toString()>"
+	        
+	        \end{itemize}
 	\end{itemize}
 	
 	
@@ -281,26 +371,49 @@ jelölés:<osztály tagváltozója>
 	\begin{itemize}
 	\item effect(robot r):
 	        \begin{itemize}
-	        \item  „you jumped into oil”
+	        \item  "you jumped into oil"
 	        \end{itemize}
 	\item toString():
 	       \begin{itemize}
-	        \item "Oil[x=<x>, y=<y>, Width=<WIDTH>, Height=<HEIGHT>]"
+	        \item "Oil[x=<x>, y=<y>, Width=<WIDTH>, Height=<HEIGHT>, remainingturns=<Turnsremaining>]"
 	       \end{itemize}
 	\end{itemize}
 \item Glue:
 	\begin{itemize}
 	\item effect(robot r):
 	        \begin{itemize}
-	        \item „you have been glued”
+	        \item "you have been glued"
 	        \end{itemize}
 	\item toString():
 	       \begin{itemize}
-	        \item"Glue [x=<x>, y=<y>, Width=<WIDTH>, Height=<HEIGHT>]";
+	        \item"Glue [x=<x>, y=<y>, Width=<WIDTH>, Height=<HEIGHT>,remaininglife=<Liferemaining>]";
 	       \end{itemize}
 	\end{itemize}
-\end{itemize}
 
+\item Cleaner:
+	\begin{itemize}
+	\item toString():
+	       \begin{itemize}
+	        \item "Cleaner[x=<x>, y=<y>, Width=<WIDTH>, Height=<HEIGHT>, State=<state>]"
+	       \end{itemize}
+	 \item CollisionWithRobot(Robot robot2):     
+	        \begin{itemize}
+	        \item  "there was a collision between this: <this.toString()> and this: <robot2.toString()>"
+	        
+	        \end{itemize}
+	 \item cleanUp(Obstacle o):     
+	        \begin{itemize}
+	        \item  " this: <o.toString()> was cleaned up"
+	        
+	        \end{itemize}
+\item CollisionWithObstacle(Obstacle o):     
+	        \begin{itemize}
+	        \item  "there was a collision between this: <this.toString()> and this: <o.toString()>"
+	        
+	        \end{itemize}
+	        
+	\end{itemize}
+\end{itemize}
 
 \section{Összes részletes use-case}
 \comment{A use-case-eknek a részletezettsége feleljen meg a kezelői felületnek, azaz a felület elemeire kell hivatkozniuk.
@@ -314,12 +427,101 @@ Alábbi táblázat minden use-case-hez külön-külön.}
 \end{center}
 \end{figure}
 
-\usecase{...}{...}{...}{...}
+\usecase{listObstacles}
+{Kilistázza az akadályokat.}
+{Tesztelő}
+{Kiírja a kimenetre a játékban levő akadályokat (ragacsokat és olajfoltokat).}
+
+\usecase{chechpointSearch}
+{A robot egy checkpointba ugrott.}
+{Tesztelő}
+{A program megnézi, hogy a robot olyan területre ugrott, ahol checkpoint található. Ha beleugrott, megnöveli a robot „checkpoint elérésének” számát.}
+
+\usecase{effect}
+{Akadály hatása a robotra.}
+{Tesztelő}
+{Ha robot olajfoltra lép, akkor letiltja az irányváltást, így amilyen irányba ráugrott, olyan irányba tud továbbugrani.}
+
+\usecase{move}
+{Robot irányának beállítása.}
+{Tesztelő}
+{Robot ugrása előtt a tesztelő beállítja a robot irányát az irányváltoztató gombokkal (0-180).}
+
+\usecase{listCleaners}
+{Kilistázza a kisrobotokat.}
+{Tesztelő}
+{Kiírja a kimenetre a játékban levő kisrobotokat.}
+
+\usecase{collisionWithObstacles}
+{Azonos koordinátákon van robot és az akadály.}
+{Tesztelő}
+{Ha a robot azonos koordinátákon van egy olajfolttal, akkor beállítja a robotot a kívánt hatásra.}
+
+\usecase{keyPressed}
+{A robot koordinátáira akadályt tesz le.}
+{Tesztelő}
+{Robot ugrása előtt a tesztelő az adott gombbal akadályt rak le a robot helyére.}
+
+\usecase{listRobots}
+{Kilistázza a robotokat}
+{Tesztelő}
+{Kiírja a kimenetre a játékban levő robotokat.}
+
+\usecase{collisionWithCleaner}
+{Robot és kisrobot azonos koordinátákon helyezkednek el a földön.}
+{Tesztelő}
+{Ha a robot és kisrobottal azonos koordinátákon helyezkedik el akkor a kisrobot meghal.}
+
+\usecase{collisionWithRobot}
+{Robot és robot azonos koordinátákon helyezkednek el.}
+{Robot}
+{Ha két robot azonos koordinátákon helyezkednek el és:  
+- ha ugyanakkora a sebességük: lepattannak egymásról
+- ha különböző: a lassabb meghal
+}
+
+\usecase{robotOutsideOfMap}
+{Robot kiugrik a pályáról.}
+{Tesztelő}
+{Ha a robot kiugrott a pályáról meghalt.}
+
+\usecase{setCheckpoints}
+{Checkpointok beállítása}
+{Tesztelő}
+{Beállítja a pályára a checkpointokat.}
+
+\usecase{MapBuilder}
+{Pálya betöltése}
+{Tesztelő}
+{A tesztelő által kiválasztott pálya betöltése.}
+
+\usecase{Glue}
+{Ragacs létrehozása}
+{Tesztelő}
+{A tesztelő a pálya megadott koordinátáira ragacsot helyez el.}
+
+\usecase{Oil}
+{Olajfolt létrehozása}
+{Tesztelő}
+{A tesztelő a pálya megadott koordinátáira olajfoltot helyez el.}
+
+
+
 
 \section{Tesztelési terv}
 \comment{A tesztelési tervben definiálni kell, hogy a be- és kimeneti fájlok egybevetésével miként végezhető el a program tesztelése. Meg kell adni teszt forgatókönyveket. Az egyes teszteket elég informálisan, szabad szövegként leírni. Teszt-esetenként egy-öt mondatban. Minden teszthez meg kell adni, hogy mi a célja, a proto mely funkcionalitását, osztályait stb. teszteli. Az alábbi táblázat minden teszt-esethez külön-külön elkészítendő.}
 
-\teszteset{...}{...}{...}
+\teszteset{Mozgás}	{A robot mozgásának tesztelése.}	{Teszteli, hogy a robot mozgása után az előre megadott értékeknek megfelelően történik a mozgás (a mozgás után a megfelelő helyen van).}
+\teszteset{Irányváltoztatás}	{A robot irányváltoztatásának tesztelése.}	{Teszteli, hogy a robot különböző irányok beállítása után is a megfelelő helyre ugrik.}
+\teszteset{Ütközés}	{A robotok ütközésének tesztelése.}	{Teszteli, hogy a két robot ütközése után a megfelelő helyre pattannak-e, illetve hogy az objektumok határai helyesen működnek.}
+\teszteset{Leesés}	{A robot leesésének tesztelése.}	{Teszteli, hogy a pálya szélén a robot megszűnik-e létezni.}
+\teszteset{Checkpoint}	{A robot checkpoint-ba érésének tesztelése.}	{Teszteli, hogy a checkpoint-ba érést, illetve hogy a robotnak megfelelően változnak-e az értékei ilyen esetben.}
+\teszteset{Olajba ugrás}	{A robot olajba ugrását teszteli.}	{Teszteli, hogy egy olajba ugrás alkalmával változnak-e a robot értékei, vizsgálja az ütközést.}
+\teszteset{Ragacsba ugrás}	{A robot ragacsba ugrását teszteli.}	{Teszteli, hogy egy ragacsba ugrás alkalmával változnak-e a robot értékei, vizsgálja az ütközést.}
+\teszteset{Olaj lerakás}	{Olaj lerakása a pályán.}	{Teszteli, hogy a lerakás után létrejött-e az olaj a pályán.}
+\teszteset{Ragacs lerakás}	{Ragacs lerakása a pályán.}	{Teszteli, hogy a lerakás után létrejött-e a ragacs a pályán.}
+\teszteset{Olaj hatás}	{Az olaj hatását teszteli.}	{Teszteli, hogy olajos állapotban a robot képes-e irányt változtatni.}
+\teszteset{Ragacs hatás}	{A ragacs hatását teszteli.}	{Teszteli, hogy ragacsos állapotban a robot milyen távolságra képes ugrani.}
 
 \section{Tesztelést támogató segéd- és fordítóprogramok specifikálása}
 \comment{Specifikálni kell a tesztelést támogató segédprogramokat.}
