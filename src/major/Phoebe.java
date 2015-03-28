@@ -182,7 +182,7 @@ public class Phoebe extends JPanel implements Runnable{
 	 */
 	public void paint(Graphics2D g2d) {
 		super.paint(g2d);
-		g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
+		g2d.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);	
 		for(int i=0;i<obstacles.size();i++)
