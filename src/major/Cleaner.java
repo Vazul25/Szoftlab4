@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.Iterator;
 
 public class Cleaner extends Robot {
 	
@@ -74,16 +75,19 @@ public class Cleaner extends Robot {
 			return null;
 		else{
 			double distance, minDist = 30000;
-			int min;
-			for(int i=0; i < obstacles.size(); i++){
-				distance = Math.sqrt( Math.pow( obstacles.get(i).x-x, 2) + Math.pow( obstacles.get(i).y-y, 2));
+			Obstacle min = null;
+			Iterator<Obstacle> it = obstacles.iterator();
+			while(it.hasNext()){
+				Obstacle obs = it.next();
+				distance = Math.sqrt( Math.pow( obs.x-x, 2) + Math.pow( obs.y-y, 2));
 				if (distance < minDist){
 					minDist = distance;
-					min = i;
+					min = obs;
 				}
 			}
+			return min;
 		}
-		return obstacles.get(min); 
+		
 	}
 	
 	/*
