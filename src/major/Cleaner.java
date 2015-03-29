@@ -70,7 +70,20 @@ public class Cleaner extends Robot {
 	 * @return NULL-al tér vissza, ha nincs elérhető akadály
 	 */
 	private Obstacle nextObstacle(){
-		return new Oil(200,300);
+		if(obstacles.isEmpty()) 
+			return null;
+		else{
+			double distance, minDist = 30000;
+			int min;
+			for(int i=0; i < obstacles.size(); i++){
+				distance = Math.sqrt( Math.pow( obstacles.get(i).x-x, 2) + Math.pow( obstacles.get(i).y-y, 2));
+				if (distance < minDist){
+					minDist = distance;
+					min = i;
+				}
+			}
+		}
+		return obstacles.get(min); 
 	}
 	
 	/*
