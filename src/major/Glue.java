@@ -58,7 +58,7 @@ public class Glue extends Obstacle {
 	 */
 	@Override
 	public void effect(Robot r) {
-		System.out.println("you have been glued");
+		System.out.println("you jumped into glue");
 		
 		//Csökkentjük lifetime értékét és ha a csökkentés előtt nagyobb volt 0-nál akkor teljesül a hatás
 		if(lifetime-- > 0){
