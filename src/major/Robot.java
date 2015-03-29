@@ -40,8 +40,8 @@ public class Robot extends Unit{
 
 	//TESZT
 	private  static final  int ANIMATIONSPEED=5;
-	/*static */int WIDTH=40;//teszt placeholder
-	/*static*/ int HEIGHT=40;//teszt placeholder
+	protected int WIDTH=40;//teszt placeholder
+	protected int HEIGHT=40;//teszt placeholder
 
 	/**
 	 * Tárolja a még felhasználatlan ragacsokat.
@@ -94,8 +94,8 @@ public class Robot extends Unit{
 	 ** alpha: arrowendx,y kiszámításához szükséges vizszintes tengelyel bezárt szög radiánban
 	 *
 	 */
-	private int arrowendx=0;//ahova mutat
-	private int arrowendy=0;
+	protected int arrowendx=0;//ahova mutat
+	protected int arrowendy=0;
 	private double alpha=1.57;//kerület pontjának számításához kell radián , alapérték 90 fok
 
 	/*

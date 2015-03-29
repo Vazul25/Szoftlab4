@@ -73,6 +73,10 @@ public abstract class Obstacle extends Unit {
 		// TODO Auto-generated method stub
 
 	}
+	/*
+	 * TODO
+	 */
+	public abstract boolean checkAlive();
 
 	@Override
 	public String toString() {

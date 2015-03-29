@@ -41,6 +41,7 @@ public class Oil extends Obstacle {
 	 */
 	public Oil(int x, int y) {
 		super(x, y);
+		lifetime = 15;
 	}
 	
 
@@ -61,6 +62,16 @@ public class Oil extends Obstacle {
 	public void effect(Robot r) {
 		System.out.println("you jumped into oil");
 		r.setOiled();
+	}
+	
+	/*
+	 * TODO
+	 * @see major.Obstacle#checkAlive()
+	 */
+	@Override
+	public boolean checkAlive(){
+		if(lifetime-- > 0 ) return true;
+		else return false;		
 	}
 
 
