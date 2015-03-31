@@ -373,6 +373,7 @@ public class Robot extends Unit{
 		if (this == r)
 			return;
 		if(this.intersect(r)) {
+			System.out.println("there was a collision between this:\n"+this.toString()+"\n and this:"+r.toString());
 			bounce();
 		}
 	}
