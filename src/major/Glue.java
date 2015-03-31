@@ -86,7 +86,7 @@ public class Glue extends Obstacle {
 	}
 	@Override
 	public String toString() {
-		return "Glue [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT + "]";
+		return "Glue [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT +", Lifetime=" +lifetime +"]";
 	}
 
 }

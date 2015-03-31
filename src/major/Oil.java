@@ -24,7 +24,7 @@ import javax.imageio.ImageIO;
  *  
  */
 public class Oil extends Obstacle {
-	protected static BufferedImage img;
+	private static BufferedImage img;
 
 	/**
 	 * Oil kontruktor
@@ -87,7 +87,7 @@ public class Oil extends Obstacle {
 
 	@Override
 	public String toString() {
-		return "Oil [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT + "]";
+		return "Oil [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT +" lifetime:"+lifetime +"]";
 	}
 
 }
