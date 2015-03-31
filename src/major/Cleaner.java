@@ -90,7 +90,7 @@ public class Cleaner extends Robot {
 	 * @see major.Robot#collisionWithRobot(major.Robot)
 	 */
 	@Override
-	public void collisionWithRobot(Robot r){
+	public boolean collisionWithRobot(Robot r){return true;
 		
 	}
 	

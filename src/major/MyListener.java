@@ -20,7 +20,7 @@ import java.util.List;
 public class MyListener implements KeyListener, Runnable  {
 	
 	//
-	boolean isUp, isDown, isRight,isLeft,isW,isD,isS,isA;
+	private boolean isUp, isDown, isRight,isLeft,isW,isD,isS,isA;
 	
 	List<Robot> robots;
 	

@@ -369,13 +369,15 @@ public class Robot extends Unit{
 	 * @param r A robot, amivel az ütközést vizsgálni kell.
 	 * 
 	 */
-	public void collisionWithRobot(Robot r){
+	public boolean  collisionWithRobot(Robot r){
 		if (this == r)
-			return;
+			return false;
 		if(this.intersect(r)) {
 			System.out.println("there was a collision between this:\n"+this.toString()+"\n and this:"+r.toString());
 			bounce();
+			return true;
 		}
+		return false;
 	}
 
 
