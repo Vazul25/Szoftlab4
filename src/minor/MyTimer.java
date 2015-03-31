@@ -6,43 +6,63 @@ import java.math.BigDecimal;
  * Timer osztály
  * Felelősség:
  * 
- * A játék elején a kezdésig visszaszámol. Játéktípustól függően felfelé 
- * vagy visszafelé számol. Ez az osztály felelős, hogy ha lejárt az idő, 
- * akkor legyen vége a játéknak.
+ * A játék elején a kezdésig visszaszámol három másodpercet, utána indulhat a játék. Játéktípustól függően felfelé(kör játékmód) 
+ * vagy visszafelé(idő játékmód) számol. Ez az osztály felelős, azért ha lejár az idő vége legyen a játéknak, 
  * 
- * Ősosztály:
- * 
- * Interfészek:
  *  
  */
 public class MyTimer {
 	
-	private long T_start;
-	private int duration;
-	
+	/*
+	 * DIR Enum
+	 * Az óra számolási irányának enumerizácciója. 
+	 */
 	private enum DIR{
 		Up,
 		Down
 	}
 	
+	/**
+	 * Attribútumok
+	 * 
+	 ** - long T_start: Az óra indításának időpontja millisec pontosággal.
+	 ** - int duration: Ha az óra visszafelé számol, akkor tárolja, hogy mennyi volt a kezdő érték, ha felfelé számol, akkor értéke 0. Mértékegysége millisekundum.
+	 ** - DIR direction: Az óra számolási irányának eltárolásáért felelős enum.
+	 */
+	private long T_start;
+	private int duration;
 	private DIR direction;
 	
-	/*
-	 * Timer konstruktor
-	 * ha 0-val vagy negatívval inicializálják felfele számol
+	/**
+	 * MyTimer(int i)
+	 * 
+	 * Felelősség: 
+	 * Ha 0-val vagy negatívval inicializálják felfele számol,
 	 * ha pozitív számmal inicializálják akkor lefelé számol.
+	 * 
+	 * @param i A visszaszámolás időtartamát(másodpercben) tartalmazó paraméter.
 	 */
 	public MyTimer(int i){
 		if(i > 0){
-			direction = DIR.Down;
-			duration = i*1000;
-			T_start = System.currentTimeMillis()-2*i*1000;
+			direction = DIR.Down; //lefele számolunk
+			duration = i*1000; //Milliszekundomba átváltás
+			T_start = System.currentTimeMillis()-2*i*1000; //beállítjuk kétszer duration milliszekundummal korábbi időpontra, hogy a start() egyből elindítsa a Timert. 
 		}else{
 			direction = DIR.Up;
-			duration = 0;
+			duration = 0; 
 		}
 	}
 	
+	/**
+	 * + void start()
+	 * 
+	 * Felelősség: 
+	 * Az óra indításakor vagy újraindításakor meghívott függvény. Csak akkor indul újra (visszaszámláló üzemmódban), ha elérte a 0-t.
+	 * 
+	 * Funkciók:
+	 * A Phoebe run metódusa hívja meg, mikor vissza kell számolni a játék kezdete előtt három másodpercet. Illetve, a játék kezdetekor.
+	 * 
+	 */
 	public void start(){
 		switch (direction){
 		case Down:
@@ -55,6 +75,14 @@ public class MyTimer {
 		
 	}
 	
+	/**
+	 * + boolean isZero()
+	 * 
+	 * Felelősség:
+	 * Az idő lejárását ellenörző függvény, megadja, hogy az indítás plusz a megadott időtartam kisebb-e a pillanatnyi időnél.
+	 * 
+	 * @return Igazzal tér vissza, ha lejárt az idő, illetve hamissal minden más esetben.
+	 */
 	public boolean isZero(){
 		switch(direction){
 		case Down:
@@ -65,6 +93,15 @@ public class MyTimer {
 			
 	}
 	
+	/**
+	 * + int getTime()
+	 * 
+	 * Felelősség: 
+	 * Ha pozitív száámal inicializálódott az objektum, akkor megadja mennyi idő van még hátra a visszaszámlálásból 
+	 * vagy, ha nullával, akkor a start() hívás óta eltelt idővel tér vissza.
+	 * 
+	 * @return Visszatér egy szekundumban megadott értékkel.
+	 */
 	public int getTime(){
 		return new BigDecimal(((System.currentTimeMillis()-T_start)/1000)).intValueExact();
 	};
