@@ -2,6 +2,7 @@ package junit;
 
 import static org.junit.Assert.*;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import major.Glue;
@@ -34,8 +35,9 @@ public class ObstacleTest {
 	}
 	
 	/*
-	 * Itt az irányt át kellene állítani, hogy ne ugorjon bele a megadott következő
-	 * olajba, ezáltal ha beleugrik, az irányváltoztatás nem megy, az olaj effect jó.
+	 * Itt az irányt átállítjuk, hogy ne ugorjon bele a megadott
+	 * olajfoltba, ezáltal ha beleugrik, az irányváltoztatás nem megy, 
+	 * az olajfolt effect jó.
 	 */
 	@Test
 	public void testEffectOil(){
@@ -43,8 +45,11 @@ public class ObstacleTest {
 		assertNotNull(o);
 
 		o.effect(r);
-
-		//r.keyPressed(30);
+		
+		//Irány beállítása, hogy a következő ugrás elérje a (100, 0) koordinátájú olajfoltot
+		for (int i = 0; i < 18; i++) {
+			r.keyPressed(KeyEvent.VK_A);
+		}
 		
 		try {
 			r.move();
@@ -56,7 +61,7 @@ public class ObstacleTest {
 			e.printStackTrace();
 		}
 		
-		assertEquals(r.collisionWithObstacles(new Oil(100, 0)), true);
+		assertEquals(r.collisionWithObstacles(new Oil(0, 100)), true);
 	}
 	
 	/*
