@@ -354,7 +354,7 @@ public class Robot extends Unit{
 		return "Robot [id=" + id + ", slowed=" + slowed + ", oiled=" + oiled
 				+ ", x=" +x + ",y=" +y
 				+ ", nextx=" + arrowendx + ", nexty=" + arrowendy
-				+ ", alpha=" + alpha + ", width=" + WIDTH +", height=" + HEIGHT +", NumGlue:"+numGlue+", NumOile"+numOil+"]";
+				+ ", alpha=" + alpha + ", width=" + WIDTH +", height=" + HEIGHT +", NumGlue:"+numGlue+", NumOil:"+numOil+"]";
 	}
 
 	/*
