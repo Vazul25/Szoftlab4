@@ -399,9 +399,9 @@ public class Robot extends Unit{
 		if(!oiled){
 			//Nyíl irányának megváltoztatása
 			if (e== Phoebe.Settings.keyconfig[id%2*4+1])
-				alpha+=0.1;
+				alpha+=0.0872664625;//5fokkal növeli
 			if (e== Phoebe.Settings.keyconfig[id%2*4])
-				alpha-=0.1;
+				alpha-=0.0872664625; 
 			arrowendx=(int)(x+r*Math.cos(alpha));
 			arrowendy=(int)(y+r*Math.sin(alpha));
 			System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);

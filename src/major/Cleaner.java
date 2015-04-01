@@ -120,8 +120,6 @@ public class Cleaner extends Unit {
 			//TODO le kell foglalni
 			
 			if(!collisionWithObstacles(destination)){ //Ha nem értünk oda megyünk tovább
-				arrowendx = 200; //TODO
-				arrowendy = 300; //TODO
 			}else{ //Ha odaértünk egy akadályhoz
 				state = Concluder.WORKING;
 				cleaning = 3; // 3 körig fog takarítani
