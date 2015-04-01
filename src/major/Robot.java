@@ -96,7 +96,7 @@ public class Robot extends Unit{
 	 */
 	protected int arrowendx=0;//ahova mutat
 	protected int arrowendy=0;
-	private double alpha=1.57;//kerület pontjának számításához kell radián , alapérték 90 fok
+	private double alpha= Math.PI / 2;//kerület pontjának számításához kell radián , alapérték 90 fok
 
 	/*
 	 * Mire való:

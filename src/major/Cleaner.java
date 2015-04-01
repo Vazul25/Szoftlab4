@@ -1,60 +1,47 @@
 package major;
 
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-public class Cleaner extends Robot {
+public class Cleaner extends Unit {
 	
-	private static final int WIDTH=100;
-	private static final int HEIGHT=100;
+	private static final int WIDTH=30;
+	private static final int HEIGHT=30;
 	List<Obstacle> obstacles;
 	
 	private enum Concluder{
 		MOVING,
 		WORKING
 	}
-	private Concluder state;
+	private Concluder state = Concluder.MOVING;
 	private int cleaning;
+	
+	private int arrowendx;
+	private int arrowendy;
+	private double alpha=1.57;
+	private static final int r=100; //sugár
+	protected static int staticid=0;
+	protected static BufferedImage img[];
+	protected Phoebe p;
 	
 	/*
 	 * Örökölt tagváltozók
 	 */
 	//protected int x,y;
 	//protected Rectangle hitbox;
-	//protected static int staticid=0;
-	//protected int WIDTH=40;
-	//protected int HEIGHT=40;
-	//protected static BufferedImage img[];
-	//protected boolean moved;
-	//protected Phoebe p;
+
 	
 	/*
 	 * Örökölt metódusok
 	 */
 	//public boolean intersect
 	//public Rectangle getHitbox
-	//public int getId
-	//public void setOiled
-	//public void setGlue
-	//public int getNumGlue
-	//public int getNumOil
-	//public void incNumGlue
-	//public void incNumOil
-	//public void deathanimation
 	//public void paint(Graphics2D g)
-	//public static void setUnitImage()
-	//public void move()
-	//public boolean collisionWithObstacles(Obstacle obstacle)
-	//public void bounce()
-	//public String toString()
-	//public void collisionWithRobot(Robot r)
-	//public void keyPressed(int e)
 	
 	
 	public Cleaner(int x, int y, Phoebe p) {
-		super(x, y, p);
+		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -89,8 +76,8 @@ public class Cleaner extends Robot {
 	 * TODO
 	 * @see major.Robot#collisionWithRobot(major.Robot)
 	 */
-	@Override
-	public boolean collisionWithRobot(Robot r){return true;
+	public boolean collisionWithRobot(Robot r){
+		return true;
 		
 	}
 	
@@ -99,6 +86,13 @@ public class Cleaner extends Robot {
 	 */
 	private void colllisionWithCleaner(Cleaner cl){
 			
+	}
+	
+	/*
+	 * TODO
+	 */
+	private boolean collisionWithObstacles(Obstacle obst){
+		return false;
 	}
 	
 	/**
@@ -126,8 +120,8 @@ public class Cleaner extends Robot {
 			//TODO le kell foglalni
 			
 			if(!collisionWithObstacles(destination)){ //Ha nem értünk oda megyünk tovább
-				arrowendx = 200; 
-				arrowendy = 300;
+				arrowendx = 200; //TODO
+				arrowendy = 300; //TODO
 			}else{ //Ha odaértünk egy akadályhoz
 				state = Concluder.WORKING;
 				cleaning = 3; // 3 körig fog takarítani
@@ -143,21 +137,11 @@ public class Cleaner extends Robot {
 			break;
 		}
 	}
-	
-	/*
-	 * Letiltandó függvények
-	 * //public void setOiled
-	 * //public void setGlue
-	 * //public int getNumGlue
-	 * //public int getNumOil
-	 * //public void incNumGlue
-	 * //public void incNumOil
-	 */
-	public void setOiled(){}
-	public void setGlue(){}
-	public int getNumGlue(){return 0;}
-	public int getNumOil(){return 0;}
-	public void incNumGlue(){}
-	public void incNumOil(){}
+
+	@Override
+	public void paint(Graphics2D g) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
