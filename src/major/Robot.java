@@ -40,8 +40,8 @@ public class Robot extends Unit{
 
 	//TESZT
 	private  static final  int ANIMATIONSPEED=5;
-	/*static */int WIDTH=40;//teszt placeholder
-	/*static*/ int HEIGHT=40;//teszt placeholder
+	protected int WIDTH=40;//teszt placeholder
+	protected int HEIGHT=40;//teszt placeholder
 
 	/**
 	 * Tárolja a még felhasználatlan ragacsokat.
@@ -94,9 +94,9 @@ public class Robot extends Unit{
 	 ** alpha: arrowendx,y kiszámításához szükséges vizszintes tengelyel bezárt szög radiánban
 	 *
 	 */
-	private int arrowendx=0;//ahova mutat
-	private int arrowendy=0;
-	private double alpha=1.57;//kerület pontjának számításához kell radián , alapérték 90 fok
+	protected int arrowendx=0;//ahova mutat
+	protected int arrowendy=0;
+	private double alpha= Math.PI / 2;//kerület pontjának számításához kell radián , alapérték 90 fok
 
 	/*
 	 * Mire való:
@@ -354,7 +354,7 @@ public class Robot extends Unit{
 		return "Robot [id=" + id + ", slowed=" + slowed + ", oiled=" + oiled
 				+ ", x=" +x + ",y=" +y
 				+ ", nextx=" + arrowendx + ", nexty=" + arrowendy
-				+ ", alpha=" + alpha + ", width=" + WIDTH +", height=" + HEIGHT +"]";
+				+ ", alpha=" + alpha + ", width=" + WIDTH +", height=" + HEIGHT +", NumGlue:"+numGlue+", NumOil:"+numOil+"]";
 	}
 
 	/*
@@ -369,12 +369,15 @@ public class Robot extends Unit{
 	 * @param r A robot, amivel az ütközést vizsgálni kell.
 	 * 
 	 */
-	public void collisionWithRobot(Robot r){
+	public boolean  collisionWithRobot(Robot r){
 		if (this == r)
-			return;
+			return false;
 		if(this.intersect(r)) {
+			System.out.println("there was a collision between this:\n"+this.toString()+"\n and this:"+r.toString());
 			bounce();
+			return true;
 		}
+		return false;
 	}
 
 
@@ -396,9 +399,9 @@ public class Robot extends Unit{
 		if(!oiled){
 			//Nyíl irányának megváltoztatása
 			if (e== Phoebe.Settings.keyconfig[id%2*4+1])
-				alpha+=0.1;
+				alpha+=0.0872664625;//5fokkal növeli
 			if (e== Phoebe.Settings.keyconfig[id%2*4])
-				alpha-=0.1;
+				alpha-=0.0872664625; 
 			arrowendx=(int)(x+r*Math.cos(alpha));
 			arrowendy=(int)(y+r*Math.sin(alpha));
 			System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);

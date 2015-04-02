@@ -114,6 +114,7 @@ public class Phoebe extends JPanel implements Runnable{
 	 */
 	private List<Robot> robots;
 	private List<Obstacle> obstacles;
+	private List<Cleaner> cleaners;
 	private HUD hud;
 	private MapBuilder map;
 	private MyTimer gameTimer;
@@ -132,6 +133,7 @@ public class Phoebe extends JPanel implements Runnable{
 		ended=false;
 		obstacles=new ArrayList<Obstacle>();
 		robots=new ArrayList<Robot>();
+		cleaners = new ArrayList<Cleaner>();
 		gameInfo = set;
 		
 		//Játék incializálása
@@ -182,7 +184,7 @@ public class Phoebe extends JPanel implements Runnable{
 	 */
 	public void paint(Graphics2D g2d) {
 		super.paint(g2d);
-		g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
+		g2d.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);	
 		for(int i=0;i<obstacles.size();i++)
@@ -289,8 +291,13 @@ public class Phoebe extends JPanel implements Runnable{
 	//Játék visszaszámláló elindítása
 		gameTimer.start();
 		
+	//Cleanerek bejövetele minden 3. percben
+		MyTimer cleanerTimer = new MyTimer(180);
+		cleanerTimer.start();
+		
 	//Teszt
 		int elteltidoteszt=0;
+		
 		while( !ended)
 		{
 	//A User ideje, hogy változtathasson az ugrás irányán
@@ -343,6 +350,12 @@ public class Phoebe extends JPanel implements Runnable{
 				};*/		
 
 			}		
+			
+			if(cleanerTimer.isZero()){
+				cleaners.add(new Cleaner(200,300,this));
+				cleaners.add(new Cleaner(300,400,this));
+				cleanerTimer.start();
+			}
 	//Teszt
 			repaint();	
 			if(elteltidoteszt>=60) ended=true;

@@ -24,7 +24,7 @@ import javax.imageio.ImageIO;
  *  
  */
 public class Oil extends Obstacle {
-	protected static BufferedImage img;
+	private static BufferedImage img;
 
 	/**
 	 * Oil kontruktor
@@ -41,6 +41,7 @@ public class Oil extends Obstacle {
 	 */
 	public Oil(int x, int y) {
 		super(x, y);
+		lifetime = 15;
 	}
 	
 
@@ -62,6 +63,16 @@ public class Oil extends Obstacle {
 		System.out.println("you jumped into oil");
 		r.setOiled();
 	}
+	
+	/*
+	 * TODO
+	 * @see major.Obstacle#checkAlive()
+	 */
+	@Override
+	public boolean checkAlive(){
+		if(lifetime-- > 0 ) return true;
+		else return false;		
+	}
 
 
 	@Override
@@ -76,7 +87,7 @@ public class Oil extends Obstacle {
 
 	@Override
 	public String toString() {
-		return "Oil [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT + "]";
+		return "Oil [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT +" lifetime:"+lifetime +"]";
 	}
 
 }

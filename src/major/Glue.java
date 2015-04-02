@@ -25,6 +25,10 @@ import javax.imageio.ImageIO;
 
 public class Glue extends Obstacle {
 
+	//TODO comment
+	private static BufferedImage img;
+	
+	
 	/**
 	 * Felelősség:
 	 * Egy Glue elem létrehozása
@@ -38,10 +42,11 @@ public class Glue extends Obstacle {
 	 */
 	public Glue(int x, int y) {
 		super(x, y);
+		//4 robot után elkopik
+		lifetime = 4;
 		// TODO Auto-generated constructor stub
 	}
-	//TODO comment
-	 static BufferedImage img;
+	
 
 	/**
 	 * Felelősség:
@@ -53,10 +58,22 @@ public class Glue extends Obstacle {
 	 */
 	@Override
 	public void effect(Robot r) {
-	
-		// TODO Auto-generated method stub
-		System.out.println("you have been glued");
-		r.setGlue();
+		System.out.println("you jumped into glue");
+		
+		//Csökkentjük lifetime értékét és ha a csökkentés előtt nagyobb volt 0-nál akkor teljesül a hatás
+		if(lifetime-- > 0){
+			r.setGlue();
+		}
+		
+	}
+	/*
+	 * (non-Javadoc)
+	 * @see major.Obstacle#checkAlive()
+	 */
+	@Override
+	public boolean checkAlive(){
+		if(lifetime > 0) return true;
+		else return false;
 	}
 
 	@Override
@@ -69,7 +86,7 @@ public class Glue extends Obstacle {
 	}
 	@Override
 	public String toString() {
-		return "Glue [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT + "]";
+		return "Glue [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT +", Lifetime=" +lifetime +"]";
 	}
 
 }

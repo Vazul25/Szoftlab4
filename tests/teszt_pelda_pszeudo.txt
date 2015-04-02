@@ -1,0 +1,34 @@
+Pszeudo kód:
+Tesztelés (Prototípusba)
+
+1. new Glue()
+2. new Robot()
+3. new Cleaner()
+
+4. System.out.println(Glue.toString)
+5. System.out.println(Robot.toString)
+6. System.out.println(Cleaner.toString)
+
+7. Robot.move()
+   Cleaner.move()
+//7-8. Robot.collisionWithRobot()
+//7-8. Robot.collisionWithCleaner(Robot)
+//7-8. Robot.collisionWithObstacle(Glue)
+//7-8. Cleaner.collisionWithRobot(Robot)
+
+7-8. Cleaner.collisionWithObstacle(Glue) //Cleaner.move-on belül hívódik meg
+
+8. System.out.println(Robot.toString)
+9. System.out.println(Cleaner.toString)
+10. Robot.move()
+    Cleaner.move()
+//10-11. Robot.collisionWithRobot()
+//10-11. Robot.collisionWithCleaner(Robot)
+
+10-11. Cleaner.collisionWithRobot(Robot)
+		Cleaner.deathanimation()
+		new Oil()
+10-11. Robot.collisionWithObstacle(Glue)
+10-11. Robot.collisionWithObstacle(Oil)
+11. System.out.println(Robot.toString)
+12. System.out.println(Cleaner.toString)
