@@ -92,46 +92,41 @@ A prototípus csak a szabványos ki- és bemeneteket használja kommunikációra
 \subsection{Bemeneti nyelv}
 
 \begin{itemize}
-\item chechpointSearch
-	\begin{itemize}
-	\item Leírás: Checkpoint keresése a robot helyzetén.
-	\item Opciók: -
-	\end{itemize}
-	
-\item collisionWithCleaner
-	\begin{itemize}
-	\item Leírás: Robot ütközése a takarító kisrobottal.
-	\item Opciók: -
-	\end{itemize}
-	
-\item collisionWithObstacles
-	\begin{itemize}
-	\item Leírás: Robot ütközése akadályokkal.
-	\item Opciók: -
-	\end{itemize}
-	
-\item collisionWithRobot
-	\begin{itemize}
-	\item Leírás: Robot ütközése a másik robottal.
-	\item Opciók: -
-	\end{itemize}
-	
-\item effect
-	\begin{itemize}
-	\item Leírás: Az akadály hatása a robotra.
-	\item Opciók: -
-	\end{itemize}
-	
-\item Glue
+\item Glue <x> <y>
 	\begin{itemize}
 	\item Leírás: Ragacs létrehozása a pályán.
-	\item Opciók: A ragacs koordinátái.
+	\item Opciók: A ragacs (x,y) koordinátái.
 	\end{itemize}
 	
-\item keyPressed
+\item keyPressed <akadály\_gomb>
 	\begin{itemize}
 	\item Leírás: Akadály lerakása a robot koordinátáira.
-	\item Opciók: Adott gomb megnyomása.
+	\item Opciók: 
+	\begin{itemize}
+    	    \item akadály\_gomb
+        	    \begin{itemize}
+        	        \item Up: Robot1 olaj lerakás
+        	        \item Down: Robot1 ragacs lerakás
+        	        \item W: Robot2 olaj lerakás
+        	        \item S: Robot2 ragacs lerakás
+        	    \end{itemize}
+    	\end{itemize}
+	\end{itemize}
+	
+\item keyPressed <irány\_gomb> <forgás értéke fokban>
+	\begin{itemize}
+	\item Leírás: A Robot következő irányának változtatása.
+	\item Opciók: 
+    	\begin{itemize}
+    	    \item irány\_gomb
+        	    \begin{itemize}
+        	        \item Left: Robot1 balra forgatása
+        	        \item Right: Robot1 jobbra forgatása
+        	        \item A: Robot2 balra forgatása
+        	        \item D: Robot2 jobbra forgatása
+        	    \end{itemize}
+        	 \item forgás érték = (0,180)
+    	\end{itemize}
 	\end{itemize}
 	
 \item listCleaners
@@ -152,7 +147,7 @@ A prototípus csak a szabványos ki- és bemeneteket használja kommunikációra
 	\item Opciók: -
 	\end{itemize}
 	
-\item MapBuilder
+\item MapBuilder 
 	\begin{itemize}
 	\item Leírás: Pálya betöltése a játékba.
 	\item Opciók: Pálya kiválasztása.
@@ -160,20 +155,14 @@ A prototípus csak a szabványos ki- és bemeneteket használja kommunikációra
 	
 \item move
 	\begin{itemize}
-	\item Leírás: Robot mozgása.
-	\item Opciók: Adott gombok lenyomása az irányváltoztatáshoz.
+	\item Leírás: Robotok, Cleanerek mozgatása.
+	\item Opciók: -
 	\end{itemize}
 	
-\item Oil
+\item Oil <x> <y>
 	\begin{itemize}
 	\item Leírás: Olajfolt létrehozása a pályán.
-	\item Opciók: Az olajfolt koordinátái.
-	\end{itemize}
-	
-\item robotOutsideOfMap
-	\begin{itemize}
-	\item Leírás: A robot koordinátái a pályán kívülre esnek.
-	\item Opciók: -
+	\item Opciók: Az olajfolt (x,y) koordinátái.
 	\end{itemize}
 	
 \item setCheckpoints
@@ -192,7 +181,7 @@ jelölés:<osztály tagváltozója>
 	\begin{itemize}
 	\item ToString(): (nem írja ki automatikusan a szöveget csak visszaad egy stringet, amit a Phoebe run metódusában kell kiíratni)
 	        \begin{itemize}
-	\item "Robot [id=<id>,  slowed=<slowed>,oiled=<oiled>, x=<x>,y=<y>, \\numGlue=<numGlue>,numOil=<numOil>,nextx=<arrowendx>,\\nexty=<arrowendy>,alpha=<alpha>,width=<WIDTH>,height=<HEIGHT>]" 
+	\item "Robot [id=<id>,  slowed=<slowed>,oiled=<oiled>, x=<x>,y=<y> \\,nextx=<arrowendx>,\\nexty=<arrowendy>,alpha=<alpha>,width=<WIDTH>,height=<HEIGHT>,numGlue=<numGlue>,numOil=<numOil>]" 
 	        \end{itemize}
 	\item Keypressed(int k):
 	       \begin{itemize}
@@ -260,6 +249,12 @@ jelölés:<osztály tagváltozója>
 	 \item cleanUp(Obstacle o):     
 	        \begin{itemize}
 	        \item  " this: <o.toString()> was cleaned up"
+	        
+	 \item deathAnimation():
+	        \begin{itemize}
+	        \item  "This:<Cleaner.toString()> died"
+	        
+	        \end{itemize}
 	        
 	        \end{itemize}
 \item CollisionWithObstacle(Obstacle o):     
