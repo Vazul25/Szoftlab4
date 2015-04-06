@@ -1,0 +1,10 @@
+Bemeneti nyelv:
+Phoebe time 300
+
+listRobots
+listObstacles
+listCleaners
+
+move
+
+Kimeneti nyelv:

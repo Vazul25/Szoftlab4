@@ -84,7 +84,7 @@ public class Cleaner extends Unit {
 	/*
 	 * TODO
 	 */
-	private void colllisionWithCleaner(Cleaner cl){
+	private void collisionWithCleaner(Cleaner cl){
 			
 	}
 	
@@ -147,6 +147,13 @@ public class Cleaner extends Unit {
 	public void paint(Graphics2D g) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public String toString() {
+		return "Cleaner [x=" + x + ",y=" +y
+				+ ", nextx=" + arrowendx + ", nexty=" + arrowendy
+				+ ", alpha=" + alpha + ", width=" + WIDTH +", height=" + HEIGHT +"]";
 	}
 	
 }

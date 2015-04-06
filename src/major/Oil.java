@@ -87,7 +87,7 @@ public class Oil extends Obstacle {
 
 	@Override
 	public String toString() {
-		return "Oil [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT +" lifetime:"+lifetime +"]";
+		return "Oil [x=" + x + ", y=" + y + ", Width=" + WIDTH +", Height=" + HEIGHT +", lifetime:"+lifetime +"]";
 	}
 
 }
