@@ -118,8 +118,15 @@ public class Cleaner extends Unit {
 				break;
 			
 			//TODO le kell foglalni
+			//nem hiszem hogy jó itt kéne meghatározni a 2 pont által bezárt szöget
+			double distancex=destination.x-x;
+			double distancey=destination.y-y;
 			
+			alpha=Math.atan2(distancey,distancex);
 			if(!collisionWithObstacles(destination)){ //Ha nem értünk oda megyünk tovább
+				
+				arrowendx=(int)(x+r*Math.cos(alpha));
+				arrowendy=(int)(y+r*Math.sin(alpha));
 			}else{ //Ha odaértünk egy akadályhoz
 				state = Concluder.WORKING;
 				cleaning = 3; // 3 körig fog takarítani
