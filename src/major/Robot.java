@@ -1,6 +1,7 @@
 ﻿package major;
 
 import java.awt.BasicStroke;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -250,9 +251,9 @@ public class Robot extends Unit{
 	 * @param g grafikus felület
 	 * 
 	 */
-	public void paint(Graphics2D g) {
+	public void paint(Graphics g) {
 		g.fillRect(x, y, WIDTH, HEIGHT);//placeholder ide jön majd a kép
-		g.setStroke(new BasicStroke(10));
+		((Graphics2D) g).setStroke(new BasicStroke(10));
 		if(!oiled)
 			g.drawLine(x+WIDTH/2, y+HEIGHT/2, arrowendx+WIDTH/2, arrowendy+HEIGHT/2);
 		g.drawImage(img[id%2], x, y, WIDTH, HEIGHT, null);

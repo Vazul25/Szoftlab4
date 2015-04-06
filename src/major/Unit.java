@@ -59,7 +59,7 @@ public abstract class Unit implements iVisible{
 	 * Funkció: 
 	 * A Phoebe hívja meg minden körben.
 	 */
-	public abstract void move() throws InterruptedException, IOException;
+	public abstract void move() throws InterruptedException, IOException, Exception;
 
 	/*
 	 * intersect függvény

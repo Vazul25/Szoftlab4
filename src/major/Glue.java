@@ -1,4 +1,5 @@
 ﻿package major;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -77,7 +78,7 @@ public class Glue extends Obstacle {
 	}
 
 	@Override
-	public void paint(Graphics2D g) {
+	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
 		g.drawImage(img, x, y, WIDTH, HEIGHT, null);
 	}

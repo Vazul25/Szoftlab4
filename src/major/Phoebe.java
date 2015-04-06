@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import minor.MapBuilder;
-import minor.*;
+import minor.MyTimer;
 
 /*
  * Phoebe osztály
@@ -35,7 +35,7 @@ import minor.*;
  * Runnable
  * 
  */
-public class Phoebe extends JPanel implements Runnable{
+public class Phoebe extends JPanel implements Runnable, iVisible{
 	
 	private static final long serialVersionUID = 8435890710077230081L;
 	
@@ -182,9 +182,10 @@ public class Phoebe extends JPanel implements Runnable{
 	 * 	 
 	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
 	 */
-	public void paint(Graphics2D g2d) {
-		super.paint(g2d);
-		g2d.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
+	public void paint(Graphics g) {
+		super.paint(g);
+		g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null); 
+		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);	
 		for(int i=0;i<obstacles.size();i++)
@@ -199,7 +200,7 @@ public class Phoebe extends JPanel implements Runnable{
 		}
 		//TODO Akadályok, Map kirajzolása 
 	}
-	/*
+	/**
 	 * init függvény
 	 * Felelősség:
 	 * Timer létrehozása. Pálya létrehozása. Játékosok létrehozása. HUD létrehozása. 
