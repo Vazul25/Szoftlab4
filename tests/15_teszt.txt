@@ -1,0 +1,10 @@
+Bemeneti nyelv:
+Phoebe time 60
+
+listRobots
+listObstacle
+listCleaners
+
+time_spend 60
+
+Kimeneti nyelv:
