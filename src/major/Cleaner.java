@@ -2,7 +2,11 @@ package major;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 public class Cleaner extends Unit {
 	
@@ -22,7 +26,7 @@ public class Cleaner extends Unit {
 	private double alpha=1.57;
 	private static final int r=100; //sugár
 	protected static int staticid=0;
-	protected static BufferedImage img[];
+	protected static BufferedImage img;
 	protected Phoebe p;
 	
 	/*
@@ -155,5 +159,7 @@ public class Cleaner extends Unit {
 				+ ", nextx=" + arrowendx + ", nexty=" + arrowendy
 				+ ", alpha=" + alpha + ", width=" + WIDTH +", height=" + HEIGHT +"]";
 	}
-	
+	public  static void setUnitImage() throws IOException{
+		img=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"cleaner.jpg"));
+	}
 }

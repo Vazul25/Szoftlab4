@@ -279,7 +279,10 @@ public class Robot extends Unit{
 	public void move() throws InterruptedException, IOException {
 		//User általi változtatás letiltása (lásd Robot.keyPressed())
 		oiled=true;
+		if(alpha>6.283)alpha-=6.283;
+		
 		//Nyíl koordinátáinak kiszámolása
+		
 		arrowendx=(int)(x+slowed*r*Math.cos(alpha));
 		arrowendy=(int)(y+slowed*r*Math.sin(alpha));
 		//x=arrowendx;	
@@ -332,7 +335,7 @@ public class Robot extends Unit{
 	 * @param obstacle az akadály amire az ütközést vizsgáljuk
 	 */
 	public boolean collisionWithObstacles(Obstacle obstacle){
-
+			
 		return this.intersect(obstacle);		
 	}
 
@@ -346,7 +349,7 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void bounce(){
-
+			
 	}
 
 	@Override
@@ -369,12 +372,16 @@ public class Robot extends Unit{
 	 * @param r A robot, amivel az ütközést vizsgálni kell.
 	 * 
 	 */
-	public boolean  collisionWithRobot(Robot r){
+	public boolean  collisionWithRobot(Robot r) throws InterruptedException, IOException{
 		if (this == r)
 			return false;
 		if(this.intersect(r)) {
+			double temp=r.alpha;
 			System.out.println("there was a collision between this:\n"+this.toString()+"\n and this:"+r.toString());
-			bounce();
+			r.alpha=alpha;
+			alpha=temp;
+			move();
+			r.move();
 			return true;
 		}
 		return false;
