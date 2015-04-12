@@ -8,17 +8,139 @@
 \subsection{Bemeneti nyelv}
 
 \begin{itemize}
-\item Robot
+	
+\item Cleaner <x> <y>
+    \begin{itemize}
+	\item Leírás: Cleaner létrehozása a pályán megadott koordinátákon.
+	\item Opciók: Két koordináta.
+	\end{itemize}
+	
+\item cycles\_elapsed <amount> 
+	\begin{itemize}
+	\item Leírás: Szimulálja, hogy hányat léptek a robotok a játékon belül.
+	\item Opciók: Lépésszám megadása.
+	\end{itemize}
+
+\item Glue <x> <y>
+	\begin{itemize}
+	\item Leírás: Ragacs létrehozása a pályán.
+	\item Opciók: A ragacs (x,y) koordinátái.
+	\end{itemize}
+	
+\item keyPressed <akadály\_gomb>
+	\begin{itemize}
+	\item Leírás: Akadály lerakása a robot koordinátáira.
+	\item Opciók: 
+	\begin{itemize}
+    	    \item akadály\_gomb
+        	    \begin{itemize}
+        	        \item Up: Robot1 olaj lerakás
+        	        \item Down: Robot1 ragacs lerakás
+        	        \item W: Robot2 olaj lerakás
+        	        \item S: Robot2 ragacs lerakás
+        	    \end{itemize}
+    	\end{itemize}
+	\end{itemize}
+	
+\item keyPressed <irány\_gomb> <forgás értéke fokban>
+	\begin{itemize}
+	\item Leírás: A Robot következő irányának változtatása.
+	\item Opciók: 
+    	\begin{itemize}
+    	    \item irány\_gomb
+        	    \begin{itemize}
+        	        \item Left: Robot1 balra forgatása
+        	        \item Right: Robot1 jobbra forgatása
+        	        \item A: Robot2 balra forgatása
+        	        \item D: Robot2 jobbra forgatása
+        	    \end{itemize}
+        	 \item forgás érték = (0,180)
+    	\end{itemize}
+	\end{itemize}
+	
+\item listCleaners
+	\begin{itemize}
+	\item Leírás: A palyán lévő takarító kisrobotok kilistázása.
+	\item Opciók: -
+	\end{itemize}
+	
+\item listObstacles
+	\begin{itemize}
+	\item Leírás: Kilistázza a pályán lévő akadályokat.
+	\item Opciók: -
+	\end{itemize}
+	
+\item listRobots
+	\begin{itemize}
+	\item Leírás: Kilistázza a robotokat.
+	\item Opciók: -
+	\end{itemize}
+	
+\item MapBuilder 
+	\begin{itemize}
+	\item Leírás: Pálya betöltése a játékba.
+	\item Opciók: Pálya kiválasztása.
+	\end{itemize}	
+	
+\item move
+	\begin{itemize}
+	\item Leírás: Robotok, Cleanerek mozgatása.
+	\item Opciók: -
+	\end{itemize}
+	
+\item Oil <x> <y>
+	\begin{itemize}
+	\item Leírás: Olajfolt létrehozása a pályán.
+	\item Opciók: Az olajfolt (x,y) koordinátái.
+	\end{itemize}
+
+\item Phoebe <mode> <count>
+	\begin{itemize}
+	\item Leírás:\\ Egy teljes értékű játék indítására való parancs. Inicializál két robotot és pár Obstaclet. A játék indulásához szükséges feltételek teszteléséhez szolgáló parancs.
+	\item Opciók:
+		\begin{itemize}
+			\item mode
+			\begin{itemize}
+				\item time: Időjátékmódú menet beállítás
+				\item lap: Körjátékmódú menet beállítása
+			\end{itemize}
+			\item count: 
+			\begin{itemize}
+				\item Időjátékmód esetén a rendelkezésre álló időt kell megadni másodpercben.
+				\item Körjátékmód esetén a teljesítendő körök számát kell megadni.
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+
+\item Robot <x> <y>
     \begin{itemize}
 	\item Leírás: Robot létrehozása a pályán megadott koordinátákon.
 	\item Opciók: Két koordináta.
 	\end{itemize}
 	
-\item Cleaner
-    \begin{itemize}
-	\item Leírás: Cleaner létrehozása a pályán megadott koordinátákon.
-	\item Opciók: Két koordináta.
+\item setCheckpoints
+	\begin{itemize}
+	\item Leírás: A pálya checkpointjainak a beállítása.
+	\item Opciók: -
 	\end{itemize}
+	
+%\item time\_spend <count>
+%	\begin{itemize}
+%	\item Leírás:\\ A játékban nagy szerepet játszik az idő múlása. Ezzel a paranccsal a tesztelő szimulálhatja, hogy bizonyos másodperccel előrelépjen a játék a működésében. Ekkor nem gyorsul fel a játék, csak az órát pörgetjük tovább.
+%	\item Opciók:\\
+%		\begin{itemize}
+%			\item count: Az eltelendő idő megadása másodpercben.
+%		\end{itemize}
+%	\end{itemize}
+%\end{itemize}
+
+	
+	
+	\item  time\_spend <count>
+	\begin{itemize}
+	\item Leírás: A játékban nagy szerepet játszik az idő múlása. Ezzel a paranccsal a tesztelő szimulálhatja, hogy bizonyos másodperccel előrelépjen a játék a működésében. Ekkor nem gyorsul fel a játék, csak az órát pörgetjük tovább.
+	\item Opciók: Az eltelendő idő megadása másodpercben.
+	\end{itemize}	
 \end{itemize}
 
 \chapter{Részletes tervek}
@@ -26,52 +148,6 @@
 \thispagestyle{fancy}
 
 \section{Osztályok és metódusok tervei}
-
-\subsection{Osztály1}
-\begin{itemize}
-\item Felelősség\newline
-\comment{Mi az osztály felelőssége. Kb 1 bekezdés. Ha szükséges, akkor state-chart is.}
-\item Ősosztályok\newline
-\comment{Mely osztályokból származik (öröklési hierarchia)\newline
-Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
-\item Interfészek\newline
-\comment{Mely interfészeket valósítja meg.}
-\item Attribútumok\newline
-\comment{Milyen attribútumai vannak}
-	\begin{itemize}
-		\item attribútum1: attribútum jellemzése: mire való, láthatósága (UML jelöléssel), típusa
-		\item attribútum2: attribútum jellemzése: mire való, láthatósága (UML jelöléssel), típusa
-	\end{itemize}
-\item Metódusok\newline
-\comment{Milyen publikus, protected és privát  metódusokkal rendelkezik. Metódusonként precíz leírás, ha szükséges, activity diagram is  a metódusban megvalósítandó algoritmusról.}
-	\begin{itemize}
-		\item int foo(Osztály3 o1, Osztály4 o2): metódus leírása, láthatósága (UML jelöléssel)
-		\item int bar(Osztály5 o1): metódus leírása, láthatósága (UML jelöléssel)
-	\end{itemize}
-\end{itemize}
-
-\subsection{Osztály2}
-\begin{itemize}
-\item Felelősség\newline
-\comment{Mi az osztály felelőssége. Kb 1 bekezdés. Ha szükséges, akkor state-chart is.}
-\item Ősosztályok\newline
-\comment{Mely osztályokból származik (öröklési hierarchia)\newline
-Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
-\item Interfészek\newline
-\comment{Mely interfészeket valósítja meg.}
-\item Attribútumok\newline
-\comment{Milyen attribútumai vannak}
-	\begin{itemize}
-		\item attribútum1: attribútum jellemzése: mire való, láthatósága (UML jelöléssel), típusa
-		\item attribútum2: attribútum jellemzése: mire való, láthatósága (UML jelöléssel), típusa
-	\end{itemize}
-\item Metódusok\newline
-\comment{Milyen publikus, protected és privát  metódusokkal rendelkezik. Metódusonként precíz leírás, ha szükséges, activity diagram is  a metódusban megvalósítandó algoritmusról.}
-	\begin{itemize}
-		\item int foo(Osztály3 o1, Osztály4 o2): metódus leírása, láthatósága (UML jelöléssel)
-		\item int bar(Osztály5 o1): metódus leírása, láthatósága (UML jelöléssel)
-	\end{itemize}
-\end{itemize}
 
 \section{Objektum katalógus}
 
@@ -95,18 +171,17 @@ Az eltelt időt és a fennmaradt idő nyilvántartásáért felelős. Ilyen pél
 \subsection{MyListener}
 A játék keylistener-jét megvalosító osztály. Külön szálon fut, hogy az egyszerre lenyomott gombok ne okozhasanak problémát. A játékban részvevő robotok KeyPressed függvényét hivogatja, a megfelelő KeyEvent paraméterrel.
 \subsection{Cleaner}
-\comment{...}
-
+Takarító robotk melyek a pályán olaj és ragacsfoltokat szednek fel. A robotkkal való ütközés során megsemmisülhetnek.
+\pagebreak
 \section{Statikus struktúra diagramok}
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=17cm]{images/struktdiagram.PNG}
-\caption{Statikus struktúra diagram}
+\caption{Osztály diagram}
 \label{fig:example3}
 \end{center}
 \end{figure}
-\pagebreak
 
 
 \section{Osztályok leírása}
@@ -114,7 +189,7 @@ A játék keylistener-jét megvalosító osztály. Külön szálon fut, hogy az 
 \subsection{Cleaner}
 \begin{itemize}
 \item Felelősség\\
-
+A takarító robotot reprezentáló osztály.
 \item Ősosztályok\\
 Unit$\rightarrow$Robot
 \item Attribútumok
@@ -431,20 +506,8 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 		\item + void \textbf{move}() : Absztrakt függvény, mely a leszármazottakban fog megvalósulni. Az egységek mozgásáért felelős.
 	\end{itemize}
 \end{itemize}
-
+\pagebreak
 \section{A tesztek részletes tervei, leírásuk a teszt nyelvén}
-[A tesztek részletes tervei alatt meg kell adni azokat a bemeneti adatsorozatokat, amelyekkel a program működése ellenőrizhető. Minden bemenő adatsorozathoz definiálni kell, hogy az adatsorozat végrehajtásától a program mely részeinek, funkcióinak ellenőrzését várjuk és konkrétan milyen eredményekre számítunk, ezek az eredmények hogyan vethetők össze a bemenetekkel.]
-
-\subsection{Teszteset1}
-\begin{itemize}
-\item Leírás\newline
-\comment{szöveges leírás, kb. 1-5 mondat.}
-\item Ellenőrzött funkcionalitás, várható hibahelyek
-\item Bemenet\newline
-\comment{a proto bemeneti nyelvén megadva (lásd előző anyag)}
-\item Elvárt kimenet\newline
-\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
-\end{itemize}
 
 \subsection{CollisionWithRobot\_VOLTÜTKÖZÉS\_TESZT}
 \begin{itemize}
@@ -505,10 +568,7 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 			és újból ki listáza őket.			\newline
 	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás végeztével .
 	Várható hiba ha loggol collisiont a függvény, amiből látjuk, hogy rossz a hitboxok össze vetése , hisz nem lehet ütközés. 
-	\comment{\\Ctrl-C, Ctrl-V hiba, most akkor mivel kell visszatérnie. \\ \\Kellene logolni a collisionWithRobot() kimenetelét, a függvényen belül? by Don.\\
-	most úgy van a függvény hogy van visszatérési értéke ... így könnyebb lesz majd égetve logolni a teszten belül , de akár a belselyébe is be lehet rakni a kiirást( de multkor azt beszéltük hogy ha nincs log az is log (a collision kiirásának elmulasztása felér azzal hogy nem volt collision))}
-	
-	\comment{Hát nem tudom mi lenne jobb. Ennél a két tesztesetnél jó lenne látni, hogy megtörtént a vizsgálat és az eredményét.}
+
 	
 	\item Bemeneti nyelv :
 		\begin{itemize}
@@ -529,9 +589,7 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 		\\nexty=300,alpha=1.57,width=40,height=40]"
 		
 		
-		\comment{most akkor merre ugrik? \\0.állapot Robot0(500,500)->(500,400),Robot1(600,400)->(600,300) \\1. állapot Robot0(500,400)->(400,400),Robot1(600,400)->(600,400)\\Figyelj arra is, hogy a nextx, nexty megfelelően értékbe álljanak, ne váltson irányt a Robot0. by Don}
-		\comment {ehez volna jó ha működne a grafikus felület mert eléggé bele tudok zavarodni a monitor képpont indexelésébe}
-		
+	
 		
 		 "Robot [id=0,  slowed=1,oiled=false, x=500,y=400, 
 		\\numGlue=3,numOil=3,nextx=500,
@@ -571,7 +629,7 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 		
 		"nextx ,nexty modified to:500,400"\\
 		"nextx ,nexty modified to:600,300"\\
-	\comment{Ne felejtsd, hogy a keypressed állítja az alpha-t is! Illetve a Robotok magukba fognak ??miért???? ugrani(500,400)->(500,400), (600,300)->(600,300). by Don}\\
+
 		"Robot [id=0,  slowed=1,oiled=false, x=500,y=400, 
 		\\numGlue=3,numOil=3,nextx=500,
 		\\nexty=400,alpha=4.71238898,width=40,height=40]"\newline
@@ -580,12 +638,132 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 		\\nexty=300,alpha=4.71238898,width=40,height=40]"\newline
 \end{itemize}
 
+\subsection{CollisionWithObstacles\_OLAJBA.UGRÁS\_TESZT}
+\begin{itemize}
+	\item Leírás: Ez a teszt a robot és az olajfolt ütközésének érzékeléséért felelős.
+	                Létrehoz egy robotot és egy olajfoltot a megfelelő koordinátákon, kiírja az adatokat, majd meghívja a move-ot, és újból kilistáza őket. A várt eredmény, hogy volt ütközés.
+\newline
+	\item  Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük, hogy a robot a megfelelően lerakott olajba ugrik-e, és ezt érzékeli is.
+		   Várható hiba, hogy a robot nem a megfelelő helyre ugrik, vagy nem érzékeli, hogy olajfoltba ugrott.
+	\item Bemeneti nyelv :
+		\begin{itemize}
+		\item Robot(0,0)
+		\item Oil(0,100)
+		\item listRobots
+		\item listObstacles
+		\item move
+		\end{itemize}
+	
+	\item Elvárt kimenet: \\
+		"Robot [id=0,  slowed=1,oiled=false, x=0,y=0, 
+		\\numGlue=3,numOil=3,nextx=0,
+		\\nexty=100,alpha=1.57,width=40,height=40]"\newline
+		"Oil[x=0, y=100, Width=40, Height=40, remainingturns=15"\newline
+		
+		"there was a collision between this: "Robot [id=0,  slowed=1,oiled=false, x=0,y=100, 
+		\\numGlue=3,numOil=3,nextx=0,
+		\\nexty=100,alpha=1.57,width=40,height=40]"\newline and this: "Oil[x=0, y=100, Width=40, Height=40, remainingturns=15"\newline
+\end{itemize}
+
+\subsection{CollisionWithObstacles\_RAGACSBA.UGRÁS\_TESZT}
+\begin{itemize}
+	\item Leírás: Ez a teszt a robot és a ragacs ütközésének érzékeléséért felelős.
+	                Létrehoz egy robotot és egy ragacsot a megfelelő koordinátákon, kiírja az adatokat, majd meghívja a move-ot, és újból kilistáza őket. A várt eredmény, hogy volt ütközés.
+\newline
+	\item  Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük, hogy a robot a megfelelően lerakott ragacsba ugrik-e, és ezt érzékeli is.
+		   Várható hiba, hogy a robot nem a megfelelő helyre ugrik, vagy nem érzékeli, hogy ragacsba ugrott.
+	\item Bemeneti nyelv :
+		\begin{itemize}
+		\item Robot(0,0)
+		\item Glue(0,100)
+		\item listRobots
+		\item listObstacles
+		\item move
+		\end{itemize}
+	
+	\item Elvárt kimenet: \\
+		"Robot [id=0,  slowed=1,oiled=false, x=0,y=0, 
+		\\numGlue=3,numOil=3,nextx=0,
+		\\nexty=100,alpha=1.57,width=40,height=40]"\newline
+		"Glue[x=0, y=100, Width=40, Height=40, remainingturns=15"\newline
+		
+		"there was a collision between this: "Robot [id=0,  slowed=1,oiled=false, x=0,y=100, 
+		\\numGlue=3,numOil=3,nextx=0,
+		\\nexty=100,alpha=1.57,width=40,height=40]"\newline and this: "Glue[x=0, y=100, Width=40, Height=40, remainingturns=15"\newline
+\end{itemize}
+
+\pagebreak
+\subsection{CollisionWithObstacles\_OLAJ.HATÁSA\_TESZT}
+\begin{itemize}
+	\item Leírás: Ez a teszt az olajfolt hatásának érvényességéért felelős. Létrehoz egy robotot és egy olajfoltot a megfelelő koordinátákon, kiírja az adatokat, meghívja az effect-et, majd megpróbál irányt változtatni, hogy beleugorjon a következő olajba. A várt eredmény, hogy lesz ütközés.
+\newline
+	\item  Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük, hogy az olaj hatássa kihat-e a robotra.
+		   Várható hiba, hogy a robot irányát tudjuk változtatni.
+	\item Bemeneti nyelv :
+		\begin{itemize}
+		\item Robot(0,0)
+		\item Oil(0,0)
+		\item Oil(0,100)
+		\item listRobots
+		\item listObstacles
+		\item effect
+		\item Keypressed(Keyevent.VK\_A,90)
+		\item move
+		\end{itemize}
+	
+	\item Elvárt kimenet: \\
+		"Robot [id=0,  slowed=1,oiled=false, x=0,y=0, 
+		\\numGlue=3,numOil=3,nextx=0,
+		\\nexty=100,alpha=1.57,width=40,height=40]"\newline
+		"Oil[x=0, y=0, Width=40, Height=40, remainingturns=15"\newline
+			"Oil[x=0, y=100, Width=40, Height=40, remainingturns=15"\newline
+			
+			"you jumped into oil"\newline
+		
+		"there was a collision between this: "Robot [id=0,  slowed=1,oiled=true, x=0,y=100, 
+		\\numGlue=3,numOil=3,nextx=0,
+		\\nexty=100,alpha=1.57,width=40,height=40]"\newline and this: "Oil[x=0, y=100, Width=40, Height=40, remainingturns=15"\newline
+\end{itemize}
+
+\subsection{CollisionWithObstacles\_RAGACS.HATÁSA\_TESZT}
+\begin{itemize}
+	\item Leírás: Ez a teszt a ragacs hatásának érvényességéért felelős. Létrehoz egy robotot és egy ragacsot a megfelelő koordinátákon, kiírja az adatokat, meghívja az effect-et, majd a move-ot, hogy beleugorjon a következő ragacsba. A várt eredmény, hogy nem lesz ütközés.
+\newline
+	\item  Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük, hogy a ragacs hatássa kihat-e a robotra.
+		   Várható hiba, hogy a robot elugrik a ragacsig.
+	\item Bemeneti nyelv :
+		\begin{itemize}
+		\item Robot(0,0)
+		\item Glue(0,0)
+		\item Glue(0,100)
+		\item listRobots
+		\item listObstacles
+		\item effect
+		\item move
+		\item listRobots
+		\end{itemize}
+	
+		"Robot [id=0,  slowed=1,oiled=false, x=0,y=0, 
+		\\numGlue=3,numOil=3,nextx=0,
+		\\nexty=100,alpha=1.57,width=40,height=40]"\newline
+		"Glue[x=0, y=0, Width=40, Height=40, remainingturns=4"\newline
+			"Glue[x=0, y=100, Width=40, Height=40, remainingturns=4"\newline
+			
+			"you jumped into glue"\newline
+				"Robot [id=0,  slowed=0.5,oiled=false, x=0,y=0, 
+		\\numGlue=3,numOil=3,nextx=0,
+		\\nexty=100,alpha=1.57,width=40,height=40]"\newline
+		
+\end{itemize}
+
+
 \subsection{robotOutsideOfMap\_A.PÁLYÁRÓL.LEESETT\_TESZT}
 \begin{itemize}
-	\item Leírás: Ez a teszt a robotOutsideOfMap(Robot r) függvény teszteléséért felelős.
+	\item Leírás: \\Ez a teszt a robotOutsideOfMap(Robot r) függvény teszteléséért felelős.
 			Létrehoz 1 robotot majd beállítja, úgy hogy kiugorjon a pályáról .
 			Kiirja az adatait  és meghivja a move függvényt ezt követően pedig a robotOutsideOfMap függvényt és leellenőrizzük hogy a listában maradt-e a robot.	\newline
-	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás végeztével .
+	\item Ellenőrzött funkcionalitás, várható hibahelyek:\\
+	Azt ellenörizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás végeztével .
 	Várható hiba ha hamissal tér vissza a függvény, amiből látjuk, hogy rossz a hitbox létrehozása  az ugrást követően.
 	\item Bemeneti nyelv :
 		\begin{itemize}
@@ -613,8 +791,6 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 		\\nexty=400,alpha=1.57,width=40,height=40]"\newline
 		and this:
 		"Map"\newline
-		
-	    "-"\comment{Nincs a robot a listában.}\newline 
 \end{itemize}
 
 \subsection{robotOutsideOfMap\_NEM.ESETT.LE.PÁLYÁRÓL\_TESZT}
@@ -640,8 +816,7 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 		\\nexty=600,alpha=1.57,width=40,height=40]"\newline
 		
 		"nextx ,nexty modified to:400,600"\newline
-		
-		"-"\comment{Nem történt ütközés a robot és a pálya között}\newline
+
 	
 		 "Robot [id=0,  slowed=1,oiled=false, x=400,y=500, 
 		\\numGlue=3,numOil=3,nextx=400,
@@ -649,7 +824,7 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 	
 \end{itemize}
 
-
+\pagebreak
 \subsection{checkpointSearch\_CHEICKPOINTONBA.UGRÁS\_TESZT}
 \begin{itemize}
 	\item Leírás: Ez a teszt a checkpointSearch() függvény teszteléséért felelős.
@@ -690,7 +865,7 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 		\\nexty=200,alpha=1.57,width=40,height=40]"\newline
 	
 \end{itemize}
-
+\pagebreak
 \subsection{checkpointSearch\_CHEICKPOINTONBA.NEM.UGRÁS\_TESZT}
 \begin{itemize}
 	\item Leírás: Ez a teszt a checkpointSearch() függvény teszteléséért felelős.
@@ -719,8 +894,6 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 		\\nexty=400,alpha=1.57,width=40,height=40]"\newline
 		
 		"nextx ,nexty modified to:100,400"\newline
-		
-		 "-"\comment{Nincs chechpoint}\newline
 	
 		 "Robot [id=0,  slowed=1,oiled=false, x=100,y=400, 
 		\\numGlue=3,numOil=3,nextx=100,
@@ -728,22 +901,188 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 	
 \end{itemize}
 
-
-
-
-
-
-\subsection{Teszteset2}
+\subsection{RobotCollisionWithCleaner\_TESZT}
 \begin{itemize}
 \item Leírás\newline
-\comment{szöveges leírás, kb. 1-5 mondat.}
-\item Ellenőrzött funkcionalitás, várható hibahelyek
+A teszt azt az esetet akarja szimulálni, amikor egy robot egy takarító robot felé halad, miközben az éppen dolgozik. Az a kimenetel lesz tesztelve, hogy a takarító megsemmisül és a robot zavartalanul tovább halad.
+\item Ellenőrzött funkcionalitás, várható hibahelyek\\
+Várhatóan a takarító megsemmisül, olajfoltot hátrahagyva maga után. A robotra nincs hatással az ütközés, de a takarító maga után hagyott olaj ellehetetleníti a robot irányváltoztatását. Lehetséges hibák a következőek: a takarító nem takarítja fel a foltot vagy feltakarítja, de nem tűnik el a pályáról, emellett lehetséges, hogy nem semmisül meg a takarító robot.
 \item Bemenet\newline
-\comment{a proto bemeneti nyelvén megadva (lásd előző anyag)}
+Glue 100,300\\
+Robot 100,100\\
+Cleaner 200,300\\
+\\
+listObstacles\\
+listRobots\\
+listCleaners\\
+\\
+move\\
+\\
+listRobots\\
+listCleaners\\
+\\	
+move\\
+\\	
+listObstacles\\
+listRobots\\
+listCleaners\\
 \item Elvárt kimenet\newline
-\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
+\begin{itemize}
+\item Glue [x=100, y=300, Width=30, Height=30, Lifetime=4]
+\item Robot [id=0, slowed=1, oiled=false, x=100, y=100, nextx=100, nexty=200, alpha=1.5708, width=40, height=40, numGlue=3, numOil=3]
+\item Cleaner[x=200, y=300, Width=30, Height=30, State=MOVING]
+\item there was a collision between this: Cleaner[x=100, y=300, Width=30, Height=30, State=MOVING] and this: Glue [x=100, y=300, Width=30, Height=30, Lifetime=4]\\
+\item Robot [id=0, slowed=1, oiled=false, x=100, y=200, nextx=100, nexty=200, alpha=1.5708, width=40, height=40, numGlue=3, numOil=3]
+\item Cleaner[x=100, y=300, Width=30, Height=30, State=WORKING]
+\item there was a collision between this: Cleaner[x=100, y=300, Width=30, Height=30, State=WORKING] and this: Robot [id=0, slowed=0.5, oiled=false, x=100, y=300, nextx=100, nexty=300, alpha=1.5708, width=40, height=40, numGlue=3, numOil=3]
+\item This: Cleaner[x=100, y=300, Width=30, Height=30, State=WORKING] died
+\item Oil[x=100, y=300, Width=60, Height=60, remainingturns=15]
+\item there was a collision between this: Robot [id=0, slowed=1, oiled=false, x=100, y=300, nextx=100, nexty=300, alpha=1.5708, width=40, height=40, numGlue=3, numOil=3] and this: Glue [x=100, y=300, Width=30, Height=30, Lifetime=4]
+\item you jumped into glue
+\item there was a collision between this: Robot [id=0, slowed=0.5, oiled=false, x=100, y=300, nextx=100, nexty=300, alpha=1.5708, width=40, height=40, numGlue=3, numOil=3] and this: 
+\item Oil[x=100, y=300, Width=60, Height=60, remainingturns=15]
+\item you jumped into oil
+\item Glue [x=100, y=300, Width=30, Height=30, Lifetime=3]
+\item Oil[x=100, y=300, Width=60, Height=60, remainingturns=15]
+\item Robot [id=0, slowed=0.5, oiled=true, x=100, y=300, nextx=100, nexty=300, alpha=1.5708, width=40, height=40, numGlue=3, numOil=3]
+\end{itemize}
+\end{itemize}
+
+\subsection{Initialisation\_Test}
+\begin{itemize}
+\item Leírás\newline
+A játék indulását hivatott tesztelni. A pálya betöltésétól kezdve az egyes elemek létrehozását(Robotok, akadályok,...) hivatott tesztelni.
+\item Ellenőrzött funkcionalitás, várható hibahelyek
+Az elemek létrehozása, esetleges kivételek kezelése. Lehetséges probléma, hogy nem tudja betölteni a pályát vagy a checkpointokat vagy esetleges nem várt kivételekkel terminálódik a futás.
+\item Bemenet\newline
+Phoebe time 300\\
+\\
+listRobots\\
+listObstacles\\
+listCleaners\\
+\\
+move\\
+\item Elvárt kimenet\newline
+\begin{itemize}
+
+\item Robot [id=0, slowed=1, oiled=false, x=100, y=100, nextx=100, nexty=200, alpha=1.5708, width=40, height=40, numGlue=3, numOil=3]
+\item \item Robot [id=1, slowed=1, oiled=false, x=300, y=100, nextx=300, nexty=200, alpha=1.5708, width=40, height=40, numGlue=3, numOil=3]
+\item Glue [x=<random>, y=<random>, Width=30, Height=30, Lifetime=4]
+\item Glue [x=<random>, y=<random>, Width=30, Height=30, Lifetime=4]
+\item Glue [x=<random>, y=<random>, Width=30, Height=30, Lifetime=4]
+\item Oil[x=<random>, y=<random>, Width=60, Height=60, remainingturns=15]
+\item Oil[x=<random>, y=<random>, Width=60, Height=60, remainingturns=15]
+\item Oil[x=<random>, y=<random>, Width=60, Height=60, remainingturns=15]
+
+\end{itemize}
+\end{itemize}
+\pagebreak
+\subsection{GameEndWithTimeElapsing\_Test}
+\begin{itemize}
+\item Leírás\newline
+A játék végét szimuláló teszt. Azt az esetet szimulálja, hogy letelik az idő játék futása közben. 
+\item Ellenőrzött funkcionalitás, várható hibahelyek
+Egy játék inicializálás után átugrunk időben a játék végére és szimuláljuk, hogy egy utolsó ugrást tesznek a robotok. Várható hibalehetőségek: nem várt kivétel, a győztes kihirdetése nem valósul meg.
+\item Bemenet\newline
+Phoebe time 60\\
+\\
+listRobots\\
+listObstacle\\
+listCleaners\\
+\\
+time\_spend 60\\
+move\\
+\item Elvárt kimenet
+\begin{itemize}
+\item Robot [id=0, slowed=1, oiled=false, x=100, y=100, nextx=100, nexty=200, alpha=1.5708, width=40, height=40, numGlue=3, numOil=3]
+\item Robot [id=1, slowed=1, oiled=false, x=300, y=100, nextx=300, nexty=200, alpha=1.5708, width=40, height=40, numGlue=3, numOil=3]
+\item Glue [x=<random>, y=<random>, Width=30, Height=30, Lifetime=4]
+\item Glue [x=<random>, y=<random>, Width=30, Height=30, Lifetime=4]
+\item Glue [x=<random>, y=<random>, Width=30, Height=30, Lifetime=4]
+\item Oil[x=<random>, y=<random>, Width=60, Height=60, remainingturns=15]
+\item Oil[x=<random>, y=<random>, Width=60, Height=60, remainingturns=15]
+\item Oil[x=<random>, y=<random>, Width=60, Height=60, remainingturns=15]
+\item EndOfTheGame
+\end{itemize}
+
+\end{itemize}
+
+\subsection{AddObstacle\_AKADÁLY\_LERAKÁS\_TESZT}
+\begin{itemize}
+	\item Leírás: Ez a teszt az akadály lerakás teszteléséért felelős. Létrehoz egy robotot, majd négyszer meghívja a KeyPressed(int e) függvényt VK\_UP paraméterrel.
+A várt eredmény, hogy az első három esetben sikerül az olaj lerakása, míg a negyedikben nem, hiszen a robot kezdetben három olajjal rendelkezik.
+\newline
+	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenőrizzük, hogy a megfelelő gomb megnyomásakor az akadály tényleges létrejön-e, illetve hogy egy akadály lerakása után csökken-e a robotnál található akadályok száma. Várható hiba, hogy az akadály létrejöttéről nincs visszajelzés. Emellett az is hiba, ha az akadály a negyedik alkalommal is létrejön, vagyis nincs "Not enough oil" jelzés, ami azt jelenti, hogy nem csökkent a robot akadályainak száma.
+	\item Bemeneti nyelv :\newline
+		Robot 100,200\\
+        keyPressed UP\\ 
+        keyPressed UP\\
+		keyPressed UP\\
+		keyPressed UP\\
+		
+	\item Elvárt kimenet: \\
+	    new oil created at:100,200\newline
+		new oil created at:100,200\newline
+		new oil created at:100,200\newline
+		Not enough oil\newline
+		
+\end{itemize}
+
+\subsection{ObstacleLife\_AKADÁLY\_ÉLETTARTAM\_TESZT}
+\begin{itemize}
+	\item Leírás: Ez a teszt az akadályok élettartamát vizsgálja, hogy eltűnnek-e bizonyos kör lefutása után. A várt eredmény, hogy az akadályok eltűnnek.\newline
+	\item  Ellenőrzött funkcionalitás, várható hibahelyek: Az akadályok élettartamát ellenőrizzük.
+		   Várható hiba, hogy az akadályok megmaradnak.
+	\item Bemeneti nyelv :
+		\begin{itemize}
+		\item Glue(0,0)
+		\item Oil(0,100)
+		\item listObstacles
+		\item cycles\_elapsed(4)
+		\item listObstacles
+		\item cycles\_elapsed(11)
+		\item listObstacles
+		\end{itemize}
+	
+		\item Elvárt kimenet: \\
+		"Glue[x=0, y=0, Width=40, Height=40, remainingturns=4"\newline
+		"Oil[x=0, y=100, Width=40, Height=40, remainingturns=15"\newline
+	    "Oil[x=0, y=100, Width=40, Height=40, remainingturns=11"\newline
+			
+
+		
+\end{itemize}
+
+
+\pagebreak
+\subsection{Cleaner\_TAKARÍTÓ\_KISROBOT\_MOZGÁS\_TAKARÍTÁS\_TESZT}
+\begin{itemize}
+	\item Leírás: Ez a teszt a takarító robot mozgását és takarítását ellenőrzi. Létrehozunk egy takarító robotot, majd két akadályt különböző koordinátákon. Meghívjuk a move metódust és megnézzük, hogy a közelebbi akadályhoz ment-e a takarító robot. Mivel egy foltot három lépés alatt takarít fel, ezért meghívjuk háromszor a move metódust és megnézzük, hogy az akadály fel lett-e takarítva.
+\newline
+	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenőrizzük, hogy a takarító robot odatalál-e a hozzá legközelebbi akadályhoz és hogy a takarítással törli-e az akadályok listájából. Lehetséges hiba, hogy a takarító robot rossz akadályhoz megy, ami abból látszik, hogy a move meghívása után a robot a tőle eredetileg távolabbi olajfolt koordinátáin van. Egy másik hiba, ha a háromszori move hívás után a kiválasztott olajfolt nincs feltakarítva, azaz megjelenik az akadályok listázása után.
+
+	\item Bemeneti nyelv :\newline
+        Cleaner 100,200\\
+        Oil 100,300\\
+        Oil 100,400\\
+        listCleaners\\
+        listObstacles\\ 
+        move\\
+        listCleaners\\
+        move\\
+        move\\
+        move\\
+        listObstacles\\
+		
+
+	\item Elvárt kimenet: \\
+	    "Cleaner [x=100,y=200,nextx=100,nexty=200,alpha=1.57,width=30,height=30]"\\
+"Oil [x=100, y=300, Width=40, Height=40, lifetime:15]"\\
+"Oil [x=100, y=400, Width=40, Height=40, lifetime:15]"\\
+"Cleaner [x=100,y=300,nextx=100,nexty=300,alpha=1.57,width=30,height=30]"\\
+"Oil [x=100, y=400, Width=40, Height=40, lifetime:12]"\newline
+		
 \end{itemize}
 
 \section{A tesztelést támogató programok tervei}
-\comment{A tesztadatok előállítására, a tesztek eredményeinek kiértékelésére szolgáló segédprogramok részletes terveit kell elkészíteni.}
-
+A tesztelő elindítja a teszteket, amik fájlba írják kimenetüket. Ezután a TotalCommander program segítségével (Fájl->Összehasonlítás tartalomra...) összehasonlítja a produkált és elvárt kimenetet. Ha megegyezik a kettő, akkor a teszt sikeres.

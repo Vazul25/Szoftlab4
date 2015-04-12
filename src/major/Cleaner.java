@@ -4,7 +4,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 public class Cleaner extends Unit {
 	
@@ -24,7 +28,7 @@ public class Cleaner extends Unit {
 	private double alpha=1.57;
 	private static final int r=100; //sugár
 	protected static int staticid=0;
-	protected static BufferedImage img[];
+	protected static BufferedImage img;
 	protected Phoebe p;
 	
 	/*
@@ -87,7 +91,7 @@ public class Cleaner extends Unit {
 	/*
 	 * TODO
 	 */
-	private void colllisionWithCleaner(Cleaner cl){
+	private void collisionWithCleaner(Cleaner cl){
 			
 	}
 	
@@ -121,8 +125,15 @@ public class Cleaner extends Unit {
 				break;
 			
 			//TODO le kell foglalni
+			//nem hiszem hogy jó itt kéne meghatározni a 2 pont által bezárt szöget
+			double distancex=destination.x-x;
+			double distancey=destination.y-y;
 			
+			alpha=Math.atan2(distancey,distancex);
 			if(!collisionWithObstacles(destination)){ //Ha nem értünk oda megyünk tovább
+				
+				arrowendx=(int)(x+r*Math.cos(alpha));
+				arrowendy=(int)(y+r*Math.sin(alpha));
 			}else{ //Ha odaértünk egy akadályhoz
 				state = Concluder.WORKING;
 				cleaning = 3; // 3 körig fog takarítani
@@ -145,4 +156,13 @@ public class Cleaner extends Unit {
 		
 	}
 	
+	@Override
+	public String toString() {
+		return "Cleaner [x=" + x + ",y=" +y
+				+ ", nextx=" + arrowendx + ", nexty=" + arrowendy
+				+ ", alpha=" + alpha + ", width=" + WIDTH +", height=" + HEIGHT +"]";
+	}
+	public  static void setUnitImage() throws IOException{
+		img=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"cleaner.jpg"));
+	}
 }

@@ -15,8 +15,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import minor.MapBuilder;
-import minor.MyTimer;
+import minor.*;
+
 
 /*
  * Phoebe osztály
@@ -341,7 +341,15 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 
 				for(Robot k : robots){
 				//Ütközés robottal
-					i.collisionWithRobot(k);
+					try {
+						i.collisionWithRobot(k);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 				}
 				//Leesés vizsgálata
