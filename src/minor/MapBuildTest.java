@@ -24,7 +24,7 @@ public class MapBuildTest extends JFrame {
         setSize(900,500);
         setVisible(true);
         map = new MapBuilder();
-		map.building(getWidth()-25, getHeight()-50);
+		//map.building(getWidth()-25, getHeight()-50);
         
     }
 
@@ -38,9 +38,14 @@ public class MapBuildTest extends JFrame {
 			
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setPaint(Color.black);
-			for(Rectangle tmp : map.paintableObjects){
+			for(Rectangle tmp : map.paintableCheckpoints){
 				g2.drawRect(tmp.x, tmp.y, tmp.width, tmp.height);
 			}
+			g2.setPaint(Color.red);
+			g2.drawRect(map.paintableInnerMap.x, map.paintableInnerMap.y, map.paintableInnerMap.width, map.paintableInnerMap.height);
+			g2.setPaint(Color.green);
+			g2.drawRect(map.paintableOuterMap.x, map.paintableOuterMap.y, map.paintableOuterMap.width, map.paintableOuterMap.height);
+		
 		}
 	}
 }

@@ -38,7 +38,7 @@ public class HUD {
 	* inicializálódni.
 	* {@link #checkpointsearch()} függvényben használjuk, hogy a {@link Robot#hitbox}
 	*/
-	private List<Shape> checkpoints;
+	private List<Area> checkpoints;
 	
 	/**
 	* Robot objektumokat tároló ArrayList. Célja, hogy a checkpointsearch() függvényben minden robotra elvégezzük a keresést.
@@ -67,14 +67,14 @@ public class HUD {
 	 * Funkció:
 	 * Phoebe hívja meg, miután lekérdezte a MapBuildertől a checkpointok tömbjét.
 	 */
-	public void setCheckpoints(List<Shape> checkObj){
+	public void setCheckpoints(List<Area> list){
 		//Checkpointokat teljesítését számontartó adatszerkezet inicialziálása
 		checkpointReached = new int[robots.size()];
 		for(int i=0;i<robots.size();i++){
 			checkpointReached[i] = 0;
 		}
 		//Checkpointok tárolása
-		checkpoints = checkObj;
+		checkpoints = list;
 	}
 	
 	/**

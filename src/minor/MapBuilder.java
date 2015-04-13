@@ -3,6 +3,11 @@
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Area;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +35,12 @@ public class MapBuilder{
 	* Tárolja a checkpointokat reprezentáló objektumokat List 
 	* adatszerkezetben. 
 	*/
-	private List<Shape> checkpoints;
+	private List<Area> checkpoints;
 	
-	public List<Rectangle> paintableObjects;
+	public List<Rectangle> paintableCheckpoints;
+	
+	public Rectangle paintableInnerMap;
+	public Rectangle paintableOuterMap;
 	
 	/*
 	* Meghatároz egy (x,y) koordinátát, ahol az első játékos kezd.
@@ -61,14 +69,50 @@ public class MapBuilder{
 		int[] temp = {200, 300};
  		startPosPlayerOne = temp;
  		startPosPlayerTwo = temp;
-		//Polygon létrehozása (pálya)
-		int[] xpoints = null;
-		int[] ypoints = null;
-		int npoints = 0;
-	//	setMap(new Polygon(xpoints, ypoints, npoints)); // null pointerekkel nem fordul
-		
+		//Pálya beolvasása
+ 		
+ 		try{ 
+			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+System.getProperty("file.separator")+"maps"+System.getProperty("file.separator")+"Map.ser"); 
+			ObjectInputStream reader = new ObjectInputStream(fis); 
+			if(fis != null && reader != null){
+				paintableInnerMap = (Rectangle) reader.readObject();
+				paintableOuterMap = (Rectangle) reader.readObject();
+				reader.close();
+				fis.close();
+			}
+		}
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		//checkpointok létrehozása
-		//...
+		checkpoints = new ArrayList<Area>();
+		try{ 
+			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+System.getProperty("file.separator")+"maps"+System.getProperty("file.separator")+"Checkpoints.ser"); 
+			ObjectInputStream reader = new ObjectInputStream(fis); 
+			if(fis != null && reader != null){
+				ArrayList<Rectangle> x = new ArrayList<Rectangle>();
+				x = (ArrayList) reader.readObject(); 
+				reader.close();
+				fis.close();
+				paintableCheckpoints = x; 
+				for(Rectangle tmp : x){
+					checkpoints.add(new Area(tmp));
+				}
+			}
+		}
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//..
 		int numberOfCheckpoints = 5;
 		for(int i=1;i<=numberOfCheckpoints;i++){
 			//Checkpointot határoló pontok beolvasása
@@ -83,7 +127,7 @@ public class MapBuilder{
 	 * 
 	 * @return visszaadja a Checkpointokat tartalmazó listát
 	 */
-	public List<Shape> getCheckpoints(){
+	public List<Area> getCheckpoints(){
 		return checkpoints;
 	}
 
@@ -159,17 +203,50 @@ public class MapBuilder{
 		//értékadás, TODO lecserélni konstruktorban szerializált elemek betöltésére fájlból
 		
 		//Logikai reprezentáció (ezzel kell ellenőrizni), de nem ezt rajzoljuk ki
-		map = new Area(outerEdge);
-		map.subtract(new Area(innerEdge));		
+		/*map = new Area(outerEdge);
+		map.subtract(new Area(innerEdge));	*/
+		
+		/*checkpoints = new ArrayList<Area>();
+		checkpoints.add(new Area(checkpoint0));
+		checkpoints.add(new Area(checkpoint1));
+		checkpoints.add(new Area(checkpoint2));
+		checkpoints.add(new Area(checkpoint3));*/
+		
+		//Area nem szerializálható
+		ArrayList<Rectangle> serializeCheckpoints = new ArrayList<Rectangle>();
+		serializeCheckpoints.add(checkpoint0);
+		serializeCheckpoints.add(checkpoint1);
+		serializeCheckpoints.add(checkpoint2);
+		serializeCheckpoints.add(checkpoint3);
+		
 		
 		//Ezeket rajzoljuk ki
-		paintableObjects = new ArrayList<Rectangle>();
-		paintableObjects.add(outerEdge);
-		paintableObjects.add(innerEdge);
-		paintableObjects.add(checkpoint0);
-		paintableObjects.add(checkpoint1);
-		paintableObjects.add(checkpoint2);
-		paintableObjects.add(checkpoint3);
+		/*paintableCheckpoints = new ArrayList<Rectangle>();
+		paintableCheckpoints.add(checkpoint0);
+		paintableCheckpoints.add(checkpoint1);
+		paintableCheckpoints.add(checkpoint2);
+		paintableCheckpoints.add(checkpoint3);*/
+		
+		//Szerializáció
+		try{
+			// Serialize data object to a file
+			ObjectOutputStream out1 = new ObjectOutputStream(new FileOutputStream(System.getProperty("user.dir")+System.getProperty("file.separator")+"maps"+System.getProperty("file.separator")+"Checkpoints.ser"));
+			if(out1 != null){
+				out1.writeObject(serializeCheckpoints);
+				out1.close();
+			}
+			ObjectOutputStream out2 = new ObjectOutputStream(new FileOutputStream(System.getProperty("user.dir")+System.getProperty("file.separator")+"maps"+System.getProperty("file.separator")+"Map.ser"));
+			if(out2 != null){				
+				out2.writeObject(innerEdge);
+				out2.writeObject(outerEdge);
+				out2.close();
+			}
+		} 
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 
 }
