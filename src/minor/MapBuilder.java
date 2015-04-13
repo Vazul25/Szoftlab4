@@ -1,7 +1,9 @@
 ﻿package minor;
 
+import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Area;
+import java.util.ArrayList;
 import java.util.List;
 
 import major.Obstacle;
@@ -22,13 +24,15 @@ public class MapBuilder{
 	/**
 	* Shape interfészű pályát tároló objektum
 	*/
-	private Shape map;
+	private Area map;
 	
 	/**
 	* Tárolja a checkpointokat reprezentáló objektumokat List 
 	* adatszerkezetben. 
 	*/
 	private List<Shape> checkpoints;
+	
+	public List<Rectangle> paintableObjects;
 	
 	/*
 	* Meghatároz egy (x,y) koordinátát, ahol az első játékos kezd.
@@ -88,7 +92,7 @@ public class MapBuilder{
 	 * A pályát reprezentáló objetum get-tere
 	 * @return the map
 	 */
-	public Shape getMap() {
+	public Area getMap() {
 		return map;
 	}
 
@@ -97,7 +101,7 @@ public class MapBuilder{
 	 * A pályát reprezentáló objektum set-tere.
 	 * @param map the map to set
 	 */
-	public void setMap(Shape map) {
+	public void setMap(Area map) {
 		this.map = map;
 	}
 	
@@ -132,6 +136,40 @@ public class MapBuilder{
 	public int[] getStartPosPlayer(int id) {
 		//TODO
 		return startPosPlayerOne;
+	}
+	
+	public void building(int windowWidth, int windowHeight){
+		
+		Rectangle outerEdge = new Rectangle(0, 0, windowWidth, windowHeight);
+		Rectangle innerEdge = new Rectangle(new Double(windowWidth*0.15).intValue(), new Double(windowHeight*0.2).intValue(),
+											new Double(windowWidth*0.7).intValue(), new Double(windowHeight*0.6).intValue());
+		//ábra megtalálható: TODO
+		
+		int checkpointWidth = new Double(windowWidth*0.15).intValue();
+		int checkpointHeight = new Double(windowHeight*0.2).intValue();
+		
+		Rectangle checkpoint0 = new Rectangle(0, 0, checkpointWidth, checkpointHeight);
+		
+		Rectangle checkpoint1 = new Rectangle(new Double(windowWidth*0.85).intValue(), 0, checkpointWidth, checkpointHeight);
+		
+		Rectangle checkpoint2 = new Rectangle(new Double(windowWidth*0.85).intValue(), new Double(windowHeight*0.8).intValue(), checkpointWidth, checkpointHeight);
+		
+		Rectangle checkpoint3 = new Rectangle(0, new Double(windowHeight*0.8).intValue(), checkpointWidth, checkpointHeight);
+		
+		//értékadás, TODO lecserélni konstruktorban szerializált elemek betöltésére fájlból
+		
+		//Logikai reprezentáció (ezzel kell ellenőrizni), de nem ezt rajzoljuk ki
+		map = new Area(outerEdge);
+		map.subtract(new Area(innerEdge));		
+		
+		//Ezeket rajzoljuk ki
+		paintableObjects = new ArrayList<Rectangle>();
+		paintableObjects.add(outerEdge);
+		paintableObjects.add(innerEdge);
+		paintableObjects.add(checkpoint0);
+		paintableObjects.add(checkpoint1);
+		paintableObjects.add(checkpoint2);
+		paintableObjects.add(checkpoint3);
 	}
 
 }
