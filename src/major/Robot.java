@@ -252,13 +252,13 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void paint(Graphics g) {
-		g.fillRect(x, y, WIDTH, HEIGHT);//placeholder ide jön majd a kép
+		
 		((Graphics2D) g).setStroke(new BasicStroke(10));
 		if(!oiled)
 			g.drawLine(x+WIDTH/2, y+HEIGHT/2, arrowendx+WIDTH/2, arrowendy+HEIGHT/2);
 		g.drawImage(img[id%2], x, y, WIDTH, HEIGHT, null);
 
-		//width,height a buffered image adatai lesznek
+		
 	}
 	public  static void setUnitImage() throws IOException{
 		img=new BufferedImage[2];
@@ -275,9 +275,10 @@ public class Robot extends Unit{
 	 * 
 	 * Funkció(ki hívja meg és mikor?):
 	 * A játékmotor minden lépésnél.
+	 * @throws IOException 
 	 */
 	@Override
-	public void move() throws InterruptedException, IOException {
+	public void move()   {
 		//User általi változtatás letiltása (lásd Robot.keyPressed())
 		oiled=true;
 		if(alpha>6.283)alpha-=6.283;
@@ -298,7 +299,12 @@ public class Robot extends Unit{
 		slowed=1;
 
 		//TESZT, GRAFIKA
-		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
+		try {
+			img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		HEIGHT=60;
 		//if(Math.abs((int)(arrowendx-x))<20 &&Math.abs((int)(arrowendy-y))<20) reached=true;
 
@@ -308,7 +314,12 @@ public class Robot extends Unit{
 			x+=speedx;
 			y+=speedy;
 			p.repaint();
-			Thread.sleep(50);
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		WIDTH=40;
@@ -318,7 +329,12 @@ public class Robot extends Unit{
 		y=arrowendy;
 		leftobstacle=false;
 		oiled=false;
-		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog0.jpg"));
+		try {
+			img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog0.jpg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 
@@ -338,6 +354,11 @@ public class Robot extends Unit{
 	public boolean collisionWithObstacles(Obstacle obstacle){
 			
 		return this.intersect(obstacle);		
+	}
+	public boolean collisionWithCleaner(Cleaner cl){
+		if(this.intersect(cl))
+		return true;
+		return false;
 	}
 
 	/**

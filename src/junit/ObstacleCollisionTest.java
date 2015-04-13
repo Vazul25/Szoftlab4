@@ -52,15 +52,7 @@ public class ObstacleCollisionTest {
 		
 		assertNotEquals(r.collisionWithObstacles(o), true);
 		
-		try {
-			r.move();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		r.move();
 		
 		assertEquals(r.collisionWithObstacles(o), true);
 	}
@@ -77,15 +69,7 @@ public class ObstacleCollisionTest {
 		
 		assertNotEquals(r.collisionWithObstacles(g), true);	
 		
-		try {
-			r.move();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		r.move();
 		
 		assertEquals(r.collisionWithObstacles(g), true);
 	}

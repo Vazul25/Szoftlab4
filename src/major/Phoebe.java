@@ -9,13 +9,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import minor.*;
+import minor.MapBuilder;
+import minor.MyTimer;
 
 
 /*
@@ -36,9 +38,9 @@ import minor.*;
  * 
  */
 public class Phoebe extends JPanel implements Runnable, iVisible{
-	
+
 	private static final long serialVersionUID = 8435890710077230081L;
-	
+
 	//Attribútumok
 	/**
 	 * Mire való:
@@ -60,10 +62,10 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 
 		//játékmód tárolására szánt tagváltozó
 		private int racemode;
-		
+
 		//Maximális kör/idő limit játékmódtól függően
 		private int limit;
-		
+
 		//Ugrások mértéke (def = 3 sec)
 		private int step;
 
@@ -74,8 +76,8 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 		 */
 
 		public static final int[] keyconfig={
-		KeyEvent.VK_LEFT   , KeyEvent.VK_RIGHT  ,KeyEvent.VK_UP     ,KeyEvent.VK_DOWN,
-		KeyEvent.VK_A      , KeyEvent.VK_D      ,KeyEvent.VK_W      ,KeyEvent.VK_S
+			KeyEvent.VK_LEFT   , KeyEvent.VK_RIGHT  ,KeyEvent.VK_UP     ,KeyEvent.VK_DOWN,
+			KeyEvent.VK_A      , KeyEvent.VK_D      ,KeyEvent.VK_W      ,KeyEvent.VK_S
 		};
 
 		public Settings(int info){
@@ -118,7 +120,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 	private HUD hud;
 	private MapBuilder map;
 	private MyTimer gameTimer;
-	
+
 	/**
 	 * Phoebe konstruktor
 	 * Felelősség:
@@ -129,26 +131,21 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 	 * 
 	 */
 	public Phoebe(Settings set) throws IOException{
-		//Változók inicializálása, adatszerkezetek létrehozása
-		ended=false;
-		obstacles=new ArrayList<Obstacle>();
-		robots=new ArrayList<Robot>();
-		cleaners = new ArrayList<Cleaner>();
 		gameInfo = set;
-		
+
 		//Játék incializálása
 		init();
-		
+
 		//Teszt
 		JFrame frame = new JFrame("Phoebe");//ez nincs itt csak tesztelés 
-		
+
 		//KeyListener (gombok lenyomásának lekezelése)
 		MyListener listener=new MyListener(robots);
 		addKeyListener(listener);
 		setFocusable(true);
 		Thread listenert=new Thread(listener);
 		listenert.start();
-		
+
 		//Teszt
 		frame.add(this,BorderLayout.CENTER);
 		frame.setSize(1000,700);
@@ -170,7 +167,15 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 	public void addObstacle(Obstacle item){
 		obstacles.add(item);
 	}
-
+	/**
+	 * getObstacles függvény
+	 * Felelősség:
+	 * Az obstacles lista referenciájának lekérdezése.
+	 * 
+	 * Funkció:A Cleaner ezen keresztül veszi át az obstacle listát.
+	 * 
+	 */
+	List<Obstacle> getObstacles(){return obstacles;}
 	/**
 	 * paint függvény
 	 * 
@@ -198,6 +203,11 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 			robots.get(i).paint(g2d);
 
 		}
+		for(int i=0;i<cleaners.size();i++)
+		{
+			cleaners.get(i).paint(g2d);
+
+		}
 		//TODO Akadályok, Map kirajzolása 
 	}
 	/**
@@ -210,7 +220,13 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 	 * run() hívja meg.
 	 */
 	private void init() throws IOException{
-	//GameTimer létrehozása, inicializálása
+		//Változók inicializálása, adatszerkezetek létrehozása
+		ended=false;
+		obstacles=new ArrayList<Obstacle>();
+		robots=new ArrayList<Robot>();
+		cleaners = new ArrayList<Cleaner>();
+
+		//GameTimer létrehozása, inicializálása
 		//Ha Időlimites játékmód
 		if(gameInfo.getSettings() == Settings.TIMELIMIT)
 			gameTimer = new MyTimer(gameInfo.getLimit());
@@ -221,30 +237,40 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 		//Pálya létrehozása
 		map = new MapBuilder();
 
-	//Teszt
+		//Teszt
 		Robot.setUnitImage();
 		Glue.setUnitImage();
 		Oil.setUnitImage();
+		Cleaner.setUnitImage();
 		background=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"background.jpg"));
-		
-	//Játékosok létrehozása
+
+		//Játékosok létrehozása
 		//TODO
 		Robot one = new Robot(300/*map.getStartPosPlayer(1)[0]*/,200/* map.getStartPosPlayer(1)[1]*/,  this);
-		
+
 		Robot two = new Robot(500/*map.getStartPosPlayer(2)[0]*/, 500/*map.getStartPosPlayer(2)[2]*/,  this);
-		
+
 		robots.add(one);
 		robots.add(two);
 
-	//HUD létrehozása
+		//HUD létrehozása
 		hud = new HUD(robots);
 
-	//Checkpointok eljuttatása a HUD-ba
+		//Checkpointok eljuttatása a HUD-ba
 		hud.setCheckpoints(map.getCheckpoints());
-		
 
-	//Akadályok létrehozása
-			/*for(int i=1;i<=10;i++){
+		//TESZTELÉSHEZ by Vazul
+		obstacles.add(new Glue(100,100));
+		obstacles.add(new Glue(500,100));
+		obstacles.add(new Glue(100,500));
+		obstacles.add(new Glue(500,500));
+		cleaners.add(new Cleaner(500,200,this));
+		cleaners.add(new Cleaner(620,200,this));
+		System.out.println(cleaners.get(0).toString());
+		////////////////////////////////////////
+
+		//Akadályok létrehozása
+		/*for(int i=1;i<=10;i++){
 			//TODO Randomgenerált (x,y) pozíciók
 			int x=0;
 			int y=0;
@@ -254,7 +280,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 			if(!map.obstacleOutsideOfMap(item1)) obstacles.add(item1);
 			if(!map.obstacleOutsideOfMap(item2)) obstacles.add(item2);
 		}						
-*/
+		 */
 	}
 
 	/*
@@ -269,7 +295,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 	 */
 	@Override
 	public void run() {
-		
+
 		/*try {
 		//	init();
 		} catch (IOException e) {
@@ -279,8 +305,8 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 
 		//TESZT
 		//repaint();
-		
-	//Játék eleji visszaszámlálás
+
+		//Játék eleji visszaszámlálás
 		MyTimer startTimer = new MyTimer(3);
 		startTimer.start();
 		/*
@@ -288,49 +314,55 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 			//Idő kiírása
 			System.out.println(startTimer.getTime());
 		}*/
-		
-	//Játék visszaszámláló elindítása
+
+		//Játék visszaszámláló elindítása
 		gameTimer.start();
-		
-	//Cleanerek bejövetele minden 3. percben
+
+		//Cleanerek bejövetele minden 3. percben
 		MyTimer cleanerTimer = new MyTimer(180);
 		cleanerTimer.start();
-		
-	//Teszt
+
+		//Teszt
 		int elteltidoteszt=0;
-		
+
 		while( !ended)
 		{
-	//A User ideje, hogy változtathasson az ugrás irányán
+			//A User ideje, hogy változtathasson az ugrás irányán
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
-	//Mozgás
+			//Mozgás
 			for(int i=0;i<robots.size();i++){
 				System.out.println(robots.get(i).toString());
-				try {
-					robots.get(i).move();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				robots.get(i).move();
 
 			}	
 
-	//TODO lépésanimálása egyenesen végig léptetgetni a robotot és kirajzolni
+			//TODO lépésanimálása egyenesen végig léptetgetni a robotot és kirajzolni
 
-	//Checkpointok vizsgálata, áthaladtunk-e?
+			//Checkpointok vizsgálata, áthaladtunk-e?
 			//hud.checkpointSearch();
 
-	//Ütközések vizsgálata robottal, akadállyal
+			//Ütközések vizsgálata robottal, akadállyal
 			for(Robot i : robots)
 			{			
+
+				Iterator<Cleaner> it=cleaners.iterator();
+				while(it.hasNext())
+				{
+					Cleaner temp=it.next();
+					
+					if(i.collisionWithCleaner(temp)){
+						temp.die();
+						it.remove();
+
+					}
+				}
 				for(Obstacle j : obstacles){
-				//Ütközés akadállyal
+					//Ütközés akadállyal
 					//	System.out.println(j.toString());
 					if(i.collisionWithObstacles(j)){
 						System.out.println("utkozes "+j.toString());
@@ -339,8 +371,10 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 
 				}
 
+
+
 				for(Robot k : robots){
-				//Ütközés robottal
+					//Ütközés robottal
 					try {
 						i.collisionWithRobot(k);
 					} catch (InterruptedException e) {
@@ -351,6 +385,8 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 						e.printStackTrace();
 					}
 
+
+
 				}
 				//Leesés vizsgálata
 				/*if(map.robotOutsideOfMap(i)){
@@ -359,13 +395,37 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 				};*/		
 
 			}		
+			//léptetjük a kisrobotokat és megnézzük hogy ütköznek e a robotokkal ha igen akkor le pattanak 
+			for(Cleaner i : cleaners)
+			{
+					i.move();
+				
+				for(Robot r:robots){
+					if(i.collisionWithRobot(r));
+				}
+			}
+			
+			
+			Iterator<Obstacle> it=obstacles.iterator();
+			while(it.hasNext())
+			{
+				Obstacle temp=it.next();
+				
+				if(!temp.checkAlive()){
+					
+					it.remove();
+
+				}
+			}
+
+			
 			
 			if(cleanerTimer.isZero()){
 				cleaners.add(new Cleaner(200,300,this));
 				cleaners.add(new Cleaner(300,400,this));
 				cleanerTimer.start();
 			}
-	//Teszt
+			//Teszt
 			repaint();	
 			if(elteltidoteszt>=60) ended=true;
 			elteltidoteszt+=3;

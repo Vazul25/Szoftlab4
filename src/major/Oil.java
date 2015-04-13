@@ -42,7 +42,7 @@ public class Oil extends Obstacle {
 	 */
 	public Oil(int x, int y) {
 		super(x, y);
-		lifetime = 15;
+		lifetime = 10;
 	}
 	
 
@@ -71,7 +71,7 @@ public class Oil extends Obstacle {
 	 */
 	@Override
 	public boolean checkAlive(){
-		if(lifetime-- > 0 ) return true;
+		if(--lifetime > 0 ) return true;
 		else return false;		
 	}
 

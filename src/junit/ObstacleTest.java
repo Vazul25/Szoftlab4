@@ -51,15 +51,7 @@ public class ObstacleTest {
 			r.keyPressed(KeyEvent.VK_A);
 		}
 		
-		try {
-			r.move();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		r.move();
 		
 		assertEquals(r.collisionWithObstacles(new Oil(0, 100)), true);
 	}
@@ -75,15 +67,7 @@ public class ObstacleTest {
 
 		g.effect(r);
 		
-		try {
-			r.move();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		r.move();
 		
 		assertNotEquals(r.collisionWithObstacles(new Glue(0, 100)), true);
 	}
