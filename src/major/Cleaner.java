@@ -9,7 +9,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 public class Cleaner extends Unit {
-	
+	private static final int ANIMATIONSPEED=10;
 	private static final int WIDTH=30;
 	private static final int HEIGHT=30;
 	List<Obstacle> obstacles;
@@ -112,7 +112,7 @@ public class Cleaner extends Unit {
 	 * TODO
 	 */
 	@Override
-	public void move(){
+	public void move() throws InterruptedException{
 		Obstacle destination = null;
 		switch(state){
 		case MOVING:
@@ -131,6 +131,28 @@ public class Cleaner extends Unit {
 				
 				arrowendx=(int)(x+r*Math.cos(alpha));
 				arrowendy=(int)(y+r*Math.sin(alpha));
+				
+				//ANIMÁLÁS
+				double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
+				double speedy=Math.round((arrowendy-y)/ANIMATIONSPEED);
+
+				
+
+				
+				for(int i=0;i<ANIMATIONSPEED;i++){
+					x+=speedx;
+					y+=speedy;
+					p.repaint();
+					Thread.sleep(25);
+				}
+				if(destination.intersect(this)){x=destination.x;y=destination.y;}
+				else{x=arrowendx;
+				y=arrowendy;
+				}
+				
+				
+				
+				
 			}else{ //Ha odaértünk egy akadályhoz
 				state = Concluder.WORKING;
 				cleaning = 3; // 3 körig fog takarítani
@@ -150,7 +172,7 @@ public class Cleaner extends Unit {
 	@Override
 	public void paint(Graphics2D g) {
 		// TODO Auto-generated method stub
-		
+		g.drawImage(img,x, y, WIDTH, HEIGHT, null);
 	}
 	
 	@Override
