@@ -1,6 +1,6 @@
 package major;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 /*
  * IVisible interfész
  * 
@@ -17,5 +17,5 @@ public interface iVisible {
 	 *
 	 * @param g Grafikus rajzoló osztály.
 	 */
-	public abstract void paint(Graphics2D g) ;
+	public abstract void paint(Graphics g) ;
 }

@@ -1,6 +1,8 @@
 package major;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -46,6 +48,7 @@ public class Cleaner extends Unit {
 	
 	public Cleaner(int x, int y, Phoebe p) {
 		super(x, y);
+		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -112,7 +115,8 @@ public class Cleaner extends Unit {
 	 * TODO
 	 */
 	@Override
-	public void move() throws InterruptedException{
+	public void move() throws Exception{
+
 		Obstacle destination = null;
 		switch(state){
 		case MOVING:
@@ -160,7 +164,7 @@ public class Cleaner extends Unit {
 			break;
 		case WORKING:
 			if(cleaning-- < 0){ //Ha lejárt a 3 kör
-				if(destination != null) clean(destination); //Törlés
+				if(!clean(destination)) throw new Exception(); //Törlés
 				state = Concluder.MOVING;
 			}
 			break;
@@ -170,7 +174,7 @@ public class Cleaner extends Unit {
 	}
 
 	@Override
-	public void paint(Graphics2D g) {
+	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
 		g.drawImage(img,x, y, WIDTH, HEIGHT, null);
 	}
