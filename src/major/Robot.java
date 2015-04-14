@@ -3,12 +3,15 @@
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import minor.VectorUtil;
 
 /*
  * Robot osztály
@@ -398,10 +401,13 @@ public class Robot extends Unit{
 		if (this == r)
 			return false;
 		if(this.intersect(r)) {
-			double temp=r.alpha;
+			//double temp=r.alpha;
 			System.out.println("there was a collision between this:\n"+this.toString()+"\n and this:"+r.toString());
-			r.alpha=alpha;
-			alpha=temp;
+			//r.alpha=alpha;
+			//alpha=temp;
+			double[] calculatedAngles = VectorUtil.getBouncedAngles(new Point(x,y), alpha, new Point(r.x,r.y), r.alpha);
+			alpha = calculatedAngles[0];
+			r.alpha = calculatedAngles[1];
 			move();
 			r.move();
 			return true;
