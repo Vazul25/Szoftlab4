@@ -1,8 +1,13 @@
 ﻿package minor;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Area;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,8 +16,11 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import major.Obstacle;
 import major.Robot;
+import major.iVisible;
 
 /*
  * MapBuilder osztály
@@ -23,7 +31,7 @@ import major.Robot;
  * így feladat, hogy vizsgálja a robotok azon belül tartózkodását. 
  *  
  */
-public class MapBuilder{
+public class MapBuilder implements iVisible {
 	
 	//Adatszerkezetek
 	/**
@@ -41,6 +49,8 @@ public class MapBuilder{
 	
 	public Rectangle paintableInnerMap;
 	public Rectangle paintableOuterMap;
+	
+	protected static BufferedImage img[];
 	
 	/*
 	* Meghatároz egy (x,y) koordinátát, ahol az első játékos kezd.
@@ -70,7 +80,12 @@ public class MapBuilder{
  		startPosPlayerOne = temp;
  		startPosPlayerTwo = temp;
 		//Pálya beolvasása
- 		
+ 		try {
+			setUnitImage();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
  		try{ 
 			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+System.getProperty("file.separator")+"maps"+System.getProperty("file.separator")+"Map.ser"); 
 			ObjectInputStream reader = new ObjectInputStream(fis); 
@@ -79,6 +94,8 @@ public class MapBuilder{
 				paintableOuterMap = (Rectangle) reader.readObject();
 				reader.close();
 				fis.close();
+				map = new Area(paintableOuterMap);
+				map.subtract(new Area(paintableOuterMap));
 			}
 		}
 		catch (ClassNotFoundException e) {
@@ -131,23 +148,6 @@ public class MapBuilder{
 		return checkpoints;
 	}
 
-	/**
-	 * 
-	 * A pályát reprezentáló objetum get-tere
-	 * @return the map
-	 */
-	public Area getMap() {
-		return map;
-	}
-
-	/**
-	 * 
-	 * A pályát reprezentáló objektum set-tere.
-	 * @param map the map to set
-	 */
-	public void setMap(Area map) {
-		this.map = map;
-	}
 	
 	/*
 	 * robotOutsideOfMap függvény
@@ -156,10 +156,10 @@ public class MapBuilder{
 	 */
 	public boolean robotOutsideOfMap(Robot r){
 		Area area = new Area(map);
-		Area otherArea = new Area(r.getHitbox());
-		area.intersect(otherArea);
+		//Area otherArea = new Area(r.getHitbox());
+		//area.intersect(otherArea);
 		//TODO revision
-		return area.getBounds().getSize().equals(r.getHitbox().getBounds().getSize());
+		return area.contains(r.getHitbox());
 	}
 	
 	/*
@@ -247,6 +247,27 @@ public class MapBuilder{
 			e.printStackTrace();
 		}
 	
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setPaint(Color.black);
+		for(Rectangle tmp : paintableCheckpoints){
+			g2.drawRect(tmp.x, tmp.y, tmp.width, tmp.height);
+		}
+		g2.setPaint(Color.red);
+		g2.drawRect(paintableInnerMap.x, paintableInnerMap.y, paintableInnerMap.width, paintableInnerMap.height);
+		//g2.drawImage(img[0], paintableInnerMap.x, paintableInnerMap.y, paintableInnerMap.width, paintableInnerMap.height, null);
+		g2.setPaint(Color.green);
+		g2.drawRect(paintableOuterMap.x, paintableOuterMap.y, paintableOuterMap.width, paintableOuterMap.height);		
+	}
+	
+	public  static void setUnitImage() throws IOException{
+		String sep=System.getProperty("file.separator");
+		img=new BufferedImage[2];
+		//img[0]=ImageIO.read(new File(System.getProperty("user.dir")+sep+"icons"+sep+"restricted.jpg"));
+		//img[1]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
 	}
 
 }

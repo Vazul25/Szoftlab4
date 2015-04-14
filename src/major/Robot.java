@@ -100,7 +100,7 @@ public class Robot extends Unit{
 	 */
 	protected int arrowendx=0;//ahova mutat
 	protected int arrowendy=0;
-	private double alpha= Math.PI / 2;//kerület pontjának számításához kell radián , alapérték 90 fok
+	private double alpha= 0;//kerület pontjának számításához kell radián , alapérték 90 fok
 
 	/*
 	 * Mire való:
@@ -257,7 +257,7 @@ public class Robot extends Unit{
 	 */
 	public void paint(Graphics g) {
 		
-		((Graphics2D) g).setStroke(new BasicStroke(10));
+		((Graphics2D) g).setStroke(new BasicStroke(5));
 		if(!oiled)
 			g.drawLine(x+WIDTH/2, y+HEIGHT/2, arrowendx+WIDTH/2, arrowendy+HEIGHT/2);
 		g.drawImage(img[id%2], x, y, WIDTH, HEIGHT, null);
@@ -375,8 +375,14 @@ public class Robot extends Unit{
 	 * Robot.collisionWithRobot()
 	 * 
 	 */
-	public void bounce(){
-			
+	public void bounce(Robot r){
+		double temp=r.alpha;
+		r.alpha=alpha;
+		alpha=temp;
+		//double calculatedAnglesRobot0 = VectorUtil.getVectorsSummRobot0(new Point(x,y), new Point(arrowendx, arrowendy), new Point(r.x,r.y), new Point(r.arrowendx, r.arrowendy));
+		//double calculatedAnglesRobot1 = VectorUtil.getVectorsSummRobot0(new Point(r.x,r.y), new Point(r.arrowendx, r.arrowendy), new Point(x,y), new Point(arrowendx, arrowendy));
+		//alpha = calculatedAnglesRobot0;
+		//r.alpha = calculatedAnglesRobot1;
 	}
 
 	@Override
@@ -399,7 +405,7 @@ public class Robot extends Unit{
 	 * @param r A robot, amivel az ütközést vizsgálni kell.
 	 * 
 	 */
-	public boolean  collisionWithRobot(Robot r) throws InterruptedException, IOException{
+	public boolean collisionWithRobot(Robot r) throws InterruptedException, IOException{
 		if (this == r)
 			return false;
 		if(this.intersect(r)) {
@@ -407,9 +413,7 @@ public class Robot extends Unit{
 			System.out.println("there was a collision between this:\n"+this.toString()+"\n and this:"+r.toString());
 			//r.alpha=alpha;
 			//alpha=temp;
-			double[] calculatedAngles = VectorUtil.getBouncedAngles(new Point(x,y), alpha, new Point(r.x,r.y), r.alpha);
-			alpha = calculatedAngles[0];
-			r.alpha = calculatedAngles[1];
+			bounce(r);			
 			move();
 			r.move();
 			return true;

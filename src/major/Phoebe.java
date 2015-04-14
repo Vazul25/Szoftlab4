@@ -199,6 +199,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);	
+		map.paint(g2d);
 		for(int i=0;i<obstacles.size();i++)
 		{
 			obstacles.get(i).paint(g2d);
@@ -214,7 +215,6 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 			cleaners.get(i).paint(g2d);
 
 		}
-		//TODO Akadályok, Map kirajzolása 
 	}
 	/**
 	 * init függvény
@@ -252,9 +252,9 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 
 		//Játékosok létrehozása
 		//TODO
-		Robot one = new Robot(300/*map.getStartPosPlayer(1)[0]*/,200/* map.getStartPosPlayer(1)[1]*/,  this);
+		Robot one = new Robot(50/*map.getStartPosPlayer(1)[0]*/,20/* map.getStartPosPlayer(1)[1]*/,  this);
 
-		Robot two = new Robot(500/*map.getStartPosPlayer(2)[0]*/, 500/*map.getStartPosPlayer(2)[2]*/,  this);
+		Robot two = new Robot(50/*map.getStartPosPlayer(2)[0]*/, 70/*map.getStartPosPlayer(2)[2]*/,  this);
 
 		robots.add(one);
 		robots.add(two);
@@ -350,7 +350,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 			//TODO lépésanimálása egyenesen végig léptetgetni a robotot és kirajzolni
 
 			//Checkpointok vizsgálata, áthaladtunk-e?
-			//hud.checkpointSearch();
+			hud.checkpointSearch();
 
 			//Ütközések vizsgálata robottal, akadállyal
 			for(Robot i : robots)
@@ -395,10 +395,10 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 
 				}
 				//Leesés vizsgálata
-				/*if(map.robotOutsideOfMap(i)){
+				if(map.robotOutsideOfMap(i)){
 					ended = true;
 					i.deathanimation();
-				};*/		
+				};		
 
 			}		
 			//léptetjük a kisrobotokat és megnézzük hogy ütköznek e a robotokkal ha igen akkor le pattanak 

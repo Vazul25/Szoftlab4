@@ -21,7 +21,7 @@ public class MapBuildTest extends JFrame {
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().add(new MapComponent());
-        setSize(900,500);
+        setSize(1000,700);
         setVisible(true);
         map = new MapBuilder();
 		//map.building(getWidth()-25, getHeight()-50);
