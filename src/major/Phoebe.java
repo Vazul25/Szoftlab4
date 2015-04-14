@@ -151,7 +151,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 	
 		
 		frame.add(this,BorderLayout.CENTER);
-		frame.add(hud,BorderLayout.SOUTH);
+		//frame.add(hud,BorderLayout.SOUTH);
 		
 	
 		frame.setSize(1000,700);

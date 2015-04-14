@@ -241,6 +241,7 @@ public class Robot extends Unit{
 	 */
 	public void deathanimation(){
 		//TODO
+		
 	};
 
 	/**
@@ -361,6 +362,7 @@ public class Robot extends Unit{
 	public boolean collisionWithCleaner(Cleaner cl){
 		if(this.intersect(cl))
 		return true;
+		
 		return false;
 	}
 

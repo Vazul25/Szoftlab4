@@ -20,6 +20,7 @@ public class Cleaner extends Unit {
 		MOVING,
 		WORKING
 	}
+	private boolean dying=false;
 	private Concluder state = Concluder.MOVING;
 	private int cleaning;
 	private boolean bouncing;
@@ -28,7 +29,7 @@ public class Cleaner extends Unit {
 	private double alpha=1.57;
 	private static final int r=100; //sugár
 	protected static int staticid=0;
-	protected static BufferedImage img;
+	protected static BufferedImage[] img=new BufferedImage[2];
 	protected Phoebe p;
 
 	/*
@@ -142,6 +143,23 @@ public class Cleaner extends Unit {
 	 * TODO
 	 * @return true-val tér vissa, ha sikerült törölni, minden más esetben false-al 
 	 */
+	public void deathAnimation(){
+		for(int i=0;i<15;i++){
+			try {
+				img[1]=ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+i+".gif"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		p.repaint();
+		try {
+			Thread.sleep(42);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}}
+		
+	}
 	private boolean clean(Obstacle obst){
 		if(obst != null) return obstacles.remove(obst);
 		else return false;
@@ -224,7 +242,8 @@ public class Cleaner extends Unit {
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
-		g.drawImage(img,x, y, WIDTH, HEIGHT, null);
+		if(dying)g.drawImage(img[1],x, y, WIDTH, HEIGHT, null);
+		else g.drawImage(img[0],x, y, WIDTH, HEIGHT, null);
 	}
 
 	@Override
@@ -234,10 +253,12 @@ public class Cleaner extends Unit {
 				+ ", alpha=" + alpha + ", width=" + WIDTH +", height=" + HEIGHT +"]  " +cleaning+" ";
 	}
 	public  static void setUnitImage() throws IOException{
-		img=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"cleaner.jpg"));
+		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"cleaner.jpg"));
 	}
 
 	public void die() {
+		dying=true;
 		obstacles.add(new Oil(x,y));
+		deathAnimation();
 	}
 }
