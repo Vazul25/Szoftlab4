@@ -145,9 +145,15 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 		setFocusable(true);
 		Thread listenert=new Thread(listener);
 		listenert.start();
-
+		
+		
 		//Teszt
+	
+		
 		frame.add(this,BorderLayout.CENTER);
+		frame.add(hud,BorderLayout.SOUTH);
+		
+	
 		frame.setSize(1000,700);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -405,7 +411,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 				}
 			}
 			
-			
+			//iterátoros megoldás a obstacle-ök vizsgálatára, ez azért kell mert törölhetünk iterálás közben
 			Iterator<Obstacle> it=obstacles.iterator();
 			while(it.hasNext())
 			{
@@ -427,7 +433,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 			}
 			//Teszt
 			repaint();	
-			if(elteltidoteszt>=60) ended=true;
+			if(elteltidoteszt>=1000) ended=true;
 			elteltidoteszt+=3;
 			System.out.println("eltelt:"+elteltidoteszt+"mp");
 		}
