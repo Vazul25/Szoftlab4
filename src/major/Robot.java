@@ -98,8 +98,8 @@ public class Robot extends Unit{
 	 ** alpha: arrowendx,y kiszámításához szükséges vizszintes tengelyel bezárt szög radiánban
 	 *
 	 */
-	protected int arrowendx=0;//ahova mutat
-	protected int arrowendy=0;
+	public int arrowendx=0;//ahova mutat
+	public int arrowendy=0;
 	private double alpha= 0;//kerület pontjának számításához kell radián , alapérték 90 fok
 
 	/*
@@ -285,7 +285,7 @@ public class Robot extends Unit{
 	public void move()   {
 		//User általi változtatás letiltása (lásd Robot.keyPressed())
 		oiled=true;
-		if(alpha>6.283)alpha-=6.283;
+		//if(alpha>6.283)alpha-=6.283;
 		
 		//Nyíl koordinátáinak kiszámolása
 		
@@ -295,24 +295,24 @@ public class Robot extends Unit{
 		//y=arrowendy;
 
 		//TESZT
-		double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
+	/*	double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
 		double speedy=Math.round((arrowendy-y)/ANIMATIONSPEED);
-
+*/
 		
 		//Olajjal ütközés hatásának eltüntetése
 		slowed=1;
 
 		//TESZT, GRAFIKA
-		try {
+	/*	try {
 			img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		HEIGHT=60;
+		HEIGHT=60;*/
 		//if(Math.abs((int)(arrowendx-x))<20 &&Math.abs((int)(arrowendy-y))<20) reached=true;
 
-		for(int i=0;i<ANIMATIONSPEED;i++){
+	/*	for(int i=0;i<ANIMATIONSPEED;i++){
 			if(i<ANIMATIONSPEED/2){WIDTH+=2;HEIGHT+=2;}
 			else {WIDTH-=2;HEIGHT-=2;}
 			x+=speedx;
@@ -324,21 +324,21 @@ public class Robot extends Unit{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		}*/
 		
-		WIDTH=40;
+		//WIDTH=40;
 
-		HEIGHT=40;
+		//HEIGHT=40;
 		x=arrowendx;
 		y=arrowendy;
 		leftobstacle=false;
 		oiled=false;
-		try {
+		/*try {
 			img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog0.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 
@@ -413,9 +413,9 @@ public class Robot extends Unit{
 			System.out.println("there was a collision between this:\n"+this.toString()+"\n and this:"+r.toString());
 			//r.alpha=alpha;
 			//alpha=temp;
-			bounce(r);			
-			move();
-			r.move();
+		//	bounce(r);			
+		//	move();
+			//r.move();
 			return true;
 		}
 		return false;
@@ -440,12 +440,12 @@ public class Robot extends Unit{
 		if(!oiled){
 			//Nyíl irányának megváltoztatása
 			if (e== Phoebe.Settings.keyconfig[id%2*4+1])
-				alpha+=0.0872664625;//5fokkal növeli
+				alpha+=0.0872764626;//5fokkal növeli
 			if (e== Phoebe.Settings.keyconfig[id%2*4])
-				alpha-=0.0872664625; 
+				alpha-=0.0872664626; 
 			arrowendx=(int)(x+r*Math.cos(alpha));
 			arrowendy=(int)(y+r*Math.sin(alpha));
-			System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);
+			//System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);
 
 		}
 		if(!leftobstacle){
@@ -474,7 +474,9 @@ public class Robot extends Unit{
 			}
 		}
 		//Nyíl végpontjainak kiszámolása
-		p.repaint();
+		//p.repaint();
+		arrowendx=(int)(x+slowed*r*Math.cos(alpha));
+		arrowendy=(int)(y+slowed*r*Math.sin(alpha));
 	}
 
 }
