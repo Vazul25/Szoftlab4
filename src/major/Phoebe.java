@@ -155,7 +155,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 		
 	
 		frame.setSize(1000,700);
-		frame.setVisible(true);
+		frame.setVisible(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(true);
 	}

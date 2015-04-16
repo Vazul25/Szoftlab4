@@ -157,18 +157,11 @@ public class mainteszt {
 				break;
 
 			case 4:	
-				///TEST EFFECT OIL TODO KÉNE OLYAT IS IRNOD VINI AHOL NINCS MÁR OLAJAD/RAGACSOD ez így 2 teszt csak by vazul
-				System.out.println("4. Ragacsba lépést választotta.");
-				System.out.println("> ->[:Phoebe].run():");
-				//robots.get(0).collisionWithObstacles(glue1);
-				System.out.println("< <-[:Phoebe].run()");
+				
 				break;
 
 			case 5:
-				System.out.println("5. Olajba lépést választotta.");
-				System.out.println("> ->[:Phoebe].run():");
-				//robots.get(0).collisionWithObstacles(oil1);
-				System.out.println("< <-[:Phoebe].run()");
+				
 				break;
 
 			case 6:
@@ -179,32 +172,20 @@ public class mainteszt {
 				break;
 
 			case 8:
-				System.out.println("8. Pályáról leesést választotta.");
-				System.out.println("> ->[:Phoebe].run():");
-				/*	if(map.robotOutsideOfMap(robots.get(0))){
-					robots.get(0).deathanimation();
-				}*/
-				System.out.println("< <-[:Phoebe].run()");
+				
 				break;
 
 			case 9:
-				/*if(gameInfo.getSettings() == Settings.TIMELIMIT)
-					System.out.println("9. Az idő lejárását választotta.");
-				else 
-					System.out.println("9. A minden kör teljesítését választotta.");
-				System.out.println("< <-[:Phoebe].run()");
-				while(temp!='i'&& temp!='n' && temp!='I' && temp!='N'){
-					if(Phoebe.gameInfo.getSettings()==Settings.TIMELIMIT) 
-						System.out.print("?\t 9.1 Lejárt az idő? I/N:");
-					else
-						System.out.print("?\t 9.1 Minden kör teljesítve van? I/N:");
-					temp=sc.nextLine().charAt(0);
-				}
-				if(temp == 'i' || temp == 'I')	hud.endOfTheGame();
-				System.out.println("< <-[:Phoebe].run()");*/
+				
 				break;
 			case 10:
 
+				break;
+			case 13://Initialisation Test
+				
+				break;
+			case 14://GameEndWithTimeElapsing_Test
+				
 				break;
 		//	}
 		}
