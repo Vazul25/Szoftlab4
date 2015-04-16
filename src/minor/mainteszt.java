@@ -23,8 +23,8 @@ public class mainteszt {
 	 * A robotra beállítjuk az adott akadály hatását,
 	 * majd ellenőrizük, hogy ez megfelelően kihat-e a robot mozgására.
 	 */
-	public void testEffectOil() throws IOException{
-		Robot r = new Robot(0, 0, new Phoebe(new Settings(0)));
+	public static void testEffectOil() throws IOException{
+		Robot r = new Robot(0, 0, null);
 		Oil o1 = new Oil(0, 0);
 		Oil o2 = new Oil(0, 100);
 
@@ -34,13 +34,13 @@ public class mainteszt {
 
 		o1.effect(r);
 
-		this.RotateXDeg(r, 90);
+		RotateXDeg(r, 90);
 		
 		r.move();
 	}
 	
-	public void testEffectGlue() throws IOException{
-		Robot r = new Robot(0, 0, new Phoebe(new Settings(0)));
+	public static void testEffectGlue() throws IOException{
+		Robot r = new Robot(0, 0, null);
 		Glue g1 = new Glue(0, 0);
 		Glue g2 = new Glue(0, 100);
 
@@ -50,7 +50,7 @@ public class mainteszt {
 
 		g1.effect(r);
 
-		this.RotateXDeg(r, 90);
+		RotateXDeg(r, 90);
 		
 		r.move();
 		
@@ -88,37 +88,29 @@ public class mainteszt {
 		System.out.flush();
 		//LogBase
 		/*	
-			System.out.println("========================================================");
-			System.out.println("|           Phoebe Szkeleton by Scrum_That!            |");
-			System.out.println("========================================================");
-			System.out.println("| 1. Robot irányváltoztatás, ugrása                    |");
-			System.out.println("| 2. Ragacs lerakása                                   |");
-			System.out.println("| 3. Olajfolt lerakása                                 |");
-			System.out.println("| 4. Ragacsba lépés                                    |");
-			System.out.println("| 5. Olajfoltba lépés                                  |");
-			System.out.println("| 6. Checkpointba lépés                                |");
-			System.out.println("| 7. Robotok ütközése                                  |");
-			System.out.println("| 8. Pályáról való leesés                              |");
-			if(gameInfo.getSettings()==Settings.TIMELIMIT) 
-				System.out.println("| 9. Idő lejárása                                      |");
-			else
-				System.out.println("| 9. Minden kör teljesítése                            |");
-			System.out.println("| 10. Kilépés                                          |");
-			System.out.println("========================================================");
-			int usecase = 0;
-			while(usecase <= 0 || usecase >= 11){
-				System.out.print("            Adja meg a játékmódot (1-10): ");
-				usecase = Integer.parseInt(sc.nextLine());
-				System.out.println("");
-			}*/
+		1.5.1.    CollisionWithRobot_VOLTÜTKÖZÉS_TESZT  
+		1.5.2.    CollisionWithRobot_NEMVOLTÜTKÖZÉS_TESZT.   
+		1.5.3.    CollisionWithRobot_IRÁNYVÁLTOZTATÁS_TESZT
+		1.5.4.    CollisionWithObstacles_OLAJBA.UGRÁS_TESZT
+		1.5.5.    CollisionWithObstacles_RAGACSBA.UGRÁS_TESZT
+		1.5.6.    CollisionWithObstacles_OLAJ.HATÁSA_TESZT
+		1.5.7.    CollisionWithObstacles_RAGACS.HATÁSA_TESZT
+		1.5.8.    robotOutsideOfMap_A.PÁLYÁRÓL.LEESETT_TESZT
+		1.5.9.    robotOutsideOfMap_NEM.ESETT.LE.PÁLYÁRÓL_TESZT
+		1.5.10.  checkpointSearch_CHEICKPOINTONBA.UGRÁS_TESZT
+		1.5.11.  checkpointSearch_CHEICKPOINTONBA.NEM.UGRÁS_TESZT
+		1.5.12.  RobotCollisionWithCleaner_TESZT
+		1.5.13.  Initialisation_Test
+		1.5.14.  GameEndWithTimeElapsing_Test
+		1.5.15.  AddObstacle_AKADÁLY_LERAKÁS_TESZT
+		1.5.16.  ObstacleLife_AKADÁLY_ÉLETTARTAM_TESZT
+		1.5.17.  Cleaner_TAKARÍTÓ_KISROBOT_MOZGÁS_TAKARÍTÁS_TESZT
+					}*/
 
 
-		/////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		/*A FENTI MENÜNEK EHEZ MÁR SEMMI KÖZE CSAK A SZERKEZET LETT ÁTEMELVE MINDENKI AZ ELÖZŐ DOKSI ALAPJÁN CSINÁLJA by:VAZUL*/
-		/////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!			
-	
+		
 	//	if(args.length>1){
-			switch(/*Integer.parseInt(args[1])*/3){
+			switch(/*Integer.parseInt(args[1])*/7){
 			case 1://VOLT ÜTKÖZÉS TESZT
 				Robot r1=new Robot(500,500,null);
 				Robot r2=new Robot(600,400,null);
@@ -141,7 +133,6 @@ public class mainteszt {
 				Robot r4=new Robot(600,400,null);
 				System.out.println(r3.toString());
 				System.out.println(r4.toString());
-			
 				System.out.println(r3.toString());
 				System.out.println(r4.toString());
 				r3.move();
@@ -165,7 +156,8 @@ public class mainteszt {
 				System.out.println(r6.toString());					
 				break;
 
-			case 4:		
+			case 4:	
+				///TEST EFFECT OIL TODO KÉNE OLYAT IS IRNOD VINI AHOL NINCS MÁR OLAJAD/RAGACSOD ez így 2 teszt csak by vazul
 				System.out.println("4. Ragacsba lépést választotta.");
 				System.out.println("> ->[:Phoebe].run():");
 				//robots.get(0).collisionWithObstacles(glue1);
@@ -180,16 +172,10 @@ public class mainteszt {
 				break;
 
 			case 6:
-				System.out.println("6. A checkpointba lépést választotta.");
-				System.out.println("> ->[:Phoebe].run():");
-				//hud.checkpointSearch();
-				System.out.println("< <-[:Phoebe].run()");
+				testEffectOil();
 				break;
 			case 7:
-				System.out.println("7. A Robot ütközését választotta.");
-				System.out.println("> ->[:Phoebe].run():");
-				//robots.get(0).collisionWithRobot(robots.get(1));
-				System.out.println("< <-[:Phoebe].run()");
+				testEffectGlue();
 				break;
 
 			case 8:

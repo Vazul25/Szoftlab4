@@ -95,7 +95,7 @@ public class MapBuilder implements iVisible {
 				reader.close();
 				fis.close();
 				map = new Area(paintableOuterMap);
-				map.subtract(new Area(paintableOuterMap));
+				map.subtract(new Area(paintableInnerMap));
 			}
 		}
 		catch (ClassNotFoundException e) {
@@ -159,6 +159,7 @@ public class MapBuilder implements iVisible {
 		//Area otherArea = new Area(r.getHitbox());
 		//area.intersect(otherArea);
 		//TODO revision
+		
 		return area.contains(r.getHitbox());
 	}
 	

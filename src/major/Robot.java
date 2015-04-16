@@ -289,8 +289,8 @@ public class Robot extends Unit{
 		
 		//Nyíl koordinátáinak kiszámolása
 		
-		arrowendx=(int)(x+slowed*r*Math.cos(alpha));
-		arrowendy=(int)(y+slowed*r*Math.sin(alpha));
+		arrowendx=(int)Math.round(x+slowed*r*Math.cos(alpha));
+		arrowendy=(int)Math.round(y+slowed*r*Math.sin(alpha));
 		//x=arrowendx;	
 		//y=arrowendy;
 
@@ -475,8 +475,8 @@ public class Robot extends Unit{
 		}
 		//Nyíl végpontjainak kiszámolása
 		//p.repaint();
-		arrowendx=(int)(x+slowed*r*Math.cos(alpha));
-		arrowendy=(int)(y+slowed*r*Math.sin(alpha));
+		arrowendx=(int)Math.round((x+slowed*r*Math.cos(alpha)));
+		arrowendy=(int)Math.round(y+slowed*r*Math.sin(alpha));
 	}
 
 }
