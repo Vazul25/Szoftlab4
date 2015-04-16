@@ -3,9 +3,8 @@ package minor;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-import major.Phoebe;
+import major.*;
 import major.Phoebe.Settings;
-import major.Robot;
 
 public class mainteszt {
 	//SEGÉD FÜGGVÉNYEK:
@@ -18,6 +17,47 @@ public class mainteszt {
 		}
 		System.out.println("nextx ,nexty modified to:"+r.arrowendx+","+r.arrowendy);
 	}
+	
+	/*
+	 * Effekt Tesztelése
+	 * A robotra beállítjuk az adott akadály hatását,
+	 * majd ellenőrizük, hogy ez megfelelően kihat-e a robot mozgására.
+	 */
+	public void testEffectOil() throws IOException{
+		Robot r = new Robot(0, 0, new Phoebe(new Settings(0)));
+		Oil o1 = new Oil(0, 0);
+		Oil o2 = new Oil(0, 100);
+
+		System.out.println(r.toString());
+		System.out.println(o1.toString());
+		System.out.println(o2.toString());
+
+		o1.effect(r);
+
+		this.RotateXDeg(r, 90);
+		
+		r.move();
+	}
+	
+	public void testEffectGlue() throws IOException{
+		Robot r = new Robot(0, 0, new Phoebe(new Settings(0)));
+		Glue g1 = new Glue(0, 0);
+		Glue g2 = new Glue(0, 100);
+
+		System.out.println(r.toString());
+		System.out.println(g1.toString());
+		System.out.println(g2.toString());
+
+		g1.effect(r);
+
+		this.RotateXDeg(r, 90);
+		
+		r.move();
+		
+		System.out.println(r.toString());
+	}
+	
+	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 
@@ -40,8 +80,10 @@ public class mainteszt {
 		//t.start();
 		//...
 
-
-
+		
+		/*
+		 * Testesetek függvényeinek meghívása: 
+		 */
 
 		System.out.flush();
 		//LogBase
@@ -72,9 +114,9 @@ public class mainteszt {
 
 
 		/////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		/*A FENTI MENÜNEK EHEZ MÁR SEMMI KÖZE CSAK A SZERKEZET LETT ÁTEMELVE MINENKI AZ ELÖZŐ DOKSI ALAPJÁN CSINÁLJA by:VAZUL*/
+		/*A FENTI MENÜNEK EHEZ MÁR SEMMI KÖZE CSAK A SZERKEZET LETT ÁTEMELVE MINDENKI AZ ELÖZŐ DOKSI ALAPJÁN CSINÁLJA by:VAZUL*/
 		/////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!			
-		
+	
 	//	if(args.length>1){
 			switch(/*Integer.parseInt(args[1])*/3){
 			case 1://VOLT ÜTKÖZÉS TESZT
@@ -180,6 +222,8 @@ public class mainteszt {
 				break;
 		//	}
 		}
+			
+			
 	}
 }
 
