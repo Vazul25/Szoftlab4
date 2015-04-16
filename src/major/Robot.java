@@ -241,7 +241,21 @@ public class Robot extends Unit{
 	 */
 	public void deathanimation(){
 		//TODO
-		
+		for(int i=0;i<15;i++){
+			try {
+				img[id%2]=ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+i+".gif"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			p.repaint();
+			try {
+				Thread.sleep(42);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	};
 
 	/**
@@ -413,7 +427,8 @@ public class Robot extends Unit{
 			System.out.println("there was a collision between this:\n"+this.toString()+"\n and this:"+r.toString());
 			//r.alpha=alpha;
 			//alpha=temp;
-			bounce(r);			
+			bounce(r);	
+			
 			move();
 			r.move();
 			return true;

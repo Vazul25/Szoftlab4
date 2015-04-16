@@ -159,7 +159,14 @@ public class MapBuilder implements iVisible {
 		//Area otherArea = new Area(r.getHitbox());
 		//area.intersect(otherArea);
 		//TODO revision
-		return !area.contains(r.getHitbox());
+		//szét bontjuk 4 darabra a hitboxok és csak akkor esik le ha legalább 2 része lelóg
+		int partingwidth=r.getHitbox().width/2;
+
+		int partingheight=r.getHitbox().height/2;
+		int tempx=r.getHitbox().x+partingwidth/2;
+		int tempy=r.getHitbox().y+partingheight/2;
+		Rectangle hitboxpart=new Rectangle(tempx,tempy,partingwidth,partingheight);
+		return !area.contains(hitboxpart);
 	}
 
 	/*
