@@ -32,35 +32,35 @@ import major.iVisible;
  *  
  */
 public class MapBuilder implements iVisible {
-	
+
 	//Adatszerkezetek
 	/**
-	* Shape interfészű pályát tároló objektum
-	*/
+	 * Shape interfészű pályát tároló objektum
+	 */
 	private Area map;
-	
+
 	/**
-	* Tárolja a checkpointokat reprezentáló objektumokat List 
-	* adatszerkezetben. 
-	*/
+	 * Tárolja a checkpointokat reprezentáló objektumokat List 
+	 * adatszerkezetben. 
+	 */
 	private List<Area> checkpoints;
-	
+
 	public List<Rectangle> paintableCheckpoints;
-	
+
 	public Rectangle paintableInnerMap;
 	public Rectangle paintableOuterMap;
-	
+
 	protected static BufferedImage img[];
-	
+
 	/*
-	* Meghatároz egy (x,y) koordinátát, ahol az első játékos kezd.
-	*/
+	 * Meghatároz egy (x,y) koordinátát, ahol az első játékos kezd.
+	 */
 	private int[] startPosPlayerOne;
 	/*
-	* Meghatároz egy (x,y) koordinátát, ahol az második játékos kezd.
-	*/
+	 * Meghatároz egy (x,y) koordinátát, ahol az második játékos kezd.
+	 */
 	private int[] startPosPlayerTwo;
-	
+
 	/*
 	 * MapBuilder konstruktor
 	 * Felelősség:
@@ -77,16 +77,16 @@ public class MapBuilder implements iVisible {
 		//...
 		//Kezdő koordináták beolvasása robotonként
 		int[] temp = {200, 300};
- 		startPosPlayerOne = temp;
- 		startPosPlayerTwo = temp;
+		startPosPlayerOne = temp;
+		startPosPlayerTwo = temp;
 		//Pálya beolvasása
- 		try {
+		try {
 			setUnitImage();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
- 		try{ 
+		try{ 
 			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+System.getProperty("file.separator")+"maps"+System.getProperty("file.separator")+"Map.ser"); 
 			ObjectInputStream reader = new ObjectInputStream(fis); 
 			if(fis != null && reader != null){
@@ -95,7 +95,7 @@ public class MapBuilder implements iVisible {
 				reader.close();
 				fis.close();
 				map = new Area(paintableOuterMap);
-				map.subtract(new Area(paintableOuterMap));
+				map.subtract(new Area(paintableInnerMap));
 			}
 		}
 		catch (ClassNotFoundException e) {
@@ -134,12 +134,12 @@ public class MapBuilder implements iVisible {
 		for(int i=1;i<=numberOfCheckpoints;i++){
 			//Checkpointot határoló pontok beolvasása
 			//...
-		//	checkpoints.add(new Polygon()); null pointerekkel nem megy
+			//	checkpoints.add(new Polygon()); null pointerekkel nem megy
 		}
 		//...
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @return visszaadja a Checkpointokat tartalmazó listát
@@ -148,7 +148,7 @@ public class MapBuilder implements iVisible {
 		return checkpoints;
 	}
 
-	
+
 	/*
 	 * robotOutsideOfMap függvény
 	 * 
@@ -159,9 +159,9 @@ public class MapBuilder implements iVisible {
 		//Area otherArea = new Area(r.getHitbox());
 		//area.intersect(otherArea);
 		//TODO revision
-		return area.contains(r.getHitbox());
+		return !area.contains(r.getHitbox());
 	}
-	
+
 	/*
 	 * obstacleOutsideOfMap függvény
 	 * 
@@ -174,59 +174,59 @@ public class MapBuilder implements iVisible {
 		//TODO revision
 		return area.getBounds().getSize().equals( r.getHitbox().getBounds().getSize() );
 
-	
+
 	}
 
 	public int[] getStartPosPlayer(int id) {
 		//TODO
 		return startPosPlayerOne;
 	}
-	
+
 	public void building(int windowWidth, int windowHeight){
-		
+
 		Rectangle outerEdge = new Rectangle(0, 0, windowWidth, windowHeight);
 		Rectangle innerEdge = new Rectangle(new Double(windowWidth*0.15).intValue(), new Double(windowHeight*0.2).intValue(),
-											new Double(windowWidth*0.7).intValue(), new Double(windowHeight*0.6).intValue());
+				new Double(windowWidth*0.7).intValue(), new Double(windowHeight*0.6).intValue());
 		//ábra megtalálható: TODO
-		
+
 		int checkpointWidth = new Double(windowWidth*0.15).intValue();
 		int checkpointHeight = new Double(windowHeight*0.2).intValue();
-		
+
 		Rectangle checkpoint0 = new Rectangle(0, 0, checkpointWidth, checkpointHeight);
-		
+
 		Rectangle checkpoint1 = new Rectangle(new Double(windowWidth*0.85).intValue(), 0, checkpointWidth, checkpointHeight);
-		
+
 		Rectangle checkpoint2 = new Rectangle(new Double(windowWidth*0.85).intValue(), new Double(windowHeight*0.8).intValue(), checkpointWidth, checkpointHeight);
-		
+
 		Rectangle checkpoint3 = new Rectangle(0, new Double(windowHeight*0.8).intValue(), checkpointWidth, checkpointHeight);
-		
+
 		//értékadás, TODO lecserélni konstruktorban szerializált elemek betöltésére fájlból
-		
+
 		//Logikai reprezentáció (ezzel kell ellenőrizni), de nem ezt rajzoljuk ki
 		/*map = new Area(outerEdge);
 		map.subtract(new Area(innerEdge));	*/
-		
+
 		/*checkpoints = new ArrayList<Area>();
 		checkpoints.add(new Area(checkpoint0));
 		checkpoints.add(new Area(checkpoint1));
 		checkpoints.add(new Area(checkpoint2));
 		checkpoints.add(new Area(checkpoint3));*/
-		
+
 		//Area nem szerializálható
 		ArrayList<Rectangle> serializeCheckpoints = new ArrayList<Rectangle>();
 		serializeCheckpoints.add(checkpoint0);
 		serializeCheckpoints.add(checkpoint1);
 		serializeCheckpoints.add(checkpoint2);
 		serializeCheckpoints.add(checkpoint3);
-		
-		
+
+
 		//Ezeket rajzoljuk ki
 		/*paintableCheckpoints = new ArrayList<Rectangle>();
 		paintableCheckpoints.add(checkpoint0);
 		paintableCheckpoints.add(checkpoint1);
 		paintableCheckpoints.add(checkpoint2);
 		paintableCheckpoints.add(checkpoint3);*/
-		
+
 		//Szerializáció
 		try{
 			// Serialize data object to a file
@@ -246,7 +246,7 @@ public class MapBuilder implements iVisible {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 	}
 
 	@Override
@@ -262,7 +262,7 @@ public class MapBuilder implements iVisible {
 		g2.setPaint(Color.green);
 		g2.drawRect(paintableOuterMap.x, paintableOuterMap.y, paintableOuterMap.width, paintableOuterMap.height);		
 	}
-	
+
 	public  static void setUnitImage() throws IOException{
 		String sep=System.getProperty("file.separator");
 		img=new BufferedImage[2];
