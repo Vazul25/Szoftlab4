@@ -18,6 +18,8 @@ public class mainteszt {
 	}
 
 	/*
+	 * RAGACS.HATÁSA_TESZT
+	 * OLAJ.HATÁSA_TESZT
 	 * Effekt Tesztelése
 	 * A robotra beállítjuk az adott akadály hatását,
 	 * majd ellenőrizük, hogy ez megfelelően kihat-e a robot mozgására.
@@ -63,6 +65,8 @@ public class mainteszt {
 	}
 
 	/*
+	 * OLAJBA.UGRÁS_TESZT
+	 * RAGACSBA.UGRÁS_TESZT
 	 * Robot ütközésének tesztelése a különböző akadályokkal.
 	 * Azt ellenörizzük, hogy a robot a megfelelően lerakott akadályba ugrik-e, és ezt érzékeli is.
 	 */	
@@ -94,7 +98,114 @@ public class mainteszt {
 		r.collisionWithObstacles(g);
 	}
 
+	/*
+	 * A.PÁLYÁRÓL.LEESETT_TESZT
+	 * NEM.ESETT.LE.PÁLYÁRÓL_TESZT
+	 * Azt ellenörizzük hogy sikeressen össze 
+	 * tudta-e vetni a hitboxokat a függvény az ugrás végeztével.
+	 */
+	public static void testRobotOutsideOfMap() {
+		MapBuilder map = new MapBuilder();
+		Robot r = new Robot(400, 500, null);
+		
+		System.out.println(r.toString());
+		
+		RotateXDeg(r, 270);
+		
+		r.move();
+		
+		System.out.println(r.toString());
+		
+		//MAP-al való ütközés implementálása
+		//r.collisionWithObstacles(map);
+	}
+	
+	public static void testRobotNotOutsideOfMap(){
+		MapBuilder map = new MapBuilder();
+		Robot r = new Robot(400, 500, null);
+		
+		System.out.println(r.toString());
+		
+		RotateXDeg(r, 90);
+		
+		r.move();
+		
+		System.out.println(r.toString());
+		
+		//MAP-al való ütközés implementálása
+		//r.collisionWithObstacles(map);
+	}
+	
+	/*
+	 * CHEICKPOINTONBA.UGRÁS_TESZT
+	 * CHEICKPOINTONBA.NEM.UGRÁS_TESZT
+	 * Azt ellenörizzük hogy sikeressen össze tudta-e vetni a
+	 * hitboxokat a függvény az ugrás végeztével .
+	 */
+	public static void testCheckpointCollide(){
+		MapBuilder map1 = new MapBuilder();
+		MapBuilder map2 = new MapBuilder();
+		Robot r = new Robot(100, 100, null);
+		
+		//setCheckpoints 100, 180
+		
+		System.out.println(r.toString());
+		
+		//listCheckpoints
+		
+		RotateXDeg(r, 90);
+		
+		r.move();
+		
+		System.out.println(r.toString());
+		
+		//Checkpointal való ütközés implementálása
+		//r.collisionWithObstacles(?checkpoint?);
+	}
+	
+	public static void testCheckpointNotCollide(){
+		MapBuilder map1 = new MapBuilder();
+		MapBuilder map2 = new MapBuilder();
+		Robot r = new Robot(100, 300, null);
+		
+		//setCheckpoints 100, 180
+		
+		System.out.println(r.toString());
+		
+		//listCheckpoints
+		
+		RotateXDeg(r, 90);
+		
+		r.move();
+		
+		System.out.println(r.toString());
+		
+		//Checkpointal való ütközés implementálása
+		//r.collisionWithObstacles(?checkpoint?);
+	}
 
+	/*
+	 * RobotCollisionWithCleaner_TESZT
+	 * Várhatóan a takarító megsemmisül, olajfoltot hátrahagyva maga után.
+	 */
+	public static void testRobotCollisionWithCleaner() {
+		Glue g = new Glue(100, 300);
+		Robot r = new Robot(100, 300, null);
+		Cleaner c = new Cleaner(100, 300, null);
+		
+		System.out.println(g.toString());
+		System.out.println(r.toString());
+		System.out.println(c.toString());
+		
+		r.move();
+		
+		/*
+		 * listCLeaners
+		 * listObstacles
+		 * nem működik .toString()-el ugyebár, és nem tudom hogy oldhatnám meg
+		 */
+	}
+	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 
@@ -211,18 +322,23 @@ public class mainteszt {
 			break;
 
 		case 8://TODO A.PÁLYÁRÓL.LEESETT_TESZT		
+			testRobotOutsideOfMap();
 			break;
 
 		case 9://TODO NEM.ESETT.LE.PÁLYÁRÓL_TESZT
+			testRobotNotOutsideOfMap();
 			break;
 		
 		case 10://TODO CHECKPOINTONBA.UGRÁS_TESZT
+			testCheckpointCollide();
 			break;
 			
 		case 11://TODO CHECKPOINTONBA.NEM.UGRÁS_TESZT
+			testCheckpointNotCollide();
 			break;
 			
 		case 12://TODO RobotCollisionWithCleaner_TESZT
+			testRobotCollisionWithCleaner();
 			break;
 		
 		case 13://TODO Initialisation Test
