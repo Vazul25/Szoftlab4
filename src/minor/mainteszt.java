@@ -4,20 +4,19 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import major.*;
-import major.Phoebe.Settings;
 
 public class mainteszt {
 	//SEGÉD FÜGGVÉNYEK:
-	public static void RotateXDeg(Robot r,int deg){
+	public static void RotateXDeg(Robot r, int deg){
 
 		for(int i=0;i<deg/5;i++){
 			if(r.getId()%2==0)r.keyPressed(KeyEvent.VK_RIGHT);
 			else r.keyPressed(KeyEvent.VK_A);
-			
+
 		}
-		System.out.println("nextx ,nexty modified to:"+r.arrowendx+","+r.arrowendy);
+		System.out.println("nextx, nexty modified to: "+r.arrowendx+", "+r.arrowendy);
 	}
-	
+
 	/*
 	 * Effekt Tesztelése
 	 * A robotra beállítjuk az adott akadály hatását,
@@ -26,7 +25,7 @@ public class mainteszt {
 	public static void testEffectOil() throws IOException{
 		Robot r = new Robot(0, 0, null);
 		Oil o1 = new Oil(0, 0);
-		Oil o2 = new Oil(0, 100);
+		Oil o2 = new Oil(100, 0);
 
 		System.out.println(r.toString());
 		System.out.println(o1.toString());
@@ -34,11 +33,15 @@ public class mainteszt {
 
 		o1.effect(r);
 
-		RotateXDeg(r, 90);
-		
+		System.out.println(r.toString());
+
+		RotateXDeg(r, 270);
+
 		r.move();
+
+		r.collisionWithObstacles(o2);
 	}
-	
+
 	public static void testEffectGlue() throws IOException{
 		Robot r = new Robot(0, 0, null);
 		Glue g1 = new Glue(0, 0);
@@ -50,14 +53,48 @@ public class mainteszt {
 
 		g1.effect(r);
 
-		RotateXDeg(r, 90);
-		
-		r.move();
-		
 		System.out.println(r.toString());
+
+		RotateXDeg(r, 90);
+
+		r.move();
+
+		r.collisionWithObstacles(g2);
 	}
-	
-	
+
+	/*
+	 * Robot ütközésének tesztelése a különböző akadályokkal.
+	 * Azt ellenörizzük, hogy a robot a megfelelően lerakott akadályba ugrik-e, és ezt érzékeli is.
+	 */	
+	public static void testCollisionWithOil() {
+		Robot r = new Robot(0, 0, null);
+		Oil o = new Oil(0, 100);
+
+		System.out.println(r.toString());
+		System.out.println(o.toString());
+
+		RotateXDeg(r, 90);
+
+		r.move();
+;
+		r.collisionWithObstacles(o);
+	}
+
+	public static void testCollisionWithGlue() {
+		Robot r = new Robot(0, 0, null);
+		Glue g = new Glue(0, 100);
+
+		System.out.println(r.toString());
+		System.out.println(g.toString());
+
+		RotateXDeg(r, 90);
+
+		r.move();
+
+		r.collisionWithObstacles(g);
+	}
+
+
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 
@@ -80,7 +117,7 @@ public class mainteszt {
 		//t.start();
 		//...
 
-		
+
 		/*
 		 * Testesetek függvényeinek meghívása: 
 		 */
@@ -108,89 +145,95 @@ public class mainteszt {
 					}*/
 
 
+
+		//	if(args.length>1){
+		switch(/*Integer.parseInt(args[1])*/5){
 		
-	//	if(args.length>1){
-			switch(/*Integer.parseInt(args[1])*/7){
-			case 1://VOLT ÜTKÖZÉS TESZT
-				Robot r1=new Robot(500,500,null);
-				Robot r2=new Robot(600,400,null);
-				System.out.println(r1.toString());
-				System.out.println(r2.toString());
-				RotateXDeg(r2,270);
-				System.out.println(r1.toString());
-				System.out.println(r2.toString());
-				r1.move();
-				r2.move();
-				r1.collisionWithRobot(r2);
-				System.out.println(r1.toString());
-				System.out.println(r2.toString());
-				
-				
+		case 1://VOLT ÜTKÖZÉS TESZT
+			Robot r1=new Robot(500,500,null);
+			Robot r2=new Robot(600,400,null);
+			System.out.println(r1.toString());
+			System.out.println(r2.toString());
+			RotateXDeg(r2,270);
+			System.out.println(r1.toString());
+			System.out.println(r2.toString());
+			r1.move();
+			r2.move();
+			r1.collisionWithRobot(r2);
+			System.out.println(r1.toString());
+			System.out.println(r2.toString());
 
-				break;
-			case 2://NEM VOLT ÜTKÖZÉS TESZT
-				Robot r3=new Robot(500,500,null);
-				Robot r4=new Robot(600,400,null);
-				System.out.println(r3.toString());
-				System.out.println(r4.toString());
-				System.out.println(r3.toString());
-				System.out.println(r4.toString());
-				r3.move();
-				r4.move();
-				r3.collisionWithRobot(r4);
-				System.out.println(r3.toString());
-				System.out.println(r4.toString());		
-				break;
 
-			case 3://KEYPRESSED TESZT(IRÁNYVÁLTÁS)
-				Robot r5=new Robot(500,500,null);
-				Robot r6=new Robot(600,400,null);
-				System.out.println(r5.toString());
-				System.out.println(r6.toString());
-				RotateXDeg(r6, 180);
-				RotateXDeg(r5, 180);
-				
-				r5.move();
-				r6.move();
-				System.out.println(r5.toString());
-				System.out.println(r6.toString());					
-				break;
 
-			case 4:	
-				
-				break;
+			break;
+		case 2://NEM VOLT ÜTKÖZÉS TESZT
+			Robot r3=new Robot(500,500,null);
+			Robot r4=new Robot(600,400,null);
+			System.out.println(r3.toString());
+			System.out.println(r4.toString());
+			System.out.println(r3.toString());
+			System.out.println(r4.toString());
+			r3.move();
+			r4.move();
+			r3.collisionWithRobot(r4);
+			System.out.println(r3.toString());
+			System.out.println(r4.toString());		
+			break;
 
-			case 5:
-				
-				break;
+		case 3://KEYPRESSED TESZT(IRÁNYVÁLTÁS)
+			Robot r5=new Robot(500,500,null);
+			Robot r6=new Robot(600,400,null);
+			System.out.println(r5.toString());
+			System.out.println(r6.toString());
+			RotateXDeg(r6, 180);
+			RotateXDeg(r5, 180);
 
-			case 6:
-				testEffectOil();
-				break;
-			case 7:
-				testEffectGlue();
-				break;
+			r5.move();
+			r6.move();
+			System.out.println(r5.toString());
+			System.out.println(r6.toString());					
+			break;
 
-			case 8:
-				
-				break;
+		case 4://OLAJBA.UGRÁS_TESZT
+			testCollisionWithOil();
+			break;
+			
+		case 5://RAGACSBA.UGRÁS_TESZT
+			testCollisionWithGlue();
+			break;
+			
+		case 6://OLAJ.HATÁSA_TESZT
+			testEffectOil();
+			break;
+			
+		case 7://RAGACS.HATÁSA_TESZT
+			testEffectGlue();
+			break;
 
-			case 9:
-				
-				break;
-			case 10:
+		case 8://TODO A.PÁLYÁRÓL.LEESETT_TESZT		
+			break;
 
-				break;
-			case 13://Initialisation Test
-				
-				break;
-			case 14://GameEndWithTimeElapsing_Test
-				
-				break;
-		//	}
+		case 9://TODO NEM.ESETT.LE.PÁLYÁRÓL_TESZT
+			break;
+		
+		case 10://TODO CHECKPOINTONBA.UGRÁS_TESZT
+			break;
+			
+		case 11://TODO CHECKPOINTONBA.NEM.UGRÁS_TESZT
+			break;
+			
+		case 12://TODO RobotCollisionWithCleaner_TESZT
+			break;
+		
+		case 13://TODO Initialisation Test
+			break;
+			
+		case 14://TODO GameEndWithTimeElapsing_Test
+			break;
+			//	}
 		}
-			
-			
+
+
 	}
 }
 

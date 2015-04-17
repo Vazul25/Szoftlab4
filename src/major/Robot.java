@@ -241,7 +241,7 @@ public class Robot extends Unit{
 	 */
 	public void deathanimation(){
 		//TODO
-		
+
 	};
 
 	/**
@@ -256,13 +256,13 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void paint(Graphics g) {
-		
+
 		((Graphics2D) g).setStroke(new BasicStroke(5));
 		if(!oiled)
 			g.drawLine(x+WIDTH/2, y+HEIGHT/2, arrowendx+WIDTH/2, arrowendy+HEIGHT/2);
 		g.drawImage(img[id%2], x, y, WIDTH, HEIGHT, null);
 
-		
+
 	}
 	public  static void setUnitImage() throws IOException{
 		img=new BufferedImage[2];
@@ -286,24 +286,24 @@ public class Robot extends Unit{
 		//User általi változtatás letiltása (lásd Robot.keyPressed())
 		oiled=true;
 		//if(alpha>6.283)alpha-=6.283;
-		
+
 		//Nyíl koordinátáinak kiszámolása
-		
+
 		arrowendx=(int)Math.round(x+slowed*r*Math.cos(alpha));
 		arrowendy=(int)Math.round(y+slowed*r*Math.sin(alpha));
 		//x=arrowendx;	
 		//y=arrowendy;
 
 		//TESZT
-	/*	double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
+		/*	double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
 		double speedy=Math.round((arrowendy-y)/ANIMATIONSPEED);
-*/
-		
+		 */
+
 		//Olajjal ütközés hatásának eltüntetése
 		slowed=1;
 
 		//TESZT, GRAFIKA
-	/*	try {
+		/*	try {
 			img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -312,7 +312,7 @@ public class Robot extends Unit{
 		HEIGHT=60;*/
 		//if(Math.abs((int)(arrowendx-x))<20 &&Math.abs((int)(arrowendy-y))<20) reached=true;
 
-	/*	for(int i=0;i<ANIMATIONSPEED;i++){
+		/*	for(int i=0;i<ANIMATIONSPEED;i++){
 			if(i<ANIMATIONSPEED/2){WIDTH+=2;HEIGHT+=2;}
 			else {WIDTH-=2;HEIGHT-=2;}
 			x+=speedx;
@@ -325,7 +325,7 @@ public class Robot extends Unit{
 				e.printStackTrace();
 			}
 		}*/
-		
+
 		//WIDTH=40;
 
 		//HEIGHT=40;
@@ -355,14 +355,25 @@ public class Robot extends Unit{
 	 * 
 	 * @param obstacle az akadály amire az ütközést vizsgáljuk
 	 */
-	public boolean collisionWithObstacles(Obstacle obstacle){
-			
-		return this.intersect(obstacle);		
+	public boolean collisionWithObstacles(Obstacle o){
+
+		if(this.intersect(o)) {
+			//double temp=r.alpha;
+			System.out.println("there was a collision between this: "+this.toString()+"\nand this: "+o.toString());
+			//r.alpha=alpha;
+			//alpha=temp;
+			//	bounce(r);			
+			//	move();
+			//r.move();
+			return true;
+		}
+		return false;
 	}
+	
 	public boolean collisionWithCleaner(Cleaner cl){
 		if(this.intersect(cl))
-		return true;
-		
+			return true;
+
 		return false;
 	}
 
@@ -388,7 +399,7 @@ public class Robot extends Unit{
 	@Override
 	public String toString() {
 		return "Robot [id=" + id + ", slowed=" + slowed + ", oiled=" + oiled
-				+ ", x=" +x + ",y=" +y
+				+ ", x=" +x + ", y=" +y
 				+ ", nextx=" + arrowendx + ", nexty=" + arrowendy
 				+ ", alpha=" + alpha + ", width=" + WIDTH +", height=" + HEIGHT +", NumGlue:"+numGlue+", NumOil:"+numOil+"]";
 	}
@@ -413,8 +424,8 @@ public class Robot extends Unit{
 			System.out.println("there was a collision between this:\n"+this.toString()+"\n and this:"+r.toString());
 			//r.alpha=alpha;
 			//alpha=temp;
-		//	bounce(r);			
-		//	move();
+			//	bounce(r);			
+			//	move();
 			//r.move();
 			return true;
 		}
