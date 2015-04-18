@@ -311,18 +311,19 @@ public class mainteszt {
 		ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 		obstacles.add(new Glue(0, 0));
 		obstacles.add(new Oil(0, 100));
+		Robot r = new Robot(100, 100, null);
 		for(Obstacle i : obstacles){ //listObstacles
 			System.out.println(i.toString());
 		}
-		for(Obstacle o : obstacles){ //cycles_elapsed(4)
+		for(Obstacle o : obstacles){ //cycles_elapsed(4) - 4x belelépünk a glue-ba (meg az olajba is, de az nem számít)
 			for(int i = 0; i < 4; i++){
-				o.checkAlive();
+				o.effect(r);
 			}
 		}
 		for(Obstacle i : obstacles){ //listObstacles
 			System.out.println(i.toString());
 		}
-		for(Obstacle o : obstacles){ //cycles_elapsed(11)
+		for(Obstacle o : obstacles){ //cycles_elapsed(11) 
 			for(int i = 0; i < 11; i++){
 				o.checkAlive();
 			}
