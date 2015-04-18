@@ -437,8 +437,8 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 			elteltidoteszt+=3;
 			System.out.println("eltelt:"+elteltidoteszt+"mp");
 		}
-		if(elteltidoteszt>=60)System.out.println("a játéknak vége, lejárt az idő");
-		else System.out.println("a játékos leesett a pályáról");
+		if(elteltidoteszt>=60)System.out.println("A játéknak vége, lejárt az idő.");
+		else System.out.println("A játékos leesett a pályáról.");
 
 	}
 }
