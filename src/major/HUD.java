@@ -1,5 +1,6 @@
 ﻿package major;
 
+import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Area;
 import java.util.List;
@@ -39,6 +40,7 @@ public class HUD {
 	* {@link #checkpointsearch()} függvényben használjuk, hogy a {@link Robot#hitbox}
 	*/
 	private List<Area> checkpoints;
+	private List<Rectangle> checkpoints2;
 	
 	/**
 	* Robot objektumokat tároló ArrayList. Célja, hogy a checkpointsearch() függvényben minden robotra elvégezzük a keresést.
@@ -76,6 +78,20 @@ public class HUD {
 		//Checkpointok tárolása
 		checkpoints = list;
 	}
+	
+	
+	
+	
+	public void setCheckpoints2(List<Rectangle> list){
+		checkpointReached = new int[robots.size()];
+		for(int i=0;i<robots.size();i++){
+			checkpointReached[i] = 0;
+		}
+		checkpoints2 = list;
+	}
+	
+	
+	
 	
 	/**
 	* setCheckpointsReached metódus
@@ -139,12 +155,44 @@ public class HUD {
 	//náluk levő olaj, ragacskészletet és feljegyezzük a 
 	//checkpoint teljesítését
 			if(!robotarea.isEmpty()){
+				System.out.println("Siker");
 				setCheckpointReached(i);
 				i.incNumGlue();
 				i.incNumOil();
 			}
 		}		
 	}
+	
+	
+	
+	public void checkpointSearch2(){
+		
+			for(Robot i : robots){			
+				int nextCheckpoint;
+				if(checkpointReached[i.getId()%2] < (checkpoints2.size()-1) ){
+					nextCheckpoint = checkpointReached[i.getId()%2] + 1;
+				}
+				else{
+					nextCheckpoint = 0;
+				}
+				
+	
+				Rectangle robotarea = new Rectangle(i.getHitbox());
+				Rectangle checkpointarea = new Rectangle(checkpoints2.get(nextCheckpoint)); 
+				robotarea.intersects(checkpointarea);
+				
+				for(Rectangle checks: checkpoints2)
+					if(robotarea.intersects(checks)) System.out.print("There was a collision between:\n"+i.toString()+"\nand this checkpoint:"+checks.x+" "+checks.y);
+				
+	
+				/*if(!robotarea.isEmpty()){
+					setCheckpointReached(i);
+					i.incNumGlue();
+					i.incNumOil();
+				}*/
+			}		
+		}
+		
 	
 	/*
 	 * endOfTheGame függvény

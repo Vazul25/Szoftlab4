@@ -1,7 +1,10 @@
 package minor;
 
+
+import java.awt.List;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import major.*;
 
@@ -106,7 +109,25 @@ public class mainteszt {
 	 */
 	public static void testRobotOutsideOfMap() {
 		MapBuilder map = new MapBuilder();
-		Robot r = new Robot(400, 500, null);
+		Robot r = new Robot(500, 350, null);
+		
+		System.out.println(r.toString());
+		
+		RotateXDeg(r, 90);
+		
+		r.move();
+		
+		System.out.println(r.toString());
+		
+		//MAP-al való ütközés implementálása
+		//r.collisionWithObstacles(map);
+		if(map.robotOutsideOfMap(r))
+			System.out.print("There was a collision between:\n"+r.toString()+"\n and this: map");
+	}
+	
+	public static void testRobotNotOutsideOfMap(){
+		MapBuilder map = new MapBuilder();
+		Robot r = new Robot(500, 350, null);
 		
 		System.out.println(r.toString());
 		
@@ -118,22 +139,8 @@ public class mainteszt {
 		
 		//MAP-al való ütközés implementálása
 		//r.collisionWithObstacles(map);
-	}
-	
-	public static void testRobotNotOutsideOfMap(){
-		MapBuilder map = new MapBuilder();
-		Robot r = new Robot(400, 500, null);
-		
-		System.out.println(r.toString());
-		
-		RotateXDeg(r, 90);
-		
-		r.move();
-		
-		System.out.println(r.toString());
-		
-		//MAP-al való ütközés implementálása
-		//r.collisionWithObstacles(map);
+		if(map.robotOutsideOfMap(r))
+			System.out.print("There was a collision between:\n"+r.toString()+"\n and this: map");
 	}
 	
 	/*
@@ -143,15 +150,21 @@ public class mainteszt {
 	 * hitboxokat a függvény az ugrás végeztével .
 	 */
 	public static void testCheckpointCollide(){
-		MapBuilder map1 = new MapBuilder();
-		MapBuilder map2 = new MapBuilder();
-		Robot r = new Robot(100, 100, null);
+		MapBuilder map = new MapBuilder();
+		Robot r = new Robot(350, 470, null);
+		ArrayList<Robot> robs = new ArrayList<Robot>();
+		robs.add(r);
+		HUD hud= new HUD(robs);
+		
 		
 		//setCheckpoints 100, 180
+		map.building(400, 700);
+		hud.setCheckpoints2(map.paintableCheckpoints);
 		
 		System.out.println(r.toString());
 		
 		//listCheckpoints
+		map.listCheckpoints();
 		
 		RotateXDeg(r, 90);
 		
@@ -161,18 +174,25 @@ public class mainteszt {
 		
 		//Checkpointal való ütközés implementálása
 		//r.collisionWithObstacles(?checkpoint?);
+		hud.checkpointSearch2();
 	}
 	
 	public static void testCheckpointNotCollide(){
-		MapBuilder map1 = new MapBuilder();
-		MapBuilder map2 = new MapBuilder();
-		Robot r = new Robot(100, 300, null);
+		MapBuilder map = new MapBuilder();
+		Robot r = new Robot(150, 170, null);
+		ArrayList<Robot> robs = new ArrayList<Robot>();
+		robs.add(r);
+		HUD hud= new HUD(robs);
+		
 		
 		//setCheckpoints 100, 180
+		map.building(400, 700);
+		hud.setCheckpoints2(map.paintableCheckpoints);
 		
 		System.out.println(r.toString());
 		
 		//listCheckpoints
+		map.listCheckpoints();
 		
 		RotateXDeg(r, 90);
 		
@@ -182,6 +202,7 @@ public class mainteszt {
 		
 		//Checkpointal való ütközés implementálása
 		//r.collisionWithObstacles(?checkpoint?);
+		hud.checkpointSearch2();
 	}
 
 	/*
@@ -258,7 +279,7 @@ public class mainteszt {
 
 
 		//	if(args.length>1){
-		switch(/*Integer.parseInt(args[1])*/5){
+		switch(/*Integer.parseInt(args[1])*/11){
 		
 		case 1://VOLT ÜTKÖZÉS TESZT
 			Robot r1=new Robot(500,500,null);

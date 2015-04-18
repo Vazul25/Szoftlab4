@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -376,6 +377,7 @@ public class Robot extends Unit{
 
 		return false;
 	}
+	
 
 	/**
 	 * bounce függvény

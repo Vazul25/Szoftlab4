@@ -20,6 +20,7 @@ import javax.imageio.ImageIO;
 
 import major.Obstacle;
 import major.Robot;
+import major.Unit;
 import major.iVisible;
 
 /*
@@ -155,12 +156,13 @@ public class MapBuilder implements iVisible {
 	 *  @return igaz értékkel tér vissza, ha a robot leesett a pályáról
 	 */
 	public boolean robotOutsideOfMap(Robot r){
-		Area area = new Area(map);
+		//Area area = new Area(map);
+		Rectangle leeso_resz = new Rectangle(400,400,600,700);
 		//Area otherArea = new Area(r.getHitbox());
 		//area.intersect(otherArea);
 		//TODO revision
-		
-		return area.contains(r.getHitbox());
+		//System.out.println();
+		return leeso_resz.contains(r.getHitbox());
 	}
 	
 	/*
@@ -271,4 +273,10 @@ public class MapBuilder implements iVisible {
 		//img[1]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
 	}
 
+	public void listCheckpoints(){
+		for(Rectangle i: paintableCheckpoints)
+			System.out.println("Checkpoint: "+i.x+" "+i.y);
+	}
+	
 }
+
