@@ -5,6 +5,7 @@ import java.awt.List;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import major.*;
 
@@ -19,7 +20,66 @@ public class mainteszt {
 		}
 		System.out.println("nextx, nexty modified to: "+r.arrowendx+", "+r.arrowendy);
 	}
-
+	
+	/*
+	 * CollisionWithRobot_VOLTÜTKÖZÉS_TESZT
+	 * Létrehoz 2 robotot, majd beállítja az őket úgy, hogy egymásra ugorjanak
+	 * Azt ellenörizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás végeztével .
+	 */
+	public static void testCollisionWithRobotCollision() throws IOException, InterruptedException{
+		Robot r1=new Robot(500,500,null);
+		Robot r2=new Robot(600,400,null);
+		System.out.println(r1.toString());
+		System.out.println(r2.toString());
+		RotateXDeg(r2,270);
+		System.out.println(r1.toString());
+		System.out.println(r2.toString());
+		r1.move();
+		r2.move();
+		r1.collisionWithRobot(r2);
+		System.out.println(r1.toString());
+		System.out.println(r2.toString());
+	}
+	
+	/*
+	 * CollisionWithRobot_NEMVOLTÜTKÖZÉS_TESZT
+	 * Létrehoz 2 robotot, majd beállítja az őket úgy, hogy egymásra ugorjanak
+	 * Azt ellenörizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás végeztével .
+	 */
+	public static void testCollisionWithRobotNoCollision() throws IOException, InterruptedException{
+		Robot r3=new Robot(500,500,null);
+		Robot r4=new Robot(600,400,null);
+		System.out.println(r3.toString());
+		System.out.println(r4.toString());
+		System.out.println(r3.toString());
+		System.out.println(r4.toString());
+		r3.move();
+		r4.move();
+		r3.collisionWithRobot(r4);
+		System.out.println(r3.toString());
+		System.out.println(r4.toString());	
+	}
+	
+	/*
+	 * CollisionWithRobot_IRÁNYVÁLTOZTATÁS_TESZT
+	 * Létrehoz 2 robotot és meghivja a KeyPressed(int e) függvényt.
+	 * Azt ellenörizzük hogy sikeressen ki tudta e számolni a függvény az új koordinátákat.
+	 * A várt eredmény, hogy 180 fokban elfordultak és úgy léptek.
+	 */
+	public static void testCollisionWithRobotKeyPressed(){
+		Robot r5=new Robot(500,500,null);
+		Robot r6=new Robot(600,400,null);
+		System.out.println(r5.toString());
+		System.out.println(r6.toString());
+		RotateXDeg(r6, 180);
+		RotateXDeg(r5, 180);
+	
+		r5.move();
+		r6.move();
+		System.out.println(r5.toString());
+		System.out.println(r6.toString());	
+	}
+	
 	/*
 	 * RAGACS.HATÁSA_TESZT
 	 * OLAJ.HATÁSA_TESZT
@@ -227,6 +287,76 @@ public class mainteszt {
 		 */
 	}
 	
+	/*
+	 * AKADÁLY_LERAKÁS_TESZT
+	 * Létrehoz egy robotot, majd négyszer meghívja a KeyPressed(int e) függvényt VK_UP paraméterrel.
+	 * Azt ellenőrizzük, hogy az akadály létrejön-e, 
+	 * illetve hogy egy akadály lerakása után csökken-e a robotnál található akadályok száma.
+	 */
+	public static void testAddObstacle(){
+		Robot r = new Robot(100, 200, null);
+		r.keyPressed(KeyEvent.VK_UP);
+		r.keyPressed(KeyEvent.VK_UP);
+		r.keyPressed(KeyEvent.VK_UP);
+		r.keyPressed(KeyEvent.VK_UP);
+	}
+	
+	/*
+	 * AKADÁLY_ÉLETTARTAM_TESZT
+	 * Látrehoz két akadályt, majd bizonyos számú lépés eltelését szimulálja
+	 * Azt ellenőrizzük, hogy az akadályok eltűnnek-e adott lépés lefutása után
+	 */
+	public static void testObstacleLife(){
+		
+		ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+		obstacles.add(new Glue(0, 0));
+		obstacles.add(new Oil(0, 100));
+		for(Obstacle i : obstacles){ //listObstacles
+			System.out.println(i.toString());
+		}
+		for(Obstacle o : obstacles){ //cycles_elapsed(4)
+			for(int i = 0; i < 4; i++){
+				o.checkAlive();
+			}
+		}
+		for(Obstacle i : obstacles){ //listObstacles
+			System.out.println(i.toString());
+		}
+		for(Obstacle o : obstacles){ //cycles_elapsed(11)
+			for(int i = 0; i < 11; i++){
+				o.checkAlive();
+			}
+		}
+		for(Obstacle i : obstacles){ //listObstacles
+			System.out.println(i.toString());
+		}
+	}
+	
+	/*
+	 * TAKARÍTÓ_KISROBOT_MOZGÁS_TAKARÍTÁS_TESZT
+	 * Létrehozunk egy takarító robotot, majd két akadályt különböző koordinátákon.
+	 * Azt ellenőrizzük, hogy a takarító robot odatalál-e a hozzá legközelebbi akadályhoz
+	 * és hogy a takarítással törli-e az akadályok listájából.
+	 */
+	public static void testCleaner(){	
+		Cleaner c = new Cleaner(100, 200, null); 
+		ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+		obstacles.add(new Oil(100, 300));
+		obstacles.add(new Oil(100, 400));
+		System.out.println(c.toString()); //listCleaners
+		for(Obstacle i : obstacles){ //listObstacles
+			System.out.println(i.toString());
+		}
+		c.move();
+		System.out.println(c.toString()); 
+		c.move();
+		c.move();
+		c.move();
+		for(Obstacle i : obstacles){ //listObstacles
+			System.out.println(i.toString());
+		}
+	}
+	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 
@@ -282,48 +412,15 @@ public class mainteszt {
 		switch(/*Integer.parseInt(args[1])*/11){
 		
 		case 1://VOLT ÜTKÖZÉS TESZT
-			Robot r1=new Robot(500,500,null);
-			Robot r2=new Robot(600,400,null);
-			System.out.println(r1.toString());
-			System.out.println(r2.toString());
-			RotateXDeg(r2,270);
-			System.out.println(r1.toString());
-			System.out.println(r2.toString());
-			r1.move();
-			r2.move();
-			r1.collisionWithRobot(r2);
-			System.out.println(r1.toString());
-			System.out.println(r2.toString());
-
-
-
+			testCollisionWithRobotCollision();
 			break;
+			
 		case 2://NEM VOLT ÜTKÖZÉS TESZT
-			Robot r3=new Robot(500,500,null);
-			Robot r4=new Robot(600,400,null);
-			System.out.println(r3.toString());
-			System.out.println(r4.toString());
-			System.out.println(r3.toString());
-			System.out.println(r4.toString());
-			r3.move();
-			r4.move();
-			r3.collisionWithRobot(r4);
-			System.out.println(r3.toString());
-			System.out.println(r4.toString());		
+			testCollisionWithRobotNoCollision();	
 			break;
 
 		case 3://KEYPRESSED TESZT(IRÁNYVÁLTÁS)
-			Robot r5=new Robot(500,500,null);
-			Robot r6=new Robot(600,400,null);
-			System.out.println(r5.toString());
-			System.out.println(r6.toString());
-			RotateXDeg(r6, 180);
-			RotateXDeg(r5, 180);
-
-			r5.move();
-			r6.move();
-			System.out.println(r5.toString());
-			System.out.println(r6.toString());					
+			testCollisionWithRobotKeyPressed();				
 			break;
 
 		case 4://OLAJBA.UGRÁS_TESZT
@@ -342,23 +439,23 @@ public class mainteszt {
 			testEffectGlue();
 			break;
 
-		case 8://TODO A.PÁLYÁRÓL.LEESETT_TESZT		
+		case 8://A.PÁLYÁRÓL.LEESETT_TESZT		
 			testRobotOutsideOfMap();
 			break;
 
-		case 9://TODO NEM.ESETT.LE.PÁLYÁRÓL_TESZT
+		case 9://NEM.ESETT.LE.PÁLYÁRÓL_TESZT
 			testRobotNotOutsideOfMap();
 			break;
 		
-		case 10://TODO CHECKPOINTONBA.UGRÁS_TESZT
+		case 10://CHECKPOINTONBA.UGRÁS_TESZT
 			testCheckpointCollide();
 			break;
 			
-		case 11://TODO CHECKPOINTONBA.NEM.UGRÁS_TESZT
+		case 11://CHECKPOINTONBA.NEM.UGRÁS_TESZT
 			testCheckpointNotCollide();
 			break;
 			
-		case 12://TODO RobotCollisionWithCleaner_TESZT
+		case 12://RobotCollisionWithCleaner_TESZT
 			testRobotCollisionWithCleaner();
 			break;
 		
@@ -366,6 +463,18 @@ public class mainteszt {
 			break;
 			
 		case 14://TODO GameEndWithTimeElapsing_Test
+			break;
+			
+		case 15://AKADÁLY_LERAKÁS_TESZT
+			testAddObstacle();
+			break;	
+			
+		case 16://AKADÁLY_ÉLETTARTAM_TESZT
+			testObstacleLife();
+			break;
+		
+		case 17://TAKARÍTÓ_KISROBOT_MOZGÁS_TAKARÍTÁS_TESZT
+			testCleaner();
 			break;
 			//	}
 		}
