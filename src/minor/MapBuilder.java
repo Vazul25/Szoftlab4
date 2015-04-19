@@ -39,7 +39,7 @@ public class MapBuilder implements iVisible {
 	* Tárolja a checkpointokat reprezentáló objektumokat List 
 	* adatszerkezetben. 
 	*/
-	List<Rectangle> checkpoints;
+	public List<Rectangle> checkpoints;
 	
 	//public List<Rectangle> paintableCheckpoints;
 	
@@ -104,7 +104,7 @@ public class MapBuilder implements iVisible {
 			ObjectInputStream reader = new ObjectInputStream(fis); 
 			if(fis != null && reader != null){
 				List<Rectangle> x = new ArrayList<Rectangle>();
-				x = (ArrayList) reader.readObject(); 
+				x = (ArrayList<Rectangle>) reader.readObject(); 
 				reader.close();
 				fis.close();
 				//paintableCheckpoints = x; 

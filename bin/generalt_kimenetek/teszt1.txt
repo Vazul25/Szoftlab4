@@ -1,10 +1,10 @@
-Robot [id=0, slowed=1.0, oiled=false, x=600, y=500, nextx=600, nexty=500, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
+Robot [id=0, slowed=1.0, oiled=false, x=500, y=500, nextx=600, nexty=500, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
 Robot [id=1, slowed=1.0, oiled=false, x=600, y=400, nextx=700, nexty=400, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
 nextx, nexty modified to: 600, 500
 Robot [id=0, slowed=1.0, oiled=false, x=500, y=500, nextx=600, nexty=500, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
 Robot [id=1, slowed=1.0, oiled=false, x=600, y=400, nextx=600, nexty=500, alpha=-4.7123889804, width=40, height=40, NumGlue:3, NumOil:3]
 there was a collision between this:
-Robot [id=0, slowed=0.5, oiled=false, x=600, y=500, nextx=600, nexty=500, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
+Robot [id=0, slowed=1.0, oiled=false, x=600, y=500, nextx=600, nexty=500, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
  and this:Robot [id=1, slowed=1.0, oiled=false, x=600, y=500, nextx=600, nexty=500, alpha=-4.7123889804, width=40, height=40, NumGlue:3, NumOil:3]
-Robot [id=0, slowed=1.0, oiled=false, x=700, y=500, nextx=600, nexty=500, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
+Robot [id=0, slowed=1.0, oiled=false, x=600, y=500, nextx=600, nexty=500, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
 Robot [id=1, slowed=1.0, oiled=false, x=600, y=500, nextx=600, nexty=500, alpha=-4.7123889804, width=40, height=40, NumGlue:3, NumOil:3]

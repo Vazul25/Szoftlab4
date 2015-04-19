@@ -237,7 +237,7 @@ public class mainteszt {
 		
 		//setCheckpoints 100, 180
 		map.building(400, 700);
-		hud.setCheckpoints(map.checkpoints);
+		hud.setCheckpoints(map.getCheckpoints());
 		
 		System.out.println(r.toString());
 		
