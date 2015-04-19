@@ -141,10 +141,10 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 
 		//KeyListener (gombok lenyomásának lekezelése)
 		MyListener listener=new MyListener(robots);
-		addKeyListener(listener);
+		//addKeyListener(listener);
 		setFocusable(true);
-		Thread listenert=new Thread(listener);
-		listenert.start();
+		//Thread listenert=new Thread(listener);
+		//listenert.start();
 		
 		
 		//Teszt
@@ -155,9 +155,9 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 		
 	
 		frame.setSize(1000,700);
-		frame.setVisible(true);
+		frame.setVisible(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(true);
+		frame.setResizable(false);
 	}
 
 	/**
