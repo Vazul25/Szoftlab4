@@ -219,7 +219,7 @@ public class mainteszt {
 		
 		//setCheckpoints 100, 180
 		map.building(400, 700);
-		hud.setCheckpoints2(map.paintableCheckpoints);
+		hud.setCheckpoints(map.paintableCheckpoints);
 		
 		System.out.println(r.toString());
 		
@@ -234,7 +234,7 @@ public class mainteszt {
 		
 		//Checkpointal való ütközés implementálása
 		//r.collisionWithObstacles(?checkpoint?);
-		hud.checkpointSearch2();
+		hud.checkpointSearch();
 	}
 	
 	public static void testCheckpointNotCollide(){
@@ -247,7 +247,7 @@ public class mainteszt {
 		
 		//setCheckpoints 100, 180
 		map.building(400, 700);
-		hud.setCheckpoints2(map.paintableCheckpoints);
+		hud.setCheckpoints(map.paintableCheckpoints);
 		
 		System.out.println(r.toString());
 		
@@ -262,7 +262,7 @@ public class mainteszt {
 		
 		//Checkpointal való ütközés implementálása
 		//r.collisionWithObstacles(?checkpoint?);
-		hud.checkpointSearch2();
+		hud.checkpointSearch();
 	}
 
 	/*

@@ -39,8 +39,8 @@ public class HUD {
 	* inicializálódni.
 	* {@link #checkpointsearch()} függvényben használjuk, hogy a {@link Robot#hitbox}
 	*/
-	private List<Area> checkpoints;
-	private List<Rectangle> checkpoints2;
+	//private List<Area> checkpoints;
+	private List<Rectangle> checkpoints;
 	
 	/**
 	* Robot objektumokat tároló ArrayList. Célja, hogy a checkpointsearch() függvényben minden robotra elvégezzük a keresést.
@@ -69,7 +69,7 @@ public class HUD {
 	 * Funkció:
 	 * Phoebe hívja meg, miután lekérdezte a MapBuildertől a checkpointok tömbjét.
 	 */
-	public void setCheckpoints(List<Area> list){
+	/*public void setCheckpoints(List<Area> list){
 		//Checkpointokat teljesítését számontartó adatszerkezet inicialziálása
 		checkpointReached = new int[robots.size()];
 		for(int i=0;i<robots.size();i++){
@@ -77,17 +77,17 @@ public class HUD {
 		}
 		//Checkpointok tárolása
 		checkpoints = list;
-	}
+	}*/
 	
 	
 	
 	
-	public void setCheckpoints2(List<Rectangle> list){
+	public void setCheckpoints(List<Rectangle> list){
 		checkpointReached = new int[robots.size()];
 		for(int i=0;i<robots.size();i++){
 			checkpointReached[i] = 0;
 		}
-		checkpoints2 = list;
+		checkpoints = list;
 	}
 	
 	
@@ -134,7 +134,7 @@ public class HUD {
 	 * Funkció: 
 	 * A játékmotor hívja meg minden ciklusban, lépés után. 
 	 */
-	public void checkpointSearch(){
+	/*public void checkpointSearch(){
 	//minden lépésnél vizsgáljuk, hogy benne van-e valamelyik robot a következő teljesítendő checkpoint mezőben
 		for(Robot i : robots){			
 	//kiszámoljuk a következő checkpoint indexét
@@ -162,14 +162,14 @@ public class HUD {
 			}
 		}		
 	}
+	*/
 	
 	
-	
-	public void checkpointSearch2(){
+	public void checkpointSearch(){
 		
 			for(Robot i : robots){			
 				int nextCheckpoint;
-				if(checkpointReached[i.getId()%2] < (checkpoints2.size()-1) ){
+				if(checkpointReached[i.getId()%2] < (checkpoints.size()-1) ){
 					nextCheckpoint = checkpointReached[i.getId()%2] + 1;
 				}
 				else{
@@ -178,10 +178,10 @@ public class HUD {
 				
 	
 				Rectangle robotarea = new Rectangle(i.getHitbox());
-				Rectangle checkpointarea = new Rectangle(checkpoints2.get(nextCheckpoint)); 
+				Rectangle checkpointarea = new Rectangle(checkpoints.get(nextCheckpoint)); 
 				robotarea.intersects(checkpointarea);
 				
-				for(Rectangle checks: checkpoints2)
+				for(Rectangle checks: checkpoints)
 					if(robotarea.intersects(checks)) System.out.print("There was a collision between:\n"+i.toString()+"\nand this checkpoint:"+checks.x+" "+checks.y);
 				
 	
