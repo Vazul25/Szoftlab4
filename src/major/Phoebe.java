@@ -114,9 +114,9 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 	 ** map: A pályát reprezentáló objektum. Tárolja még a checkpointokat és a robotok kezdő koordinátáit.
 	 ** gameTimer: A játék során időt mérő objektum.
 	 */
-	private List<Robot> robots;
-	private List<Obstacle> obstacles;
-	private List<Cleaner> cleaners;
+	public List<Robot> robots;
+	public List<Obstacle> obstacles;
+	public List<Cleaner> cleaners;
 	private HUD hud;
 	private MapBuilder map;
 	private MyTimer gameTimer;
@@ -155,7 +155,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 		
 	
 		frame.setSize(1000,700);
-		frame.setVisible(false);
+		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(true);
 	}
@@ -181,7 +181,10 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 	 * Funkció:A Cleaner ezen keresztül veszi át az obstacle listát.
 	 * 
 	 */
-	List<Obstacle> getObstacles(){return obstacles;}
+	List<Obstacle> getObstacles(){
+		return obstacles;
+		}
+	
 	/**
 	 * paint függvény
 	 * 
@@ -252,9 +255,9 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 
 		//Játékosok létrehozása
 		//TODO
-		Robot one = new Robot(50/*map.getStartPosPlayer(1)[0]*/,20/* map.getStartPosPlayer(1)[1]*/,  this);
+		Robot one = new Robot(map.getStartPosPlayer(1)[0], map.getStartPosPlayer(1)[1],  this);
 
-		Robot two = new Robot(50/*map.getStartPosPlayer(2)[0]*/, 70/*map.getStartPosPlayer(2)[2]*/,  this);
+		Robot two = new Robot(map.getStartPosPlayer(0)[0], map.getStartPosPlayer(0)[1],  this);
 
 		robots.add(one);
 		robots.add(two);
@@ -268,11 +271,11 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 		//TESZTELÉSHEZ by Vazul
 		obstacles.add(new Glue(100,100));
 		obstacles.add(new Glue(500,100));
-		obstacles.add(new Glue(100,500));
-		obstacles.add(new Glue(500,500));
+		obstacles.add(new Oil(100,600));
+		obstacles.add(new Oil(500,600));
 		cleaners.add(new Cleaner(500,200,this));
 		cleaners.add(new Cleaner(620,200,this));
-		System.out.println(cleaners.get(0).toString());
+		//System.out.println(cleaners.get(0).toString());
 		////////////////////////////////////////
 
 		//Akadályok létrehozása
@@ -302,16 +305,6 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 	@Override
 	public void run() {
 
-		/*try {
-		//	init();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-
-		//TESZT
-		//repaint();
-
 		//Játék eleji visszaszámlálás
 		MyTimer startTimer = new MyTimer(3);
 		startTimer.start();
@@ -329,7 +322,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 		cleanerTimer.start();
 
 		//Teszt
-		int elteltidoteszt=0;
+		//int elteltidoteszt=0;
 
 		while( !ended)
 		{
@@ -433,12 +426,14 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 			}
 			//Teszt
 			repaint();	
-			if(elteltidoteszt>=1000) ended=true;
-			elteltidoteszt+=3;
-			System.out.println("eltelt:"+elteltidoteszt+"mp");
+			//System.out.println("Fennmaradt idő: "+gameTimer.getTime()+" mp");
+			if(gameTimer.isZero()) ended = true;
+			//if(elteltidoteszt>=1000) ended=true;
+			//elteltidoteszt+=3;
+			//System.out.println("eltelt:"+elteltidoteszt+"mp");
 		}
-		if(elteltidoteszt>=60)System.out.println("A játéknak vége, lejárt az idő.");
-		else System.out.println("A játékos leesett a pályáról.");
+		//if(gameTimer.isZero())System.out.println("A játéknak vége, lejárt az idő.");
+		//else System.out.println("A játékos leesett a pályáról.");
 
 	}
 }

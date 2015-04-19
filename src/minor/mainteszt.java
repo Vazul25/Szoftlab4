@@ -1,13 +1,19 @@
 package minor;
 
 
-import java.awt.List;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
-import major.*;
+import major.Cleaner;
+import major.Glue;
+import major.HUD;
+import major.Obstacle;
+import major.Oil;
+import major.Phoebe;
+import major.Phoebe.Settings;
+import major.Robot;
 
 public class mainteszt {
 	//SEGÉD FÜGGVÉNYEK:
@@ -19,6 +25,18 @@ public class mainteszt {
 
 		}
 		System.out.println("nextx, nexty modified to: "+r.arrowendx+", "+r.arrowendy);
+	}
+	
+	public static void listObstacles(List<Obstacle> list){
+		for(Obstacle i : list)System.out.println(i.toString());	
+	}
+	
+	public static void listRobots(List<Robot> list){
+		for(Robot i : list) System.out.println(i.toString());
+	}
+	
+	public static void listCleaner(List<Cleaner> list){
+		for(Cleaner i : list) System.out.println(i.toString());
 	}
 	
 	/*
@@ -358,6 +376,27 @@ public class mainteszt {
 		}
 	}
 	
+	public static void testInitialisation(){
+		MapBuilder map = new MapBuilder();
+		map.building(1000, 700);
+		Settings set = new Settings(Settings.TIMELIMIT);
+		set.setLimit(2);
+		try {
+			Phoebe game = new Phoebe(set);
+			listRobots(game.robots);
+			listObstacles(game.obstacles);
+			listCleaner(game.cleaners);
+			game.run();
+			listRobots(game.robots);
+			listObstacles(game.obstacles);
+			listCleaner(game.cleaners);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 
@@ -461,6 +500,7 @@ public class mainteszt {
 			break;
 		
 		case 13://TODO Initialisation Test
+			testInitialisation();
 			break;
 			
 		case 14://TODO GameEndWithTimeElapsing_Test
