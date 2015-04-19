@@ -376,7 +376,38 @@ public class mainteszt {
 		}
 	}
 	
+	/*
+	 * Initialisation_Test
+	 * A pálya betöltésétól kezdve az egyes elemek létrehozását(Robotok, akadályok,...) hivatott tesztelni.
+	 * Az elemek létrehozása, esetleges kivételek kezelése. 
+	 * Lehetséges probléma, hogy nem tudja betölteni a pályát vagy a checkpointokat vagy esetleges nem várt kivételekkel terminálódik a futás.
+	 */
 	public static void testInitialisation(){
+		MapBuilder map = new MapBuilder();
+		map.building(1000, 700);
+		Settings set = new Settings(Settings.LAPLIMIT);
+		set.setLimit(2);
+		try {
+			Phoebe game = new Phoebe(set);
+			listRobots(game.robots);
+			listObstacles(game.obstacles);
+			listCleaner(game.cleaners);
+			game.run();
+			listRobots(game.robots);
+			listObstacles(game.obstacles);
+			listCleaner(game.cleaners);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	/*
+	 * GameEndWithTimeElapsing_Test
+	 * A játék végét szimuláló teszt. Azt az esetet szimulálja, hogy letelik az idő játék futása közben. 
+	 * Egy játék inicializálás után átugrunk időben a játék végére és szimuláljuk, hogy egy utolsó ugrást tesznek a robotok. 
+	 * Várható hibalehetőségek: nem várt kivétel, a győztes kihirdetése nem valósul meg.
+	 */
+	private static void testGameEndWithTimeElapsing() {
 		MapBuilder map = new MapBuilder();
 		map.building(1000, 700);
 		Settings set = new Settings(Settings.TIMELIMIT);
@@ -393,8 +424,6 @@ public class mainteszt {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
@@ -449,7 +478,7 @@ public class mainteszt {
 
 
 		//	if(args.length>1){
-		switch(/*Integer.parseInt(args[1])*/4){
+		switch(/*Integer.parseInt(args[1])*/14){
 		
 		case 1://VOLT ÜTKÖZÉS TESZT
 			testCollisionWithRobotCollision();
@@ -499,11 +528,12 @@ public class mainteszt {
 			testRobotCollisionWithCleaner();
 			break;
 		
-		case 13://TODO Initialisation Test
+		case 13://Initialisation Test
 			testInitialisation();
 			break;
 			
 		case 14://TODO GameEndWithTimeElapsing_Test
+			testGameEndWithTimeElapsing();
 			break;
 			
 		case 15://AKADÁLY_LERAKÁS_TESZT
@@ -522,5 +552,6 @@ public class mainteszt {
 
 
 	}
+
 }
 

@@ -428,11 +428,12 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 			repaint();	
 			//System.out.println("Fennmaradt idő: "+gameTimer.getTime()+" mp");
 			if(gameTimer.isZero()) ended = true;
+			if(gameInfo.getSettings() == Settings.LAPLIMIT) ended = true; //Teszt 13 miatt
 			//if(elteltidoteszt>=1000) ended=true;
 			//elteltidoteszt+=3;
 			//System.out.println("eltelt:"+elteltidoteszt+"mp");
 		}
-		//if(gameTimer.isZero())System.out.println("A játéknak vége, lejárt az idő.");
+		if(gameTimer.isZero())System.out.println("A játéknak vége, lejárt az idő.");
 		//else System.out.println("A játékos leesett a pályáról.");
 
 	}
