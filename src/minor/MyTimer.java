@@ -97,12 +97,12 @@ public class MyTimer {
 	 * + int getTime()
 	 * 
 	 * Felelősség: 
-	 * Ha pozitív száámal inicializálódott az objektum, akkor megadja mennyi idő van még hátra a visszaszámlálásból 
+	 * Ha pozitív számal inicializálódott az objektum, akkor megadja mennyi idő van még hátra a visszaszámlálásból 
 	 * vagy, ha nullával, akkor a start() hívás óta eltelt idővel tér vissza.
 	 * 
 	 * @return Visszatér egy szekundumban megadott értékkel.
 	 */
 	public int getTime(){
-		return new BigDecimal(((System.currentTimeMillis()-T_start)/1000)).intValueExact();
+		return new BigDecimal(((T_start+duration-System.currentTimeMillis())/1000)).intValueExact();
 	};
 }

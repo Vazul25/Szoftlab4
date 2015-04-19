@@ -72,9 +72,10 @@ public class MapBuilder implements iVisible {
 		//Fájlból olvasás		
 		//...
 		//Kezdő koordináták beolvasása robotonként
-		int[] temp = {200, 300};
+		int[] temp = {50, 70};
  		startPosPlayerOne = temp;
- 		startPosPlayerTwo = temp;
+ 		int[] temp2 = {50, 20};
+ 		startPosPlayerTwo = temp2;
 		//Pálya beolvasása
  		try {
 			setUnitImage();
@@ -177,8 +178,8 @@ public class MapBuilder implements iVisible {
 	}
 
 	public int[] getStartPosPlayer(int id) {
-		//TODO
-		return startPosPlayerOne;
+		if(id%2 == 0) return startPosPlayerTwo;
+		else return startPosPlayerOne;
 	}
 	
 	public void building(int windowWidth, int windowHeight){
