@@ -20,16 +20,21 @@ public class comparer {
      BufferedReader br2 = new BufferedReader(new InputStreamReader(in2));
       
      String strLine1, strLine2;
-      
+     
+     int db=0;
+     
+     System.out.println("<compare>");
       
      while((strLine1 = br1.readLine()) != null && (strLine2 = br2.readLine()) != null){
-         if(strLine1.equals(strLine2)){
-             System.out.println();
-              
+         if(!strLine1.equals(strLine2)){       
+        	 System.out.println(strLine1);
+        	 db++;
          }
-         else        System.out.println(strLine1);
           
      }
+     System.out.println("<\\compare>");
+     if(db == 0) System.out.println("----------!!!A Teszt sikeres!!!----------");
+     else System.out.println("----------!!!A Teszt sikertelen!!!----------");
       br1.close();br2.close();
    }
 }
