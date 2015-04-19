@@ -1,6 +1,0 @@
-Robot [id=0, slowed=1.0, oiled=false, x=500, y=500, nextx=600, nexty=500, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
-Robot [id=1, slowed=1.0, oiled=false, x=600, y=400, nextx=700, nexty=400, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
-nextx, nexty modified to: 500, 400
-nextx, nexty modified to: 400, 500
-Robot [id=0, slowed=1.0, oiled=false, x=400, y=500, nextx=400, nexty=500, alpha=3.1419526536000024, width=40, height=40, NumGlue:3, NumOil:3]
-Robot [id=1, slowed=1.0, oiled=false, x=500, y=400, nextx=500, nexty=400, alpha=-3.1415926536000014, width=40, height=40, NumGlue:3, NumOil:3]

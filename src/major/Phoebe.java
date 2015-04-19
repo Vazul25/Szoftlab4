@@ -141,10 +141,10 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 
 		//KeyListener (gombok lenyomásának lekezelése)
 		MyListener listener=new MyListener(robots);
-		//addKeyListener(listener);
+		addKeyListener(listener);
 		setFocusable(true);
-		//Thread listenert=new Thread(listener);
-		//listenert.start();
+		Thread listenert=new Thread(listener);
+		listenert.start();
 		
 		
 		//Teszt
@@ -155,7 +155,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 		
 	
 		frame.setSize(1000,700);
-		frame.setVisible(false);
+		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 	}
@@ -348,16 +348,10 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 			//Ütközések vizsgálata robottal, akadállyal
 			for(Robot i : robots)
 			{			
-
-				Iterator<Cleaner> it=cleaners.iterator();
-				while(it.hasNext())
-				{
-					Cleaner temp=it.next();
-					
-					if(i.collisionWithCleaner(temp)){
-						temp.die();
-						it.remove();
-
+				for(Cleaner cl : cleaners){					
+					if(i.collisionWithCleaner(cl)){
+						cl.die();
+						cleaners.remove(cl);
 					}
 				}
 				for(Obstacle j : obstacles){
@@ -428,7 +422,6 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 			repaint();	
 			//System.out.println("Fennmaradt idő: "+gameTimer.getTime()+" mp");
 			if(gameTimer.isZero()) ended = true;
-			if(gameInfo.getSettings() == Settings.LAPLIMIT) ended = true; //Teszt 13 miatt
 			//if(elteltidoteszt>=1000) ended=true;
 			//elteltidoteszt+=3;
 			//System.out.println("eltelt:"+elteltidoteszt+"mp");

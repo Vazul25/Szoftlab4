@@ -1,7 +1,0 @@
-Robot [id=0, slowed=1.0, oiled=false, x=150, y=170, nextx=250, nexty=170, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
-Checkpoint: 0 0
-Checkpoint: 340 0
-Checkpoint: 340 560
-Checkpoint: 0 560
-nextx, nexty modified to: 150, 270
-Robot [id=0, slowed=1.0, oiled=false, x=150, y=270, nextx=150, nexty=270, alpha=1.5709763267999999, width=40, height=40, NumGlue:3, NumOil:3]

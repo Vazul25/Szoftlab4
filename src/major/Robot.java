@@ -40,7 +40,7 @@ public class Robot extends Unit{
 	private  static final  int r=100; //sugár
 
 	//TESZT
-	//private  static final  int ANIMATIONSPEED=5;
+	private  static final  int ANIMATIONSPEED=5;
 	protected int WIDTH=40;//teszt placeholder
 	protected int HEIGHT=40;//teszt placeholder
 
@@ -292,24 +292,24 @@ public class Robot extends Unit{
 		//y=arrowendy;
 
 		//TESZT
-		/*	double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
+			double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
 		double speedy=Math.round((arrowendy-y)/ANIMATIONSPEED);
-		 */
+		 
 
 		//Olajjal ütközés hatásának eltüntetése
 		slowed=1;
 
 		//TESZT, GRAFIKA
-		/*	try {
+			try {
 			img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		HEIGHT=60;*/
+		HEIGHT=60;
 		//if(Math.abs((int)(arrowendx-x))<20 &&Math.abs((int)(arrowendy-y))<20) reached=true;
 
-		/*	for(int i=0;i<ANIMATIONSPEED;i++){
+			for(int i=0;i<ANIMATIONSPEED;i++){
 			if(i<ANIMATIONSPEED/2){WIDTH+=2;HEIGHT+=2;}
 			else {WIDTH-=2;HEIGHT-=2;}
 			x+=speedx;
@@ -321,11 +321,11 @@ public class Robot extends Unit{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}*/
+		}
 
-		//WIDTH=40;
+		WIDTH=40;
 
-		//HEIGHT=40;
+		HEIGHT=40;
 		x=arrowendx;
 		y=arrowendy;
 		leftobstacle=false;
@@ -355,13 +355,7 @@ public class Robot extends Unit{
 	public boolean collisionWithObstacles(Obstacle o){
 
 		if(this.intersect(o)) {
-			//double temp=r.alpha;
 			System.out.println("there was a collision between this: "+this.toString()+"\nand this: "+o.toString());
-			//r.alpha=alpha;
-			//alpha=temp;
-			//	bounce(r);			
-			//	move();
-			//r.move();
 			return true;
 		}
 		return false;
@@ -370,7 +364,6 @@ public class Robot extends Unit{
 	public boolean collisionWithCleaner(Cleaner cl){
 		if(this.intersect(cl))
 			return true;
-
 		return false;
 	}
 	
@@ -422,9 +415,9 @@ public class Robot extends Unit{
 			System.out.println("there was a collision between this:\n"+this.toString()+"\n and this:"+r.toString());
 			//r.alpha=alpha;
 			//alpha=temp;
-			//	bounce(r);			
-			//	move();
-			//r.move();
+			bounce(r);			
+			move();
+			r.move();
 			return true;
 		}
 		return false;
@@ -462,7 +455,7 @@ public class Robot extends Unit{
 			if(e == Phoebe.Settings.keyconfig[id%2*4+2])  {
 				if(numOil > 0){
 					Oil item0 = new Oil(x, y);
-					if(p!= null)p.addObstacle(item0);
+					p.addObstacle(item0);
 					leftobstacle=true;
 					System.out.println("new oil created at:"+x+","+y);
 					numOil--;
@@ -474,7 +467,7 @@ public class Robot extends Unit{
 			if(e== Phoebe.Settings.keyconfig[id%2*4+3]){
 				if(numGlue > 0){
 					Glue item1 = new Glue(x, y);
-					if(p!= null)p.addObstacle(item1);
+					p.addObstacle(item1);
 					leftobstacle=true;
 					System.out.println("new glue created at:"+x+","+y);
 					numGlue--;
@@ -483,7 +476,7 @@ public class Robot extends Unit{
 			}
 		}
 		//Nyíl végpontjainak kiszámolása
-		//p.repaint();
+		p.repaint();
 		arrowendx=(int)Math.round((x+slowed*r*Math.cos(alpha)));
 		arrowendy=(int)Math.round(y+slowed*r*Math.sin(alpha));
 	}

@@ -1,6 +1,0 @@
-Robot [id=0, slowed=1.0, oiled=false, x=500, y=350, nextx=600, nexty=350, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
-nextx, nexty modified to: 500, 450
-Robot [id=0, slowed=1.0, oiled=false, x=500, y=450, nextx=500, nexty=450, alpha=1.5709763267999999, width=40, height=40, NumGlue:3, NumOil:3]
-There was a collision between:
-Robot [id=0, slowed=1.0, oiled=false, x=500, y=450, nextx=500, nexty=450, alpha=1.5709763267999999, width=40, height=40, NumGlue:3, NumOil:3]
- and this: map

@@ -265,7 +265,7 @@ public class mainteszt {
 		
 		//setCheckpoints 100, 180
 		map.building(400, 700);
-		hud.setCheckpoints(map.checkpoints);
+		hud.setCheckpoints(map.getCheckpoints());
 		
 		System.out.println(r.toString());
 		
@@ -430,7 +430,7 @@ public class mainteszt {
 		}
 	}
 	
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		/*
@@ -448,8 +448,15 @@ public class mainteszt {
 		//Sz�l l�trehoz�sa, ind�t�sa
 		//	g.game = new Phoebe(set);
 
-		//	Thread t = new Thread( new Phoebe(set));
-		//t.start();
+		Thread t;
+		try {
+			t = new Thread( new Phoebe(set));
+			t.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		//...
 
 
@@ -480,7 +487,7 @@ public class mainteszt {
 
 
 		//	if(args.length>1){
-		switch(Integer.parseInt(args[0])){
+		/*switch(Integer.parseInt(args[0])){
 		
 		case 1://VOLT ÜTKÖZÉS TESZT
 			testCollisionWithRobotCollision();
@@ -550,7 +557,7 @@ public class mainteszt {
 			testCleaner();
 			break;
 			//	}
-		}
+		}*/
 
 
 	}
