@@ -22,7 +22,7 @@ public class MapBuildTest extends JPanel implements iVisible {
 	MapBuilder map;
 
 	public static void main(String[] args) {
-		 MapBuildTest d = new MapBuildTest();
+		 new MapBuildTest();
 		 
 	}
 	

@@ -77,12 +77,6 @@ public class MapBuilder implements iVisible {
  		int[] temp2 = {50, 20};
  		startPosPlayerTwo = temp2;
 		//Pálya beolvasása
- 		try {
-			setUnitImage();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
  		try{ 
 			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+System.getProperty("file.separator")+"maps"+System.getProperty("file.separator")+"Map.ser"); 
 			ObjectInputStream reader = new ObjectInputStream(fis); 
@@ -263,12 +257,12 @@ public class MapBuilder implements iVisible {
 		g2.drawRect(paintableOuterMap.x, paintableOuterMap.y, paintableOuterMap.width, paintableOuterMap.height);		
 	}
 	
-	public  static void setUnitImage() throws IOException{
+	/*public  static void setUnitImage() throws IOException{
 		String sep=System.getProperty("file.separator");
 		img=new BufferedImage[2];
 		//img[0]=ImageIO.read(new File(System.getProperty("user.dir")+sep+"icons"+sep+"restricted.jpg"));
 		//img[1]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
-	}
+	}*/
 
 	public void listCheckpoints(){
 		for(Rectangle i: checkpoints)

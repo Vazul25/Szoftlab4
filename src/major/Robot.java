@@ -3,16 +3,12 @@
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import javax.imageio.ImageIO;
-
-import minor.VectorUtil;
 
 /*
  * Robot osztály
@@ -44,7 +40,7 @@ public class Robot extends Unit{
 	private  static final  int r=100; //sugár
 
 	//TESZT
-	private  static final  int ANIMATIONSPEED=5;
+	//private  static final  int ANIMATIONSPEED=5;
 	protected int WIDTH=40;//teszt placeholder
 	protected int HEIGHT=40;//teszt placeholder
 

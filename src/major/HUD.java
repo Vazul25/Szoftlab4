@@ -1,8 +1,6 @@
 ﻿package major;
 
 import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.geom.Area;
 import java.util.List;
 
 /**

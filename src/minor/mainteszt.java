@@ -456,23 +456,23 @@ public class mainteszt {
 		System.out.flush();
 		//LogBase
 		/*	
-		1.5.1.    CollisionWithRobot_VOLTÜTKÖZÉS_TESZT  
-		1.5.2.    CollisionWithRobot_NEMVOLTÜTKÖZÉS_TESZT.   
-		1.5.3.    CollisionWithRobot_IRÁNYVÁLTOZTATÁS_TESZT
-		1.5.4.    CollisionWithObstacles_OLAJBA.UGRÁS_TESZT
-		1.5.5.    CollisionWithObstacles_RAGACSBA.UGRÁS_TESZT
-		1.5.6.    CollisionWithObstacles_OLAJ.HATÁSA_TESZT
-		1.5.7.    CollisionWithObstacles_RAGACS.HATÁSA_TESZT
-		1.5.8.    robotOutsideOfMap_A.PÁLYÁRÓL.LEESETT_TESZT
-		1.5.9.    robotOutsideOfMap_NEM.ESETT.LE.PÁLYÁRÓL_TESZT
-		1.5.10.  checkpointSearch_CHEICKPOINTONBA.UGRÁS_TESZT
-		1.5.11.  checkpointSearch_CHEICKPOINTONBA.NEM.UGRÁS_TESZT
-		1.5.12.  RobotCollisionWithCleaner_TESZT
-		1.5.13.  Initialisation_Test
-		1.5.14.  GameEndWithTimeElapsing_Test
-		1.5.15.  AddObstacle_AKADÁLY_LERAKÁS_TESZT
-		1.5.16.  ObstacleLife_AKADÁLY_ÉLETTARTAM_TESZT
-		1.5.17.  Cleaner_TAKARÍTÓ_KISROBOT_MOZGÁS_TAKARÍTÁS_TESZT
+		1.5.1.    CollisionWithRobot_VOLTÜTKÖZÉS_TESZT  		Vazul
+		1.5.2.    CollisionWithRobot_NEMVOLTÜTKÖZÉS_TESZT.  	 Vazul
+		1.5.3.    CollisionWithRobot_IRÁNYVÁLTOZTATÁS_TESZT		Vazul
+		1.5.4.    CollisionWithObstacles_OLAJBA.UGRÁS_TESZT 	Vince
+		1.5.5.    CollisionWithObstacles_RAGACSBA.UGRÁS_TESZT 	Vince
+		1.5.6.    CollisionWithObstacles_OLAJ.HATÁSA_TESZT 		Vince
+		1.5.7.    CollisionWithObstacles_RAGACS.HATÁSA_TESZT 	Vince
+		1.5.8.    robotOutsideOfMap_A.PÁLYÁRÓL.LEESETT_TESZT	Attó
+		1.5.9.    robotOutsideOfMap_NEM.ESETT.LE.PÁLYÁRÓL_TESZT Attó
+		1.5.10.  checkpointSearch_CHEICKPOINTONBA.UGRÁS_TESZT 	Attó
+		1.5.11.  checkpointSearch_CHEICKPOINTONBA.NEM.UGRÁS_TESZT Attó
+		1.5.12.  RobotCollisionWithCleaner_TESZT				Vince
+		1.5.13.  Initialisation_Test							Don
+		1.5.14.  GameEndWithTimeElapsing_Test					Don
+		1.5.15.  AddObstacle_AKADÁLY_LERAKÁS_TESZT				Milán			
+		1.5.16.  ObstacleLife_AKADÁLY_ÉLETTARTAM_TESZT			Milán
+		1.5.17.  Cleaner_TAKARÍTÓ_KISROBOT_MOZGÁS_TAKARÍTÁS_TESZT Milán
 					}*/
 
 
