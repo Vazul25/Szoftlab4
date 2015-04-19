@@ -452,8 +452,6 @@ public class mainteszt {
 		/*
 		 * Testesetek függvényeinek meghívása: 
 		 */
-
-		//System.out.flush();
 		//LogBase
 		/*	
 		1.5.1.    CollisionWithRobot_VOLTÜTKÖZÉS_TESZT  		Vazul
