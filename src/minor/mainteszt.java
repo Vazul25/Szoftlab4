@@ -314,9 +314,13 @@ public class mainteszt {
 	public static void testAddObstacle(){
 		Robot r = new Robot(100, 200, null);
 		r.keyPressed(KeyEvent.VK_UP);
+		r.move(); //mozgatni kell a keypressed-ek után, mert egy lépésben csak egy olajat tehet le
 		r.keyPressed(KeyEvent.VK_UP);
+		r.move();
 		r.keyPressed(KeyEvent.VK_UP);
+		r.move();
 		r.keyPressed(KeyEvent.VK_UP);
+		r.move();
 	}
 	
 	/*

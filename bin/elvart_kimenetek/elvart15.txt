@@ -1,1 +1,4 @@
 new oil created at:100,200
+new oil created at:200,200
+new oil created at:300,200
+Not enough oil
