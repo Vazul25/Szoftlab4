@@ -462,7 +462,7 @@ public class Robot extends Unit{
 			if(e == Phoebe.Settings.keyconfig[id%2*4+2])  {
 				if(numOil > 0){
 					Oil item0 = new Oil(x, y);
-					p.addObstacle(item0);
+					if(p!= null)p.addObstacle(item0);
 					leftobstacle=true;
 					System.out.println("new oil created at:"+x+","+y);
 					numOil--;
@@ -474,7 +474,7 @@ public class Robot extends Unit{
 			if(e== Phoebe.Settings.keyconfig[id%2*4+3]){
 				if(numGlue > 0){
 					Glue item1 = new Glue(x, y);
-					p.addObstacle(item1);
+					if(p!= null)p.addObstacle(item1);
 					leftobstacle=true;
 					System.out.println("new glue created at:"+x+","+y);
 					numGlue--;

@@ -176,11 +176,11 @@ public class HUD {
 				
 	
 				Rectangle robotarea = new Rectangle(i.getHitbox());
-				Rectangle checkpointarea = new Rectangle(checkpoints.get(nextCheckpoint)); 
-				robotarea.intersects(checkpointarea);
+				//Rectangle checkpointarea = checkpoints.get(nextCheckpoint); 
+				//robotarea.intersects(checkpointarea);
 				
-				for(Rectangle checks: checkpoints)
-					if(robotarea.intersects(checks)) System.out.print("There was a collision between:\n"+i.toString()+"\nand this checkpoint:"+checks.x+" "+checks.y);
+				//for(Rectangle checks: checkpoints)
+					//if(robotarea.intersects(checks)) System.out.print("There was a collision between:\n"+i.toString()+"\nand this checkpoint:"+checks.x+" "+checks.y);
 				
 	
 				/*if(!robotarea.isEmpty()){

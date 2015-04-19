@@ -77,8 +77,13 @@ public class Cleaner extends Unit {
 	public Cleaner(int x, int y, Phoebe p) {
 		super(x, y);
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
-		this.p=p;
-		obstacles=p.getObstacles();
+		if(p!=null ){
+			this.p=p;
+			obstacles=p.getObstacles();
+		}else{
+			p = null;
+			obstacles = null;
+		}
 		bouncing=false;
 	}
 
@@ -88,6 +93,7 @@ public class Cleaner extends Unit {
 	 * @return NULL-al tér vissza, ha nincs elérhető akadály
 	 */
 	private Obstacle nextObstacle(){
+		if(obstacles!=null)
 		if(!obstacles.isEmpty()){
 			double distance, minDist = 30000;
 			Obstacle min = null;
@@ -224,7 +230,7 @@ public class Cleaner extends Unit {
 					x=destination.x;
 					y=destination.y;
 					hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
-					obstacles.remove(destination);
+					if(obstacles!= null)obstacles.remove(destination);
 					state = Concluder.WORKING;
 					cleaning = 1; 
 					break;
@@ -266,7 +272,7 @@ public class Cleaner extends Unit {
 
 	public void die() {
 		dying=true;
-		obstacles.add(new Oil(x,y));
+		if(obstacles!=null )obstacles.add(new Oil(x,y));
 		deathAnimation();
 	}
 }

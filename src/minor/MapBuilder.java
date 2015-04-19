@@ -39,7 +39,7 @@ public class MapBuilder implements iVisible {
 	* Tárolja a checkpointokat reprezentáló objektumokat List 
 	* adatszerkezetben. 
 	*/
-	public List<Rectangle> checkpoints;
+	List<Rectangle> checkpoints;
 	
 	//public List<Rectangle> paintableCheckpoints;
 	

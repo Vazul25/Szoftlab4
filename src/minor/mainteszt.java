@@ -453,7 +453,7 @@ public class mainteszt {
 		 * Testesetek függvényeinek meghívása: 
 		 */
 
-		System.out.flush();
+		//System.out.flush();
 		//LogBase
 		/*	
 		1.5.1.    CollisionWithRobot_VOLTÜTKÖZÉS_TESZT  		Vazul
@@ -478,7 +478,7 @@ public class mainteszt {
 
 
 		//	if(args.length>1){
-		switch(/*Integer.parseInt(args[1])*/14){
+		switch(Integer.parseInt(args[0])){
 		
 		case 1://VOLT ÜTKÖZÉS TESZT
 			testCollisionWithRobotCollision();
