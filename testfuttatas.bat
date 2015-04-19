@@ -1,0 +1,17 @@
+java mainteszt 1 >> teszt1.txt
+java mainteszt 2 >> teszt2.txt
+java mainteszt 3 >> teszt3.txt
+java mainteszt 4 >> teszt4.txt
+java mainteszt 5 >> teszt5.txt
+java mainteszt 6 >> teszt6.txt
+java mainteszt 7 >> teszt7.txt
+java mainteszt 8 >> teszt8.txt
+java mainteszt 9 >> teszt9.txt
+java mainteszt 10 >> teszt10.txt
+java mainteszt 11 >> teszt11.txt
+java mainteszt 12 >> teszt12.txt
+java mainteszt 13 >> teszt13.txt
+java mainteszt 14 >> teszt14.txt
+java mainteszt 15 >> teszt15.txt
+java mainteszt 16 >> teszt16.txt
+java mainteszt 17 >> teszt17.txt
