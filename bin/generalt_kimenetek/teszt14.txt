@@ -1,0 +1,20 @@
+Robot [id=0, slowed=1.0, oiled=false, x=50, y=70, nextx=150, nexty=70, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
+Robot [id=1, slowed=1.0, oiled=false, x=50, y=20, nextx=150, nexty=20, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
+Glue [x=100, y=100, Width=40, Height=40, Lifetime=4]
+Glue [x=500, y=100, Width=40, Height=40, Lifetime=4]
+Oil [x=100, y=600, Width=40, Height=40, lifetime:10]
+Oil [x=500, y=600, Width=40, Height=40, lifetime:10]
+Cleaner [x=500,y=200, nextx=0, nexty=0, alpha=1.57, width=40, height=40]  0 
+Cleaner [x=620,y=200, nextx=0, nexty=0, alpha=1.57, width=40, height=40]  0 
+Robot [id=0, slowed=1.0, oiled=false, x=50, y=70, nextx=150, nexty=70, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
+Robot [id=1, slowed=1.0, oiled=false, x=50, y=20, nextx=150, nexty=20, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
+Cleaner [x=500,y=200, nextx=0, nexty=0, alpha=1.57, width=40, height=40]  0 
+Cleaner [x=620,y=200, nextx=0, nexty=0, alpha=1.57, width=40, height=40]  0 
+A játéknak vége, lejárt az idõ.
+Robot [id=0, slowed=1.0, oiled=false, x=150, y=70, nextx=150, nexty=70, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
+Robot [id=1, slowed=1.0, oiled=false, x=150, y=20, nextx=150, nexty=20, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
+Glue [x=100, y=100, Width=40, Height=40, Lifetime=4]
+Oil [x=100, y=600, Width=40, Height=40, lifetime:9]
+Oil [x=500, y=600, Width=40, Height=40, lifetime:9]
+Cleaner [x=500,y=100, nextx=500, nexty=100, alpha=-1.5707963267948966, width=40, height=40]  1 
+Cleaner [x=591,y=295, nextx=591, nexty=295, alpha=1.8622531212727638, width=40, height=40]  0 

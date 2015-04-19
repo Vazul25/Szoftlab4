@@ -1,5 +1,4 @@
 src/major/testuml.ucls
-bin/*
 bin/minor/*
 bin/major/*
 bin/junit/*

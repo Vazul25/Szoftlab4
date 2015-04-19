@@ -1,0 +1,10 @@
+Cleaner [x=100,y=200, nextx=0, nexty=0, alpha=1.57, width=40, height=40]  0 
+Oil [x=100, y=300, Width=40, Height=40, lifetime:10]
+Oil [x=100, y=400, Width=40, Height=40, lifetime:10]
+Cleaner [x=100,y=200, nextx=0, nexty=0, alpha=1.57, width=40, height=40]  0 
+Cleaner [x=100,y=200, nextx=0, nexty=0, alpha=1.57, width=40, height=40]  0 
+Cleaner [x=100,y=200, nextx=0, nexty=0, alpha=1.57, width=40, height=40]  0 
+Cleaner [x=100,y=200, nextx=0, nexty=0, alpha=1.57, width=40, height=40]  0 
+Cleaner [x=100,y=200, nextx=0, nexty=0, alpha=1.57, width=40, height=40]  0 
+Oil [x=100, y=300, Width=40, Height=40, lifetime:10]
+Oil [x=100, y=400, Width=40, Height=40, lifetime:10]

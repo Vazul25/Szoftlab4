@@ -1,0 +1,8 @@
+Robot [id=0, slowed=1.0, oiled=false, x=0, y=0, nextx=100, nexty=0, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
+Oil [x=0, y=0, Width=40, Height=40, lifetime:10]
+Oil [x=100, y=0, Width=40, Height=40, lifetime:10]
+you jumped into oil
+Robot [id=0, slowed=1.0, oiled=true, x=0, y=0, nextx=100, nexty=0, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
+nextx, nexty modified to: 100, 0
+there was a collision between this: Robot [id=0, slowed=1.0, oiled=false, x=100, y=0, nextx=100, nexty=0, alpha=0.0, width=40, height=40, NumGlue:3, NumOil:3]
+and this: Oil [x=100, y=0, Width=40, Height=40, lifetime:10]

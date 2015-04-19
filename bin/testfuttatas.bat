@@ -1,0 +1,17 @@
+java minor.mainteszt 1 >> generalt_kimenetek\teszt1.txt
+java minor.mainteszt 2 >> generalt_kimenetek\teszt2.txt
+java minor.mainteszt 3 >> generalt_kimenetek\teszt3.txt
+java minor.mainteszt 4 >> generalt_kimenetek\teszt4.txt
+java minor.mainteszt 5 >> generalt_kimenetek\teszt5.txt
+java minor.mainteszt 6 >> generalt_kimenetek\teszt6.txt
+java minor.mainteszt 7 >> generalt_kimenetek\teszt7.txt
+java minor.mainteszt 8 >> generalt_kimenetek\teszt8.txt
+java minor.mainteszt 9 >> generalt_kimenetek\teszt9.txt
+java minor.mainteszt 10 >> generalt_kimenetek\teszt10.txt
+java minor.mainteszt 11 >> generalt_kimenetek\teszt11.txt
+java minor.mainteszt 12 >> generalt_kimenetek\teszt12.txt
+java minor.mainteszt 13 >> generalt_kimenetek\teszt13.txt
+java minor.mainteszt 14 >> generalt_kimenetek\teszt14.txt
+java minor.mainteszt 15 >> generalt_kimenetek\teszt15.txt
+java minor.mainteszt 16 >> generalt_kimenetek\teszt16.txt
+java minor.mainteszt 17 >> generalt_kimenetek\teszt17.txt

@@ -1,0 +1,14 @@
+Glue [x=0, y=0, Width=40, Height=40, Lifetime=4]
+Oil [x=0, y=100, Width=40, Height=40, lifetime:10]
+you jumped into glue
+you jumped into glue
+you jumped into glue
+you jumped into glue
+you jumped into oil
+you jumped into oil
+you jumped into oil
+you jumped into oil
+Glue [x=0, y=0, Width=40, Height=40, Lifetime=0]
+Oil [x=0, y=100, Width=40, Height=40, lifetime:10]
+Glue [x=0, y=0, Width=40, Height=40, Lifetime=0]
+Oil [x=0, y=100, Width=40, Height=40, lifetime:-1]
