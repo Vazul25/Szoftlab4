@@ -4,10 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.Shape;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,11 +14,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-
 import major.Obstacle;
 import major.Robot;
-import major.Unit;
 import major.iVisible;
 
 /*
@@ -44,9 +39,9 @@ public class MapBuilder implements iVisible {
 	* Tárolja a checkpointokat reprezentáló objektumokat List 
 	* adatszerkezetben. 
 	*/
-	private List<Area> checkpoints;
+	public List<Rectangle> checkpoints;
 	
-	public List<Rectangle> paintableCheckpoints;
+	//public List<Rectangle> paintableCheckpoints;
 	
 	public Rectangle paintableInnerMap;
 	public Rectangle paintableOuterMap;
@@ -108,19 +103,20 @@ public class MapBuilder implements iVisible {
 		}
 
 		//checkpointok létrehozása
-		checkpoints = new ArrayList<Area>();
+		//checkpoints = new ArrayList<Area>();
 		try{ 
 			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+System.getProperty("file.separator")+"maps"+System.getProperty("file.separator")+"Checkpoints.ser"); 
 			ObjectInputStream reader = new ObjectInputStream(fis); 
 			if(fis != null && reader != null){
-				ArrayList<Rectangle> x = new ArrayList<Rectangle>();
+				List<Rectangle> x = new ArrayList<Rectangle>();
 				x = (ArrayList) reader.readObject(); 
 				reader.close();
 				fis.close();
-				paintableCheckpoints = x; 
-				for(Rectangle tmp : x){
+				//paintableCheckpoints = x; 
+				checkpoints = x;
+				/*for(Rectangle tmp : x){
 					checkpoints.add(new Area(tmp));
-				}
+				}*/
 			}
 		}
 		catch (ClassNotFoundException e) {
@@ -145,7 +141,7 @@ public class MapBuilder implements iVisible {
 	 * 
 	 * @return visszaadja a Checkpointokat tartalmazó listát
 	 */
-	public List<Area> getCheckpoints(){
+	public List<Rectangle> getCheckpoints(){
 		return checkpoints;
 	}
 
@@ -256,7 +252,7 @@ public class MapBuilder implements iVisible {
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setPaint(Color.black);
-		for(Rectangle tmp : paintableCheckpoints){
+		for(Rectangle tmp : checkpoints){
 			g2.drawRect(tmp.x, tmp.y, tmp.width, tmp.height);
 		}
 		g2.setPaint(Color.red);
@@ -274,7 +270,7 @@ public class MapBuilder implements iVisible {
 	}
 
 	public void listCheckpoints(){
-		for(Rectangle i: paintableCheckpoints)
+		for(Rectangle i: checkpoints)
 			System.out.println("Checkpoint: "+i.x+" "+i.y);
 	}
 	

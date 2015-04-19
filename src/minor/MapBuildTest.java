@@ -38,7 +38,7 @@ public class MapBuildTest extends JFrame {
 			
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setPaint(Color.black);
-			for(Rectangle tmp : map.paintableCheckpoints){
+			for(Rectangle tmp : map.checkpoints){
 				g2.drawRect(tmp.x, tmp.y, tmp.width, tmp.height);
 			}
 			g2.setPaint(Color.red);

@@ -219,7 +219,7 @@ public class mainteszt {
 		
 		//setCheckpoints 100, 180
 		map.building(400, 700);
-		hud.setCheckpoints(map.paintableCheckpoints);
+		hud.setCheckpoints(map.checkpoints);
 		
 		System.out.println(r.toString());
 		
@@ -247,7 +247,7 @@ public class mainteszt {
 		
 		//setCheckpoints 100, 180
 		map.building(400, 700);
-		hud.setCheckpoints(map.paintableCheckpoints);
+		hud.setCheckpoints(map.checkpoints);
 		
 		System.out.println(r.toString());
 		
@@ -316,7 +316,7 @@ public class mainteszt {
 			System.out.println(i.toString());
 		}
 		for(Obstacle o : obstacles){ //cycles_elapsed(4) - 4x belelépünk a glue-ba (meg az olajba is, de az nem számít)
-			for(int i = 0; i < 4; i++){
+			for(int i = 1; i <= 4; i++){
 				o.effect(r);
 			}
 		}
@@ -324,7 +324,7 @@ public class mainteszt {
 			System.out.println(i.toString());
 		}
 		for(Obstacle o : obstacles){ //cycles_elapsed(11) 
-			for(int i = 0; i < 11; i++){
+			for(int i = 1; i <= 11; i++){
 				o.checkAlive();
 			}
 		}
@@ -410,7 +410,7 @@ public class mainteszt {
 
 
 		//	if(args.length>1){
-		switch(/*Integer.parseInt(args[1])*/11){
+		switch(/*Integer.parseInt(args[1])*/4){
 		
 		case 1://VOLT ÜTKÖZÉS TESZT
 			testCollisionWithRobotCollision();
