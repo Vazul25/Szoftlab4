@@ -6,66 +6,130 @@
 \thispagestyle{fancy}
 
 \section{Fordítási és futtatási útmutató}
-\comment{A feltöltött program fordításával és futtatásával kapcsolatos útmutatás. Ennek tartalmaznia kell leltárszerűen az egyes fájlok pontos nevét, méretét byte-ban, keletkezési idejét, valamint azt, hogy a fájlban mi került megvalósításra.}
 
 \subsection{Fájllista}
 
 \begin{fajllista}
 
 \fajl
-{Main.java} % Kezdet
-{250 byte} % Idptartam
-{2009.10.10~18:05~} % Résztvevők
-{...} % Leírás
+{Scrum\_that\_proto\_test.zip} % Kezdet
+{775 213 byte} 
+{2015.04.19. ~21:46~} 
+{Tesztrendszer} 
 
 \fajl
-{...}
-{...}
-{...}
-{...}
+{Scrum\_that\_proto\_teljes.zip} % Kezdet
+{676 528 byte} 
+{2015.04.20. ~00:01~} 
+{Prototípus} 
 
 \end{fajllista}
 
-\subsection{Fordítás}
-\comment{A fenti listában szereplő forrásfájlokból milyen műveletekkel lehet a bináris, futtatható kódot előállítani. Az előállításhoz csak a 2. Követelmények c. dokumentumban leírt környezetet szabad előírni.}
+\subsection{Tesztelés}
 
-\lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
-\begin{lstlisting}
-javac -d bin *.java
-\end{lstlisting}
+1. Csomagolja ki a Scrum\_that\_proto.zip állományt.\\
+2. Lépjen be a Prototipus gyökérkönyvtárba.\\
+3. Indítsa el a Clean.bat futtatható scriptet.\\
+4. Indítsa el a Tesztelo.bat futtatható scriptet.\\
+5. Figyelje a megjelenő parancssort és ha szükséges nyomjon meg egy gombot.\newline
 
-\subsection{Futtatás}
-\comment{A futtatható kód elindításával kapcsolatos teendők leírása. Az indításhoz csak a 2. Követelmények c. dokumentumban leírt környezetet szabad előírni.}
+A tesztek elvárt és eredményezett kimeneteit ellenörző script a következőképp épül fel:\newline
+-----TesztX------\\
+<compare>\\
+\comment{0 vagy több sor kimeneti nyelv}\\
+</compare>\\
 
-\lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
-\begin{lstlisting}
-cd bin
-java Main.java
-\end{lstlisting}
+Ha a compare kulcsszavak között 0 sor van akkor a Teszt sikeresnek mondható, ha nem akkor az eltérést látható ott. Ekkor a teszt sikertelen.
 
+\subsection{Prototípus futtatás}
+Eclipse környezetben:\\
+1. Importálja a projektet a Scrum\_that\_proto\_teljes.zip archív fájlból.\\
+2. Run As: Java Application
 
 \section{Tesztek jegyzőkönyvei}
 
-\subsection{Teszteset1}
-\comment{Az alábbi táblázatot az utolsó, sikeres tesztfuttatáshoz kell kitölteni}
+\subsection{CollisionWithRobot\_VOLTÜTKÖZÉS\_TESZT}
 
-\tesztok{...}{...}
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
 
-\comment{Az alábbi táblázatot a megismételt (hibás) tesztek esetén kell kitölteni minden ismétléshez egyszer. Ha szükséges, akkor a valós kimenet is mellékelhető mint a teszt eredménye.}
+\subsection{CollisionWithRobot\_NEMVOLTÜTKÖZÉS\_TESZT}
 
-\tesztfail{...}{...}{...}{...}{...}
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
 
+\subsection{CollisionWithRobot\_IRÁNYVÁLTOZTATÁS\_TESZT}
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{CollisionWithObstacles\_OLAJBA.UGRÁS\_TESZT }
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{CollisionWithObstacles\_RAGACSBA.UGRÁS\_TESZT}
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{ CollisionWithObstacles\_OLAJ.HATÁSA\_TESZT}
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{CollisionWithObstacles\_RAGACS.HATÁSA\_TESZT }
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{robotOutsideOfMap\_A.PÁLYÁRÓL.LEESETT\_TESZT}
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{robotOutsideOfMap\_NEM.ESETT.LE.PÁLYÁRÓL\_TESZT}
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{checkpointSearch\_CHEICKPOINTONBA.UGRÁS\_TESZT}
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{checkpointSearch\_CHEICKPOINTONBA.NEM.UGRÁS\_TESZT}
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{RobotCollisionWithCleaner\_TESZT}
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{Initialisation\_Test}
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{GameEndWithTimeElapsing\_Test}
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{AddObstacle\_AKADÁLY\_LERAKÁS\_TESZT}
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{ObstacleLife\_AKADÁLY\_ÉLETTARTAM\_TESZT}
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+\subsection{Cleaner\_TAKARÍTÓ\_KISROBOT\_MOZGÁS\_TAKARÍTÁS\_TESZT}
+
+\tesztok{Tóth Krisztián Dávid}{2015.04.19. 22:00}
+
+
+\pagebreak
 \section{Értékelés}
-\comment{A projekt kezdete óta az értékelésig eltelt időben tagokra bontva, százalékban.}
 
 \begin{ertekeles}
-\tag{Horváth} % Tag neve
-{23.5}        % Munka szazalekban
-\tag{Német}
-{24.5}
+\tag{Kovács} % Tag neve
+{20}        % Munka szazalekban
+\tag{Lovász}
+{20}
+\tag{Graics}
+{20}
+\tag{Magyar}
+{20}
 \tag{Tóth}
-{25}
-\tag{Oláh}
-{27}
+{20}
 \end{ertekeles}
 

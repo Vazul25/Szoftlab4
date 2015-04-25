@@ -194,15 +194,25 @@ A takarító robotot reprezentáló osztály.
 Unit$\rightarrow$Robot
 \item Attribútumok
     \begin{itemize}
-        \item List obstacles:  
+        \item - \textbf{enum} Concluder {MOVING, WORKING}: A kis robot állapotának leírása.
+        \item - \textbf{boolean} dying: A Cleaner robot meghalását jelző logiaki változó.
+        \item - \textbf{Concluder} state: A robot állapotát tároló változó.
+        \item - \textbf{int} cleaning: A takarító robot takarítási idejének változója.
+        \item - \textbf{boolean} bouncing: A kis robot ütközését másik kisrobottal jelző változó.
+        \item - \textbf{int} arrowendx: A kis robot következő pozícióját segítő nyílnak az x koordinátája.
+        \item - \textbf{int} arrownedy: A kis robot következő pozícióját segítő nyílnak az y koordinátája.
+        \item - \textbf{double} alpha: A kis robot irányának számítására használt szög érték.(radiánban)
+        \item - \textbf{int} r: Ugrás nagyságának értéke.
+        \item - \textbf{Phoebe} p: A játék fő osztályára mutató referencia.
+        \item - \textbf{List} obstacles: A játékba szereplő akadályok listája.
     \end{itemize}
 \item Metódusok
 	\begin{itemize}
-	    \item \textbf{Cleaner}(int x, int y, Phoebe p):
-		\item void \textbf{setObstacles}(List obsts): 
-		\item boolean \textbf{collisionWithRobot}():
-		\item void \textbf{collisionWithCleaner}():
-		\item void \textbf{move}():
+	    \item \textbf{Cleaner}(int x, int y, Phoebe p): Egy Cleaner objektum létrehozásáért, inicializálásáért felelős konstruktor.
+	    \item Obstacle \textbf{nextObstacle}(): Megkeresi a legközelebbi akadályt a listából és visszaadja a rá mutató referenciát.
+		\item boolean \textbf{collisionWithRobot}(): Abban az esetben, amikor Cleaner ütközik Robottal, le kell kezelnie a lepattanást.
+		\item void \textbf{collisionWithCleaner}(): Abban az esetben, amikor Cleaner ütközik Cleanerrel, le kell kezelnie mindkettő lepattanást.
+		\item void \textbf{move}(): A kis robot mozgásának lekezeléséért és akadályok takarításért felelős felelős.
 	\end{itemize}
 \end{itemize}
 
@@ -328,7 +338,7 @@ A játék elején a kezdésig visszaszámol három másodpercet, utána indulhat
 \item Metódusok
 	\begin{itemize}
 		\item + \textbf{MyTimer}(int i): Konstruktor. Ha 0-val vagy negatívval inicializálják felfele számol, ha pozitív számmal inicializálják akkor lefelé számol.
-		\item + boolean \textbf{isZero}(): Az idő lejárását ellenörző függvény, megadja, hogy az indítás plusz a megadott időtartam kisebb-e a pillanatnyi időnél.
+		\item + boolean \textbf{isZero}(): Az idő lejárását ellenőrző függvény, megadja, hogy az indítás plusz a megadott időtartam kisebb-e a pillanatnyi időnél.
 		\item + int \textbf{getTime}():  Ha pozitív száámal inicializálódott az objektum, akkor megadja mennyi idő van még hátra a visszaszámlálásból vagy, ha nullával, akkor a start() hívás óta eltelt idővel tér vissza.
 		\item + void \textbf{start}(): Az óra indításakor vagy újraindításakor meghívott függvény. Csak akkor indul újra (visszaszámláló üzemmódban), ha elérte a 0-t. A Phoebe run() metódusa hívja meg, mikor vissza kell számolni a játék kezdete előtt három másodpercet. Illetve, a játék kezdetekor.
 	\end{itemize}
@@ -344,7 +354,7 @@ Unit
 	\begin{itemize}
 		\item \# \textbf{int} WIDTH: Az akadályokat jellemző szélesség. Szükség van rá, hogy létrehozzuk a leszármazottak hitbox-át(sokszög pályaelem).
 		\item \# \textbf{int} HEIGHT: Az akadályokat jellemző hosszúság. Szükség van rá, hogy létrehozzuk a leszármazottak hitbox-át(sokszög pályaelem).
-			\item \# \textbf{int} lifetime: Generikussan az akadályok életben maradásának ellenörzésére szolgál. Olaj esetében megadja, hogy hány kör telt el az akadály lerakása óta. Ragacs esetében pedig, hogy hányan léptek rá mióta lekerült. 
+			\item \# \textbf{int} lifetime: Generikussan az akadályok életben maradásának ellenőrzésére szolgál. Olaj esetében megadja, hogy hány kör telt el az akadály lerakása óta. Ragacs esetében pedig, hogy hányan léptek rá mióta lekerült. 
 	\end{itemize}
 \item Metódusok
 	\begin{itemize}
@@ -479,7 +489,7 @@ Unit
 		\item+ void\textbf{incNumGlue}():Növeli a robotnál tárolt ragacsok számát, ha az nem haladja meg a 3 at.
 	\item+ void\textbf{paint}(Graphics2D g):kirajzolja a robotot a saját koordinátáin, ha nem lép éppen akkor az irányítást segítő nyilat is.
 	\item+ void\textbf{setUnitImage}():beállítja a robot osztályhoz tartozó képeket.
-\item+ void\textbf{bounce}():A robotok ütközésekor a lepattanás céjának  koordinátáinak számolása történik itt.
+\item+ void\textbf{bounce}(Robot r):A robotok ütközésekor a lepattanás céjának  koordinátáinak számolása történik itt.
 
 		\item+ void\textbf{move}():A robot mozgatásáért és annak leanimálásáért felelős függvény.Kiszámolja az új koordinátát és oda ugrasztja a robotot, majd frissíti a hitboxot.
 		\item+ boolean \textbf{collisionWithObstacle}(Obstacle o): Ellenőrzi hogy a robot ütközött-e az akadállyal, igazzal tér vissza ha igen, hamissal ha nem.
@@ -507,20 +517,21 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 	\end{itemize}
 \end{itemize}
 \pagebreak
+
 \section{A tesztek részletes tervei, leírásuk a teszt nyelvén}
 
 \subsection{CollisionWithRobot\_VOLTÜTKÖZÉS\_TESZT}
 \begin{itemize}
 	\item Leírás: Ez a teszt a collisionWithRobot(Robot r) függvény teszteléséért felelős.
 			Létrehoz 2 robotot majd beállítja az őket, úgy hogy egymásra ugorjanak .
-			Kiirja az adataikat  és meghivja a move függvényt ezt követően pedig az egyik collisionWithRobot függvényét a másikra	és újból ki listáza őket.	\newline
-	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás végeztével .
+			Kiirja az adataikat  és meghivja a move függvényt ezt követően pedig az egyik collisionWithRobot függvényét a másikra	és újból kilistázza őket.	\newline
+	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenőrizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás végeztével .
 	Várható hiba ha hamissal tér vissza a függvény, amiből látjuk, hogy rossz a hitbox létrehozása az új helyen az ugrást követően.
 	\item Bemeneti nyelv :
 		\begin{itemize}
 		\item Robot(500,500)
 		\item Robot(600,400)
-		\item Keypressed(Keyevent.VK\_A,90)
+		\item Keypressed A 90 
 		\item listRobots
 		\item move
 		\item listRobots
@@ -565,8 +576,8 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 	\item Leírás: Ez a teszt a collisionWithRobot(Robot r) függvény teszteléséért felelős.
 			Létrehoz 2 robotot  .
 			Kiirja az adataikat  és meghivja a move függvényt ezt követően pedig az egyik collisionWithRobot függvényét a másikra 
-			és újból ki listáza őket.			\newline
-	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás végeztével .
+			és újból kilistázza őket.			\newline
+	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenőrizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás végeztével .
 	Várható hiba ha loggol collisiont a függvény, amiből látjuk, hogy rossz a hitboxok össze vetése , hisz nem lehet ütközés. 
 
 	
@@ -588,9 +599,6 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 		\\numGlue=3,numOil=3,nextx=600,
 		\\nexty=300,alpha=1.57,width=40,height=40]"
 		
-		
-	
-		
 		 "Robot [id=0,  slowed=1,oiled=false, x=500,y=400, 
 		\\numGlue=3,numOil=3,nextx=500,
 		\\nexty=400,alpha=1.57,width=40,height=40]"\newline
@@ -604,8 +612,8 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 \begin{itemize}
 	\item Leírás: Ez a teszt a KeyPressed(int e) függvény teszteléséért felelős.
 			Létrehoz 2 robotot.
-			Kiirja az adataikat  és meghivja a KeyPressed(int e)  függvényt VK\_D és VK\_LEFT paraméterekkel majd meghívjuk a move-ot és újból ki listáza őket. A várt eredmény, hogy 180 fokban elfordultak és úgy léptek.			\newline
-	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük hogy sikeressen ki tudta e számolni a függvény az új koordinátákat.
+			Kiirja az adataikat  és meghivja a KeyPressed(int e)  függvényt VK\_A és VK\_LEFT paraméterekkel majd meghívjuk a move-ot és újból kilistázza őket. A várt eredmény, hogy 180 fokban elfordultak és úgy léptek.			\newline
+	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenőrizzük hogy sikeressen ki tudta e számolni a függvény az új koordinátákat.
 		Várható hiba hogy rosszul modosítja a cél koordinátákat vagy az alpha szöget. 
 		Ezt onnan látjuk, hogy nem a várt koordinátákat látjuk a nextx, nexty, alpha tagváltozókban miután másodjára is kilistáztuk őket vagy mikor a keypressed kiirja.
 	\item Bemeneti nyelv :
@@ -613,8 +621,8 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 		\item Robot(500,500)
 		\item Robot(600,400)
 		\item listRobots
-		\item Keypressed(Keyevent.VK\_A,180)
-		\item Keypressed(Keyevent.VK\_LEFT,180)
+		\item keyPressed A 180 
+		\item keyPressed Left 180
 		\item move
 		\item listRobots
 		\end{itemize}
@@ -641,9 +649,9 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 \subsection{CollisionWithObstacles\_OLAJBA.UGRÁS\_TESZT}
 \begin{itemize}
 	\item Leírás: Ez a teszt a robot és az olajfolt ütközésének érzékeléséért felelős.
-	                Létrehoz egy robotot és egy olajfoltot a megfelelő koordinátákon, kiírja az adatokat, majd meghívja a move-ot, és újból kilistáza őket. A várt eredmény, hogy volt ütközés.
+	                Létrehoz egy robotot és egy olajfoltot a megfelelő koordinátákon, kiírja az adatokat, majd meghívja a move-ot, és újból kilistázza őket. A várt eredmény, hogy volt ütközés.
 \newline
-	\item  Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük, hogy a robot a megfelelően lerakott olajba ugrik-e, és ezt érzékeli is.
+	\item  Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenőrizzük, hogy a robot a megfelelően lerakott olajba ugrik-e, és ezt érzékeli is.
 		   Várható hiba, hogy a robot nem a megfelelő helyre ugrik, vagy nem érzékeli, hogy olajfoltba ugrott.
 	\item Bemeneti nyelv :
 		\begin{itemize}
@@ -668,9 +676,9 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 \subsection{CollisionWithObstacles\_RAGACSBA.UGRÁS\_TESZT}
 \begin{itemize}
 	\item Leírás: Ez a teszt a robot és a ragacs ütközésének érzékeléséért felelős.
-	                Létrehoz egy robotot és egy ragacsot a megfelelő koordinátákon, kiírja az adatokat, majd meghívja a move-ot, és újból kilistáza őket. A várt eredmény, hogy volt ütközés.
+	                Létrehoz egy robotot és egy ragacsot a megfelelő koordinátákon, kiírja az adatokat, majd meghívja a move-ot, és újból kilistázza őket. A várt eredmény, hogy volt ütközés.
 \newline
-	\item  Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük, hogy a robot a megfelelően lerakott ragacsba ugrik-e, és ezt érzékeli is.
+	\item  Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenőrizzük, hogy a robot a megfelelően lerakott ragacsba ugrik-e, és ezt érzékeli is.
 		   Várható hiba, hogy a robot nem a megfelelő helyre ugrik, vagy nem érzékeli, hogy ragacsba ugrott.
 	\item Bemeneti nyelv :
 		\begin{itemize}
@@ -697,7 +705,7 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 \begin{itemize}
 	\item Leírás: Ez a teszt az olajfolt hatásának érvényességéért felelős. Létrehoz egy robotot és egy olajfoltot a megfelelő koordinátákon, kiírja az adatokat, meghívja az effect-et, majd megpróbál irányt változtatni, hogy beleugorjon a következő olajba. A várt eredmény, hogy lesz ütközés.
 \newline
-	\item  Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük, hogy az olaj hatássa kihat-e a robotra.
+	\item  Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenőrizzük, hogy az olaj hatása kihat-e a robotra.
 		   Várható hiba, hogy a robot irányát tudjuk változtatni.
 	\item Bemeneti nyelv :
 		\begin{itemize}
@@ -706,8 +714,7 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 		\item Oil(0,100)
 		\item listRobots
 		\item listObstacles
-		\item effect
-		\item Keypressed(Keyevent.VK\_A,90)
+		\item keyPressed A 90
 		\item move
 		\end{itemize}
 	
@@ -729,7 +736,7 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 \begin{itemize}
 	\item Leírás: Ez a teszt a ragacs hatásának érvényességéért felelős. Létrehoz egy robotot és egy ragacsot a megfelelő koordinátákon, kiírja az adatokat, meghívja az effect-et, majd a move-ot, hogy beleugorjon a következő ragacsba. A várt eredmény, hogy nem lesz ütközés.
 \newline
-	\item  Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük, hogy a ragacs hatássa kihat-e a robotra.
+	\item  Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenőrizzük, hogy a ragacs hatása kihat-e a robotra.
 		   Várható hiba, hogy a robot elugrik a ragacsig.
 	\item Bemeneti nyelv :
 		\begin{itemize}
@@ -738,7 +745,6 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 		\item Glue(0,100)
 		\item listRobots
 		\item listObstacles
-		\item effect
 		\item move
 		\item listRobots
 		\end{itemize}
@@ -763,14 +769,14 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 			Létrehoz 1 robotot majd beállítja, úgy hogy kiugorjon a pályáról .
 			Kiirja az adatait  és meghivja a move függvényt ezt követően pedig a robotOutsideOfMap függvényt és leellenőrizzük hogy a listában maradt-e a robot.	\newline
 	\item Ellenőrzött funkcionalitás, várható hibahelyek:\\
-	Azt ellenörizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás végeztével .
+	Azt ellenőrizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás végeztével .
 	Várható hiba ha hamissal tér vissza a függvény, amiből látjuk, hogy rossz a hitbox létrehozása  az ugrást követően.
 	\item Bemeneti nyelv :
 		\begin{itemize}
 \item MapBuilder map
 		\item Robot(400,500)
 		\item listRobots
-		\item Keypressed(Keyevent.VK\_A,90)
+		\item keyPressed A 90
 		\item move
 		\item listRobots
 		\end{itemize}
@@ -798,14 +804,14 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 	\item Leírás: Ez a teszt a robotOutsideOfMap(Robot r) függvény teszteléséért felelős.
 			Létrehoz 1 robotot majd beállítja, úgy hogy ne ugorjon ki a pályáról .
 			Kiirja az adatait  és meghivja a move függvényt ezt követően pedig a robotOutsideOfMap függvényt és leellenőrizzük hogy a listában maradt-e             a robot.\newline
-	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás                     végeztével .
+	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenőrizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás                     végeztével .
 	        Várható hiba ha igazzal tér vissza a függvény, amiből látjuk, hogy rossz a hitbox létrehozása  az ugrást követően.
 	\item Bemeneti nyelv :
 		\begin{itemize}
-\item MapBuilder map
+        \item MapBuilder Map
 		\item Robot(400,500)
 		\item listRobots
-		\item Keypressed(Keyevent.VK\_D,90)
+		\item keyPressed D 90
 		\item move
 		\item listRobots
 		\end{itemize}
@@ -830,24 +836,20 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 	\item Leírás: Ez a teszt a checkpointSearch() függvény teszteléséért felelős.
 			Létrehoz 1 robotot majd beállítja, úgy hogy ugorjon bele a checkpointba.
 			Kiirja az adatait  és meghivja a move függvényt ezt követően pedig a checkpointSearch függvényt és leellenőrizzük hogy van-e a két hitboxnak metszette.\newline
-	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás                     végeztével .
+	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenőrizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás                     végeztével .
 	        Várható hiba ha hamissal tér vissza a függvény, amiből látjuk, hogy rossz a hitbox létrehozása  az ugrást követően.
 	\item Bemeneti nyelv :
 		\begin{itemize}
-\item MapBuilder map
         \item MapBuilder Map
-        \item setCheckpoints 100,180
+        \item setCheckpoints 
 		\item Robot(100,100)
-		\item listCheckpoints
 		\item listRobots
-		\item Keypressed(Keyevent.VK\_D,90)
+		\item keyPressed D 90
 		\item move
 		\item listRobots
 		\end{itemize}
 
 	\item Elvárt kimenet: \\
-	    "Checkpoint: 100,180"\newline
-	    
 		"Robot [id=0,  slowed=1,oiled=false, x=100,y=100, 
 		\\numGlue=3,numOil=3,nextx=100,
 		\\nexty=200,alpha=1.57,width=40,height=40]"\newline
@@ -871,24 +873,20 @@ A pályán található objektumokért felel és azok viszonyáról (például ü
 	\item Leírás: Ez a teszt a checkpointSearch() függvény teszteléséért felelős.
 			Létrehoz 1 robotot majd beállítja, úgy hogy ne ugorjon bele a checkpointba.
 			Kiirja az adatait  és meghivja a move függvényt ezt követően pedig a checkpointSearch függvényt és leellenőrizzük hogy van-e a két hitboxnak metszette.\newline
-	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenörizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás                     végeztével .
+	\item Ellenőrzött funkcionalitás, várható hibahelyek: Azt ellenőrizzük hogy sikeressen össze tudta-e vetni a hitboxokat a függvény az ugrás                     végeztével .
 	        Várható hiba ha igazzal tér vissza a függvény, amiből látjuk, hogy rossz a hitbox létrehozása  az ugrást követően.
 	\item Bemeneti nyelv :
 		\begin{itemize}
-\item MapBuilder map
         \item MapBuilder Map
-        \item setCheckpoints 100,180
+        \item setCheckpoints
 		\item Robot(100,300)
-		\item listCheckpoints
 		\item listRobots
-		\item Keypressed(Keyevent.VK\_D,90)
+		\item keyPressed D 90 
 		\item move
 		\item listRobots
 		\end{itemize}
 
 	\item Elvárt kimenet: \\
-	    "Checkpoint: 100,180"\newline
-	    
 		"Robot [id=0,  slowed=1,oiled=false, x=100,y=300, 
 		\\numGlue=3,numOil=3,nextx=100,
 		\\nexty=400,alpha=1.57,width=40,height=40]"\newline
@@ -1038,9 +1036,9 @@ A várt eredmény, hogy az első három esetben sikerül az olaj lerakása, míg
 		\item Glue(0,0)
 		\item Oil(0,100)
 		\item listObstacles
-		\item cycles\_elapsed(4)
+		\item cycles\_elapsed 4
 		\item listObstacles
-		\item cycles\_elapsed(11)
+		\item cycles\_elapsed 11
 		\item listObstacles
 		\end{itemize}
 	
