@@ -1,5 +1,6 @@
 ﻿package major;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * A robotok megtett köreit és checkpontjait tartja számon.
  * Megvalósítja a checkpoint ellenőrzést.
  */
-public class HUD {
+public class HUD implements iVisible, Runnable {
 	
 	/**
 	* Két robot esetén két elemű tömb, ami tárolja a teljesített checkpointokat.
@@ -158,5 +159,21 @@ public class HUD {
 	 */
 	public int endOfTheGame(){
 		return 0;
+	}
+	/**
+	 * 
+	 */
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+	/**
+	 * 
+	 */
+	@Override
+	public void paint(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
 }

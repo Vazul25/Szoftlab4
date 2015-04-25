@@ -304,6 +304,9 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 	 */
 	@Override
 	public void run() {
+		
+		Thread hud_thread = new Thread(hud);
+		hud_thread.start();
 
 		//Játék eleji visszaszámlálás
 		MyTimer startTimer = new MyTimer(3);
