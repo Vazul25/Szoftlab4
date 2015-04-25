@@ -3,15 +3,12 @@
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
-import minor.VectorUtil;
 
 /*
  * Robot osztály
@@ -98,8 +95,8 @@ public class Robot extends Unit{
 	 ** alpha: arrowendx,y kiszámításához szükséges vizszintes tengelyel bezárt szög radiánban
 	 *
 	 */
-	protected int arrowendx=0;//ahova mutat
-	protected int arrowendy=0;
+	public int arrowendx=0;//ahova mutat
+	public int arrowendy=0;
 	private double alpha= 0;//kerület pontjának számításához kell radián , alapérték 90 fok
 
 	/*
@@ -270,13 +267,13 @@ public class Robot extends Unit{
 	 * 
 	 */
 	public void paint(Graphics g) {
-		
+
 		((Graphics2D) g).setStroke(new BasicStroke(5));
 		if(!oiled)
 			g.drawLine(x+WIDTH/2, y+HEIGHT/2, arrowendx+WIDTH/2, arrowendy+HEIGHT/2);
 		g.drawImage(img[id%2], x, y, WIDTH, HEIGHT, null);
 
-		
+
 	}
 	public  static void setUnitImage() throws IOException{
 		img=new BufferedImage[2];
@@ -299,25 +296,25 @@ public class Robot extends Unit{
 	public void move()   {
 		//User általi változtatás letiltása (lásd Robot.keyPressed())
 		oiled=true;
-		if(alpha>6.283)alpha-=6.283;
-		
+		//if(alpha>6.283)alpha-=6.283;
+
 		//Nyíl koordinátáinak kiszámolása
-		
-		arrowendx=(int)(x+slowed*r*Math.cos(alpha));
-		arrowendy=(int)(y+slowed*r*Math.sin(alpha));
+
+		arrowendx=(int)Math.round(x+slowed*r*Math.cos(alpha));
+		arrowendy=(int)Math.round(y+slowed*r*Math.sin(alpha));
 		//x=arrowendx;	
 		//y=arrowendy;
 
 		//TESZT
-		double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
+			double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
 		double speedy=Math.round((arrowendy-y)/ANIMATIONSPEED);
+		 
 
-		
 		//Olajjal ütközés hatásának eltüntetése
 		slowed=1;
 
 		//TESZT, GRAFIKA
-		try {
+			try {
 			img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -326,7 +323,7 @@ public class Robot extends Unit{
 		HEIGHT=60;
 		//if(Math.abs((int)(arrowendx-x))<20 &&Math.abs((int)(arrowendy-y))<20) reached=true;
 
-		for(int i=0;i<ANIMATIONSPEED;i++){
+			for(int i=0;i<ANIMATIONSPEED;i++){
 			if(i<ANIMATIONSPEED/2){WIDTH+=2;HEIGHT+=2;}
 			else {WIDTH-=2;HEIGHT-=2;}
 			x+=speedx;
@@ -339,7 +336,7 @@ public class Robot extends Unit{
 				e.printStackTrace();
 			}
 		}
-		
+
 		WIDTH=40;
 
 		HEIGHT=40;
@@ -347,12 +344,12 @@ public class Robot extends Unit{
 		y=arrowendy;
 		leftobstacle=false;
 		oiled=false;
-		try {
+		/*try {
 			img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog0.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 
@@ -369,16 +366,21 @@ public class Robot extends Unit{
 	 * 
 	 * @param obstacle az akadály amire az ütközést vizsgáljuk
 	 */
-	public boolean collisionWithObstacles(Obstacle obstacle){
-			
-		return this.intersect(obstacle);		
-	}
-	public boolean collisionWithCleaner(Cleaner cl){
-		if(this.intersect(cl))
-		return true;
-		
+	public boolean collisionWithObstacles(Obstacle o){
+
+		if(this.intersect(o)) {
+			System.out.println("there was a collision between this: "+this.toString()+"\nand this: "+o.toString());
+			return true;
+		}
 		return false;
 	}
+	
+	public boolean collisionWithCleaner(Cleaner cl){
+		if(this.intersect(cl))
+			return true;
+		return false;
+	}
+	
 
 	/**
 	 * bounce függvény
@@ -402,7 +404,7 @@ public class Robot extends Unit{
 	@Override
 	public String toString() {
 		return "Robot [id=" + id + ", slowed=" + slowed + ", oiled=" + oiled
-				+ ", x=" +x + ",y=" +y
+				+ ", x=" +x + ", y=" +y
 				+ ", nextx=" + arrowendx + ", nexty=" + arrowendy
 				+ ", alpha=" + alpha + ", width=" + WIDTH +", height=" + HEIGHT +", NumGlue:"+numGlue+", NumOil:"+numOil+"]";
 	}
@@ -455,12 +457,12 @@ public class Robot extends Unit{
 		if(!oiled){
 			//Nyíl irányának megváltoztatása
 			if (e== Phoebe.Settings.keyconfig[id%2*4+1])
-				alpha+=0.0872664625;//5fokkal növeli
+				alpha+=0.0872764626;//5fokkal növeli
 			if (e== Phoebe.Settings.keyconfig[id%2*4])
-				alpha-=0.0872664625; 
+				alpha-=0.0872664626; 
 			arrowendx=(int)(x+r*Math.cos(alpha));
 			arrowendy=(int)(y+r*Math.sin(alpha));
-			System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);
+			//System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);
 
 		}
 		if(!leftobstacle){
@@ -490,6 +492,8 @@ public class Robot extends Unit{
 		}
 		//Nyíl végpontjainak kiszámolása
 		p.repaint();
+		arrowendx=(int)Math.round((x+slowed*r*Math.cos(alpha)));
+		arrowendy=(int)Math.round(y+slowed*r*Math.sin(alpha));
 	}
 
 }

@@ -21,7 +21,7 @@ public abstract class Unit implements iVisible{
 	 * Felelősség:
 	 * Az egység (x,y) koordinátájának tárolása
 	 */
-	protected int x,y;
+	public int x,y;
 	
 	/*
 	 * Pályaelem reprezentációja egy robotnak

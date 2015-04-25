@@ -4,10 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.Shape;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,8 +13,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import major.Obstacle;
 import major.Robot;
@@ -40,13 +36,11 @@ public class MapBuilder implements iVisible {
 	private Area map;
 
 	/**
-	 * Tárolja a checkpointokat reprezentáló objektumokat List 
-	 * adatszerkezetben. 
-	 */
-	private List<Area> checkpoints;
-
-	public List<Rectangle> paintableCheckpoints;
-
+	* Tárolja a checkpointokat reprezentáló objektumokat List 
+	* adatszerkezetben. 
+	*/
+	public List<Rectangle> checkpoints;
+	
 	public Rectangle paintableInnerMap;
 	public Rectangle paintableOuterMap;
 
@@ -76,17 +70,13 @@ public class MapBuilder implements iVisible {
 		//Fájlból olvasás		
 		//...
 		//Kezdő koordináták beolvasása robotonként
-		int[] temp = {200, 300};
-		startPosPlayerOne = temp;
-		startPosPlayerTwo = temp;
+		int[] temp = {50, 70};
+ 		startPosPlayerOne = temp;
+ 		int[] temp2 = {50, 20};
+ 		startPosPlayerTwo = temp2;
 		//Pálya beolvasása
-		try {
-			setUnitImage();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try{ 
+ 		try{ 
+
 			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+System.getProperty("file.separator")+"maps"+System.getProperty("file.separator")+"Map.ser"); 
 			ObjectInputStream reader = new ObjectInputStream(fis); 
 			if(fis != null && reader != null){
@@ -107,19 +97,20 @@ public class MapBuilder implements iVisible {
 		}
 
 		//checkpointok létrehozása
-		checkpoints = new ArrayList<Area>();
+		//checkpoints = new ArrayList<Area>();
 		try{ 
 			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+System.getProperty("file.separator")+"maps"+System.getProperty("file.separator")+"Checkpoints.ser"); 
 			ObjectInputStream reader = new ObjectInputStream(fis); 
 			if(fis != null && reader != null){
-				ArrayList<Rectangle> x = new ArrayList<Rectangle>();
-				x = (ArrayList) reader.readObject(); 
+				List<Rectangle> x = new ArrayList<Rectangle>();
+				x = (ArrayList<Rectangle>) reader.readObject(); 
 				reader.close();
 				fis.close();
-				paintableCheckpoints = x; 
-				for(Rectangle tmp : x){
+				//paintableCheckpoints = x; 
+				checkpoints = x;
+				/*for(Rectangle tmp : x){
 					checkpoints.add(new Area(tmp));
-				}
+				}*/
 			}
 		}
 		catch (ClassNotFoundException e) {
@@ -144,7 +135,7 @@ public class MapBuilder implements iVisible {
 	 * 
 	 * @return visszaadja a Checkpointokat tartalmazó listát
 	 */
-	public List<Area> getCheckpoints(){
+	public List<Rectangle> getCheckpoints(){
 		return checkpoints;
 	}
 
@@ -156,6 +147,7 @@ public class MapBuilder implements iVisible {
 	 */
 	public boolean robotOutsideOfMap(Robot r){
 		Area area = new Area(map);
+		//Area leeso_resz = new Rectangle(400,400,600,700);
 		//Area otherArea = new Area(r.getHitbox());
 		//area.intersect(otherArea);
 		//TODO revision
@@ -167,6 +159,7 @@ public class MapBuilder implements iVisible {
 		int tempy=r.getHitbox().y+partingheight/2;
 		Rectangle hitboxpart=new Rectangle(tempx,tempy,partingwidth,partingheight);
 		return !area.contains(hitboxpart);
+
 	}
 
 	/*
@@ -185,8 +178,8 @@ public class MapBuilder implements iVisible {
 	}
 
 	public int[] getStartPosPlayer(int id) {
-		//TODO
-		return startPosPlayerOne;
+		if(id%2 == 0) return startPosPlayerTwo;
+		else return startPosPlayerOne;
 	}
 
 	public void building(int windowWidth, int windowHeight){
@@ -260,7 +253,7 @@ public class MapBuilder implements iVisible {
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setPaint(Color.black);
-		for(Rectangle tmp : paintableCheckpoints){
+		for(Rectangle tmp : checkpoints){
 			g2.drawRect(tmp.x, tmp.y, tmp.width, tmp.height);
 		}
 		g2.setPaint(Color.red);
@@ -270,11 +263,10 @@ public class MapBuilder implements iVisible {
 		g2.drawRect(paintableOuterMap.x, paintableOuterMap.y, paintableOuterMap.width, paintableOuterMap.height);		
 	}
 
-	public  static void setUnitImage() throws IOException{
-		String sep=System.getProperty("file.separator");
-		img=new BufferedImage[2];
-		//img[0]=ImageIO.read(new File(System.getProperty("user.dir")+sep+"icons"+sep+"restricted.jpg"));
-		//img[1]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog1.jpg"));
+	public void listCheckpoints(){
+		for(Rectangle i: checkpoints)
+			System.out.println("Checkpoint: "+i.x+" "+i.y);
 	}
-
+	
 }
+
