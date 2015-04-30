@@ -114,13 +114,17 @@ public class Cleaner extends Unit {
 	 * Felelősség: Abban az esetben, amikor Cleaner ütközik Robottal, le kell kezelnie a lepattanást.
 	 * @see major.Robot#collisionWithRobot(major.Robot)
 	 */
-
+	
 	public boolean collisionWithRobot(Robot r){
 		if(r.intersect(this))
 		{
 			//lepattanást számolni
 			try {
+				System.out.println("\n\n\n\n\npattanunk\n\n\n\n\n\n");
 				bouncing=true;
+				alpha+=35*0.0872664626; 
+				arrowendx=(int)(x+this.r*Math.cos(alpha));
+				arrowendy=(int)(y+this.r*Math.sin(alpha));
 				move();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -139,22 +143,19 @@ public class Cleaner extends Unit {
 	 */
 	private void collisionWithCleaner(Cleaner cl) {
 		//TODO vektor átlag pattanás
-		this.bouncing=true;
-		cl.bouncing=true;
-		try {
-			move();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
+		if(this.intersect(cl)){
+			double alpha=cl.alpha;
+					cl.alpha=this.alpha;
+					this.alpha=alpha;
+			arrowendx=(int)(x+r*Math.cos(alpha));
+			arrowendy=(int)(y+r*Math.sin(alpha));
+			cl.arrowendx=(int)(x+r*Math.cos(alpha));
+			cl.arrowendy=(int)(y+r*Math.sin(alpha));
 			cl.move();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			this.move();
 
-
+}
+		
 	}
 
 	/**
@@ -169,7 +170,7 @@ public class Cleaner extends Unit {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			p.repaint();
+			p.update();
 			try {
 				Thread.sleep(42);
 			} catch (InterruptedException e) {
@@ -218,7 +219,7 @@ public class Cleaner extends Unit {
 				x+=speedx;
 				y+=speedy;
 				hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
-				p.repaint();
+				p.update();
 				try {
 					Thread.sleep(25);
 				} catch (InterruptedException e) {

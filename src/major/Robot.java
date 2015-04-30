@@ -245,7 +245,7 @@ public class Robot extends Unit{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			p.repaint();
+			p.update();
 			try {
 				Thread.sleep(42);
 			} catch (InterruptedException e) {
@@ -328,7 +328,7 @@ public class Robot extends Unit{
 			else {WIDTH-=2;HEIGHT-=2;}
 			x+=speedx;
 			y+=speedy;
-			p.repaint();
+			p.update();
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
@@ -491,7 +491,7 @@ public class Robot extends Unit{
 			}
 		}
 		//Nyíl végpontjainak kiszámolása
-		p.repaint();
+		p.update();
 		arrowendx=(int)Math.round((x+slowed*r*Math.cos(alpha)));
 		arrowendy=(int)Math.round(y+slowed*r*Math.sin(alpha));
 	}

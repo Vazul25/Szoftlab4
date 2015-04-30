@@ -1,9 +1,6 @@
 ﻿package major;
 
 import java.awt.BorderLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,7 +11,6 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import minor.MapBuilder;
 import minor.MyTimer;
@@ -37,7 +33,7 @@ import minor.MyTimer;
  * Runnable
  * 
  */
-public class Phoebe extends JPanel implements Runnable, iVisible{
+public class Phoebe  extends JFrame implements Runnable{
 
 	private static final long serialVersionUID = 8435890710077230081L;
 
@@ -47,10 +43,11 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 	 ** ended: Állapot változó, ha vége a játéknak true érték íródik be. Ha beteljesül egy játék végét jelentő esemény, akkor ezen a változón keresztül leáll a játék és megállapítódik a nyertes.
 	 ** gameInfo: A játék kezdeti beállításait tárolja (kör/idő mód, max kör/max idő).
 	 */
-	public static BufferedImage background;
+	
 	private boolean ended;
+	public static BufferedImage background;
 	private Settings gameInfo;
-
+	private Display d;
 	//Beállítások
 	/*
 	 * Setting Enum
@@ -68,7 +65,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 
 		//Ugrások mértéke (def = 3 sec)
 		private int step;
-
+		
 		/*
 		 * Keyconfig 
 		 * Mire való:
@@ -137,9 +134,18 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 		init();
 
 		//Teszt
-		JFrame frame = new JFrame("Phoebe");//ez nincs itt csak tesztelés 
-
+		//JFrame frame = new JFrame("Phoebe");//ez nincs itt csak tesztelés 
+		
+		//--------------------------------ÚJ KÓD----------------------
+		d=new Display(this);
+		this.add(d,BorderLayout.CENTER);
+		
+		
+		
+		
+		//------------------------------------
 		//KeyListener (gombok lenyomásának lekezelése)
+		
 		MyListener listener=new MyListener(robots);
 		addKeyListener(listener);
 		setFocusable(true);
@@ -150,14 +156,13 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 		//Teszt
 	
 		
-		frame.add(this,BorderLayout.CENTER);
 		//frame.add(hud,BorderLayout.SOUTH);
 		
 	
-		frame.setSize(1000,700);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
+		this.setSize(1000,700);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
 	}
 
 	/**
@@ -184,7 +189,17 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 	List<Obstacle> getObstacles(){
 		return obstacles;
 		}
+	public List<iVisible> getVisibleData(){
+		List<iVisible> visible=new ArrayList<iVisible>();
+		visible.add(map);
+		visible.addAll(obstacles);
+		visible.addAll(robots);
+		visible.addAll(cleaners);
+		
+		return visible;
+	}
 	
+	public BufferedImage getBackgroundimg(){return Phoebe.background;}
 	/**
 	 * paint függvény
 	 * 
@@ -196,28 +211,10 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 	 * 	 
 	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
 	 */
-	public void paint(Graphics g) {
-		super.paint(g);
-		g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null); 
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);	
-		map.paint(g2d);
-		for(int i=0;i<obstacles.size();i++)
-		{
-			obstacles.get(i).paint(g2d);
-
-		}
-		for(int i=0;i<robots.size();i++)
-		{
-			robots.get(i).paint(g2d);
-
-		}
-		for(int i=0;i<cleaners.size();i++)
-		{
-			cleaners.get(i).paint(g2d);
-
-		}
+	
+    
+	public void update() { d.repaint();
+	
 	}
 	/**
 	 * init függvény
@@ -422,7 +419,7 @@ public class Phoebe extends JPanel implements Runnable, iVisible{
 				cleanerTimer.start();
 			}
 			//Teszt
-			repaint();	
+			update();	
 			//System.out.println("Fennmaradt idő: "+gameTimer.getTime()+" mp");
 			if(gameTimer.isZero()) ended = true;
 			//if(elteltidoteszt>=1000) ended=true;
