@@ -134,6 +134,8 @@ public class Phoebe  extends JFrame implements Runnable{
 	public Phoebe(Settings set) throws IOException{
 		gameInfo = set;
 
+		this.setSize(Settings.WINDOW_WIDTH,Settings.WINDOW_HEIGHT+200);
+
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -301,7 +303,7 @@ int count=0;
 			 y=rn.nextInt()%this.getHeight();
 
 			Glue item2 = new Glue(x, y);
-			System.out.println(item1.toString());
+			//System.out.println(item1.toString());
 			
 			if(!PlaceTaken(item1)){
 			if(!map.obstacleOutsideOfMap(item1)) {obstacles.add(item1);count++;}
