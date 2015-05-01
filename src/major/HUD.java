@@ -1,9 +1,14 @@
 ﻿package major;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.List;
 
+import major.Phoebe.Settings;
 import minor.MyTimer;
 
 /**
@@ -200,18 +205,20 @@ public class HUD implements iVisible, Runnable {
 	public void run() {		
 		while(!startTimer.isZero()){
 			time = startTimer.getTime();
+			//System.out.println(time);
 			p.update();
 			try {
-				Thread.sleep(400);
+				Thread.sleep(800);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}		
 		while(!ended){
 			time = gameTimer.getTime();
+			System.out.println(time);
 			p.update();
 			try {
-				Thread.sleep(400);
+				Thread.sleep(800);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -222,6 +229,19 @@ public class HUD implements iVisible, Runnable {
 	 */
 	@Override
 	public void paint(Graphics g) {
-		//TODO
+		Graphics2D g2d = (Graphics2D) g;
+		String timeInChar = new String();
+		Integer hour = new Integer(time/3600);
+		Integer minute = new Integer((time%3600)/60);
+		Integer second = new Integer(time%60);
+		if(hour > 0) timeInChar = timeInChar.concat(hour.toString() + " : ");
+		if(minute > 0) timeInChar = timeInChar.concat(minute.toString() + " : ");
+		timeInChar = timeInChar.concat(second.toString());
+		Font font = new Font("Serif", Font.PLAIN, 55);
+		g2d.setColor(Color.BLACK);
+		g2d.setFont(font);
+		g2d.drawString(timeInChar, (int)(Settings.WINDOW_WIDTH * 0.4), (int)(Settings.WINDOW_HEIGHT + Settings.HUD_HEIGHT * 0.3));
+		//g2d.drawRect((int)(Settings.WINDOW_WIDTH * 0.4),(int)(Settings.WINDOW_HEIGHT + Settings.HUD_HEIGHT * 0.3) , 20, 30);
 	}
 }
+

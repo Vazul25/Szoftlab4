@@ -19,14 +19,14 @@ public class Display extends JPanel {
 	public Display(Phoebe p){
 		this.p=p;		
 	
-		this.setSize(1000,700);
+		this.setSize(Phoebe.Settings.WINDOW_WIDTH,Phoebe.Settings.WINDOW_HEIGHT+Phoebe.Settings.HUD_HEIGHT);
 		this.setVisible(true);	
 	}
 	
 	public void paint(Graphics g){
 		super.paint(g);
 		List<iVisible> list=p.getVisibleData();
-		g.drawImage(p.getBackgroundimg(), 0, 0, this.getWidth(), this.getHeight(), null); 
+		g.drawImage(p.getBackgroundimg(), 0, 0, Phoebe.Settings.WINDOW_WIDTH,Phoebe.Settings.WINDOW_HEIGHT, null); 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);	

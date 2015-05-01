@@ -30,7 +30,7 @@ public class MyTimer {
 	 ** - DIR direction: Az óra számolási irányának eltárolásáért felelős enum.
 	 */
 	private long T_start;
-	private int duration;
+	private long duration;
 	private DIR direction;
 	
 	/**
@@ -103,6 +103,12 @@ public class MyTimer {
 	 * @return Visszatér egy szekundumban megadott értékkel.
 	 */
 	public int getTime(){
+		//System.out.println("Current: "+ new Integer((int) ((System.currentTimeMillis()%3600000)/60000)).toString()+":"+new Integer((int) (System.currentTimeMillis()%60000)));
+		//System.out.println("T_start: "+ new Integer((int) ((T_start%3600000)/60000)).toString()+":"+new Integer((int) (T_start%60000)));
+		//System.out.println("Duration: "+ duration);
+		//int time = new BigDecimal(((T_start+duration-System.currentTimeMillis())/1000)).intValueExact();
+		//long time = T_start+duration;
+		//System.out.println("Time: "+ new Integer((int) ((time%3600000)/60000)).toString()+":"+new Integer((int) (time%60000)));
 		return new BigDecimal(((T_start+duration-System.currentTimeMillis())/1000)).intValueExact();
 	};
 }

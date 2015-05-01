@@ -80,6 +80,7 @@ public class Phoebe  extends JFrame implements Runnable{
 		
 		public static int WINDOW_WIDTH = 1000;
 		public static int WINDOW_HEIGHT = 700;
+		public static int HUD_HEIGHT = 150;
 
 		public Settings(int info){
 			this.racemode = info;
@@ -204,10 +205,10 @@ public class Phoebe  extends JFrame implements Runnable{
 	public List<iVisible> getVisibleData(){
 		List<iVisible> visible=new ArrayList<iVisible>();
 		visible.add(map);
-		visible.add(hud);
 		visible.addAll(obstacles);
 		visible.addAll(robots);
 		visible.addAll(cleaners);
+		visible.add(hud);
 		
 		return visible;
 	}
@@ -289,13 +290,13 @@ public class Phoebe  extends JFrame implements Runnable{
 		cleaners.add(new Cleaner(620,200,this));*/
 		//System.out.println(cleaners.get(0).toString());
 		////////////////////////////////////////
-int count=0;
+		int count=0;
 		//Akadályok létrehozása
 		while(count<4){
 			//TODO Randomgenerált (x,y) pozíciók
-	Random rn=new Random();
-	int x=rn.nextInt()%this.getWidth();
-	int y=rn.nextInt()%this.getHeight();
+			Random rn=new Random();
+			int x=rn.nextInt()%this.getWidth();
+			int y=rn.nextInt()%this.getHeight();
 
 		
 			Oil item1 = new Oil(x, y);
@@ -315,16 +316,22 @@ int count=0;
 		}						
 		 
 	}
-private boolean PlaceTaken(Unit u){
-	ArrayList<Unit> existing =new ArrayList<Unit>();
-	existing.addAll(obstacles);
-	existing.addAll(cleaners);
-	existing.addAll(robots);
-	for(Unit i : existing){
-		if(u.intersect(i))return true;
+	
+	/**
+	 * TODO
+	 * @param u
+	 * @return
+	 */
+	private boolean PlaceTaken(Unit u){
+		ArrayList<Unit> existing =new ArrayList<Unit>();
+		existing.addAll(obstacles);
+		existing.addAll(cleaners);
+		existing.addAll(robots);
+		for(Unit i : existing){
+			if(u.intersect(i))return true;
+		}
+		return false;
 	}
-	return false;
-}
 	
 	/*
 	 * Run függvény
@@ -338,7 +345,6 @@ private boolean PlaceTaken(Unit u){
 	 */
 	@Override
 	public void run() {
-		hud.gameTimer.start();
 		
 		//Játék eleji visszaszámlálás
 		hud.startTimer = new MyTimer(3);
