@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -129,7 +130,10 @@ public class Phoebe  extends JFrame implements Runnable{
 	 */
 	public Phoebe(Settings set) throws IOException{
 		gameInfo = set;
-
+		this.setSize(1000,700);
+		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
 		//Játék incializálása
 		init();
 
@@ -158,11 +162,8 @@ public class Phoebe  extends JFrame implements Runnable{
 		
 		//frame.add(hud,BorderLayout.SOUTH);
 		
-	
-		this.setSize(1000,700);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
+		
 	}
 
 	/**
@@ -266,29 +267,51 @@ public class Phoebe  extends JFrame implements Runnable{
 		hud.setCheckpoints(map.getCheckpoints());
 
 		//TESZTELÉSHEZ by Vazul
-		obstacles.add(new Glue(100,100));
+	/*	obstacles.add(new Glue(100,100));
 		obstacles.add(new Glue(500,100));
 		obstacles.add(new Oil(100,600));
 		obstacles.add(new Oil(500,600));
 		cleaners.add(new Cleaner(500,200,this));
-		cleaners.add(new Cleaner(620,200,this));
+		cleaners.add(new Cleaner(620,200,this));*/
 		//System.out.println(cleaners.get(0).toString());
 		////////////////////////////////////////
-
+int count=0;
 		//Akadályok létrehozása
-		/*for(int i=1;i<=10;i++){
+		while(count<4){
 			//TODO Randomgenerált (x,y) pozíciók
-			int x=0;
-			int y=0;
+	Random rn=new Random();
+	int x=rn.nextInt()%this.getWidth();
+	int y=rn.nextInt()%this.getHeight();
 
-			Oil item1 = new Oil(x, y, null);
-			Glue item2 = new Glue(x, y, null);
-			if(!map.obstacleOutsideOfMap(item1)) obstacles.add(item1);
-			if(!map.obstacleOutsideOfMap(item2)) obstacles.add(item2);
+		
+			Oil item1 = new Oil(x, y);
+			 x=rn.nextInt()%this.getWidth();
+			 y=rn.nextInt()%this.getHeight();
+
+			Glue item2 = new Glue(x, y);
+			System.out.println(item1.toString());
+			
+			if(!PlaceTaken(item1)){
+			if(!map.obstacleOutsideOfMap(item1)) {obstacles.add(item1);count++;}
+			}
+			if(!PlaceTaken(item2)){
+				
+			if(!map.obstacleOutsideOfMap(item2)) {obstacles.add(item2);count++;}
+			}
 		}						
-		 */
+		 
 	}
-
+private boolean PlaceTaken(Unit u){
+	ArrayList<Unit> existing =new ArrayList<Unit>();
+	existing.addAll(obstacles);
+	existing.addAll(cleaners);
+	existing.addAll(robots);
+	for(Unit i : existing){
+		if(u.intersect(i))return true;
+	}
+	return false;
+}
+	
 	/*
 	 * Run függvény
 	 * @see java.lang.Runnable#run()

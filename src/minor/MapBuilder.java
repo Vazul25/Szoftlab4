@@ -169,11 +169,12 @@ public class MapBuilder implements iVisible {
 	 */
 	public boolean obstacleOutsideOfMap(Obstacle r){
 		Area area = new Area(map);
-		Area otherArea = new Area(r.getHitbox());
+		return !area.contains(r.getHitbox());
+/*		Area otherArea = new Area(r.getHitbox());
 		area.intersect(otherArea);
 		//TODO revision
 		return area.getBounds().getSize().equals( r.getHitbox().getBounds().getSize() );
-
+*/
 
 	}
 
