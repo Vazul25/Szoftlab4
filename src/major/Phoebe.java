@@ -77,6 +77,9 @@ public class Phoebe  extends JFrame implements Runnable{
 			KeyEvent.VK_LEFT   , KeyEvent.VK_RIGHT  ,KeyEvent.VK_UP     ,KeyEvent.VK_DOWN,
 			KeyEvent.VK_A      , KeyEvent.VK_D      ,KeyEvent.VK_W      ,KeyEvent.VK_S
 		};
+		
+		public static int WINDOW_WIDTH = 1000;
+		public static int WINDOW_HEIGHT = 700;
 
 		public Settings(int info){
 			this.racemode = info;
@@ -117,7 +120,7 @@ public class Phoebe  extends JFrame implements Runnable{
 	private List<Cleaner> cleaners;
 	private HUD hud;
 	private MapBuilder map;
-	private MyTimer gameTimer;
+	//public MyTimer gameTimer;
 
 	/**
 	 * Phoebe konstruktor
@@ -130,7 +133,7 @@ public class Phoebe  extends JFrame implements Runnable{
 	 */
 	public Phoebe(Settings set) throws IOException{
 		gameInfo = set;
-		this.setSize(1000,700);
+
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -142,10 +145,7 @@ public class Phoebe  extends JFrame implements Runnable{
 		
 		//--------------------------------ÚJ KÓD----------------------
 		d=new Display(this);
-		this.add(d,BorderLayout.CENTER);
-		
-		
-		
+		this.add(d,BorderLayout.CENTER);		
 		
 		//------------------------------------
 		//KeyListener (gombok lenyomásának lekezelése)
@@ -162,6 +162,10 @@ public class Phoebe  extends JFrame implements Runnable{
 		
 		//frame.add(hud,BorderLayout.SOUTH);
 		
+
+	
+		this.setSize(Settings.WINDOW_WIDTH,Settings.WINDOW_HEIGHT+200);
+
 		this.setVisible(true);
 		
 	}
@@ -189,10 +193,16 @@ public class Phoebe  extends JFrame implements Runnable{
 	 */
 	List<Obstacle> getObstacles(){
 		return obstacles;
-		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<iVisible> getVisibleData(){
 		List<iVisible> visible=new ArrayList<iVisible>();
 		visible.add(map);
+		visible.add(hud);
 		visible.addAll(obstacles);
 		visible.addAll(robots);
 		visible.addAll(cleaners);
@@ -200,7 +210,9 @@ public class Phoebe  extends JFrame implements Runnable{
 		return visible;
 	}
 	
-	public BufferedImage getBackgroundimg(){return Phoebe.background;}
+	public BufferedImage getBackgroundimg(){
+		return Phoebe.background;
+	}
 	/**
 	 * paint függvény
 	 * 
@@ -214,8 +226,8 @@ public class Phoebe  extends JFrame implements Runnable{
 	 */
 	
     
-	public void update() { d.repaint();
-	
+	public void update() { 
+		d.repaint();	
 	}
 	/**
 	 * init függvény
@@ -232,14 +244,6 @@ public class Phoebe  extends JFrame implements Runnable{
 		obstacles=new ArrayList<Obstacle>();
 		robots=new ArrayList<Robot>();
 		cleaners = new ArrayList<Cleaner>();
-
-		//GameTimer létrehozása, inicializálása
-		//Ha Időlimites játékmód
-		if(gameInfo.getSettings() == Settings.TIMELIMIT)
-			gameTimer = new MyTimer(gameInfo.getLimit());
-		//ha körlimites játékmód
-		else if(gameInfo.getSettings() == Settings.LAPLIMIT)
-			gameTimer = new MyTimer(0);
 
 		//Pálya létrehozása
 		map = new MapBuilder();
@@ -261,11 +265,19 @@ public class Phoebe  extends JFrame implements Runnable{
 		robots.add(two);
 
 		//HUD létrehozása
-		hud = new HUD(robots);
+		hud = new HUD(robots, this);
 
 		//Checkpointok eljuttatása a HUD-ba
 		hud.setCheckpoints(map.getCheckpoints());
 
+		//GameTimer létrehozása, inicializálása
+		//Ha Időlimites játékmód
+		if(gameInfo.getSettings() == Settings.TIMELIMIT)
+			hud.gameTimer = new MyTimer(gameInfo.getLimit());
+		//ha körlimites játékmód
+		else if(gameInfo.getSettings() == Settings.LAPLIMIT)
+			hud.gameTimer = new MyTimer(0);
+		
 		//TESZTELÉSHEZ by Vazul
 	/*	obstacles.add(new Glue(100,100));
 		obstacles.add(new Glue(500,100));
@@ -324,21 +336,21 @@ private boolean PlaceTaken(Unit u){
 	 */
 	@Override
 	public void run() {
+		hud.gameTimer.start();
+		
+		//Játék eleji visszaszámlálás
+		hud.startTimer = new MyTimer(3);
+		hud.startTimer.start();
 		
 		Thread hud_thread = new Thread(hud);
-		hud_thread.start();
-
-		//Játék eleji visszaszámlálás
-		MyTimer startTimer = new MyTimer(3);
-		startTimer.start();
-		/*
-		while(!startTimer.isZero()){
-			//Idő kiírása
-			System.out.println(startTimer.getTime());
-		}*/
+		hud_thread.start();		
+		
+		while(!hud.startTimer.isZero()){
+			//Szünet
+		}
 
 		//Játék visszaszámláló elindítása
-		gameTimer.start();
+		hud.gameTimer.start();
 
 		//Cleanerek bejövetele minden 3. percben
 		MyTimer cleanerTimer = new MyTimer(180);
@@ -444,12 +456,12 @@ private boolean PlaceTaken(Unit u){
 			//Teszt
 			update();	
 			//System.out.println("Fennmaradt idő: "+gameTimer.getTime()+" mp");
-			if(gameTimer.isZero()) ended = true;
+			if(hud.gameTimer.isZero()) ended = true;
 			//if(elteltidoteszt>=1000) ended=true;
 			//elteltidoteszt+=3;
 			//System.out.println("eltelt:"+elteltidoteszt+"mp");
 		}
-		if(gameTimer.isZero())System.out.println("A játéknak vége, lejárt az idő.");
+		if(hud.gameTimer.isZero())System.out.println("A játéknak vége, lejárt az idő.");
 		//else System.out.println("A játékos leesett a pályáról.");
 
 	}
