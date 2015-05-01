@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.List;
 
+import minor.MyTimer;
+
 /**
  * Ez az objektum követi és nyilvántartja, hogy a robotok hány 
  * checkpoint-on mentek át, illetve kiírja a képernyőre a hátramaradó 
@@ -46,14 +48,43 @@ public class HUD implements iVisible, Runnable {
 	*/
 	private List<Robot> robots;
 	
+	/*
+	 * TODO
+	 */
+	private boolean ended;
+	
+	/*
+	 * TODO
+	 */
+	private int time;
+	
+	/*
+	 * TODO
+	 */
+	public MyTimer gameTimer;
+	
+	/*
+	 * TODO
+	 */
+	public MyTimer startTimer;
+	
+	/*
+	 * TODO
+	 */
+	
+	Phoebe p;
+	
 	/**
 	* Konstruktor, inicializálja a köröket számláló változót.
 	* @param robs A játékban résztvevő robotok listája.
 	*/
-	public HUD(List<Robot> robs){
+	public HUD(List<Robot> robs, Phoebe game){
 		lap = new int[robs.size()];
-		
+		ended = false;
+		time = 0;
 		robots = robs;
+		gameTimer = new MyTimer(0);
+		p = game;
 		for(Robot i: robots){
 			lap[i.getId()%2] = 0;
 		}
@@ -158,22 +189,39 @@ public class HUD implements iVisible, Runnable {
 	 * 
 	 */
 	public int endOfTheGame(){
+		ended = true;
 		return 0;
 	}
+	
 	/**
 	 * 
 	 */
 	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
+	public void run() {		
+		while(!startTimer.isZero()){
+			time = startTimer.getTime();
+			p.update();
+			try {
+				Thread.sleep(400);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}		
+		while(!ended){
+			time = gameTimer.getTime();
+			p.update();
+			try {
+				Thread.sleep(400);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	/**
 	 * 
 	 */
 	@Override
 	public void paint(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		//TODO
 	}
 }
