@@ -234,7 +234,7 @@ public class HUD implements iVisible, Runnable {
 			//System.out.println(time);
 			p.update();
 			try {
-				Thread.sleep(800);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -244,7 +244,7 @@ public class HUD implements iVisible, Runnable {
 			//System.out.println(time);
 			p.update();
 			try {
-				Thread.sleep(800);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -285,6 +285,7 @@ public class HUD implements iVisible, Runnable {
 			if(i.getId()%2 == 0) rob2 = i;
 			else rob1 = i;
 		}
+		//KÖR
 		if(rob1 != null && rob2 !=null){
 			g2d.drawString(new Integer(lap[rob1.getId()%2]).toString(),(int) (WINDOW_WIDTH * 0.375), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.85));
 			g2d.drawString(new Integer(lap[rob2.getId()%2]).toString(),(int) (WINDOW_WIDTH * 0.54), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.85));
