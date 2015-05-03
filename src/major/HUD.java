@@ -5,7 +5,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.event.WindowStateListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -84,8 +86,8 @@ public class HUD implements iVisible, Runnable {
 	
 	Phoebe p;
 	
-	private static BufferedImage checked_checkbox;
-	private static BufferedImage unchecked_checkbox;
+	private static Image checked_checkbox;
+	private static Image unchecked_checkbox;
 	
 	/**
 	* Konstruktor, inicializálja a köröket számláló változót.
@@ -112,8 +114,8 @@ public class HUD implements iVisible, Runnable {
 	}
 	
 	private static void setCheckboxImage() throws IOException{
-		checked_checkbox = ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"checked.png"));
-		unchecked_checkbox = ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"unchecked.png"));
+		checked_checkbox = ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"checked.png")).getScaledInstance((int)Settings.HUD_HEIGHT/3, (int)Settings.HUD_HEIGHT/3, Image.SCALE_SMOOTH);
+		unchecked_checkbox = ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"unchecked.png")).getScaledInstance((int)Settings.HUD_HEIGHT/3, (int)Settings.HUD_HEIGHT/3, Image.SCALE_SMOOTH);
 	}
 	
 	/**
@@ -253,6 +255,9 @@ public class HUD implements iVisible, Runnable {
 	public void paint(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		
+		int WINDOW_WIDTH = Settings.WINDOW_WIDTH;
+		int WINDOW_HEIGHT = Settings.WINDOW_HEIGHT;
+		int HUD_HEIGHT = Settings.HUD_HEIGHT;
 		
 		//Idő kirajzolása
 		String timeInChar = new String();
@@ -260,15 +265,17 @@ public class HUD implements iVisible, Runnable {
 		Integer minute = new Integer((time%3600)/60);
 		Integer second = new Integer(time%60);
 		if(hour > 0) timeInChar = timeInChar.concat(hour.toString() + " : ");
-		if(minute > 0) timeInChar = timeInChar.concat(minute.toString() + " : ");
-		timeInChar = timeInChar.concat(second.toString());
-		Font font = new Font("Serif", Font.PLAIN, 50);
-		g2d.setColor(Color.BLACK);
+		if(minute >= 10) timeInChar = timeInChar.concat(minute.toString() + " : ");
+		else if(minute > 0) timeInChar = timeInChar.concat("0"+minute.toString() + " : ");
+		if(second >= 10)timeInChar = timeInChar.concat(second.toString());
+		else timeInChar = timeInChar.concat("0"+second.toString());
+		Font font = new Font("Serif", Font.PLAIN, HUD_HEIGHT/3);
+		g2d.setColor(Color.darkGray);
 		g2d.setFont(font);
-		g2d.drawString(timeInChar, (int)(Settings.WINDOW_WIDTH * 0.42), (int)(Settings.WINDOW_HEIGHT + Settings.HUD_HEIGHT * 0.3));
+		g2d.drawString(timeInChar, (int)(WINDOW_WIDTH * 0.42), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.3));
 		
 		//Szövegek
-		g2d.drawString("LAP",(int) (Settings.WINDOW_WIDTH * 0.43), (int)(Settings.WINDOW_HEIGHT + Settings.HUD_HEIGHT * 0.85));
+		g2d.drawString("LAPS",(int) (WINDOW_WIDTH * 0.42), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.85));
 		
 		//Felhasználható olaj, ragacs kirajzolások
 		Robot rob1 = null, rob2 = null;
@@ -276,111 +283,128 @@ public class HUD implements iVisible, Runnable {
 			if(i.getId()%2 == 0) rob2 = i;
 			else rob1 = i;
 		}
+		if(rob1 != null && rob2 !=null){
+			g2d.drawString(new Integer(lap[rob1.getId()%2]).toString(),(int) (WINDOW_WIDTH * 0.375), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.85));
+			g2d.drawString(new Integer(lap[rob2.getId()%2]).toString(),(int) (WINDOW_WIDTH * 0.54), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.85));
+		}
+		
 		//Robot1
-		//Olaj
+		//Elválasztó vonal
+		g2d.drawLine((int)(WINDOW_WIDTH * 0.37), WINDOW_HEIGHT,(int) (WINDOW_WIDTH * 0.37),WINDOW_HEIGHT+HUD_HEIGHT );		
+		
+		//Olaj		
+		int checkboxWidth = (HUD_HEIGHT/3);
+		int checkboxSpace = (int) (checkboxWidth*0.3);
 		if(rob1 != null){
-			int oilNum = rob1.getNumOil();
+			int oilNum = rob1.getNumOil();//Window_width*(m*Hud_height+b)
+			g2d.drawString("Oil",(int) (WINDOW_WIDTH * (0.09+HUD_HEIGHT*-0.00053)) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.5));
 			switch(oilNum){
 			case 1:
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			case 2:
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			case 3:
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			default://oilNum == 0
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			}
 		}
 		
 		//Ragacs
 		if(rob1 != null){
-			int glueNum = rob1.getNumGlue();
+			int glueNum = rob1.getNumGlue();//Window_width*(m*Hud_height+b)
+			g2d.drawString("Glue",(int) (WINDOW_WIDTH * (0.09+HUD_HEIGHT*-0.00053)) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.5 + checkboxWidth));
 			switch(glueNum){
 			case 1:
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
 				break;
 			case 2:
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
 				break;
 			case 3:
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
 				break;
 			default://glueNum == 0
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.03+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
 				break;
 			}
 		}
 		//Robot2
+		//Elválasztó vonal 2.
+		g2d.drawLine((int)(WINDOW_WIDTH * 0.56), WINDOW_HEIGHT,(int) (WINDOW_WIDTH * 0.56),WINDOW_HEIGHT+HUD_HEIGHT );
 		//Olaj
-		if(rob2 != null){
-			int oilNum = rob2.getNumOil();
+		if(rob2 != null){			
+			int oilNum = rob2.getNumOil();//Window_width*(m*Hud_height+b)			
+			g2d.drawString("Oil",(int) (WINDOW_WIDTH * (0.65+HUD_HEIGHT*-0.00053)) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.5));
 			switch(oilNum){
 			case 1:
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			case 2:
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			case 3:
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			default://oilNum == 0
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			}
 		}
 		
 		//Ragacs
 		if(rob2 != null){
-			int glueNum = rob2.getNumGlue();
+			int glueNum = rob2.getNumGlue();//Window_width*(m*Hud_height+b)
+			
+			g2d.drawString("Glue",(int) (WINDOW_WIDTH* (0.65+HUD_HEIGHT*-0.00053)) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.5 + checkboxWidth));
 			switch(glueNum){
 			case 1:
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
 				break;
 			case 2:
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
 				break;
 			case 3:
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
 				break;
 			default://glueNum == 0
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+70) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
-				g2d.drawImage(unchecked_checkbox, (int) (Settings.WINDOW_WIDTH*0.73+140) ,(int) (Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
 				break;
 			}
 		}

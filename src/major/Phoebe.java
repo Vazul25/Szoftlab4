@@ -78,9 +78,9 @@ public class Phoebe  extends JFrame implements Runnable{
 			KeyEvent.VK_A      , KeyEvent.VK_D      ,KeyEvent.VK_W      ,KeyEvent.VK_S
 		};
 		
-		public static int WINDOW_WIDTH = 1000;
+		public static int WINDOW_WIDTH = 1280;
 		public static int WINDOW_HEIGHT = 700;
-		public static int HUD_HEIGHT = 150;
+		public static int HUD_HEIGHT = 130; //max = 155, preffered= 130, min = 100
 
 		public Settings(int info){
 			this.racemode = info;
@@ -135,8 +135,9 @@ public class Phoebe  extends JFrame implements Runnable{
 	public Phoebe(Settings set) throws IOException{
 		gameInfo = set;
 
-		this.setSize(Settings.WINDOW_WIDTH,Settings.WINDOW_HEIGHT+200);
-
+		this.setSize(Settings.WINDOW_WIDTH,Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT);
+		map = new MapBuilder();
+		map.building(Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -167,7 +168,7 @@ public class Phoebe  extends JFrame implements Runnable{
 		
 
 	
-		this.setSize(Settings.WINDOW_WIDTH,Settings.WINDOW_HEIGHT+200);
+		this.setSize(Settings.WINDOW_WIDTH,Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT+25);
 
 		this.setVisible(true);
 		
