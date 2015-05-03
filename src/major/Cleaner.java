@@ -268,7 +268,7 @@ public class Cleaner extends Unit {
 				+ ", alpha=" + alpha + ", width=" + WIDTH +", height=" + HEIGHT +"]  " +cleaning+" ";
 	}
 	public  static void setUnitImage() throws IOException{
-		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"cleaner.jpg"));
+		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"cleaner.png"));
 	}
 
 	public void die() {
