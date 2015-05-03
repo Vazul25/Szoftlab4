@@ -116,6 +116,8 @@ public class HUD implements iVisible, Runnable {
 	private static void setCheckboxImage() throws IOException{
 		checked_checkbox = ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"checked.png")).getScaledInstance((int)Settings.HUD_HEIGHT/3, (int)Settings.HUD_HEIGHT/3, Image.SCALE_SMOOTH);
 		unchecked_checkbox = ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"unchecked.png")).getScaledInstance((int)Settings.HUD_HEIGHT/3, (int)Settings.HUD_HEIGHT/3, Image.SCALE_SMOOTH);
+		//checked_checkbox = Display.rotate(checked_checkbox, 45);
+		
 	}
 	
 	/**
