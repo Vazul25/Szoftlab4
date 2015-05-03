@@ -78,8 +78,8 @@ public class Phoebe  extends JFrame implements Runnable{
 			KeyEvent.VK_A      , KeyEvent.VK_D      ,KeyEvent.VK_W      ,KeyEvent.VK_S
 		};
 		
-		public static int WINDOW_WIDTH = 1280;
-		public static int WINDOW_HEIGHT = 700;
+		public static int WINDOW_WIDTH = 1366;//min= 1200
+		public static int WINDOW_HEIGHT = 570;
 		public static int HUD_HEIGHT = 130; //max = 155, preffered= 130, min = 100
 
 		public Settings(int info){
