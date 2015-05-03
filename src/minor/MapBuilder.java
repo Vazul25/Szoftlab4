@@ -186,19 +186,20 @@ public class MapBuilder implements iVisible {
 	public void building(int windowWidth, int windowHeight){
 
 		Rectangle outerEdge = new Rectangle(0, 0, windowWidth, windowHeight);
-		Rectangle innerEdge = new Rectangle(150, 150, 700, 300);
+		Rectangle innerEdge = new Rectangle(new Double(windowWidth*0.15).intValue(), new Double(windowHeight*0.25).intValue(),
+				new Double(windowWidth*0.7).intValue(), new Double(windowHeight*0.5).intValue());
 		//ábra megtalálható: TODO
 
-		int checkpointWidth = 150;
-		int checkpointHeight = 150;
+		int checkpointWidth = new Double(windowWidth*0.15).intValue(); // 150/1000
+		int checkpointHeight = new Double(windowWidth*0.25).intValue(); // 150/600
 
 		Rectangle checkpoint0 = new Rectangle(0, 0, checkpointWidth, checkpointHeight);
 
-		Rectangle checkpoint1 = new Rectangle(550, 0, checkpointWidth, checkpointHeight);
+		Rectangle checkpoint1 = new Rectangle(new Double(windowWidth*0.85).intValue(), 0, checkpointWidth, checkpointHeight);
 
-		Rectangle checkpoint2 = new Rectangle(550, 450, checkpointWidth, checkpointHeight);
+		Rectangle checkpoint2 = new Rectangle(new Double(windowWidth*0.85).intValue(), new Double(windowHeight*0.75).intValue(), checkpointWidth, checkpointHeight);
 
-		Rectangle checkpoint3 = new Rectangle(0, 450, checkpointWidth, checkpointHeight);
+		Rectangle checkpoint3 = new Rectangle(0, new Double(windowHeight*0.75).intValue(), checkpointWidth, checkpointHeight);
 
 		//értékadás, TODO lecserélni konstruktorban szerializált elemek betöltésére fájlból
 
