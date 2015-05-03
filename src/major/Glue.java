@@ -82,7 +82,7 @@ public class Glue extends Obstacle {
 		g.drawImage(img, x, y, WIDTH, HEIGHT, null);
 	}
 	public  static void setUnitImage() throws IOException{
-		img=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"glue.jpg"));
+		img=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"glue.png"));
 	}
 	@Override
 	public String toString() {

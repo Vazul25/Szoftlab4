@@ -2,3 +2,4 @@ src/major/testuml.ucls
 bin/minor/*
 bin/major/*
 bin/junit/*
+src/major/Cleaner.java
