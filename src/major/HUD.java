@@ -301,12 +301,12 @@ public class HUD implements iVisible, Runnable {
 			switch(oilNum){
 			case 1:
 				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			case 2:
 				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			case 3:
@@ -359,12 +359,12 @@ public class HUD implements iVisible, Runnable {
 			switch(oilNum){
 			case 1:
 				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			case 2:
 				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.66 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			case 3:

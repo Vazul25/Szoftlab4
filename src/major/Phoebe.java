@@ -135,7 +135,7 @@ public class Phoebe  extends JFrame implements Runnable{
 	public Phoebe(Settings set) throws IOException{
 		gameInfo = set;
 
-		this.setSize(Settings.WINDOW_WIDTH,Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT);
+		this.setSize(Settings.WINDOW_WIDTH,Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT+25);
 		map = new MapBuilder();
 		map.building(Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
 		
@@ -159,16 +159,6 @@ public class Phoebe  extends JFrame implements Runnable{
 		setFocusable(true);
 		Thread listenert=new Thread(listener);
 		listenert.start();
-		
-		
-		//Teszt
-	
-		
-		//frame.add(hud,BorderLayout.SOUTH);
-		
-
-	
-		this.setSize(Settings.WINDOW_WIDTH,Settings.WINDOW_HEIGHT+Settings.HUD_HEIGHT+25);
 
 		this.setVisible(true);
 		
