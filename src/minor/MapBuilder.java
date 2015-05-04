@@ -191,7 +191,7 @@ public class MapBuilder implements iVisible {
 		//ábra megtalálható: TODO
 
 		int checkpointWidth = new Double(windowWidth*0.15).intValue(); // 150/1000
-		int checkpointHeight = new Double(windowWidth*0.25).intValue(); // 150/600
+		int checkpointHeight = new Double(windowHeight*0.25).intValue(); // 150/600
 
 		Rectangle checkpoint0 = new Rectangle(0, 0, checkpointWidth, checkpointHeight);
 
