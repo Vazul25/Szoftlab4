@@ -1,14 +1,11 @@
 ﻿package major;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.WindowStateListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -82,12 +79,12 @@ public class HUD implements iVisible, Runnable {
 	
 	/*
 	 * TODO
-	 */
-	
+	 */	
 	Phoebe p;
 	
 	private static Image checked_checkbox;
 	private static Image unchecked_checkbox;
+	private static Image background;
 	
 	/**
 	* Konstruktor, inicializálja a köröket számláló változót.
@@ -117,6 +114,7 @@ public class HUD implements iVisible, Runnable {
 		checked_checkbox = ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"checked.png")).getScaledInstance((int)Settings.HUD_HEIGHT/3, (int)Settings.HUD_HEIGHT/3, Image.SCALE_SMOOTH);
 		unchecked_checkbox = ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"unchecked.png")).getScaledInstance((int)Settings.HUD_HEIGHT/3, (int)Settings.HUD_HEIGHT/3, Image.SCALE_SMOOTH);
 		//checked_checkbox = Display.rotate(checked_checkbox, 45);
+		background = ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"HUD.jpg")).getScaledInstance((int)Settings.WINDOW_WIDTH, (int)Settings.HUD_HEIGHT, Image.SCALE_SMOOTH);
 		
 	}
 	
@@ -229,6 +227,7 @@ public class HUD implements iVisible, Runnable {
 	 */
 	@Override
 	public void run() {		
+		
 		while(!startTimer.isZero()){
 			time = Math.abs(startTimer.getTime());
 			//System.out.println(time);
@@ -261,6 +260,8 @@ public class HUD implements iVisible, Runnable {
 		int WINDOW_HEIGHT = Settings.WINDOW_HEIGHT;
 		int HUD_HEIGHT = Settings.HUD_HEIGHT;
 		
+		g2d.drawImage(background, 0, Settings.WINDOW_HEIGHT, null);
+		
 		//Idő kirajzolása
 		String timeInChar = new String();
 		Integer hour = new Integer(time/3600);
@@ -271,14 +272,13 @@ public class HUD implements iVisible, Runnable {
 		else if(minute > 0) timeInChar = timeInChar.concat("0"+minute.toString() + " : ");
 		if(second >= 10)timeInChar = timeInChar.concat(second.toString());
 		else timeInChar = timeInChar.concat("0"+second.toString());
-		Font font = new Font("Serif", Font.PLAIN, HUD_HEIGHT/3);
-		g2d.setColor(Color.darkGray);
+		Font font = new Font("Serif", Font.BOLD, HUD_HEIGHT/3);
+		g2d.setColor(Color.black);
 		g2d.setFont(font);
-		g2d.drawString(timeInChar, (int)(WINDOW_WIDTH * 0.42), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.3));
+		g2d.drawString(timeInChar, (int)(WINDOW_WIDTH * (timeInChar.length() * (-0.006)+0.492)), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.3));
+		System.out.println(timeInChar.length());
 		
 		//Szövegek
-		g2d.drawString("LAPS",(int) (WINDOW_WIDTH * 0.42), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.85));
-		
 		//Felhasználható olaj, ragacs kirajzolások
 		Robot rob1 = null, rob2 = null;
 		for(Robot i : robots){
@@ -287,40 +287,37 @@ public class HUD implements iVisible, Runnable {
 		}
 		//KÖR
 		if(rob1 != null && rob2 !=null){
-			g2d.drawString(new Integer(lap[rob1.getId()%2]).toString(),(int) (WINDOW_WIDTH * 0.375), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.85));
-			g2d.drawString(new Integer(lap[rob2.getId()%2]).toString(),(int) (WINDOW_WIDTH * 0.54), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.85));
+			g2d.drawString(new Integer(lap[rob1.getId()%2]).toString(),(int) (WINDOW_WIDTH * 0.4), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.85));
+			g2d.drawString(new Integer(lap[rob2.getId()%2]).toString(),(int) (WINDOW_WIDTH * 0.58), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.85));
 		}
 		
-		//Robot1
-		//Elválasztó vonal
-		g2d.drawLine((int)(WINDOW_WIDTH * 0.37), WINDOW_HEIGHT,(int) (WINDOW_WIDTH * 0.37),WINDOW_HEIGHT+HUD_HEIGHT );		
+		//Robot1	
 		
 		//Olaj		
 		int checkboxWidth = (HUD_HEIGHT/3);
 		int checkboxSpace = (int) (checkboxWidth*0.3);
 		if(rob1 != null){
 			int oilNum = rob1.getNumOil();//Window_width*(m*Hud_height+b)
-			g2d.drawString("Oil",(int) (WINDOW_WIDTH * (0.09+HUD_HEIGHT*-0.00053)) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.5));
 			switch(oilNum){
 			case 1:
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.2) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.2 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.2 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			case 2:
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.2) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.2 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.2 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			case 3:
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.2) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.2 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.2 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			default://oilNum == 0
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.2) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.2 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.2 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
 				break;
 			}
 		}
@@ -328,37 +325,34 @@ public class HUD implements iVisible, Runnable {
 		//Ragacs
 		if(rob1 != null){
 			int glueNum = rob1.getNumGlue();//Window_width*(m*Hud_height+b)
-			g2d.drawString("Glue",(int) (WINDOW_WIDTH * (0.09+HUD_HEIGHT*-0.00053)) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.5 + checkboxWidth));
 			switch(glueNum){
 			case 1:
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.2) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.2 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.2 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
 				break;
 			case 2:
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.2) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.2 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.2 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
 				break;
 			case 3:
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
-				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.2) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.2 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(checked_checkbox, (int) (WINDOW_WIDTH*0.2 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
 				break;
 			default://glueNum == 0
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
-				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.1 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.2) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.2 + checkboxSpace + checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
+				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.2 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
 				break;
 			}
 		}
 		//Robot2
 		//Elválasztó vonal 2.
-		g2d.drawLine((int)(WINDOW_WIDTH * 0.56), WINDOW_HEIGHT,(int) (WINDOW_WIDTH * 0.56),WINDOW_HEIGHT+HUD_HEIGHT );
 		//Olaj
 		if(rob2 != null){			
 			int oilNum = rob2.getNumOil();//Window_width*(m*Hud_height+b)			
-			g2d.drawString("Oil",(int) (WINDOW_WIDTH * (0.65+HUD_HEIGHT*-0.00053)) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.5));
 			switch(oilNum){
 			case 1:
 				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.2), null);
@@ -386,8 +380,6 @@ public class HUD implements iVisible, Runnable {
 		//Ragacs
 		if(rob2 != null){
 			int glueNum = rob2.getNumGlue();//Window_width*(m*Hud_height+b)
-			
-			g2d.drawString("Glue",(int) (WINDOW_WIDTH* (0.65+HUD_HEIGHT*-0.00053)) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.5 + checkboxWidth));
 			switch(glueNum){
 			case 1:
 				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
