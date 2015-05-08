@@ -192,13 +192,12 @@ public class HUD implements iVisible, Runnable {
 	
 				Rectangle robotarea = new Rectangle(i.getHitbox());
 				Rectangle checkpointarea = checkpoints.get(nextCheckpoint); 
-				robotarea.intersects(checkpointarea);
 				
 				//for(Rectangle checks: checkpoints)
 					//if(robotarea.intersects(checks)) System.out.print("There was a collision between:\n"+i.toString()+"\nand this checkpoint:"+checks.x+" "+checks.y);
 				
 	
-				if(robotarea.isEmpty()){
+				if(robotarea.intersects(checkpointarea)){
 					setCheckpointReached(i);
 					i.incNumGlue();
 					i.incNumOil();
@@ -276,7 +275,7 @@ public class HUD implements iVisible, Runnable {
 		g2d.setColor(Color.black);
 		g2d.setFont(font);
 		g2d.drawString(timeInChar, (int)(WINDOW_WIDTH * (timeInChar.length() * (-0.006)+0.492)), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.3));
-		System.out.println(timeInChar.length());
+		//System.out.println(timeInChar.length());
 		
 		//Szövegek
 		//Felhasználható olaj, ragacs kirajzolások
