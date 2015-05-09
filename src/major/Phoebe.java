@@ -467,9 +467,10 @@ public class Phoebe  extends JFrame implements Runnable{
 		Thread.sleep(3000);
 		} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+			e.printStackTrace();
 		}
-		System.exit(0);
+		dispose();
+		//System.exit(0);
 		//else System.out.println("A játékos leesett a pályáról.");
 
 	}
