@@ -40,14 +40,19 @@ public class MyListener implements KeyListener, Runnable  {
 	@Override
 	public void run() {
 		while(true){
+			if(!robots.get(0).getOiled()){
 			if(isUp) robots.get(0).keyPressed(KeyEvent.VK_UP);
 			if (isDown)robots.get(0).keyPressed(KeyEvent.VK_DOWN);
 			if(isRight)robots.get(0).keyPressed(KeyEvent.VK_RIGHT);
-			if(isLeft)robots.get(0).keyPressed(KeyEvent.VK_LEFT);
+			if(isLeft)robots.get(0).keyPressed(KeyEvent.VK_LEFT);}
+			
+			if(!robots.get(1).getOiled()){
+				
 			if(isD)robots.get(1).keyPressed(KeyEvent.VK_D);
 			if (isA)robots.get(1).keyPressed(KeyEvent.VK_A);
 			if(isS)robots.get(1).keyPressed(KeyEvent.VK_S);
 			if(isW)robots.get(1).keyPressed(KeyEvent.VK_W);
+			}
 			try {
 				Thread.sleep(30);
 			} catch (InterruptedException e) {

@@ -140,7 +140,7 @@ public class Robot extends Unit{
 	}
 
 	// Setter-Getterek
-
+	boolean getOiled(){return oiled;}
 	/**
 	 * GetId függvény
 	 * 
