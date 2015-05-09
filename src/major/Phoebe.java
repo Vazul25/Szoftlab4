@@ -419,6 +419,7 @@ public class Phoebe  extends JFrame implements Runnable{
 				if(map.robotOutsideOfMap(i)){
 					ended = true;
 					i.deathanimation();
+					hud.endOfTheGame();
 				};		
 
 			}		
@@ -455,12 +456,20 @@ public class Phoebe  extends JFrame implements Runnable{
 			//Teszt
 			update();	
 			//System.out.println("Fennmaradt idő: "+gameTimer.getTime()+" mp");
-			if(hud.gameTimer.isZero()) ended = true;
+			if(hud.gameTimer.isZero()){ ended = true;
+			hud.endOfTheGame();}
 			//if(elteltidoteszt>=1000) ended=true;
 			//elteltidoteszt+=3;
 			//System.out.println("eltelt:"+elteltidoteszt+"mp");
 		}
 		if(hud.gameTimer.isZero())System.out.println("A játéknak vége, lejárt az idő.");
+		try {
+		Thread.sleep(3000);
+		} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+		System.exit(0);
 		//else System.out.println("A játékos leesett a pályáról.");
 
 	}
