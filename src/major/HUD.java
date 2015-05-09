@@ -216,9 +216,8 @@ public class HUD implements iVisible, Runnable {
 	 * Funkció: Amikor a Phoebe ended értéke igazzá válik, a run metódus fogja meghívni.
 	 * 
 	 */
-	public int endOfTheGame(){
+	public void endOfTheGame(){
 		ended = true;
-		return 0;
 	}
 	
 	/**
@@ -401,6 +400,22 @@ public class HUD implements iVisible, Runnable {
 				g2d.drawImage(unchecked_checkbox, (int) (WINDOW_WIDTH*0.66 + 2*checkboxSpace + 2*checkboxWidth) ,(int) (WINDOW_HEIGHT + HUD_HEIGHT*0.6), null);
 				break;
 			}
+		}
+		if(ended==true){
+		g2d.setColor(Color.WHITE);
+		g2d.drawString("GAME OVER!",410,210);
+		
+		if(rob1.dead == true && rob2.dead == false){
+			
+			g2d.drawString("A győztes robot: ", 250, 300);
+			g2d.drawImage(rob1.img[0], 500, 264, null);
+			
+		}else if(rob2.dead == true && rob1.dead == false){
+				g2d.drawString("A győztes robot: ", 250, 300);
+				g2d.drawImage(rob2.img[1], 500, 264, null);
+			
+				}else g2d.drawString("Döntetlen!", 410, 310);
+				
 		}
 	}
 }

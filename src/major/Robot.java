@@ -108,7 +108,7 @@ public class Robot extends Unit{
 
 	//Tartalmazó objektum
 	protected Phoebe p;
-
+	public boolean dead;
 	/**
 	 * Konstruktor
 	 * Felelősség:
@@ -122,6 +122,7 @@ public class Robot extends Unit{
 	 */
 	public Robot(int x, int y, Phoebe p) {
 		super(x, y);
+		dead = false;
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 
 		id=staticid;
@@ -238,6 +239,7 @@ public class Robot extends Unit{
 	 */
 	public void deathanimation(){
 		//TODO
+		dead = true;
 		for(int i=0;i<15;i++){
 			try {
 				img[id%2]=ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+i+".gif"));
