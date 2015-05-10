@@ -406,6 +406,28 @@ public class HUD implements iVisible, Runnable {
 		g2d.setColor(Color.WHITE);
 		g2d.drawString("GAME OVER!",410,210);
 		
+		if(rob2.dead == false && rob1.dead == false)
+		{
+			if(lap[0] > lap[1]){
+				g2d.drawString("A győztes robot: ", 250, 300);
+				g2d.drawImage(Robot.img[0], 500, 264, null);
+			}else 
+				if(lap[1] > lap[0]){
+				g2d.drawString("A győztes robot: ", 250, 300);
+				g2d.drawImage(Robot.img[1], 500, 264, null);
+			} else 
+				if(lap[0] == lap[1])
+					if(checkpointReached[0] > checkpointReached[1]){			
+						g2d.drawString("A győztes robot: ", 250, 300);
+						g2d.drawImage(Robot.img[1], 500, 264, null);
+			} else  if(checkpointReached[1] > checkpointReached[0]){
+						g2d.drawString("A győztes robot: ", 250, 300);
+						g2d.drawImage(Robot.img[1], 500, 264, null);
+			} else  if(checkpointReached[0] == checkpointReached[1]) 
+						g2d.drawString("Döntetlen!", 410, 310);
+		}
+		
+		
 		if(rob1.dead == true && rob2.dead == false){
 			
 			g2d.drawString("A győztes robot: ", 250, 300);
@@ -415,7 +437,7 @@ public class HUD implements iVisible, Runnable {
 				g2d.drawString("A győztes robot: ", 250, 300);
 				g2d.drawImage(Robot.img[1], 500, 264, null);
 			
-				}else g2d.drawString("Döntetlen!", 410, 310);
+				}else if(rob2.dead == true && rob1.dead == true) g2d.drawString("Döntetlen!", 410, 310);
 				
 		}
 	}
