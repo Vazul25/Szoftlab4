@@ -362,7 +362,7 @@ public class Phoebe  extends JFrame implements Runnable{
 		{
 			//A User ideje, hogy változtathasson az ugrás irányán
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(gameInfo.getStep()*1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -373,8 +373,6 @@ public class Phoebe  extends JFrame implements Runnable{
 				robots.get(i).move();
 
 			}	
-
-			//TODO lépésanimálása egyenesen végig léptetgetni a robotot és kirajzolni
 
 			//Checkpointok vizsgálata, áthaladtunk-e?
 			hud.checkpointSearch();
@@ -405,10 +403,8 @@ public class Phoebe  extends JFrame implements Runnable{
 					try {
 						i.collisionWithRobot(k);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -429,7 +425,10 @@ public class Phoebe  extends JFrame implements Runnable{
 					i.move();
 				
 				for(Robot r:robots){
-					if(i.collisionWithRobot(r));
+					i.collisionWithRobot(r);
+				}
+				for(Cleaner cl : cleaners){
+					i.collisionWithCleaner(cl);
 				}
 			}
 			
@@ -453,25 +452,29 @@ public class Phoebe  extends JFrame implements Runnable{
 				cleaners.add(new Cleaner(300,400,this));
 				cleanerTimer.start();
 			}
-			//Teszt
+
 			update();	
-			//System.out.println("Fennmaradt idő: "+gameTimer.getTime()+" mp");
-			if(hud.gameTimer.isZero()){ ended = true;
-			hud.endOfTheGame();}
-			//if(elteltidoteszt>=1000) ended=true;
-			//elteltidoteszt+=3;
-			//System.out.println("eltelt:"+elteltidoteszt+"mp");
+			
+			if(gameInfo.getSettings()==Settings.TIMELIMIT){
+					if(hud.gameTimer.isZero()){ 
+						ended = true;
+						hud.endOfTheGame();
+					}
+			}
+			else{
+				if(hud.maxLapReached(gameInfo)){
+					ended = true;
+				}
+			}
+			
 		}
 		if(hud.gameTimer.isZero())System.out.println("A játéknak vége, lejárt az idő.");
 		try {
-		Thread.sleep(3000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		dispose();
-		//System.exit(0);
-		//else System.out.println("A játékos leesett a pályáról.");
 
 	}
 }

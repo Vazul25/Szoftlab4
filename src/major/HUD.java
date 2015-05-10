@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -408,15 +409,31 @@ public class HUD implements iVisible, Runnable {
 		if(rob1.dead == true && rob2.dead == false){
 			
 			g2d.drawString("A győztes robot: ", 250, 300);
-			g2d.drawImage(rob1.img[0], 500, 264, null);
+			g2d.drawImage(Robot.img[0], 500, 264, null);
 			
 		}else if(rob2.dead == true && rob1.dead == false){
 				g2d.drawString("A győztes robot: ", 250, 300);
-				g2d.drawImage(rob2.img[1], 500, 264, null);
+				g2d.drawImage(Robot.img[1], 500, 264, null);
 			
 				}else g2d.drawString("Döntetlen!", 410, 310);
 				
 		}
+	}
+
+	public boolean maxLapReached(Settings gameInfo) {
+		ArrayList<Robot> winners = new ArrayList<Robot>();
+		for(Robot r : robots){
+			if(lap[r.getId()%2] == gameInfo.getLimit()) winners.add(r);
+		}
+		if(winners.size() == 0) return false;
+		if(winners.size() != robots.size())
+		{
+			for(Robot r : robots){
+				if(!winners.contains(r)) r.dead = true;
+			}
+		}
+		ended = true;
+		return true;
 	}
 }
 
