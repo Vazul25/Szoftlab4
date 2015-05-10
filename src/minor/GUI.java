@@ -22,17 +22,23 @@ import major.Phoebe.Settings;
 public class GUI extends javax.swing.JFrame {
 	
 	private static final long serialVersionUID = 3610253813412048777L;
-	
 
 	/*
 	* A {@link Phoebe} játékmotor objektum referenciája.
 	*/
 	private Phoebe game;
 	
+	//Játékot futtató szál referenciája
+	Thread t = null;
+	
 	//Tagváltozók
-	//private
-	//JComboBox, JPanel, JLabel, JButton, JTextField, JMenu, JMenuItem
-	//...
+	private javax.swing.JLabel gameName;
+    private javax.swing.JComboBox gameType;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jatekmod;
+    private javax.swing.JLabel limit;
+    private javax.swing.JTextField limitField;
+    private javax.swing.JButton startButton;
 	
 	/*
 	 * Konstruktor. Beállítja az ablak nevét, létrehozza az ablak elemeit, elrendezi őket 
@@ -136,7 +142,7 @@ public class GUI extends javax.swing.JFrame {
         pack();
 	}
 	
-	Thread t = null;
+
 	/*
 	 * startButtonActionPerformed függvény
 	 * Felelősség: A beállítások kiolvasása a megfelelő objektumokból, 
@@ -146,14 +152,10 @@ public class GUI extends javax.swing.JFrame {
 	 * 
 	 */	
 	 private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		//...
 		//Beállítások lekérdezése
-		//...
-		//int mode = 2; //LapLimit=1, TimeLimit=2
 		Phoebe.Settings set = new Phoebe.Settings(Settings.TIMELIMIT);
 		if(gameType.getSelectedItem() == "Körlimit") set = new Phoebe.Settings(Settings.LAPLIMIT);
-		//...
-		//int limit = 120; //Másodperc
+
 		int limitInt = 0;
 		
 		try {
@@ -164,11 +166,10 @@ public class GUI extends javax.swing.JFrame {
 		}
 		
 		set.setLimit(limitInt);
-		//...
+
 		int step = 1; //Másodperc
 		set.setStep(step);
-		//...
-		;
+
 		//Szál létrehozása, indítása
 		try {
 			if(t == null){
@@ -181,16 +182,14 @@ public class GUI extends javax.swing.JFrame {
 				t = new Thread(game);
 				t.start();
 			}
-			
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		//...
-	    }
+	  }
 
 	    /**
-	     * @param args the command line arguments
+	     * GUI main függvény
 	     */
 	    public static void main(String args[]) {
 	        try {
@@ -216,13 +215,5 @@ public class GUI extends javax.swing.JFrame {
 	                new GUI().setVisible(true);
 	            }
 	        });
-	    }
-
-	    private javax.swing.JLabel gameName;
-	    private javax.swing.JComboBox gameType;
-	    private javax.swing.JPanel jPanel1;
-	    private javax.swing.JLabel jatekmod;
-	    private javax.swing.JLabel limit;
-	    private javax.swing.JTextField limitField;
-	    private javax.swing.JButton startButton;
+	    }	    
 }

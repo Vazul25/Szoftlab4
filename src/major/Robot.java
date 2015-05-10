@@ -39,7 +39,6 @@ public class Robot extends Unit{
 	protected static int staticid=0;
 	private  static final  int r=100; //sugár
 
-	//TESZT
 	private  static final  int ANIMATIONSPEED=5;
 	protected int WIDTH=40;//teszt placeholder
 	protected int HEIGHT=40;//teszt placeholder
@@ -109,6 +108,7 @@ public class Robot extends Unit{
 	//Tartalmazó objektum
 	protected Phoebe p;
 	public boolean dead;
+	
 	/**
 	 * Konstruktor
 	 * Felelősség:
@@ -277,6 +277,11 @@ public class Robot extends Unit{
 
 
 	}
+	/**
+	 * setUInitImage függvény
+	 * Betölti a Robot képeit
+	 * @throws IOException
+	 */
 	public  static void setUnitImage() throws IOException{
 		img=new BufferedImage[2];
 		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"robot0.png"));
@@ -298,60 +303,49 @@ public class Robot extends Unit{
 	public void move()   {
 		//User általi változtatás letiltása (lásd Robot.keyPressed())
 		oiled=true;
-		//if(alpha>6.283)alpha-=6.283;
 
 		//Nyíl koordinátáinak kiszámolása
-
 		arrowendx=(int)Math.round(x+slowed*r*Math.cos(alpha));
 		arrowendy=(int)Math.round(y+slowed*r*Math.sin(alpha));
-		//x=arrowendx;	
-		//y=arrowendy;
 
-		//TESZT
-			double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
+		double speedx=Math.round((arrowendx-x)/ANIMATIONSPEED);
 		double speedy=Math.round((arrowendy-y)/ANIMATIONSPEED);
 		 
-
 		//Olajjal ütközés hatásának eltüntetése
 		slowed=1;
 
-		//TESZT, GRAFIKA
-			try {
+		//Képek cserélgetése mozgás közben
+		try {
 			img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"robot0.png"));
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		HEIGHT=60;
-		//if(Math.abs((int)(arrowendx-x))<20 &&Math.abs((int)(arrowendy-y))<20) reached=true;
-
-			for(int i=0;i<ANIMATIONSPEED;i++){
-			if(i<ANIMATIONSPEED/2){WIDTH+=2;HEIGHT+=2;}
-			else {WIDTH-=2;HEIGHT-=2;}
+		for(int i=0;i<ANIMATIONSPEED;i++){
+			if(i<ANIMATIONSPEED/2){
+				WIDTH+=2;
+				HEIGHT+=2;
+			}else {
+				WIDTH-=2;
+				HEIGHT-=2;
+			}
 			x+=speedx;
 			y+=speedy;
 			p.update();
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 
 		WIDTH=40;
-
 		HEIGHT=40;
+		
 		x=arrowendx;
 		y=arrowendy;
 		leftobstacle=false;
 		oiled=false;
-		/*try {
-			img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"frog0.jpg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 
 		hitbox = new Rectangle(x, y, WIDTH, HEIGHT);
 
@@ -377,6 +371,12 @@ public class Robot extends Unit{
 		return false;
 	}
 	
+	/**
+	 * collisionWithCleaner függvény
+	 * Megvizsgálja, hogy történt-e Robot és Cleaner között ütközés.
+	 * @param cl
+	 * @return
+	 */
 	public boolean collisionWithCleaner(Cleaner cl){
 		if(this.intersect(cl))
 			return true;
@@ -397,10 +397,6 @@ public class Robot extends Unit{
 		double temp=r.alpha;
 		r.alpha=alpha;
 		alpha=temp;
-		//double calculatedAnglesRobot0 = VectorUtil.getVectorsSummRobot0(new Point(x,y), new Point(arrowendx, arrowendy), new Point(r.x,r.y), new Point(r.arrowendx, r.arrowendy));
-		//double calculatedAnglesRobot1 = VectorUtil.getVectorsSummRobot0(new Point(r.x,r.y), new Point(r.arrowendx, r.arrowendy), new Point(x,y), new Point(arrowendx, arrowendy));
-		//alpha = calculatedAnglesRobot0;
-		//r.alpha = calculatedAnglesRobot1;
 	}
 
 	@Override
@@ -427,12 +423,8 @@ public class Robot extends Unit{
 		if (this == r)
 			return false;
 		if(this.intersect(r)) {
-			//double temp=r.alpha;
 			System.out.println("there was a collision between this:\n"+this.toString()+"\n and this:"+r.toString());
-			//r.alpha=alpha;
-			//alpha=temp;
-			bounce(r);	
-			
+			bounce(r);				
 			move();
 			r.move();
 			return true;
@@ -464,8 +456,6 @@ public class Robot extends Unit{
 				alpha-=0.0872664626; 
 			arrowendx=(int)(x+r*Math.cos(alpha));
 			arrowendy=(int)(y+r*Math.sin(alpha));
-			//System.out.println("nextx ,nexty modified to:"+arrowendx+","+arrowendy);
-
 		}
 		if(!leftobstacle){
 			//Olaj lerakás

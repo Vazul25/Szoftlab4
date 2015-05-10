@@ -222,14 +222,13 @@ public class HUD implements iVisible, Runnable {
 	}
 	
 	/**
-	 * 
+	 * run metódus
 	 */
 	@Override
 	public void run() {		
 		
 		while(!startTimer.isZero()){
 			time = Math.abs(startTimer.getTime());
-			//System.out.println(time);
 			p.update();
 			try {
 				Thread.sleep(1000);
@@ -239,7 +238,6 @@ public class HUD implements iVisible, Runnable {
 		}		
 		while(!ended){
 			time = Math.abs(gameTimer.getTime());
-			//System.out.println(time);
 			p.update();
 			try {
 				Thread.sleep(1000);
@@ -255,10 +253,12 @@ public class HUD implements iVisible, Runnable {
 	public void paint(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		
+		//Képernyő szélességek kimentése lokális változóba
 		int WINDOW_WIDTH = Settings.WINDOW_WIDTH;
 		int WINDOW_HEIGHT = Settings.WINDOW_HEIGHT;
 		int HUD_HEIGHT = Settings.HUD_HEIGHT;
 		
+		//Háttér kirajzolása
 		g2d.drawImage(background, 0, Settings.WINDOW_HEIGHT, null);
 		
 		//Idő kirajzolása
@@ -275,23 +275,20 @@ public class HUD implements iVisible, Runnable {
 		g2d.setColor(Color.black);
 		g2d.setFont(font);
 		g2d.drawString(timeInChar, (int)(WINDOW_WIDTH * (timeInChar.length() * (-0.006)+0.492)), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.3));
-		//System.out.println(timeInChar.length());
 		
-		//Szövegek
 		//Felhasználható olaj, ragacs kirajzolások
 		Robot rob1 = null, rob2 = null;
 		for(Robot i : robots){
 			if(i.getId()%2 == 0) rob2 = i;
 			else rob1 = i;
 		}
-		//KÖR
+		//Körök kijelzése
 		if(rob1 != null && rob2 !=null){
 			g2d.drawString(new Integer(lap[rob1.getId()%2]).toString(),(int) (WINDOW_WIDTH * 0.4), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.85));
 			g2d.drawString(new Integer(lap[rob2.getId()%2]).toString(),(int) (WINDOW_WIDTH * 0.58), (int)(WINDOW_HEIGHT + HUD_HEIGHT * 0.85));
 		}
 		
-		//Robot1	
-		
+		//Robot1			
 		//Olaj		
 		int checkboxWidth = (HUD_HEIGHT/3);
 		int checkboxSpace = (int) (checkboxWidth*0.3);
@@ -348,7 +345,6 @@ public class HUD implements iVisible, Runnable {
 			}
 		}
 		//Robot2
-		//Elválasztó vonal 2.
 		//Olaj
 		if(rob2 != null){			
 			int oilNum = rob2.getNumOil();//Window_width*(m*Hud_height+b)			
@@ -402,24 +398,31 @@ public class HUD implements iVisible, Runnable {
 				break;
 			}
 		}
+		
+		//Játék végének kirajzolása
 		if(ended==true){
 		g2d.setColor(Color.WHITE);
 		g2d.drawString("GAME OVER!",410,210);
 		
-		if(rob1.dead == true && rob2.dead == false){
-			
+		if(rob1.dead == true && rob2.dead == false){			
 			g2d.drawString("A győztes robot: ", 250, 300);
 			g2d.drawImage(Robot.img[0], 500, 264, null);
 			
 		}else if(rob2.dead == true && rob1.dead == false){
-				g2d.drawString("A győztes robot: ", 250, 300);
-				g2d.drawImage(Robot.img[1], 500, 264, null);
-			
-				}else g2d.drawString("Döntetlen!", 410, 310);
+					g2d.drawString("A győztes robot: ", 250, 300);
+					g2d.drawImage(Robot.img[1], 500, 264, null);
+				}
+				else g2d.drawString("Döntetlen!", 410, 310);
 				
 		}
 	}
 
+	/**
+	 * maxLapReached függvény
+	 * Megvizsgálja, hogy elérte-e valaki a maximum körszámot
+	 * @param gameInfo
+	 * @return true, ha elérte valaki vagy mindketten, false, ha senki sem érte el.
+	 */
 	public boolean maxLapReached(Settings gameInfo) {
 		ArrayList<Robot> winners = new ArrayList<Robot>();
 		for(Robot r : robots){
