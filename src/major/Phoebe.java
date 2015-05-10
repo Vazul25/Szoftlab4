@@ -351,14 +351,15 @@ public class Phoebe  extends JFrame implements Runnable{
 		//Játék visszaszámláló elindítása
 		hud.gameTimer.start();
 
-		//Cleanerek bejövetele minden 3. percben
-		MyTimer cleanerTimer = new MyTimer(180);
+		//Cleanerek bejövetele minden 45. másodpercben, ha köridős, akkor a játék során 3-szor fog bejönni 2 robot
+		MyTimer cleanerTimer = new MyTimer(45);
+		if(gameInfo.getSettings() == Settings.TIMELIMIT) cleanerTimer = new MyTimer(gameInfo.getLimit()/4);
 		cleanerTimer.start();
 
 		//Teszt
 		//int elteltidoteszt=0;
 
-		while( !ended)
+		while(!ended)
 		{
 			//A User ideje, hogy változtathasson az ugrás irányán
 			try {

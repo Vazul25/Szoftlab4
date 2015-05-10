@@ -136,6 +136,7 @@ public class GUI extends javax.swing.JFrame {
         pack();
 	}
 	
+	Thread t = null;
 	/*
 	 * startButtonActionPerformed függvény
 	 * Felelősség: A beállítások kiolvasása a megfelelő objektumokból, 
@@ -167,13 +168,21 @@ public class GUI extends javax.swing.JFrame {
 		int step = 1; //Másodperc
 		set.setStep(step);
 		//...
+		;
 		//Szál létrehozása, indítása
 		try {
-			game = new Phoebe(set);
-			Thread t = new Thread(game);
-			t.start();
+			if(t == null){
+				game = new Phoebe(set);
+				t = new Thread(game);
+				t.start();
+			}
+			else if(!t.isAlive()){
+				game = new Phoebe(set);
+				t = new Thread(game);
+				t.start();
+			}
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
