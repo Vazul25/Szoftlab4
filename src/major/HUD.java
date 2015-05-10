@@ -431,7 +431,7 @@ public class HUD implements iVisible, Runnable {
 			g2d.drawString("A győztes robot: ", 250, 300);
 			g2d.drawImage(Robot.img[0], 500, 264, null);
 			
-		}else if(rob2.dead == true && rob1.dead == false){
+		}else if(rob1.dead == false && rob2.dead == true){
 				g2d.drawString("A győztes robot: ", 250, 300);
 				g2d.drawImage(Robot.img[1], 500, 264, null);
 			
