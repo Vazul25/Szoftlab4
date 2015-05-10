@@ -252,7 +252,7 @@ public class Phoebe  extends JFrame implements Runnable{
 		Glue.setUnitImage();
 		Oil.setUnitImage();
 		Cleaner.setUnitImage();
-		background=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"background.jpg"));
+		background=ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"background.jpg"));
 
 		//Játékosok létrehozása
 		Robot one = new Robot(map.getStartPosPlayer(1)[0], map.getStartPosPlayer(1)[1],  this);

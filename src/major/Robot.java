@@ -284,8 +284,8 @@ public class Robot extends Unit{
 	 */
 	public  static void setUnitImage() throws IOException{
 		img=new BufferedImage[2];
-		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"robot0.png"));
-		img[1]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"robot1.png"));
+		img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"robot0.png"));
+		img[1]=ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"robot1.png"));
 	}
 
 
@@ -316,7 +316,7 @@ public class Robot extends Unit{
 
 		//Képek cserélgetése mozgás közben
 		try {
-			img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"robot0.png"));
+			img[0]=ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"robot0.png"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

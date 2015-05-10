@@ -82,7 +82,7 @@ public class Oil extends Obstacle {
 		
 	}
 	public static void setUnitImage() throws IOException{
-		img=ImageIO.read(new File(System.getProperty("user.dir")+"\\"+"oil.png"));
+		img=ImageIO.read(new File(System.getProperty("user.dir")+"\\icons\\"+"oil.png"));
 	}
 
 	@Override

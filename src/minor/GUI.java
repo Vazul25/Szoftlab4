@@ -166,7 +166,7 @@ public class GUI extends javax.swing.JFrame {
 		}
 		
 		set.setLimit(limitInt);
-
+		System.out.println(System.getProperty("java.class.path"));
 		int step = 1; //Másodperc
 		set.setStep(step);
 

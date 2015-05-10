@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="Szoftlab4/Scrum_that_vegleges.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/Szoftlab4/vegleges_desc.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="true" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <selectedElements exportClassFiles="false" exportJavaFiles="true" exportOutputFolder="false">
+        <file path="/Szoftlab4/icons/7.gif"/>
+        <file path="/Szoftlab4/icons/11.gif"/>
+        <file path="/Szoftlab4/icons/robot1.png"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;major{iVisible.java"/>
+        <file path="/Szoftlab4/icons/ReadMe.txt"/>
+        <file path="/Szoftlab4/doc/szoftlab4_2_kovetelmeny.pdf"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;major{Robot.java"/>
+        <file path="/Szoftlab4/icons/12.gif"/>
+        <file path="/Szoftlab4/icons/6.gif"/>
+        <file path="/Szoftlab4/icons/cleaner.png"/>
+        <file path="/Szoftlab4/icons/checkpoint.jpg"/>
+        <file path="/Szoftlab4/icons/3.gif"/>
+        <file path="/Szoftlab4/doc/szoftlab4_10_graph.pdf"/>
+        <file path="/Szoftlab4/icons/0.gif"/>
+        <file path="/Szoftlab4/doc/szoftlab4_9_proto.pdf"/>
+        <file path="/Szoftlab4/icons/10.gif"/>
+        <file path="/Szoftlab4/doc/szoftlab4_8_reszletes.pdf"/>
+        <folder path="/Szoftlab4/maps"/>
+        <file path="/Szoftlab4/.classpath"/>
+        <file path="/Szoftlab4/doc/szoftlab4_3_analizis.pdf"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;major{Unit.java"/>
+        <file path="/Szoftlab4/icons/2.gif"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;minor{MapBuilder.java"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;major{MyListener.java"/>
+        <file path="/Szoftlab4/icons/1.gif"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;major{Display.java"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;major{Phoebe.java"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;minor{MyTimer.java"/>
+        <file path="/Szoftlab4/doc/szoftlab4_5_szkeleton.pdf"/>
+        <file path="/Szoftlab4/doc/szoftlab4_7_protokoncept.pdf"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;major{Obstacle.java"/>
+        <file path="/Szoftlab4/icons/4.gif"/>
+        <file path="/Szoftlab4/.gitignore"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;major{Cleaner.java"/>
+        <file path="/Szoftlab4/icons/14.gif"/>
+        <file path="/Szoftlab4/icons/5.gif"/>
+        <file path="/Szoftlab4/icons/13.gif"/>
+        <file path="/Szoftlab4/src/ReadMe.txt"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;major{Oil.java"/>
+        <file path="/Szoftlab4/icons/HUD.jpg"/>
+        <file path="/Szoftlab4/doc/Szkeleton felület terv.docx"/>
+        <file path="/Szoftlab4/doc/szoftlab4_2.pdf"/>
+        <file path="/Szoftlab4/icons/15.gif"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;major{Glue.java"/>
+        <file path="/Szoftlab4/icons/checked.png"/>
+        <file path="/Szoftlab4/icons/background.jpg"/>
+        <file path="/Szoftlab4/icons/robot0.png"/>
+        <file path="/Szoftlab4/doc/szoftlab4_4_analizis2.pdf"/>
+        <file path="/Szoftlab4/icons/8.gif"/>
+        <file path="/Szoftlab4/icons/oil.png"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;minor{GUI.java"/>
+        <file path="/Szoftlab4/icons/9.gif"/>
+        <file path="/Szoftlab4/icons/glue.png"/>
+        <file path="/Szoftlab4/icons/unchecked.png"/>
+        <file path="/Szoftlab4/LICENCE.txt"/>
+        <file path="/Szoftlab4/.project"/>
+        <javaElement handleIdentifier="=Szoftlab4/src&lt;major{HUD.java"/>
+        <file path="/Szoftlab4/icons/16.gif"/>
+    </selectedElements>
+</jardesc>
