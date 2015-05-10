@@ -123,8 +123,8 @@ public class Cleaner extends Unit {
 				System.out.println("\n\n\n\n\npattanunk\n\n\n\n\n\n");
 				bouncing=true;
 				alpha+=35*0.0872664626; 
-				arrowendx=(int)(x+this.r*Math.cos(alpha));
-				arrowendy=(int)(y+this.r*Math.sin(alpha));
+				arrowendx=(int)(x+Cleaner.r * Math.cos(alpha));
+				arrowendy=(int)(y+Cleaner.r * Math.sin(alpha));
 				move();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -141,21 +141,22 @@ public class Cleaner extends Unit {
 	 * collisionWithCleaner metódus
 	 * Felelősség: Abban az esetben, amikor Cleaner ütközik Cleanerrel, le kell kezelnie mindkettő lepattanást.
 	 */
-	private void collisionWithCleaner(Cleaner cl) {
-		//TODO vektor átlag pattanás
+	public boolean collisionWithCleaner(Cleaner cl) {
+		if(this==cl) return false;
+		
 		if(this.intersect(cl)){
 			double alpha=cl.alpha;
-					cl.alpha=this.alpha;
-					this.alpha=alpha;
+			cl.alpha=this.alpha;
+			this.alpha=alpha;
 			arrowendx=(int)(x+r*Math.cos(alpha));
 			arrowendy=(int)(y+r*Math.sin(alpha));
 			cl.arrowendx=(int)(x+r*Math.cos(alpha));
 			cl.arrowendy=(int)(y+r*Math.sin(alpha));
 			cl.move();
 			this.move();
-
-}
-		
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -179,10 +180,6 @@ public class Cleaner extends Unit {
 			}
 		}
 		
-	}
-	private boolean clean(Obstacle obst){
-		if(obst != null) return obstacles.remove(obst);
-		else return false;
 	}
 
 	/**

@@ -3,6 +3,7 @@
 import java.io.IOException;
 
 import major.Phoebe;
+import major.Phoebe.Settings;
 
 /**
  * A grafikus felületet megvalósító objektum. Ez az objektum 
@@ -147,13 +148,23 @@ public class GUI extends javax.swing.JFrame {
 		//...
 		//Beállítások lekérdezése
 		//...
-		int mode = 2; //LapLimit=1, TimeLimit=2
-		Phoebe.Settings set = new Phoebe.Settings(mode);
+		//int mode = 2; //LapLimit=1, TimeLimit=2
+		Phoebe.Settings set = new Phoebe.Settings(Settings.TIMELIMIT);
+		if(gameType.getSelectedItem() == "Körlimit") set = new Phoebe.Settings(Settings.LAPLIMIT);
 		//...
-		int limit = 120; //Másodperc
-		set.setLimit(limit);
+		//int limit = 120; //Másodperc
+		int limitInt = 0;
+		
+		try {
+			limitInt = Integer.parseInt(limitField.getText());
+		} catch (NumberFormatException e1) {
+			e1.printStackTrace();
+			return;
+		}
+		
+		set.setLimit(limitInt);
 		//...
-		int step = 3; //Másodperc
+		int step = 1; //Másodperc
 		set.setStep(step);
 		//...
 		//Szál létrehozása, indítása
